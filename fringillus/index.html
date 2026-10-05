@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#EEF1F4">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Fringillus">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<title>Fringillus</title>
+<meta name="description" content="Vokabeltrainer Latein mit gestaffelter Wiederholung">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,500;0,600;0,700;1,500&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --surface2:#E3E8EE; --ink:#1E2A38; --ink2:#55637A; --line:#CBD3DD;
+  --accent:#B85C38; --accent-ink:#FFFFFF; --slate:#4A6580;
+  --ok:#5E7A2E; --ok-bg:#E4ECD3; --warn:#B8860B; --warn-bg:#F5E9C4; --bad:#B23A3A; --bad-bg:#F3D6D6;
+  --shadow:0 1px 2px rgba(30,42,56,.08),0 8px 24px rgba(30,42,56,.10);
+  --fs:17px; --lemma:2.4rem; --radius:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#141A21; --surface:#1E2731; --surface2:#28333F; --ink:#E9EDF1; --ink2:#A3AFBE; --line:#3A4654;
+  --accent:#D9805A; --accent-ink:#1A0F08; --slate:#8FA9C4;
+  --ok:#A5C46B; --ok-bg:#2C3A1E; --warn:#E0B84C; --warn-bg:#3E3418; --bad:#E07A7A; --bad-bg:#442222;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#141A21; --surface:#1E2731; --surface2:#28333F; --ink:#E9EDF1; --ink2:#A3AFBE; --line:#3A4654;
+  --accent:#D9805A; --accent-ink:#1A0F08; --slate:#8FA9C4;
+  --ok:#A5C46B; --ok-bg:#2C3A1E; --warn:#E0B84C; --warn-bg:#3E3418; --bad:#E07A7A; --bad-bg:#442222;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+:root[data-big="1"]{ --fs:20px; --lemma:2.9rem; }
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--fs);line-height:1.45;-webkit-text-size-adjust:100%}
+.lat{font-family:"Crimson Pro",Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--slate);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55em .8em}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.2}
+.app{max-width:600px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;padding:14px 16px 8px}
+.top h1{font-family:"Crimson Pro",Georgia,serif;font-weight:700;font-size:1.55rem;letter-spacing:.01em}
+.top .sub{color:var(--ink2);font-size:.85rem}
+.finch{width:38px;height:38px;flex:none}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--ink2);font-size:.8rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill b{color:var(--ink)}
+main{flex:1;padding:8px 16px 96px}
+.view[hidden]{display:none}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center}
+.tabs .in{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:600px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;color:var(--ink2);font-size:.72rem}
+.tab svg{width:24px;height:24px}
+.tab[aria-selected="true"]{color:var(--accent);background:var(--surface2)}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.7em 1.1em;border-radius:12px;background:var(--surface2);color:var(--ink);font-weight:700;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;border:1px solid var(--line)}
+.btn.small{min-height:38px;padding:.4em .8em;font-size:.9rem;font-weight:400}
+.btn[disabled]{opacity:.45;cursor:default}
+.note{color:var(--ink2);font-size:.9rem}
+.eyebrow{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);font-weight:700}
+/* Lernkarte */
+.study{display:flex;flex-direction:column;gap:14px}
+.flash{min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center;cursor:pointer;position:relative}
+.flash .lemma{font-size:var(--lemma);font-weight:600;line-height:1.15;color:var(--ink)}
+.flash .info{font-size:1.45rem;color:var(--ink2);font-style:italic;line-height:1.3}
+.flash .bed{font-size:1.25rem;margin-top:8px}
+.flash .meta{position:absolute;left:16px;right:16px;bottom:12px;display:flex;justify-content:space-between;color:var(--ink2);font-size:.78rem;font-variant-numeric:tabular-nums}
+.flash .hint{color:var(--ink2);font-size:.9rem}
+.flash hr{border:0;border-top:1px dashed var(--line);margin:8px 30px}
+.answers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.answers .btn{flex-direction:column;gap:2px;min-height:64px;padding:.5em .3em;font-size:.95rem;line-height:1.15;text-align:center}
+.answers .btn small{font-weight:400;font-size:.75rem;opacity:.85;font-variant-numeric:tabular-nums}
+.btn.bad{background:var(--bad-bg);color:var(--bad)}
+.btn.good{background:var(--warn-bg);color:var(--warn)}
+.btn.strong{background:var(--ok-bg);color:var(--ok)}
+.reveal{display:flex;justify-content:center}
+.progress{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);width:0}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface);border-radius:12px;padding:10px 12px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.78rem;color:var(--ink2)}
+/* Lektionen */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.tile{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-variant-numeric:tabular-nums}
+.tile b{font-size:1.15rem}
+.tile small{font-size:.7rem;color:var(--ink2);white-space:nowrap}
+.tile[aria-pressed="true"]{border-color:var(--accent);background:var(--surface)}
+.tile[aria-pressed="true"] b{color:var(--accent)}
+.tile .bar{width:100%;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-top:4px}
+.tile .bar i{display:block;height:100%;background:var(--ok)}
+/* Suche */
+.list{display:flex;flex-direction:column;gap:6px}
+.item{background:var(--surface);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+.item .t{flex:1;min-width:0}
+.item .t .l{font-size:1.15rem;font-weight:600}
+.item .t .d{color:var(--ink2);font-size:.9rem}
+.item.off{opacity:.55}
+.tag{font-size:.72rem;padding:2px 7px;border-radius:999px;background:var(--surface2);color:var(--ink2);white-space:nowrap}
+/* Einstellungen */
+.field{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.field:last-child{border-bottom:0}
+.field label{flex:1}
+.field small{display:block;color:var(--ink2);font-size:.8rem}
+.field input[type=number]{width:5.5em;text-align:right;font-variant-numeric:tabular-nums}
+.seg{display:inline-flex;background:var(--surface2);border-radius:10px;padding:3px}
+.seg button{padding:.35em .7em;border-radius:8px;font-size:.9rem}
+.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow);font-weight:700}
+textarea.code{width:100%;min-height:90px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;word-break:break-all}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%}
+.toast.show{opacity:1}
+.banner{background:var(--warn-bg);color:var(--ink);border-radius:12px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:.9rem}
+.banner .btn{min-height:36px;padding:.3em .7em;font-size:.85rem;background:var(--surface)}
+.gate{position:fixed;inset:0;background:var(--bg);z-index:20;overflow:auto;padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.gate .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.gate .in p{margin:0}
+.result{display:flex;flex-direction:column;gap:8px}
+.result ul{margin:0;padding-left:1.2em;columns:2;column-gap:20px}
+@media (max-width:420px){.result ul{columns:1}}
+.i{position:relative;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--slate);color:var(--slate);background:transparent;font-family:"Crimson Pro",Georgia,serif;font-style:italic;font-weight:700;font-size:.95rem;line-height:1;vertical-align:middle;margin-left:6px;flex:none;cursor:pointer}
+.i::after{content:"";position:absolute;inset:-9px}
+.i:hover{background:var(--surface2)}
+.field label .i{margin-left:4px;vertical-align:-3px}
+.help{position:fixed;inset:0;background:rgba(20,26,33,.55);z-index:30;display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.help[hidden]{display:none}
+.help-box{background:var(--surface);color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px 16px;max-width:520px;width:100%;max-height:80vh;overflow:auto}
+.help-box h2{font-size:1.15rem;margin:0 0 8px;font-family:"Atkinson Hyperlegible",system-ui,sans-serif}
+.help-box p{margin:0 0 .7em;font-size:.95rem}
+.help-box p:last-of-type{margin-bottom:0}
+.help-box .row{margin-top:14px;justify-content:flex-end}
+@media (min-width:600px){.help{align-items:center}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div id="gate" class="gate" hidden>
+  <div class="in">
+    <svg class="finch" viewBox="0 0 48 48" width="56" height="56" aria-hidden="true"><use href="#finchsym"/></svg>
+    <h1 class="lat" style="font-size:2.2rem">Fringillus</h1>
+    <p>Vokabeltrainer zu <b>unserem Lateinlehrwerk</b> (Lektionen 1 bis 31, Salvē und Texte T1 bis T6) mit gestaffelter Wiederholung.</p>
+    <p><b>Nutzungshinweis:</b> Fringillus ist ausschließlich für den Lateinunterricht von Herrn Finke bestimmt. Die Weitergabe an Personen außerhalb dieses Unterrichts ist nicht erlaubt. Die Vokabeln stammen aus unserem Lehrwerk; die Rechte daran liegen beim Verlag.</p>
+    <p>Dein Lernstand wird nur auf diesem Gerät gespeichert. Sichere ihn regelmäßig unter <b>Sicherung</b>, sonst ist er bei Verlust des Handys weg.</p>
+    <p>Das kleine <b>i</b> neben jeder Funktion erklärt, wofür sie da ist.</p>
+    <button class="btn primary" id="gateOk">Verstanden, los geht's</button>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="finchsym" viewBox="0 0 48 48">
+    <path d="M9 30c2-9 9-15 18-15 5 0 8 2 11 5l6 1-5 3c1 6-3 12-11 13-5 1-9 0-12-2l-7 6 2-8c-1-1-2-2-2-3z" fill="#4A6580"/>
+    <path d="M14 31c3-6 8-9 14-9 3 0 6 1 8 3-1 5-4 8-9 9-5 1-9 0-13-3z" fill="#B85C38"/>
+    <circle cx="31" cy="20.5" r="1.6" fill="#141A21"/>
+    <path d="M38 20l6 1-5 3z" fill="#E0B84C"/>
+    <path d="M13 36l-5 5 2-7" fill="#4A6580"/>
+  </symbol>
+</svg>
+
+<div class="app">
+  <header class="top">
+    <svg class="finch" aria-hidden="true"><use href="#finchsym"/></svg>
+    <div><h1>Fringillus</h1><div class="sub">Latein-Vokabeln</div></div>
+    <div class="spacer"></div>
+    <button type="button" class="pill" title="Lernserie in Tagen" data-help="streak" style="cursor:pointer">🔥 <b id="streak">0</b></button>
+    <span class="pill" title="Lernrichtung" id="dirPill">L → D</span>
+  </header>
+
+  <main>
+    <!-- Lernen -->
+    <section class="view" id="v-lernen">
+      <div class="stack">
+        <div id="backupBanner" class="banner" hidden><span>Letzte Sicherung: <b id="backupAge">nie</b>. Sichere deinen Lernstand.</span><span class="spacer"></span><button class="btn" data-go="sicherung">Sichern</button></div>
+        <div class="row" style="justify-content:space-between"><div class="eyebrow">Langfristig lernen <button type="button" class="i" data-help="lernen" aria-label="Erklärung">i</button></div><span class="note">5 bis 10 Minuten, jeden Tag <button type="button" class="i" data-help="zahlen" aria-label="Erklärung">i</button></span></div>
+        <div class="statrow">
+          <div class="stat"><b id="sDue">0</b><span>heute fällig</span></div>
+          <div class="stat"><b id="sNew">0</b><span>neu heute</span></div>
+          <div class="stat"><b id="sDone">0</b><span>heute gelernt</span></div>
+        </div>
+        <div class="progress"><i id="prog"></i></div>
+        <div class="study" id="study">
+          <div class="card flash" id="flash" role="button" tabindex="0" aria-label="Karte aufdecken">
+            <div class="lemma lat" id="front"></div>
+            <div id="back" hidden>
+              <hr>
+              <div class="info lat" id="info"></div>
+              <div class="bed" id="bed"></div>
+            </div>
+            <div class="hint" id="hint">Tippen zum Aufdecken</div>
+            <div class="meta"><span id="metaLekt"></span><span id="metaIv"></span></div>
+          </div>
+          <div class="reveal" id="revealRow"><button class="btn primary" id="revealBtn" style="min-width:60%">Aufdecken</button><button type="button" class="i" data-help="aufdecken" aria-label="Erklärung">i</button></div>
+          <div class="answers" id="answers" hidden>
+            <div class="note" style="grid-column:1/-1;text-align:center;margin-bottom:-4px">Ehrlich bewerten <button type="button" class="i" data-help="bewerten" aria-label="Erklärung">i</button></div>
+            <button class="btn bad" id="aWrong">Nicht gewusst<small id="nWrong"></small></button>
+            <button class="btn good" id="aGood">Gewusst<small id="nGood"></small></button>
+            <button class="btn strong" id="aStrong">Sicher gewusst<small id="nStrong"></small></button>
+          </div>
+          <div class="row" style="justify-content:space-between">
+            <span><button class="btn small ghost" id="undoBtn" disabled>↶ Zurück</button><button type="button" class="i" data-help="zurueck" aria-label="Erklärung">i</button></span>
+            <span class="note" id="queueNote" style="flex-basis:100%;text-align:center;order:3"></span>
+            <span><button class="btn small ghost" id="suspendBtn">Aussetzen</button><button type="button" class="i" data-help="aussetzen" aria-label="Erklärung">i</button></span>
+          </div>
+        </div>
+        <div class="card" id="empty" hidden>
+          <div class="stack">
+            <h2 id="emptyTitle">Für heute alles erledigt</h2>
+            <p class="note" id="emptyText"></p>
+            <div class="row"><button class="btn" data-go="lektionen">Lektionen wählen</button><button class="btn" id="moreNew">Heute noch 5 neue</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lektionen -->
+    <section class="view" id="v-lektionen" hidden>
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Lektionen <button type="button" class="i" data-help="lektionen" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:.3em 0 0">Antippen schaltet eine Lektion an oder ab. Der Lernstand bleibt erhalten. Grün zeigt, wie viel davon schon gelernt ist.</p>
+        </div>
+        <div class="row">
+          <label class="note" for="upto">Alle bis Lektion</label>
+          <select id="upto"></select>
+          <button class="btn small" id="uptoBtn">anwählen</button>
+          <span class="spacer"></span>
+          <button class="btn small ghost" id="noneBtn">alle ab</button><button type="button" class="i" data-help="upto" aria-label="Erklärung">i</button>
+        </div>
+        <div class="grid" id="tiles"></div>
+      </div>
+    </section>
+
+    <!-- Turbo -->
+    <section class="view" id="v-turbo" hidden>
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Turbo-Modus <button type="button" class="i" data-help="turbo" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:.3em 0 0">Bis zu vier Lektionen einmal komplett durch, in zufälliger Reihenfolge. Der Lernstand wird nicht verändert. Die Auswahl hier ist unabhängig von den Lektionen, die du langfristig lernst.</p>
+        </div>
+        <div class="card" id="turboStart">
+          <div class="stack">
+            <div class="eyebrow">Turbo-Lektionen (max. 4)</div>
+            <div class="grid" id="turboTiles"></div>
+            <div class="note" id="turboInfo"></div>
+            <div class="row"><button class="btn primary" id="turboGo">Turbo starten</button><button class="btn small ghost" id="turboClear">Auswahl leeren</button><button type="button" class="i" data-help="turboStart" aria-label="Erklärung">i</button></div>
+          </div>
+        </div>
+        <div class="study" id="turboStudy" hidden>
+          <div class="progress"><i id="tProg"></i></div>
+          <div class="card flash" id="tFlash" role="button" tabindex="0" aria-label="Karte aufdecken">
+            <div class="lemma lat" id="tFront"></div>
+            <div id="tBack" hidden><hr><div class="info lat" id="tInfo"></div><div class="bed" id="tBed"></div></div>
+            <div class="hint" id="tHint">Tippen zum Aufdecken</div>
+            <div class="meta"><span id="tMeta"></span><span id="tCount"></span></div>
+          </div>
+          <div class="reveal" id="tRevealRow"><button class="btn primary" id="tRevealBtn" style="min-width:60%">Aufdecken</button></div>
+          <div class="answers" id="tAnswers" hidden style="grid-template-columns:1fr 1fr">
+            <button class="btn bad" id="tWrong">Nicht gewusst</button>
+            <button class="btn strong" id="tRight">Gewusst</button>
+          </div>
+          <div class="row"><button class="btn small ghost" id="tUndo" disabled>↶ Zurück</button><span class="spacer"></span><button class="btn small ghost" id="tStop">Abbrechen</button></div>
+        </div>
+        <div class="card result" id="turboResult" hidden>
+          <h2>Ergebnis</h2>
+          <div class="statrow"><div class="stat"><b id="tR1">0</b><span>gewusst</span></div><div class="stat"><b id="tR2">0</b><span>nicht gewusst</span></div><div class="stat"><b id="tR3">0 %</b><span>Quote</span></div></div>
+          <div id="tMissedWrap"><div class="eyebrow" style="margin:8px 0 4px">Noch einmal ansehen</div><ul id="tMissed" class="lat"></ul></div>
+          <div class="row"><button class="btn primary" id="tAgain">Nur die nicht gewussten</button><button class="btn" id="tNew">Neue Runde</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suche -->
+    <section class="view" id="v-suche" hidden>
+      <div class="stack">
+        <input type="search" id="q" placeholder="Vokabel suchen (amare findet amāre)" autocomplete="off" aria-label="Vokabel suchen">
+        <div class="row note"><label><input type="checkbox" id="onlyOff"> nur ausgesetzte zeigen</label><button type="button" class="i" data-help="suche" aria-label="Erklärung">i</button><span class="spacer"></span><span id="qCount"></span></div>
+        <div class="list" id="results"></div>
+      </div>
+    </section>
+
+    <!-- Einstellungen -->
+    <section class="view" id="v-einstellungen" hidden>
+      <div class="stack">
+        <div class="card" id="pwaCard">
+          <div class="eyebrow" style="margin-bottom:6px">Als App auf dem Handy</div>
+          <div id="pwaEmbedded" hidden><p class="note" style="margin:0">Installieren kannst du Fringillus nur, wenn du die Seite direkt unter ihrer eigenen Adresse im Browser öffnest, nicht in dieser Vorschau.</p></div>
+          <div id="pwaDone" hidden class="stack">
+            <p class="note" style="margin:0">Fringillus läuft als App auf diesem Gerät. <span id="pwaOff"></span></p>
+            <p class="note" style="margin:0">Du hast vorher im Browser gelernt? Füge dort kopierten Code hier ein, dann geht es mit deinem alten Lernstand weiter.</p>
+            <div class="row"><button class="btn" id="pwaToRestore">Code einfügen</button></div>
+          </div>
+          <div id="pwaSteps" hidden class="stack">
+            <p class="note" style="margin:0">Mit eigenem Symbol auf dem Home-Bildschirm, ohne Internet nutzbar, und der Lernstand wird nicht vom Browser aufgeräumt. Die App beginnt mit leerem Lernstand, darum in dieser Reihenfolge:</p>
+            <div class="field"><label><b>1.</b> Lernstand mitnehmen<small>Kopiert deinen Sicherungscode in die Zwischenablage</small></label><button class="btn small" id="pwaCopy">Code kopieren</button></div>
+            <div class="field"><label><b>2.</b> Fringillus installieren<small id="pwaHow">Legt das Symbol auf den Home-Bildschirm</small></label><button class="btn small primary" id="pwaInstall">Installieren</button></div>
+            <div class="field"><label><b>3.</b> App öffnen und Code einfügen<small>In der App unter „Mehr“ bei „Wiederherstellen“</small></label></div>
+            <div id="pwaManual" class="banner" hidden><span id="pwaManualText"></span></div>
+            <p class="note" style="margin:0" id="pwaOff2"></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Lernen</div>
+          <div class="field"><label>Lernrichtung <button type="button" class="i" data-help="dir" aria-label="Erklärung">i</button><small>Getrennter Lernstand je Richtung</small></label>
+            <div class="seg" id="dirSeg"><button data-v="LD" aria-pressed="true">Latein → Deutsch</button><button data-v="DL" aria-pressed="false">Deutsch → Latein</button></div></div>
+          <div class="field"><label for="goal">Zielintervall (Tage) <button type="button" class="i" data-help="goal" aria-label="Erklärung">i</button><small>Ab diesem Abstand gilt eine Vokabel als gelernt. 90 empfohlen, 180 für Ehrgeizige.</small></label><input type="number" id="goal" min="7" max="365" step="1"></div>
+          <div class="field"><label for="fGood">Faktor gewusst <button type="button" class="i" data-help="fGood" aria-label="Erklärung">i</button><small>Abstand × Faktor nach „Gewusst“</small></label><input type="number" id="fGood" min="1.1" max="5" step="0.1"></div>
+          <div class="field"><label for="fStrong">Faktor sicher gewusst <button type="button" class="i" data-help="fStrong" aria-label="Erklärung">i</button><small>Abstand × Faktor nach „Sicher gewusst“</small></label><input type="number" id="fStrong" min="1.2" max="8" step="0.1"></div>
+          <div class="field"><label for="fWrong">Faktor nicht gewusst <button type="button" class="i" data-help="fWrong" aria-label="Erklärung">i</button><small>Neuer Abstand nach „Nicht gewusst“, die Karte kommt heute noch einmal</small></label><input type="number" id="fWrong" min="0" max="1" step="0.1"></div>
+          <div class="field"><label for="newPerDay">Neue Vokabeln pro Tag <button type="button" class="i" data-help="newPerDay" aria-label="Erklärung">i</button><small>10 ist gut, 20 für fleißige Tage</small></label><input type="number" id="newPerDay" min="0" max="100" step="1"></div>
+          <div class="field"><label for="first1">Erster Abstand nach „Gewusst“ (Tage) <button type="button" class="i" data-help="first" aria-label="Erklärung">i</button></label><input type="number" id="first1" min="1" max="30" step="1"></div>
+          <div class="field"><label for="first3">Erster Abstand nach „Sicher gewusst“ (Tage) <button type="button" class="i" data-help="first" aria-label="Erklärung">i</button></label><input type="number" id="first3" min="1" max="60" step="1"></div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Anzeige</div>
+          <div class="field"><label>Schriftgröße <button type="button" class="i" data-help="anzeige" aria-label="Erklärung">i</button></label><div class="seg" id="bigSeg"><button data-v="0" aria-pressed="true">Normal</button><button data-v="1" aria-pressed="false">Groß</button></div></div>
+          <div class="field"><label>Farbschema <button type="button" class="i" data-help="anzeige" aria-label="Erklärung">i</button></label><div class="seg" id="themeSeg"><button data-v="system" aria-pressed="true">Gerät</button><button data-v="light" aria-pressed="false">Hell</button><button data-v="dark" aria-pressed="false">Dunkel</button></div></div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Sicherung <button type="button" class="i" data-help="sicherung" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:0 0 10px">Der Lernstand liegt nur in diesem Browser. Kopiere den Code regelmäßig und schicke ihn dir per Mail oder speichere ihn in der Cloud. Auf einem neuen Handy fügst du ihn unten ein.</p>
+          <div class="stack">
+            <div class="row"><button class="btn primary" id="bkCopy">Code kopieren</button><button class="btn" id="bkFile">Als Datei speichern</button><button type="button" class="i" data-help="bkCopy" aria-label="Erklärung">i</button><span class="note" id="bkInfo"></span></div>
+            <textarea class="code" id="bkOut" readonly aria-label="Sicherungscode"></textarea>
+            <div class="eyebrow">Wiederherstellen <button type="button" class="i" data-help="bkRestore" aria-label="Erklärung">i</button></div>
+            <textarea class="code" id="bkIn" placeholder="Sicherungscode hier einfügen" aria-label="Sicherungscode einfügen"></textarea>
+            <div class="row"><button class="btn" id="bkRestore">Aus Code wiederherstellen</button><label class="btn">Datei wählen<input type="file" id="bkFileIn" accept=".json,.txt,application/json" hidden></label></div>
+            <div id="bkConfirm" class="banner" hidden><span>Das ersetzt den Lernstand auf diesem Gerät. Sicher?</span><span class="spacer"></span><button class="btn" id="bkYes">Ja, ersetzen</button><button class="btn" id="bkNo">Nein</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Sonstiges</div>
+          <div class="field"><label>Lernstand dieser Richtung löschen <button type="button" class="i" data-help="reset" aria-label="Erklärung">i</button><small>Unwiderruflich. Vorher sichern.</small></label><button class="btn small ghost" id="resetBtn">Löschen</button></div>
+          <div id="resetConfirm" class="banner" hidden><span>Wirklich alles löschen?</span><span class="spacer"></span><button class="btn" id="resetYes">Ja</button><button class="btn" id="resetNo">Nein</button></div>
+          <p class="note" style="margin:10px 0 0" id="sisterNote">Schwesterprogramm für Griechisch: <a href="http://spinakis.finke.berlin" target="_blank" rel="noopener" style="color:var(--slate)">Spinakis</a></p>
+          <p class="note" style="margin:10px 0 0">Fringillus ist ausschließlich für den Lateinunterricht von Herrn Finke bestimmt und darf nicht weitergegeben werden. Vokabeln aus unserem Lehrwerk, Rechte beim Verlag. Tasten am Rechner: Leertaste aufdecken, 1 / 2 / 3 bewerten, Z zurück. Version <span id="ver"></span>, <span id="nCards"></span> Vokabeln.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Bereiche"><div class="in">
+    <button class="tab" data-go="lernen" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/></svg>Lernen</button>
+    <button class="tab" data-go="lektionen" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>Lektionen</button>
+    <button class="tab" data-go="turbo" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Turbo</button>
+    <button class="tab" data-go="suche" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Suche</button>
+    <button class="tab" data-go="einstellungen" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Mehr</button>
+  </div></nav>
+</div>
+<div class="help" id="help" hidden><div class="help-box" role="dialog" aria-modal="true" aria-labelledby="helpT"><h2 id="helpT"></h2><div id="helpB"></div><div class="row"><button class="btn primary" id="helpX">Verstanden</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const VERSION = "2026-10-05.3f0b63";
+const DATA = [["audīre","audiō","(zu)hören","1; 10"],["clāmor","clāmōris m.","der Lärm, das Geschrei, der Ruf","1"],["ecce!","+ Nom./Akk.","sieh(e)!, sieh(e) da!","1"],["etiam","Konj.","auch, sogar","1; 29"],["exspectāre","exspectō","erwarten","1"],["familia","familiae f.","die Hausgemeinschaft, die Familie","1"],["hodiē","Adv.","heute","1"],["ibī","Adv.","dort","1"],["intrāre","intrō","betreten, eintreten","1; 9; 10"],["nam","Konj.","denn","1"],["nōn","","nicht","1"],["nunc","Adv.","nun, jetzt","1"],["quaerere","quaerō, quaesīvī, quaesītum","1. suchen; 2. fragen","1; T6"],["quid?","Interrog.-Pron.","was?","1"],["rīdēre","rīdeō, rīsī, rīsum","lachen, jdn. auslachen","1; 4; 14; 16"],["rogāre","rogō","fragen","1"],["sed","Konj.","aber, sondern","1"],["subitō","Adv.","plötzlich","1"],["tenēre","teneō, tenuī, tentum","halten","1; 22"],["tum","Adv.","dann, darauf, da (zeitlich)","1"],["ubī?","Adv.","wo?","1"],["vidēre","videō, vīdī","sehen","1; 10"],["adhūc","Adv.","bis jetzt, noch","2"],["amāre","amō","lieben, mögen","2"],["ātrium","ātriī n.","das Atrium","2"],["culīna","culīnae f.","die Küche","2"],["cūr?","Adv.","warum?","2"],["dēbēre","dēbeō, dēbuī","müssen (nōn dēbēre: nicht dürfen)","2; 10"],["dīcere","dīcō, dīxī, dictum","sagen, sprechen, reden","2; 10; 16; T2"],["explēre","expleō, explēvī, explētum","erfüllen","2; 16"],["frāter","frātris m.","der Bruder","2"],["illīc","Adv.","dort","2"],["itaque","Adv.","deshalb","2"],["iterum","Adv.","wieder","2"],["labor","labōris m.","die Mühe, die Arbeit","2"],["līberī","līberōrum m. Pl.","die Kinder","2"],["neglegere","neglegō, neglēxī, neglēctum","vernachlässigen, nicht beachten","2; 20"],["officium","officiī n.","die Pflicht","2"],["ōtium","ōtiī n.","die Ruhe, die Freizeit","2"],["parentēs","parent(i)um m. Pl.","die Eltern","2"],["pergere","pergō, perrēxī, perrēctum","etw. weiter tun, fortsetzen","2; 21"],["peristȳlium","peristȳliī n.","das Peristyl","2"],["placēre","placeō, placuī, placitum","gefallen, Spaß machen (mihī placet: ich fasse den Beschluss)","2; 31"],["puella","puellae f.","das Mädchen","2"],["puer","puerī m.","das Kind, der Junge","2"],["respondēre","respondeō, respondī","antworten","2; 11"],["Salvēte!","","Seid gegrüßt!","2"],["semper","Adv.","immer","2"],["soror","sorōris f.","die Schwester","2"],["statim","Adv.","sofort","2"],["vir","virī m.","der Mann","2"],["ad","Präp. + Akk.","zu (… hin); bei","3; 10"],["adiuvāre","adiuvō, adiūvī","unterstützen","3; 10"],["agere","agō, ēgī, āctum","tun, handeln","3; 17"],["alere","alō, aluī","nähren, ernähren","3; 14"],["ante","Präp. + Akk.","vor","3"],["autem","Konj.","aber","3"],["bene","Adv.","gut","3"],["bōs","bovis m.","das Rind, der Ochse","3"],["caedere","caedō, cecīdī, caesum","töten, schlachten","3; 14; 16"],["canis","canis m.","der Hund","3"],["cēna","cēnae f.","die Mahlzeit, das Essen","3"],["certē","Adv.","sicher, gewiss","3"],["dēlectāre","dēlectō","erfreuen","3"],["ego","","ich","3"],["equus","equī m.","das Pferd","3"],["esse","sum, fuī","sein","3; 11"],["hortus","hortī m.","der Garten","3"],["iam","Adv.","schon, gleich, jetzt (nōn iam: nicht mehr)","3; 6"],["igitur","Adv.","also","3"],["in + Akk.","Präp. + Akk.","in (…hinein); gegen; nach; auf","3; 8; 13; 15"],["īnstruere","īnstruō, īnstrūxī, īnstrūctum","anweisen, unterrichten; bauen","3; 14; 16"],["nōs","Pers.-Pron.","wir","3"],["obsecrāre","obsecrō","anflehen","3"],["parāre","parō","vorbereiten, zubereiten; (+ Inf.) sich vorbereiten, etwas zu tun; verschaffen","3; 14; 17"],["paulō post","Adv.","ein wenig später","3"],["per","Präp. + Akk.","(örtl.) über, durch; (zeitl.) durch, hindurch, während, in","3; 28"],["properāre","properō","eilen, sich beeilen","3"],["salūtāre","salūtō","grüßen","3"],["servāre","servō","retten","3; 10"],["tū","Pers.-Pron.","du","3"],["uxor","uxōris f.","die Ehefrau","3"],["vīlla","vīllae f.","das Landhaus, das Landgut","3"],["vōs","Pers.-Pron.","ihr","3"],["atque","Konj.","und","4"],["cōnsīdere","cōnsīdō, cōnsēdī","sich hinsetzen, sich niederlassen","4; 13"],["discere","discō","lernen","4"],["discipula","discipulae f.","die Schülerin","4"],["discipulus","discipulī m.","der Schüler","4"],["docēre","doceō, docuī, doctum","unterrichten, lehren","4; 20"],["domum","","nach Hause","4"],["dūcere","dūcō, dūxī, ductum","führen, ziehen","4; 11; 16"],["ergō","Adv.","deshalb, also","4"],["habēre","habeō, habuī, habitum","haben, halten (prō certō habēre: für sicher halten, sich sicher sein)","4; 14; 23"],["ita","Adv.","so","4"],["legere","legō, lēgī","lesen","4; 10"],["magister","magistrī m.","der Lehrer","4"],["monēre","moneō, monuī, monitum","ermahnen, mahnen; warnen","4; 11; 20"],["mōnstrāre","mōnstrō","zeigen","4"],["-ne?","","zeigt an, dass es sich um eine Frage handelt","4"],["nōlī","nōlīte Sg./Pl. + Inf.","zeigt an, dass es sich um ein Verbot handelt","4"],["nōnne?","","etwa nicht?, doch wohl?","4"],["num?","","denn?, etwa?","4"],["portāre","portō","tragen","4"],["posse","possum, potuī","können","4; 11"],["posteā","Adv.","danach, später","4"],["pūnīre","pūniō","bestrafen","4; 16"],["-que","Konj.","und","4"],["quis?","Interrog.-Pron.","wer?","4"],["schola","scholae f.","die Schule","4"],["scrībere","scrībō, scrīpsī, scriptum","schreiben","4; 10; 16"],["sedēre","sedeō","sitzen","4"],["tabula","tabulae f.","das Wachstäfelchen","4"],["tacēre","taceō","schweigen","4"],["vocāre","vocō","rufen","4; 16"],["accēdere","accēdō, accessī","sich nähern, herbeikommen","5; 11"],["accūsāre","accūsō","beschuldigen","5"],["amīca","amīcae f.","die Freundin","5"],["amīcus","amīcī m.","der Freund","5"],["aureus","-a, -um","golden","5"],["aut","Konj.","oder","5"],["bonus","-a, -um (Komp. melior, Superl. optimus)","gut","5; T4"],["capere","capiō, cēpī, captum","fangen, ergreifen; einnehmen; gefangen nehmen","5; 12; 18"],["cōnspicere","cōnspiciō, cōnspexī, cōnspectum","erblicken, sehen","5; 10; 22"],["cupere","cupiō, cupīvī","wollen, wünschen","5; 11"],["dōnum","dōnī n.","das Geschenk","5"],["facere","faciō, fēcī, factum","machen, tun","5; 10; 16"],["forum","forī n.","das Forum, der Marktplatz","5"],["fugere","fugiō, fūgī + Akk.","fliehen (vor), entkommen (vor), meiden","5; 10"],["fūr","fūris m.","der Dieb","5"],["homō","hominis m.","der Mensch, der Mann","5"],["incipere","incipiō, coepī, inceptum","anfangen, beginnen","5; 14; 27"],["īrātus","-a, -um","zornig, wütend","5"],["magnus","-a, -um (Komp. maior, Superl. maximus)","groß","5; T4"],["malus","-a, -um (Komp. pēior, Superl. pessimus)","schlecht, böse","5; T4"],["manēre","maneō","bleiben, erwarten","5"],["miser","-a, -um","arm, unglücklich","5"],["monumentum","monumentī n.","das Denkmal, das Grabmal","5; 25"],["mors","mortis f.","der Tod","5"],["multī","-ae, -a (Komp. plūrēs, Superl. plūrimī)","viele","5; T4"],["parvus","-a, -um (Komp. minor, Superl. minimus)","klein","5; T4"],["praebēre","praebeō, praebuī, praebitum","bieten, gewähren, anbieten","5; 17"],["profectō","Adv.","tatsächlich","5"],["prope","Präp. + Akk.","nahe bei; in die Nähe (von)","5; 20"],["pulcher","-chra, -chrum","schön","5"],["rēctus","-a, -um","gerade, richtig, ehrlich","5"],["reddere","reddō, reddidī, redditum","zurückgeben","5; 16"],["Rōmānus","-a, -um","römisch","5"],["statua","statuae f.","die Statue","5"],["tam","Adv.","so","5; T3"],["tūtus","-a, -um","sicher","5"],["agitātor","agitātōris m.","der Wagenlenker","6"],["arcēre","arceō, arcuī","abwehren, fernhalten","6; 10"],["audītor","audītōris m.","der Zuhörer","6"],["canere","canō","ertönen","6"],["cēterī","-ae, -a Pl.","die übrigen","6"],["Circus Maximus","Circī Maximī m.","der Circus Maximus","6"],["crēscere","crēscō, crēvī","wachsen","6"],["cūnctī","-ae, -a Pl.","alle","6"],["dare","dō, dedī, datum","geben","6; 11; 26"],["eius","nicht-refl. Poss.-Pron.","sein(e), ihr(e), dessen, deren","6"],["eōrum","eārum, eōrum nicht-refl. Poss.-Pron. Pl.","deren","6"],["ferē","Adv.","fast, etwa","6"],["gaudium","gaudiī n.","die Freude","6"],["imperātor","imperātōris m.","der Kaiser, der Feldherr","6; 24"],["incitāre","incitō","antreiben, anfeuern","6"],["inter","Präp. + Akk.","zwischen, unter","6"],["meus","-a, -um Poss.-Pron.","mein(e)","6"],["mortuus","-a, -um","tot","6"],["noster","-tra, -trum Poss.-Pron.","unser(e)","6"],["pecūnia","pecūniae f.","das Geld","6"],["praeclārus","-a, -um","berühmt, ausgezeichnet","6"],["praestāre","praestō, praestitī, –","sich hervortun, sich auszeichnen, besser sein; zeigen, erweisen; (+ Dat.) jdn. überragen, übertreffen","6; 23; 29"],["sē","refl. Pers.-Pron. Akk.","sich; im AcI auch: er, sie, ihn; sie (Pl.)","6; 23"],["sīgnum","sīgnī n.","das Zeichen","6"],["simul","Adv.","gleichzeitig, zugleich","6"],["spectāre","spectō","anschauen, betrachten, sehen","6"],["spectātor","spectātōris m.","der Zuschauer","6"],["surgere","surgō, surrēxī, surrēctum","aufstehen, sich erheben","6; 30"],["suus","-a, -um refl. Poss.-Pron.","sein(e), ihr(e)","6"],["tandem","Adv.","schließlich, endlich","6"],["tangere","tangō, tetigī, tāctum","berühren","6; 16"],["tuba","tubae f.","die Trompete","6"],["tunica","tunicae f.","die Tunika","6"],["tuus","-a, -um Poss.-Pron.","dein(e)","6"],["verbum","verbī n.","das Wort","6"],["vester","-tra, -trum Poss.-Pron.","euer, eure","6"],["victor","victōris m.","der Sieger","6"],["vincere","vincō, vīcī, victum","siegen, besiegen; umstimmen, erweichen","6; 15; 24; T6"],["ā, ab","Präp. + Abl.","von","7"],["accipere","accipiō, accēpī, acceptum","annehmen, aufnehmen, empfangen; erfahren","7; 16; T4"],["aestās","aestātis f.","der Sommer","7"],["aqua","aquae f.","das Wasser","7"],["at","Konj.","aber","7"],["cōgitāre","cōgitō","denken","7"],["cōnsilium","cōnsiliī n.","der Rat, die Beratung; der Plan","7; 14"],["cum + Abl.","Präp. + Abl.","mit, zusammen mit","7"],["dēpōnere","dēpōnō, dēposuī","ablegen","7; 10"],["ē, ex","Präp. + Abl.","aus (… heraus), von, seit","7; 21"],["ēgregius","-a, -um","hervorragend, herausragend, ausgezeichnet","7"],["errāre","errō","irren, sich irren","7"],["excitāre","excitō","aufschrecken, aufwecken","7; 10"],["hōra","hōrae f.","die Stunde","7"],["in + Abl.","Präp. + Abl.","in, an, auf, bei","7"],["īre","eō, iī","gehen","7; 11"],["iūcundus","-a, -um","erfreulich, angenehm","7"],["molestus","-a, -um","lästig, unangenehm","7"],["nihil","","nichts","7"],["occupātus","-a, -um","beschäftigt","7"],["patrōnus","patrōnī m.","der Schutzherr, der Patron","7"],["paucī","-ae, -a Pl.","wenige, nur wenige","7"],["prīmum","Adv.","zunächst, zuerst","7"],["quō?","Adv.","wohin?","7"],["saepe","Adv.","oft","7"],["sēcum","","bei sich","7"],["septimus","-a, -um","der siebte","7"],["sermō","sermōnis m.","das Gespräch","7"],["silentium","silentiī n.","die Stille, das Schweigen","7"],["thermae","thermārum f. Pl.","die Thermen","7"],["toga","togae f.","die Toga","7"],["vestis","vestis f.","die Kleidung","7"],["vōx","vōcis f.","die Stimme","7"],["adesse","adsum, adfuī","da sein, anwesend sein; (+ Dat.) jdm. beistehen, helfen","8; 13"],["aliī","-ae, -a Pl.","andere","8"],["animadvertere","animadvertō, animadvertī, animadversum","merken, bemerken","8; 10; 25"],["arēna","arēnae f.","die Arena","8"],["arma","armōrum n. Pl.","die Waffen","8"],["aspicere","aspiciō","ansehen","8"],["cadere","cadō, cecidī, –","fallen","8; 26"],["dēfendere","dēfendō, dēfendī, dēfēnsum","verteidigen","8; 10; 16"],["gladiātor","gladiātōris m.","der Gladiator","8"],["gladius","gladiī m.","das Schwert","8"],["humī","","auf dem Boden","8"],["iacēre","iaceō","liegen","8"],["iactāre","iactō","werfen, schleudern","8; 10; 16"],["īgnōtus","-a, -um","unbekannt","8"],["inquit","3. P. Sg.","er, sie, es sagt; er, sie, es sagte","8; 11"],["intendere","intendō","(gegen jdn.) richten","8"],["iūdicium","iūdiciī n.","das Urteil, die Meinung","8"],["mittere","mittō, mīsī, missum","schicken, wegschicken","8; 17"],["neque","Konj.","und nicht, aber nicht","8; 16"],["oppūgnāre","oppūgnō","angreifen, bestürmen","8; 10"],["petere","petō, petīvī, petītum","angreifen; aufsuchen; fordern, (er)bitten","8; 11; 26"],["pūgna","pūgnae f.","der Kampf","8"],["pūgnāre","pūgnō","kämpfen","8; 10"],["putāre","putō","glauben, meinen; jdn. für etw. halten","8; 24"],["rūrsus","Adv.","wieder, von neuem","8"],["saevus","-a, -um","wild, heftig","8"],["valdē","Adv.","sehr","8"],["vīvere","vīvō, vīxī, –","leben","8; 20"],["abīre","abeō, abiī","weggehen, verschwinden","9"],["aperīre","aperiō, aperuī, apertum","öffnen","9; 11; T5"],["bibere","bibō","trinken","9"],["cēdere","cēdō, cessī","gehen, (zurück)weichen; nachgeben","9; 13"],["cēnsēre","cēnseō, cēnsuī, cēnsum","denken, meinen","9; T3"],["convīvium","convīviī n.","das Gastmahl, das Festessen","9"],["corrumpere","corrumpō, corrūpī, corruptum","verderben","9; 16"],["cūrāre","cūrō","(+ dē) sich kümmern um; (+ ut) dafür sorgen, dass","9; 27"],["dē","Präp. + Abl.","über, von","9"],["enim","Konj.","nämlich","9"],["fortūnae","fortūnārum f. Pl.","das Vermögen, die Reichtümer","9"],["iānua","iānuae f.","die Tür","9"],["improbus","-a, -um","schlecht, böse","9"],["īnstāre","īnstō, īnstitī, –","bevorstehen, drohen; verfolgen","9; 18"],["īnstituere","īnstituō, īnstituī, īnstitūtum","veranstalten, ausrichten; errichten; unterrichten, unterweisen","9; 13; T3"],["is","ea, id Dem.-Pron./Pers.-Pron.","dieser, diese, dieses; er, sie, es; (+ quī, quae, quod) der(jenige), der","9; 16"],["licet","","es ist erlaubt","9"],["modo","Adv.","bloß, nur; gerade (eben)","9; 22"],["nocēre","noceō","schaden","9"],["pārēre","pāreō","gehorchen","9"],["perdere","perdō","verschwenden, vergeuden","9"],["poena","poenae f.","die Strafe, die Buße","9; T6"],["reprehendere","reprehendō, reprehendī, reprehēnsum","tadeln","9; 16"],["rūrī","","auf dem Land","9"],["scīre","sciō","wissen, kennen","9"],["sinere","sinō","lassen, zulassen","9"],["studēre","studeō","bemühen","9"],["vīta","vītae f.","das Leben","9"],["abstinēre","abstineō, abstinuī","fernhalten","10"],["arx","arcis f. (Gen. Pl. arcium)","die Festung, die Anhöhe","10"],["ascendere","ascendō, ascendī","besteigen, hinaufsteigen","10"],["custōs","custōdis m.","der Wächter","10"],["dea","deae f.","die Göttin","10"],["deus","deī m.","der Gott (Deus, Deī m.: der christliche Gott)","10; T1; T2; T3"],["fābula","fābulae f.","die Sage, die Erzählung","10"],["famēs","famis f.","der Hunger","10"],["fēmina","fēminae f.","die Frau","10"],["forte","Adv.","zufällig","10"],["mīles","mīlitis m.","der Soldat","10"],["nārrāre","nārrō","erzählen","10"],["neque … neque","","weder … noch","10"],["nox","noctis f. (Gen. Pl. noctium)","die Nacht","10"],["nūper","Adv.","neulich","10"],["obsidēre","obsideō, obsēdī","belagern","10"],["prīmus","-a, -um","der erste","10"],["procul","Adv.","von fern, weit (weg), von weitem","10"],["quondam","Adv.","einst","10"],["sacer","sacra, sacrum","heilig, geweiht","10"],["sacrum","sacrī n.","das Opfer","10"],["saxum","saxī n.","der Fels","10"],["tamen","Adv.","dennoch, trotzdem","10"],["templum","templī n.","der Tempel","10"],["urgēre","urgeō, ursī","drängen, bedrängen","10"],["accendere","accendō, accendī","anzünden, entzünden","11"],["adhibēre","adhibeō, adhibuī, adhibitum","anwenden, hinzuziehen","11; T6"],["aliī … aliī","","einige … andere, die einen … die anderen","11"],["appārēre","appāreō, appāruī","erscheinen","11"],["cōnstruere","cōnstruō, cōnstrūxī","bauen, errichten","11"],["crēdere","crēdō, crēdidī","vertrauen, Glauben schenken, glauben","11"],["dēlēre","dēleō, dēlēvī, dēlētum","zerstören, vernichten","11; 26"],["dolus","dolī m.","die List","11"],["dōnāre","dōnō","schenken","11"],["dubitāre","dubitō","zögern, zweifeln","11"],["duo","duae, duo (Abl. duōbus)","zwei","11; 24"],["fallere","fallō, fefellī","täuschen","11"],["hic","haec, hoc Dem.-Pron.","dieser, diese, dieses; der, die, das hier","11"],["ille","illa, illud Dem.-Pron.","jener, jene, jenes; der, die, das dort; jener, jene, jenes berühmte","11"],["intereā","Adv.","inzwischen, in der Zwischenzeit","11"],["īra","īrae f.","der Zorn","11"],["lacrima","lacrimae f.","die Träne","11"],["occīdere","occīdō, occīdī","töten","11"],["occultāre","occultō","verbergen","11"],["perīculum","perīculī n.","die Gefahr","11"],["porta","portae f.","das Tor","11"],["proximus","-a, -um","der nächste","11"],["quamquam","Subj.","obwohl","11"],["quia","Subj.","weil","11"],["recipere","recipiō, recēpī, receptum","zurückziehen, aufnehmen","11; 16"],["relinquere","relinquō, relīquī, relictum","zurücklassen, verlassen","11; 16"],["sacerdōs","sacerdōtis m./f.","der Priester, die Priesterin","11"],["sīgnificāre","sīgnificō","anzeigen, bedeuten, bezeichnen","11"],["sine","Präp. + Abl.","ohne","11"],["socius","sociī m.","der Gefährte","11"],["tēctum","tēctī n.","das Haus, das Dach","11"],["timēre","timeō, timuī","(sich) fürchten; (+ Akk.) Angst haben vor; (+ prō) sich fürchten um, Angst haben um","11; 12"],["timor","timōris m.","die Furcht, die Angst","11"],["tunc","Adv.","dann, damals","11"],["ūnus","-a, -um (Gen. ūnīus, Dat. ūnī)","einer","11"],["urbs","urbis f. (Gen. Pl. urbium)","die Stadt","11"],["vērus","-a, -um","wahr, richtig (rē vērā: in Wahrheit)","11; 27"],["vīvus","-a, -um","lebendig, lebend","11"],["adīre","adeō, adiī","an jdn. herangehen, sich jdm. nähern; auf sich nehmen","12; 13"],["annus","annī m.","das Jahr","12"],["cum + Perf.","Subj. + Perf.","als (plötzlich)","12"],["dēspērāre","dēspērō","aufgeben, verzweifeln","12"],["dextra","dextrae f.","die rechte Hand","12"],["diū","Adv.","lange","12"],["fātum","fātī n.","das Schicksal, der Schicksalsspruch","12"],["flamma","flammae f.","die Flamme","12"],["īnfīrmus","-a, -um","schwach, geschwächt","12"],["iter","itineris n.","der Weg, der Marsch, die Fahrt","12; 20"],["lītus","lītoris n.","die Küste, der Strand","12"],["mūnus","mūneris n.","die Aufgabe","12"],["nāvis","nāvis f. (Gen. Pl. nāvium)","das Schiff","12"],["nōmen","nōminis n.","der Name","12"],["novus","-a, -um","neu","12"],["oculus","oculī m.","das Auge","12"],["patria","patriae f.","die Heimat","12"],["penātēs","penātium m. Pl.","die Penaten","12"],["perīre","pereō, periī","ums Leben kommen, sterben","12"],["pius","-a, -um","pflichtbewusst","12"],["prō","Präp. + Abl.","für","12"],["respicere","respiciō, respexī","zurückblicken","12"],["ruīnae","ruīnārum f. Pl.","die Ruinen, die Trümmer","12"],["temptāre","temptō","versuchen, prüfen, auf die Probe stellen","12; 22"],["trādere","trādō, trādidī, trāditum","übergeben, anvertrauen; überliefern","12; 16"],["ubīque","Adv.","überall","12"],["umbra","umbrae f.","der Schatten, das Schattenbild","12"],["bellum","bellī n.","der Krieg","13"],["cōgnōscere","cōgnōscō, cōgnōvī, cōgnitum","erfahren, erkennen; kennenlernen","13; 17"],["cōnsistere","cōnsistō, cōnstitī","haltmachen, sich aufstellen","13"],["deinde","Adv.","hierauf, dann","13"],["dēligere","dēligō, dēlēgī, dēlēctum","auswählen","13; 19"],["error","errōris m.","die Irrfahrt; der Irrtum, der Fehler","13; 22"],["exīre","exeō, exiī","hinausgehen, herausgehen, verlassen","13"],["fīnis","fīnis m. (Gen. Pl. fīnium)","das Ende, das Ziel, die Grenze (fīnēs, fīnium m. Pl.: das Gebiet)","13; 28"],["futūrus","-a, -um","zukünftig","13"],["grātia","grātiae f.","der Dank; die Gunst, die Beliebtheit (grātiās agere: danken, Dank sagen)","13; 15; 22"],["habitāre","habitō","wohnen, bewohnen","13"],["hostis","hostis m. (Gen. Pl. hostium)","der Feind","13"],["ipse","ipsa, ipsum Dem.-Pron.","selbst, persönlich, direkt, unmittelbar","13"],["mox","Adv.","bald","13"],["post","Präp. + Akk.","nach","13"],["prōvidēre","prōvideō, prōvīdī, prōvīsum","voraussehen, vorhersehen; (+ Dat.) Vorsorge treffen, sorgen für","13; T1"],["quandō?","Adv.","wann?","13"],["subīre","subeō, subiī","ertragen, auf sich nehmen","13"],["tempus","temporis n.","die Zeit, der Zeitpunkt","13"],["terra","terrae f.","die Erde, das Land","13"],["tot","","so viele","13"],["voluntās","voluntātis f.","der Wille, der Wunsch","13"],["anteā","Adv.","vorher, früher, zuvor","14"],["appellāre","appellō","ansprechen, nennen","14"],["avis","avis f. (Gen. Pl. avium)","der Vogel","14"],["caedēs","caedis f.","die Ermordung, der Mord","14"],["condere","condō, condidī, conditum","gründen","14; 16"],["contendere","contendō, contendī","behaupten","14"],["convenīre","conveniō, convēnī","zusammenkommen; (+ Akk.) jdn. treffen","14; 23"],["duodecim","","zwölf","14"],["invenīre","inveniō, invēnī, inventum","finden","14; 16"],["lupa","lupae f.","die Wölfin","14"],["mūrus","mūrī m.","die Mauer","14"],["ō(h)!","","oh, ach","14"],["occupāre","occupō","einnehmen, besetzen","14"],["pāstor","pāstōris m.","der Hirte","14"],["quod","Subj.","weil","14"],["regere","regō, rēxī","lenken, herrschen","14"],["rēgnum","rēgnī n.","die Herrschaft, das Königtum, das Königreich","14"],["rēx","rēgis m.","der König","14"],["rīpa","rīpae f.","das Ufer","14"],["scelestus","-a, -um","verbrecherisch","14"],["sex","","sechs","14"],["uterque","","jeder von beiden","14"],["vix","Adv.","kaum","14"],["volāre","volō","eilen, fliegen","14"],["ager","agrī m.","der Acker, das Feld","15"],["auris","auris f. (Gen. Pl. aurium)","das Ohr","15"],["avāritia","avāritiae f.","die Habgier, der Geiz","15"],["cīvis","cīvis m. (Gen. Pl. cīvium)","der Bürger","15"],["glōria","glōriae f.","die Ehre, der Ruhm","15"],["iacere","iaciō, iēcī","werfen","15"],["lapis","lapidis m.","der Stein","15"],["lēx","lēgis f.","das Gesetz","15"],["lūxuria","lūxuriae f.","die Genusssucht","15"],["mūtāre","mūtō","verändern, (ver)wandeln","15"],["nōbilēs","nōbilium m. Pl.","die Adligen","15"],["opprimere","opprimō, oppressī, oppressum","unterdrücken","15; 16"],["pellere","pellō, pepulī, pulsum","vertreiben","15; 16"],["populus","populī m.","das Volk","15"],["probus","-a, -um","anständig, tüchtig, gut","15"],["quamdiū?","","wie lange?","15"],["rōstra","rōstrōrum n. Pl.","die Rednerbühne (auf dem Forum Romanum)","15"],["sēdēs","sēdis f.","der Wohnsitz","15"],["vērō","Adv.","wirklich, tatsächlich, aber","15"],["afficere","afficiō, affēcī, affectum + Abl.","mit etw. versehen","16"],["aliter","Adv.","sonst, andernfalls, anders, auf andere Art","16; T4"],["apud","Präp. + Akk.","bei","16"],["ārdēre","ārdeō, ārsī","brennen","16"],["castra","castrōrum n. Pl.","das Lager, das Kriegslager","16"],["facinus","facinoris n.","die Handlung, die Tat","16"],["flūmen","flūminis n.","der Fluss","16"],["foedus","foederis n.","der Vertrag, der Friedensvertrag, das Bündnis","16"],["honor","honōris m.","die Ehre","16"],["iubēre","iubeō, iussī, iussum","befehlen","16"],["laudāre","laudō, laudāvī, laudātum","loben","16"],["lībertās","lībertātis f.","die Freiheit","16"],["nōnnūllī","-ae, -a Pl.","einige, manche","16"],["nūntius","nūntiī m.","der Bote","16"],["ob","Präp. + Akk.","wegen","16"],["obses","obsidis m./f.","die Geisel","16"],["pōnere","pōnō, posuī, positum","stellen, aufstellen, setzen","16"],["quī","quae, quod Rel.-/Interrog.-Pron.","der, die, das; welcher, welche, welches","16"],["redūcere","redūcō, redūxī, reductum","zurückführen, hinbringen","16"],["remittere","remittō, remīsī, remissum","zurückschicken","16"],["repetere","repetō, repetīvī, repetītum","zurückverlangen","16"],["rumpere","rumpō, rūpī, ruptum","brechen, zerbrechen","16"],["sī","Subj.","wenn","16"],["sollicitāre","sollicitō","beunruhigen, erregen","16"],["tēlum","tēlī n.","das Geschoss, das Wurfgeschoss","16"],["virtūs","virtūtis f.","die Tapferkeit, die Tugend","16"],["vulnus","vulneris n.","die Wunde","16"],["ācer","ācris, ācre","energisch, heftig, scharf","17"],["alius","alia, aliud (Gen. alterīus, Dat. aliī)","ein anderer","17"],["audāx","Gen. audācis","wagemutig, frech","17"],["audēre","audeō","wagen","17"],["celer","celeris, celere","schnell","17"],["comes","comitis m.","der Begleiter","17"],["dīvidere","dīvidō, dīvīsī, dīvīsum","teilen, unterteilen","17"],["fēlīx","Gen. fēlīcis","glücklich","17"],["grandis","grande","groß, bedeutend","17"],["gravis","grave","schwer, charakterfest, ernst","17"],["illūstris","illūstre","bekannt, berühmt","17"],["ingēns","Gen. ingentis","ungeheuer groß","17"],["modus","modī m.","die Art, die Weise","17"],["mōs","mōris m.","die Sitte, der Brauch (mōrēs, mōrum m. Pl.: der Charakter)","17; 23"],["omnis","omne","(Sg.) jeder, ganz; (Pl.) alle","17"],["prōvincia","prōvinciae f.","die Provinz","17"],["rēgius","-a, -um","königlich","17"],["sibī","Dat.","sich; im AcI auch: ihm, ihr, ihn, ihnen","17; 23"],["singulāris","singulāre","einzigartig","17"],["ubī","Subj.","als, sobald","17"],["varius","-a, -um","verschieden, verschiedenartig","17"],["vās","vāsis n.","das Gefäß","17"],["velut","","wie zum Beispiel","17"],["amor","amōris m.","die Liebe","18"],["an?","","oder (etwa)?","18"],["audācia","audāciae f.","die Frechheit, der Mut","18"],["brevis","breve","kurz","18"],["captīvus","captīvī m.","der Gefangene","18"],["carcer","carceris m.","das Gefängnis","18"],["carmen","carminis n.","das Gedicht, das Lied","18"],["colligere","colligō, collēgī, collēctum","sammeln","18"],["cum + Indikativ Impf.","Subj. + Indikativ Impf.","(jedes Mal) wenn","18"],["dīves","Gen. dīvitis (Abl. Sg. -e, Nom. Pl. n. -a, Gen. Pl. -um)","reich","18"],["dormīre","dormiō","schlafen","18"],["dux","ducis m.","der Anführer","18"],["expōnere","expōnō, exposuī, expositum","aussetzen; darstellen, beschreiben","18; T4"],["gerere","gerō, gessī, gestum","tragen, ausführen (sē gerere: sich verhalten)","18; T3"],["laus","laudis f.","das Lob","18"],["nāvigāre","nāvigō","segeln","18"],["nōbilis","nōbile","adlig, vornehm","18"],["nūllus","-a, -um (Gen. nūllīus, Dat. nūllī)","keiner","18"],["perturbāre","perturbō","verwirren, in Unruhe versetzen","18"],["pīrāta","pīrātae m.","der Seeräuber, der Pirat","18"],["poscere","poscō, poposcī, –","fordern","18"],["propinquus","-a, -um","nahe, benachbart","18"],["quīnquāgintā","","fünfzig","18"],["recitāre","recitō","vorlesen","18"],["redīre","redeō, rediī, reditum","zurückkehren, zurückgehen","18"],["solvere","solvō, solvī, solūtum","zahlen, bezahlen, lösen, losbinden","18; 20"],["supplicium","suppliciī n.","die Todesstrafe","18"],["tantum","Adv.","nur","18"],["terrēre","terreō, terruī, territum","jdn. erschrecken","18"],["terror","terrōris m.","der Schrecken","18"],["vīgintī","","zwanzig","18"],["aeternus","-a, -um","ewig","19"],["coniūrātiō","coniūrātiōnis f.","die Verschwörung","19"],["contemnere","contemnō, contempsī, contemptum","verachten","19"],["dēsinere","dēsinō, dēsiī, dēsitum","aufhören","19"],["etsī","Subj.","auch wenn","19"],["excēdere","excēdō, excessī, excessum","hinausgehen, sich entfernen","19"],["īgnōrāre","īgnōrō","nicht kennen, nicht wissen (nōn īgnōrāre: sehr gut kennen, sehr gut wissen)","19; 23"],["immō","Adv.","vielmehr, ja sogar","19"],["incendere","incendō, incendī, incēnsum","in Brand stecken, entflammen","19"],["interesse","intersum, interfuī, –","sich dazwischen befinden; (+ Dat.) an etw. teilnehmen","19"],["iste","ista, istud Dem.-Pron.","dieser da, diese da, dieses da","19"],["latēre","lateō, latuī, –","verborgen sein, versteckt sein","19"],["nēmō","(Gen. nūllīus, Dat. nēminī, Akk. nēminem, Abl. nūllō)","niemand","19"],["nōndum","Adv.","noch nicht","19"],["nostrum","Gen. von nōs","von uns","19"],["ōrātiō","ōrātiōnis f.","die Rede","19"],["pars","partis f.","der Teil","19"],["patēre","pateō, patuī, –","offensichtlich sein, offen stehen (patet + AcI: es ist offensichtlich, dass …)","19"],["patrēs cōnscrīptī","patrum cōnscrīptōrum m. Pl.","die Senatoren","19"],["proinde","Adv.","also, deswegen","19"],["quamdiū","","so lange (wie)","19"],["salvus","-a, -um","gesund, wohlbehalten; gerettet","19; T1"],["satis","Adv.","genug (satis est + AcI: es ist genug, dass …)","19"],["ūnā","Adv.","zusammen","19"],["vestrum","Gen. von vōs","von euch","19"],["accidere","accidō, accidī, –","geschehen, zustoßen","20"],["āmittere","āmittō, āmīsī, āmissum","verlieren","20"],["cōgere","cōgō, coēgī, coāctum","(+ Akk. + Inf.) jdn. zwingen, etw. zu tun; (+ Akk.) jdn. zusammenbringen, versammeln","20; 25"],["cōnstituere","cōnstituō, cōnstituī, cōnstitūtum","beschließen","20"],["dulcis","dulce","süß, angenehm","20"],["dum","Subj. + Präs.","während","20"],["effugere","effugiō, effūgī, –","entfliehen, entkommen","20"],["frūstrā","Adv.","vergeblich, umsonst","20"],["imprīmīs","Adv.","vor allem, besonders","20"],["īnsula","īnsulae f.","die Insel","20"],["memoria","memoriae f.","das Gedächtnis, die Erinnerung","20"],["numquam","Adv.","niemals","20"],["ōrnāre","ōrnō","ausrüsten, schmücken","20; 25"],["postquam","Subj. + Perf.","nachdem","20"],["praeter","Präp. + Akk.","an … vorbei","20"],["situs","-a, -um","befindlich, gelegen","20"],["unda","undae f.","die Welle, die Flut","20"],["vinculum","vinculī n.","die Fessel","20"],["abesse","absum, āfuī, –","weg sein, entfernt sein","21"],["animus","animī m.","der Geist, das Gemüt, das Herz, der Mut","21"],["bēstia","bēstiae f.","das (wilde) Tier","21"],["commovēre","commoveō, commōvī, commōtum","bewegen, veranlassen; (jdn.) rühren","21"],["dēmum","Adv.","endlich","21"],["dēsīderium","dēsīderiī n.","die Sehnsucht","21"],["diēs","diēī m.","der Tag","21"],["dolor","dolōris m.","der Schmerz","21"],["fidēs","fideī f.","der Schutz, der Beistand; die Zuverlässigkeit, die Treue; der Glaube","21; 22; T2; T3"],["flēre","fleō, flēvī, flētum","(be)weinen","21"],["lūx","lūcis f.","das Licht, das Tageslicht","21"],["mandāre","mandō","übergeben, auftragen, befehlen","21; 25"],["nōn modo … sed etiam","","nicht nur … sondern auch","21"],["nūptiae","nūptiārum f. Pl.","die Hochzeit","21"],["optāre","optō","wünschen","21"],["ōrāre","ōrō","(er)bitten","21"],["perniciēs","perniciēī f.","das Verderben","21"],["pervenīre","perveniō, pervēnī, perventum","gelangen","21"],["pēs","pedis m.","der Fuß; der Fuß als Längenmaß (ca. 30 cm)","21"],["plēnus","-a, -um + Gen.","voll","21"],["quaesō","","(ich) bitte!","21"],["rēgīna","rēgīnae f.","die Königin","21"],["rēs","reī f.","die Sache, der Vorfall","21"],["salūs","salūtis f.","das Wohlergehen; der Gruß; die Rettung","21; 31; T1; T4"],["spēs","speī f.","die Hoffnung","21"],["superāre","superō","überwältigen, besiegen","21"],["turba","turbae f.","die Menge","21"],["arbor","arboris f.","der Baum","22"],["aurum","aurī n.","das Gold","22"],["cēnāre","cēnō","speisen, die Hauptmahlzeit zu sich nehmen","22"],["cibus","cibī m.","die Speise","22"],["dīvitiae","dīvitiārum f. Pl.","der Reichtum","22"],["fingere","fingō, fīnxī, fictum","vorstellen, ausdenken","22"],["(ab-/ad-/ex-/per-/red-/sub-)iēns","Gen. euntis","PPA von īre","22"],["līberāre","līberō","befreien","22"],["maximē","Adv.","am meisten, ganz besonders","22"],["mīrus","-a, -um","wunderbar, erstaunlich","22"],["nisī","Subj.","wenn nicht","22"],["ōs","ōris n.","der Mund","22"],["pōculum","pōculī n.","der Becher","22"],["prūdēns","Gen. prūdentis, Adv. prūdenter","klug","22"],["sīc","Adv.","so","22"],["stultus","-a, -um","dumm","22"],["torquēre","torqueō, torsī, tortum","foltern","22"],["trahere","trahō, trāxī, tractum","ziehen","22"],["venia","veniae f.","die Verzeihung","22"],["vīnum","vīnī n.","der Wein","22"],["cīvitās","cīvitātis f. (Gen. Pl. cīvitātium)","die Bürgerschaft, der Staat; das Bürgerrecht","23; 26"],["cōnfirmāre","cōnfirmō","bestätigen","23"],["cōnscrībere","cōnscrībō, cōnscrīpsī, cōnscrīptum","anwerben","23"],["contrā","Präp. + Akk.","gegen","23"],["dictum","dictī n.","die Äußerung, der Ausspruch","23"],["fidēlis","fidēle","treu","23"],["hūc","Adv.","hierher, hierhin","23"],["imperāre","imperō","befehlen","23"],["imperium","imperiī n.","der Befehl, die Herrschaft; das Herrschaftsgebiet, das (Römische) Reich","23; 28"],["inopia","inopiae f.","die Armut, die Not","23"],["intermittere","intermittō, intermīsī, intermissum","einschieben, verstreichen lassen","23"],["libenter","Adv.","gern","23"],["mēnsis","mēnsis m. (Gen. Pl. mēnsium)","der Monat","23"],["nūntiāre","nūntiō","melden","23"],["obtinēre","obtineō, obtinuī, obtentum","erhalten, innehaben","23"],["paulum","Adv.","ein wenig","23"],["philosophus","philosophī m.","der Philosoph","23"],["praedicāre","praedicō","rühmen, lobend hervorheben","23"],["sōl","sōlis m.","die Sonne","23"],["sub","Präp. + Abl.","unter","23"],["tantum … quantum","","so viel … wie, so weit … wie","23"],["turpis","turpe","schimpflich, hässlich","23"],["velle","volō, voluī, –","wollen, wünschen","23"],["causa","causae f.","der Grund, die Ursache, der Streitfall, die (Gerichts-)Verhandlung (meā causā: meinetwegen)","24; 27; T6"],["cōpiae","cōpiārum f. Pl.","die Truppen","24"],["fundere","fundō, fūdī, fūsum","zerstreuen, forttreiben","24"],["gēns","gentis f. (Gen. Pl. gentium)","der Volksstamm","24"],["intellegere","intellegō, intellēxī, intellēctum","bemerken, einsehen, verstehen","24"],["Italicus","-a, -um","italisch","24"],["laetitia","laetitiae f.","die Freude","24"],["maximus","-a, -um","der größte","24"],["nōmināre","nōminō","jdn. etwas nennen","24"],["praetereā","Adv.","außerdem","24"],["proelium","proeliī n.","der Kampf","24"],["quem?","Interrog.-Pron. Akk.","wen?","24"],["quoque","Adv. (nachgestellt)","auch","24"],["scīlicet","Adv.","selbstverständlich, natürlich","24"],["tertius","-a, -um","der dritte","24"],["adeō","Adv.","so sehr","25"],["ars","artis f. (Gen. Pl. artium)","die Geschicklichkeit, die Kunst; die Wissenschaft","25; T3"],["efficere","efficiō, effēcī, effectum","herstellen, bauen; bewirken","25; 28"],["expūgnāre","expūgnō","erobern","25"],["fōrma","fōrmae f.","die Form","25"],["geōmetricus","-a, -um","geometrisch","25"],["ingenium","ingeniī n.","die Begabung, das Talent","25"],["īnstrūmentum","īnstrūmentī n.","das Gerät, das Werkzeug","25"],["māchina","māchinae f.","die Maschine","25"],["mathēmaticus","-a, -um","mathematisch, Mathematik-","25"],["moenia","moenium n. Pl.","die Stadtmauer","25"],["mora","morae f.","die Verzögerung","25"],["nē","Subj. + Konjunktiv","dass nicht, damit nicht","25"],["pendēre","pendeō, pependī, –","hängen, herabhängen","25"],["posterī","posterōrum m. Pl.","die Nachkommen, die Nachwelt","25"],["postulāre","postulō","fordern","25"],["praeesse","praesum, praefuī, – + Dat.","befehligen, den Oberbefehl haben über","25"],["tantus","-a, -um","so groß, so viel","25"],["turbāre","turbō","stören, in Unordnung bringen","25"],["undique","Adv.","von allen Seiten, von überall (her)","25"],["ut + Konjunktiv","Subj. + Konjunktiv","(so) dass, damit, (um …) zu","25; T3; T6"],["ūtilis","ūtile","nützlich","25"],["victōria","victōriae f.","der Sieg","25"],["abdūcere","abdūcō, abdūxī, abductum","abführen, wegführen","26"],["caelum","caelī n.","der Himmel","26"],["clādēs","clādis f. (Gen. Pl. clādium)","die Niederlage","26"],["cōnspectus","cōnspectūs m.","der Anblick, das Blickfeld","26"],["cum + Konjunktiv","Subj. + Konjunktiv","als, nachdem; weil; obwohl","26"],["cupidus","-a, -um + Gen.","begierig (nach etwas)","26"],["ēventus","ēventūs m.","der Ausgang","26"],["exercitus","exercitūs m.","das Heer","26"],["fortis","forte","mutig, tapfer","26"],["impellere","impellō, impulī, impulsum","veranlassen","26"],["impetus","impetūs m.","der Angriff","26"],["īnsidiae","īnsidiārum f. Pl.","der Hinterhalt","26"],["legiō","legiōnis f.","die Legion (Heereseinheit, ca. 4000 – 6000 Mann)","26"],["locus","locī m.","der Ort, der Platz","26"],["manus","manūs f.","die Hand","26"],["metus","metūs m.","die Furcht","26"],["persuādēre","persuādeō, persuāsī, persuāsum","(+ AcI) überzeugen; (+ Dat. + ut) überreden (mihī persuāsum est: ich bin überzeugt)","26; 27"],["placidus","-a, -um","friedfertig, ruhig","26"],["prīnceps","prīncipis m.","der Fürst, der Erste","26; 27"],["quattuor","","vier","26"],["servitūs","servitūtis f.","die Knechtschaft, die Sklaverei","26"],["silva","silvae f.","der Wald","26"],["tendere","tendō, tetendī, tentum","strecken, spannen","26"],["terribilis","terribile","schrecklich","26"],["trēs","trēs, tria","drei","26"],["tumultus","tumultūs m.","der Tumult, der Aufruhr, der Kriegslärm","26"],["adicere","adiciō, adiēcī, adiectum","hinzusetzen, hinzufügen","27"],["adulēscēns","adulēscentis m./f.","der junge Mann, die junge Frau","27"],["aedificāre","aedificō","bauen","27"],["auctor","auctōris m.","der Veranlasser, der Urheber","27"],["caput","capitis n.","der Kopf","27"],["cottīdiē","Adv.","täglich","27"],["ēdere","ēdidī, ēditum","veranstalten, herausgeben","27"],["ēligere","ēligō, ēlēgī, ēlēctum","auswählen","27"],["figūra","figūrae f.","die Gestalt, die Figur","27"],["frōns","frontis f.","die Vorderseite, die Stirn","27"],["hospes","hospitis m.","der Gast, der Fremde","27"],["īgnārus","-a, -um","unkundig, unwissend","27"],["lūdus","lūdī m.","das Spiel, das Schauspiel","27"],["medius","-a, -um","der mittlere, mitten (in)","27"],["observāre","observō","beobachten","27"],["ōmen","ōminis n.","das Vorzeichen","27"],["praesēns","Gen. praesentis","anwesend","27"],["quīdam","quaedam, quoddam (Akk. Sg. m./f. quendam, quandam, Gen. Pl. quōrundam, quārundam)","ein bestimmter, gewisser; (Pl.) einige, manche","27"],["quotiēns","Subj.","wie oft, sooft","27"],["sīdus","sīderis n.","der Stern, das Sternbild","27"],["solēre","soleō + Inf.","gewohnt sein, pflegen, gewöhnlich etw. tun","27"],["succēdere","succēdō, successī, successum","an die Stelle treten, nachfolgen","27"],["summus","-a, -um","der oberste, der höchste, oben(auf)","27"],["tālis","tāle","so beschaffen, solch ein","27"],["theātrum","theātrī n.","das Theater","27"],["augēre","augeō, auxī, auctum","vergrößern, vermehren","28"],["celebrāre","celebrō","feiern, rühmen","28"],["compōnere","compōnō, composuī, compositum","zusammensetzen, ordnen, verfassen","28"],["domus","domūs f. (Gen. Pl. domōrum, Akk. Pl. domōs)","das Haus, die Familie, die Hausgemeinschaft","28; T1"],["flōrēre","flōreō, flōruī, –","blühen","28"],["frūctus","frūctūs m.","die Frucht","28"],["frūmentum","frūmentī n.","das Getreide","28"],["longus","-a, -um","lang, weit","28"],["negāre","negō","ablehnen, verneinen, sich weigern","28"],["orbis","orbis m.","der Kreis (orbis terrārum: der Erdkreis, die Erde)","28"],["pāx","pācis f.","der Frieden","28"],["permittere","permittō, permīsī, permissum","erlauben, gestatten","28"],["perpetuus","-a, -um","ununterbrochen, fortlaufend, beständig","28"],["poēta","poētae m.","der Dichter","28"],["potestās","potestātis f.","die Macht, die Gewalt, die Möglichkeit","28"],["quantus","-a, -um?","wie groß?, wie viel?","28"],["saeculum","saeculī n.","das Zeitalter, das Jahrhundert","28"],["statuere","statuō, statuī, statūtum","beschließen, festsetzen","28"],["ultimus","-a, -um","der letzte, der äußerste","28"],["umquam","Adv.","jemals","28"],["altus","-a, -um","hoch, tief","29"],["certāmen","certāminis n.","der Wettkampf, der Wettstreit","29"],["clam","Adv.","heimlich","29"],["claudere","claudō, clausī, clausum","schließen, verschließen","29"],["concēdere","concēdō, concessī, concessum","erlauben, zugestehen","29"],["cōnsulere","cōnsulō, cōnsuluī, cōnsultum","sich beraten, beratschlagen","29"],["dēclārāre","dēclārō","jdn. (öffentlich) zu etwas erklären, ausrufen","29"],["dēportāre","dēportō","wegtragen, fortschaffen","29"],["dīligere","dīligō, dīlēxī, dīlēctum","lieben, wertschätzen","29"],["ēvenīre","ēveniō, ēvēnī, ēventum","sich ereignen","29"],["iūdex","iūdicis m.","der Richter","29"],["meritō","Adv.","mit Recht, aus gutem Grund","29"],["necesse est","","es ist nötig, man muss","29"],["nescīre","nesciō","nicht wissen, nicht kennen","29"],["offendere","offendō, offendī, offēnsum","beleidigen","29"],["oppidum","oppidī n.","die (Land-)Stadt","29"],["parere","pariō, peperī, partum","hervorbringen, gebären","29"],["pertinēre","pertineō, pertinuī, –","sich erstrecken, sich beziehen","29"],["pūblicus","-a, -um","öffentlich","29"],["quīn etiam","","ja sogar, ja vielmehr","29"],["quōmodo?","Adv.","wie?, auf welche Weise?","29"],["rēs pūblica","reī pūblicae f.","der Staat, das Gemeinwesen","29"],["simulāre","simulō","vortäuschen, so tun, als ob","29"],["tamquam","Adv.","wie, als ob","29"],["afferre","afferō, attulī, allātum","heranbringen","30"],["ait","3. P. Sg.","er, sie, es sagt; er, sie, es sagte","30"],["alter","-a, -um (Gen. alterīus, Dat. alterī)","der eine, der andere","30"],["auxilium","auxiliī n.","die Hilfe","30"],["concordia","concordiae f.","die Eintracht, die Harmonie","30"],["sē cōnferre","cōnferō, contulī, collātum","sich begeben","30"],["cursus","cursūs m.","der Lauf, die Fahrt","30"],["dolēre","doleō, doluī, –","Schmerz empfinden, bedauern","30"],["familiāris","familiāre","vertraut","30"],["ferre","ferō, tulī, lātum","tragen, bringen","30"],["frangere","frangō, frēgī, frāctum","zerbrechen, schwächen, entkräften","30; T4"],["gemitus","gemitūs m.","das Seufzen, das Stöhnen","30"],["īnferre","īnferō, intulī, illātum","hineintragen","30"],["iussū","","auf Befehl","30"],["laedere","laedō, laesī, laesum","verletzen, beschädigen","30"],["laetus","-a, -um","fröhlich","30"],["littera","litterae f.","der Buchstabe (litterae, litterārum f. Pl.: der Brief)","30"],["mēns","mentis f.","die Gesinnung, der Gedanke, die Absicht, der Sinn","30"],["nimis","Adv.","zu, zu sehr","30"],["offerre","offerō, obtulī, oblātum","anbieten","30"],["optimus","-a, -um","der beste","30"],["paene","Adv.","beinahe, fast","30"],["potēns","Gen. potentis, Adv. potenter","mächtig","30"],["prōdūcere","prōdūcō, prōdūxī, prōductum","vor(an)führen, in die Länge ziehen","30"],["restituere","restituō, restituī, restitūtum","wiederherstellen","30"],["sinus","sinūs m.","die Bucht","30"],["tollere","tollō, sustulī, sublātum","beseitigen, hochheben","30"],["ūsque ad","","bis zu","30"],["utinam","","wenn doch, hoffentlich","30"],["aedificium","aedificiī n.","das Gebäude","31"],["āter","ātra, ātrum","schwarz, grauenvoll","31"],["cārus","-a, -um","lieb, teuer","31"],["cinis","cineris m.","die Asche","31"],["cōnārī","cōnor + Inf.","versuchen, etw. zu tun","31"],["dēscendere","dēscendō, dēscendī, dēscēnsum","herabsteigen, herabkommen; sich senken","31"],["difficilis","difficile","schwer, schwierig","31"],["discēdere","discēdō, discessī, discessum","auseinandergehen, weggehen, sich entfernen","31"],["domō","","aus dem Haus, von zuhause","31"],["ēgredī","ēgredior, ēgressus sum","hinausgehen","31"],["epistula","epistulae f.","der Brief","31"],["fierī","fīō, factus sum","werden, entstehen, geschehen, gemacht werden (ita fit, ut + Konjunktiv: so geschieht es, dass)","31; T4"],["hortārī","hortor","ermahnen, auffordern","31"],["ingredī","ingredior, ingressus sum","hineingehen, betreten","31"],["levis","leve","leicht","31"],["marītus","marītī m.","der Ehemann","31"],["morī","morior, mortuus sum","sterben","31"],["mōtus","mōtūs m.","die Bewegung","31"],["nūbēs","nūbis f.","die Wolke","31"],["oblīvīscī","oblīvīscor, oblītus sum","vergessen","31"],["precārī","precor","bitten (um), wünschen, beten","31"],["prius","Adv.","früher, eher","31"],["proficīscī","proficīscor, profectus sum","aufbrechen, sich auf den Weg machen","31"],["quam","Adv.","als; wie, wie sehr","31; T5"],["querī","queror, questus sum","klagen, sich beklagen","31"],["somnus","somnī m.","der Schlaf","31"],["studium","studiī n.","die Studie, die Wissenschaft, der Eifer, die Beschäftigung","31"],["tenebrae","tenebrārum f. Pl.","die Finsternis, die Dunkelheit","31"],["tuērī","tueor, tuitus sum","schützen, beschützen","31"],["valēre","valeō, valuī, –","stark sein, gesund sein","31"],["via","viae f.","der Weg","31"],["avus","avī m.","der Großvater","S"],["cantāre","cantō","singen","S"],["catella","catellae f.","das Hündchen","S"],["clāmāre","clāmō","rufen","S"],["currere","currō, cucurrī","laufen","S; 12"],["domina","dominae f.","die Hausherrin","S"],["dominus","dominī m.","der Herr, der Hausherr (Dominus: Herr, als Anrede für den christlichen Gott)","S; T1"],["est","","er, sie, es ist; es gibt","S"],["et","Konj.","und (et … et: sowohl … als auch)","S; 19"],["fīlia","fīliae f.","die Tochter","S"],["fīlius","fīliī m.","der Sohn","S"],["gaudēre","gaudeō","sich freuen","S"],["hīc","Adv.","hier","S"],["labōrāre","labōrō","arbeiten, (+ Abl.) an etwas leiden","S; 15"],["lūdere","lūdō","spielen","S"],["māter","mātris f.","die Mutter","S"],["pater","patris m.","der Vater","S"],["Salvē!","","Sei gegrüßt!","S"],["serva","servae f.","die Sklavin","S"],["servus","servī m.","der Sklave","S"],["venīre","veniō, vēnī","kommen","S; 10"],["cum + Indikativ Präs./Perf.","Subj. + Indikativ Präs./Perf.","(zu dem Zeitpunkt) wenn, als; sobald","T1; T4; T5; T6"],["dīligēns","Gen. dīligentis, Adv. dīligenter","gründlich, gewissenhaft, sorgfältig","T1; T6"],["impōnere","impōnō, imposuī, impositum","auferlegen","T1"],["interficere","interficiō, interfēcī, interfectum","umbringen, töten","T1"],["interior","Gen. interiōris (Nom. Sg. n. interius)","der innere, der tiefere, tief (in)","T1"],["lātus","-a, -um","breit, weit","T1; T4"],["magistrātus","magistrātūs m.","der Beamte, der Magistrat","T1; T3"],["nōlle","nōlō, nōluī, –","nicht wollen","T1; T2; T5; T6"],["oportet","oportuit + AcI","es ist nötig, dass; es gehört sich, dass","T1"],["ops","opis f.","die Hilfe, die Kraft","T1"],["parātus","-a, -um","bereit","T1; T2; T4"],["perterrēre","perterreō, perterruī, perterritum","jdn. gewaltig erschrecken","T1; T2"],["praeceptum","praeceptī n.","die Vorschrift, der Befehl","T1"],["praecipere","praecipiō, praecēpī, praeceptum","vorschreiben, befehlen","T1"],["sānctus","-a, -um","heilig","T1"],["spīritus","spīritūs m.","der Geist, der Atem, der Hauch","T1"],["amphitheātrum","amphitheātrī n.","das Amphitheater","T2; T3; T5; T6"],["carēre","careō, caruī, – + Abl.","nicht haben, frei sein von","T2; T4"],["circus","circī m.","die Rennbahn, der Zirkus","T2"],["colere","colō, coluī, cultum","verehren, achten; pflegen, betreiben","T2; T3"],["corripere","corripiō, corripuī, correptum","befallen, in Beschlag nehmen","T2"],["dēmōnstrāre","dēmōnstrō","beweisen, darlegen","T2; T6"],["dēnique","Adv.","zuletzt, endlich","T2; T4"],["falsus","-a, -um","falsch, trügerisch","T2; T6"],["furor","furōris m.","die Wut, die Raserei","T2"],["genus","generis n.","die Art, die Weise","T2"],["loquī","loquor, locūtus sum","sagen, sprechen, reden","T2; T3; T5; T6"],["minus","Adv.","weniger","T2; T4"],["orīrī","orior, ortus sum","sich erheben, entstehen","T2"],["plērīque","plēraeque, plēraque","die meisten, sehr viele","T2"],["probāre","probō","billigen","T2"],["quārē","Adv.","weshalb, deshalb","T2"],["ruere","ruō, ruī, rutum","stürzen, eilen","T2"],["scelus","sceleris n.","das Verbrechen","T2; T3"],["vītāre","vītō","meiden, vermeiden","T2; T3"],["adipiscī","adipiscor, adeptus sum","erreichen","T3; T4"],["administrāre","administrō","verwalten","T3"],["commūnis","commūne","gemeinsam","T3"],["contingere","contingō, contigī, contāctum","gelingen, glücken","T3"],["domesticus","-a, -um","häuslich, zum Haushalt gehörig","T3"],["exercēre","exerceō, exercuī, exercitum","üben, ausüben","T3; T6"],["Latīnus","-a, -um","lateinisch","T3"],["lingua","linguae f.","die Sprache","T3; T5; T6"],["ōrātor","ōrātōris m.","der Redner","T3"],["patrius","-a, -um","väterlich, heimatlich","T3"],["prīmō","Adv.","zuerst, zunächst","T3"],["pūrus","-a, -um","rein, sauber","T3"],["rēs familiāris","reī familiāris f.","das Vermögen","T3"],["sōlus","-a, -um (Gen. sōlīus, Dat. sōlī)","allein, nur","T3"],["tam … quam","","so … wie","T3"],["ut + Indikativ","Konj. + Indikativ","wie","T3; T6"],["ūtī","ūtor, ūsus sum + Abl.","etw. benutzen, verwenden, gebrauchen","T3; T6"],["vacuus","-a, -um","leer, frei","T3"],["comparāre","comparō","vergleichen","T4"],["cōnsuētūdō","cōnsuētūdinis f.","die Gewohnheit","T4"],["disciplīna","disciplīnae f.","die Ordnung, die Disziplin","T4"],["exstinguere","exstinguō, exstīnxī, exstīnctum","löschen, auslöschen","T4; T5"],["exter(us)","-a, -um (Komp. exterior, Superl. extrēmus)","(Pos./Komp.) der äußere, (Superl.) der äußerste","T4"],["mīlle","(Pl. mīlia)","tausend","T4; T6"],["omnīnō","Adv.","ganz und gar, überhaupt, völlig","T4"],["patī","patior, passus sum","erdulden, ertragen","T4"],["quidem","Adv.","jedenfalls, freilich","T4"],["rārus","-a, -um","selten","T4"],["sitis","sitis f. (Akk. Sg. sitim, Abl. Sg. sitī)","der Durst","T4; T5"],["vīrēs","vīrium f. Pl.","die Macht, die Streitkräfte","T4; T6"],["vīs","– f. (Akk. Sg. vim, Abl. Sg. vī)","die Kraft, die Gewalt","T4; T6"],["appāret","","es scheint, dass","T5"],["blandus","-a, -um","schmeichlerisch, schmeichelnd","T5; T6"],["cāseus","cāseī m.","der Käse","T5"],["cōnsūmere","cōnsūmō, cōnsūmpsī, cōnsūmptum","verzehren, essen","T5"],["corpus","corporis n.","der Körper","T5"],["corvus","corvī m.","der Rabe","T5"],["dubium","dubiī n.","der Zweifel","T5"],["ēmittere","ēmittō, ēmīsī, ēmissum","loslassen, losschicken","T5"],["invidia","invidiae f.","der Neid","T5"],["rapere","rapiō, rapuī, raptum","(an sich) raffen, rauben","T5"],["spērāre","spērō","hoffen","T5"],["suspicere","suspiciō, suspexī, suspectum","in die Höhe sehen, aufwärts blicken","T5"],["trīstis","trīste","traurig","T5"],["vulpēs","vulpis f.","der Fuchs","T5"],["vultus","vultūs m.","das Gesicht, der Gesichtsausdruck, die Miene","T5"],["amātor","amātōris m.","der Liebhaber, der Verehrer","T6"],["cōnfitērī","cōnfiteor, cōnfessus sum","(ein-)gestehen, bekennen","T6"],["decem","","zehn","T6"],["doctus","-a, -um","gelehrt, gebildet","T6"],["dūrus","-a, -um","hart","T6"],["iuvenis","iuvenis m./f.","der junge Mann, die junge Frau; Pl. die jungen Leute","T6"],["mollis","molle","weich","T6"],["octō","","acht","T6"],["precēs","precum f. Pl.","die Bitte(n)","T6"],["prōmittere","prōmittō, prōmīsī, prōmissum","versprechen","T6"],["reus","reī m.","der Angeklagte","T6"],["rudis","rude","unerfahren, ungeschickt; roh","T6"],["tabella","tabellae f.","das Wachstäfelchen","T6"],["vidērī","videor, vīsus sum","(er-)scheinen, für etwas gehalten werden, gelten","T6"]];
+// DATA: [lemma, info, bedeutung, lektionen] ; id = lemma + "|" + info (stabil über Updates)
+const LESSON_KEYS = ["S", ...Array.from({length:31},(_,i)=>String(i+1)), "T1","T2","T3","T4","T5","T6"];
+const CARDS = DATA.map((r,idx)=>{
+  const ls = r[3].split("; ");
+  return {id:r[0]+"|"+r[1], lemma:r[0], info:r[1], bed:r[2], lekt:r[3], l1:ls[0], ls, idx,
+          key:fold(r[0]+" "+r[1]+" "+r[2])};
+});
+const BYID = Object.create(null); CARDS.forEach(c=>BYID[c.id]=c);
+function fold(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(); }
+function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function addDays(iso,n){ const d=new Date(iso+"T12:00:00"); d.setDate(d.getDate()+n); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function dayDiff(a,b){ return Math.round((new Date(b+"T12:00:00")-new Date(a+"T12:00:00"))/86400000); }
+function lessonLabel(k){ return k==="S"?"Salvē":(k[0]==="T"?"Text "+k.slice(1):"Lektion "+k); }
+
+// ---------- Zustand ----------
+const KEY = "fringillus.v1";
+const DEFAULTS = {goal:90, fGood:1.4, fStrong:2.2, fWrong:0.5, newPerDay:10, first1:1, first3:3, big:0, theme:"system", dir:"LD"};
+let S = load();
+function load(){
+  let s=null; try{ s=JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){ s=null; }
+  if(!s) s={};
+  s.set = Object.assign({}, DEFAULTS, s.set||{});
+  s.lessons = s.lessons || {"S":true,"1":true};
+  s.turbo = s.turbo || {lessons:{}};   // eigene Auswahl für den Turbo-Modus (max. 4 Lektionen)
+  s.turbo.lessons = s.turbo.lessons || {};
+  s.stats = s.stats || {LD:{}, DL:{}};
+  s.stats.LD = s.stats.LD||{}; s.stats.DL = s.stats.DL||{};
+  s.suspended = s.suspended || {};
+  s.daily = s.daily || {date:today(), newN:0, revN:0, doneN:0, extraNew:0};
+  s.streak = s.streak || {last:null, n:0};
+  s.lastBackup = s.lastBackup || null;
+  s.gate = !!s.gate;
+  return s;
+}
+let saveTimer=null;
+let saveWarned=false;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ if(!saveWarned){ saveWarned=true; toast("Speichern nicht möglich. Privater Modus oder Speicher gesperrt? Dein Lernstand geht beim Schließen verloren."); } } }
+function stats(){ return S.stats[S.set.dir]; }
+function rollDay(){ const t=today(); if(S.daily.date!==t){ S.daily={date:t,newN:0,revN:0,doneN:0,extraNew:0}; save(); } }
+function bumpStreak(){ const t=today(); if(S.streak.last===t) return; if(S.streak.last && dayDiff(S.streak.last,t)===1) S.streak.n++; else S.streak.n=1; S.streak.last=t; }
+function streakShown(){ if(!S.streak.last) return 0; const d=dayDiff(S.streak.last,today()); return d<=1?S.streak.n:0; }
+
+// ---------- Warteschlange ----------
+function activeCards(){ return CARDS.filter(c=>S.lessons[c.l1] && !S.suspended[c.id]); }
+function isLearned(rec){ return !!rec && rec.iv>=S.set.goal; }
+function buildQueue(){
+  rollDay();
+  const t=today(), st=stats();
+  const due=[], fresh=[];
+  for(const c of activeCards()){
+    const r=st[c.id];
+    if(!r) fresh.push(c);
+    else if(r.due<=t) due.push(c);
+  }
+  due.sort((a,b)=> (st[a.id].iv===0?-1:1)*0 + (st[a.id].due<st[b.id].due?-1:st[a.id].due>st[b.id].due?1:a.idx-b.idx));
+  // Karten, die heute schon falsch waren (iv 0), ans Ende, damit erst die anderen kommen
+  const relearn=due.filter(c=>st[c.id].iv===0), normal=due.filter(c=>st[c.id].iv!==0);
+  const allowNew=Math.max(0, S.set.newPerDay + S.daily.extraNew - S.daily.newN);
+  return {queue: normal.concat(relearn, fresh.slice(0,allowNew)), dueN: due.length, freshAvail: fresh.length, allowNew};
+}
+let Q=null, cur=null, revealed=false, undoStack=[];
+
+function nextIv(rec, ans){
+  const s=S.set;
+  if(!rec || rec.iv===0){
+    // neu oder im Wiederholen nach Fehler
+    if(ans===0) return 0;
+    if(rec && rec.riv) return ans===1? Math.max(1,rec.riv) : Math.max(s.first3, Math.round(rec.riv*s.fStrong/s.fGood));
+    return ans===1? s.first1 : s.first3;
+  }
+  if(ans===0) return 0;
+  let iv = ans===1? Math.round(rec.iv*s.fGood) : Math.round(rec.iv*s.fStrong);
+  iv = Math.max(rec.iv+1, iv);
+  return Math.min(iv, s.goal);
+}
+function previewIvs(rec){
+  const s=S.set;
+  const w = (!rec||rec.iv===0)? "heute" : (Math.max(1,Math.round(rec.iv*s.fWrong))+" T.");
+  return [w, nextIv(rec,1)+" T.", nextIv(rec,2)+" T."];
+}
+function answer(ans){
+  if(!cur) return;
+  const st=stats(), t=today();
+  const prev = st[cur.id]? JSON.parse(JSON.stringify(st[cur.id])) : null;
+  const prevDaily = Object.assign({}, S.daily), prevStreak=Object.assign({}, S.streak);
+  const wasNew = !prev;
+  const iv = nextIv(prev, ans);
+  const rec = prev? prev : {iv:0, due:t, n:0, l:0};
+  if(ans===0){ rec.riv = prev && prev.iv>0 ? Math.max(1,Math.round(prev.iv*S.set.fWrong)) : (rec.riv||0); rec.iv=0; rec.due=t; rec.l=(rec.l||0)+ (prev&&prev.iv>0?1:0); }
+  else { rec.iv=iv; rec.due=addDays(t,iv); delete rec.riv; }
+  rec.n=(rec.n||0)+1; rec.last=t;
+  st[cur.id]=rec;
+  if(wasNew) S.daily.newN++;
+  S.daily.revN++;
+  if(ans>0) S.daily.doneN++;
+  bumpStreak();
+  undoStack.push({id:cur.id, prev, prevDaily, prevStreak, card:cur});
+  if(undoStack.length>50) undoStack.shift();
+  save();
+  // Warteschlange fortschreiben
+  Q.queue.shift();
+  if(ans===0){ const pos=Math.min(Q.queue.length, 3); Q.queue.splice(pos,0,cur); }
+  showNext();
+}
+function undo(){
+  const u=undoStack.pop(); if(!u) return;
+  const st=stats();
+  if(u.prev) st[u.id]=u.prev; else delete st[u.id];
+  S.daily=u.prevDaily; S.streak=u.prevStreak; save();
+  Q.queue = [u.card].concat(Q.queue.filter(c=>c.id!==u.id));
+  showNext();
+}
+function showNext(){
+  rollDay();
+  const st=stats();
+  cur = Q.queue[0]||null; revealed=false;
+  $("undoBtn").disabled = undoStack.length===0;
+  const total = Q.dueN + Math.min(Q.freshAvail, Q.allowNew);
+  $("sDue").textContent = Q.queue.filter(c=>st[c.id]).length;
+  $("sNew").textContent = S.daily.newN + " / " + (S.set.newPerDay+S.daily.extraNew);
+  $("sDone").textContent = S.daily.doneN;
+  const done = Math.max(0, total - Q.queue.length);
+  $("prog").style.width = (total? Math.min(100, 100*done/Math.max(1,total)) : 0)+"%";
+  $("streak").textContent = streakShown();
+  if(!cur){
+    $("study").hidden=true; $("empty").hidden=false;
+    const act=activeCards().length;
+    $("emptyTitle").textContent = act? "Für heute alles erledigt" : "Keine Lektion angewählt";
+    $("emptyText").textContent = act? `Heute ${S.daily.revN} Karten geübt. ${Q.freshAvail} neue Vokabeln warten in den angewählten Lektionen.` : "Wähle unter „Lektionen“ aus, was du lernen willst.";
+    $("moreNew").hidden = !(act && Q.freshAvail>0);
+    return;
+  }
+  $("study").hidden=false; $("empty").hidden=true;
+  const rec=st[cur.id];
+  const LD = S.set.dir==="LD";
+  $("front").textContent = LD? cur.lemma : cur.bed;
+  $("front").classList.toggle("lat", LD);
+  $("info").textContent = cur.info;
+  $("bed").innerHTML = LD? esc(cur.bed) : '<span class="lat" style="font-size:1.6rem;font-weight:600">'+esc(cur.lemma)+'</span>';
+  $("back").hidden=true; $("answers").hidden=true; $("revealRow").hidden=false;
+  $("hint").textContent = LD? "Stammformen und Bedeutung nennen, dann aufdecken" : "Lateinisches Wort mit Stammformen nennen, dann aufdecken";
+  $("metaLekt").textContent = "Lektion "+cur.lekt.replace(/; /g,", ") + (rec? "" : " · neu");
+  $("metaIv").textContent = rec? (rec.iv>=S.set.goal? "gelernt ✓" : rec.iv===0? "wiederholen" : "Abstand "+rec.iv+" T.") : "";
+  const p=previewIvs(rec); $("nWrong").textContent=p[0]; $("nGood").textContent=p[1]; $("nStrong").textContent=p[2];
+  $("queueNote").textContent = Q.queue.length+" in der Runde";
+}
+function reveal(){
+  if(!cur||revealed) return; revealed=true;
+  $("back").hidden=false; $("answers").hidden=false; $("revealRow").hidden=true;
+  $("hint").textContent = "";
+}
+function startStudy(){ Q=buildQueue(); showNext(); updateBackupBanner(); }
+
+// ---------- Lektionen ----------
+function renderTiles(){
+  const st=stats(); const wrap=$("tiles"); wrap.innerHTML="";
+  const counts={};
+  for(const c of CARDS){ const k=c.l1; counts[k]=counts[k]||{n:0,learned:0,seen:0}; counts[k].n++; const r=st[c.id]; if(r){counts[k].seen++; if(isLearned(r)) counts[k].learned++;} }
+  for(const k of LESSON_KEYS){
+    const cnt=counts[k]||{n:0,learned:0,seen:0};
+    const b=document.createElement("button"); b.className="tile"; b.setAttribute("aria-pressed", !!S.lessons[k]);
+    b.innerHTML = `<b>${k}</b><small>${cnt.n} Wörter</small><small>${cnt.learned} gelernt</small><div class="bar"><i style="width:${cnt.n?100*cnt.learned/cnt.n:0}%"></i></div>`;
+    b.title = lessonLabel(k);
+    b.onclick=()=>{ S.lessons[k]=!S.lessons[k]; save(); renderTiles(); };
+    wrap.appendChild(b);
+  }
+  const sel=$("upto"); if(!sel.options.length){ for(const k of LESSON_KEYS){ const o=document.createElement("option"); o.value=k; o.textContent=k; sel.appendChild(o);} sel.value="1"; }
+}
+$("uptoBtn").onclick=()=>{ const i=LESSON_KEYS.indexOf($("upto").value); LESSON_KEYS.forEach((k,j)=>{ if(k[0]!=="T") S.lessons[k]= j<=i; }); save(); renderTiles(); toast("Lektionen bis "+$("upto").value+" angewählt"); };
+$("noneBtn").onclick=()=>{ S.lessons={}; save(); renderTiles(); };
+
+// ---------- Turbo ----------
+let T={list:[], i:0, right:0, wrong:0, missed:[], undo:[]};
+const TURBO_MAX = 4;
+function turboLessons(){ return LESSON_KEYS.filter(k=>S.turbo.lessons[k]); }
+function turboCards(){ return CARDS.filter(c=>S.turbo.lessons[c.l1] && !S.suspended[c.id]); }
+function renderTurboTiles(){
+  const wrap=$("turboTiles"); wrap.innerHTML="";
+  const counts={}; for(const c of CARDS){ counts[c.l1]=(counts[c.l1]||0)+1; }
+  for(const k of LESSON_KEYS){
+    const b=document.createElement("button"); b.className="tile"; b.setAttribute("aria-pressed", !!S.turbo.lessons[k]);
+    b.innerHTML=`<b>${k}</b><small>${counts[k]||0} Wörter</small>`; b.title=lessonLabel(k);
+    b.onclick=()=>{
+      if(S.turbo.lessons[k]) delete S.turbo.lessons[k];
+      else if(turboLessons().length>=TURBO_MAX){ toast("Höchstens "+TURBO_MAX+" Lektionen im Turbo. Erst eine abwählen."); return; }
+      else S.turbo.lessons[k]=true;
+      save(); renderTurboTiles(); turboInfo();
+    };
+    wrap.appendChild(b);
+  }
+}
+function turboInfo(){ const n=turboCards().length, l=turboLessons(); $("turboInfo").textContent = n? `${n} Vokabeln aus ${l.length===1?"Lektion":"den Lektionen"} ${l.join(", ")}.` : "Wähle oben eine bis vier Lektionen."; $("turboGo").disabled=!n; }
+$("turboClear").onclick=()=>{ S.turbo.lessons={}; save(); renderTurboTiles(); turboInfo(); };
+function turboStart(list){
+  T={list:shuffle(list.slice()), i:0, right:0, wrong:0, missed:[], undo:[]};
+  $("turboStart").hidden=true; $("turboResult").hidden=true; $("turboStudy").hidden=false; turboShow();
+}
+function turboShow(){
+  const c=T.list[T.i]; $("tUndo").disabled=T.undo.length===0;
+  $("tProg").style.width=(100*T.i/Math.max(1,T.list.length))+"%";
+  if(!c){ turboEnd(); return; }
+  const LD=S.set.dir==="LD";
+  $("tFront").textContent= LD? c.lemma : c.bed; $("tFront").classList.toggle("lat",LD);
+  $("tInfo").textContent=c.info; $("tBed").innerHTML= LD? esc(c.bed) : '<span class="lat" style="font-size:1.6rem;font-weight:600">'+esc(c.lemma)+'</span>';
+  $("tBack").hidden=true; $("tAnswers").hidden=true; $("tRevealRow").hidden=false; $("tHint").textContent="Tippen zum Aufdecken";
+  $("tMeta").textContent="Lektion "+c.lekt.replace(/; /g,", "); $("tCount").textContent=(T.i+1)+" / "+T.list.length;
+}
+function turboReveal(){ if($("tBack").hidden){ $("tBack").hidden=false; $("tAnswers").hidden=false; $("tRevealRow").hidden=true; $("tHint").textContent=""; } }
+function turboAnswer(ok){ const c=T.list[T.i]; if(!c) return; T.undo.push({i:T.i, ok}); if(ok) T.right++; else { T.wrong++; T.missed.push(c);} T.i++; turboShow(); }
+function turboUndo(){ const u=T.undo.pop(); if(!u) return; if(u.ok) T.right--; else { T.wrong--; T.missed.pop(); } T.i=u.i; turboShow(); }
+function turboEnd(){
+  $("turboStudy").hidden=true; $("turboResult").hidden=false;
+  $("tR1").textContent=T.right; $("tR2").textContent=T.wrong; $("tR3").textContent=Math.round(100*T.right/Math.max(1,T.right+T.wrong))+" %";
+  $("tMissedWrap").hidden=T.missed.length===0;
+  $("tMissed").innerHTML=T.missed.map(c=>`<li><b>${esc(c.lemma)}</b> ${esc(c.info)} <span class="note">${esc(c.bed)}</span></li>`).join("");
+  $("tAgain").hidden=T.missed.length===0;
+}
+$("turboGo").onclick=()=>turboStart(turboCards());
+$("tAgain").onclick=()=>turboStart(T.missed);
+$("tNew").onclick=()=>{ $("turboResult").hidden=true; $("turboStart").hidden=false; renderTurboTiles(); turboInfo(); };
+$("tStop").onclick=()=>{ $("turboStudy").hidden=true; $("turboStart").hidden=false; renderTurboTiles(); turboInfo(); };
+$("tFlash").onclick=turboReveal; $("tRevealBtn").onclick=turboReveal; $("tWrong").onclick=()=>turboAnswer(false); $("tRight").onclick=()=>turboAnswer(true); $("tUndo").onclick=turboUndo;
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+// ---------- Suche ----------
+function renderSearch(){
+  const q=fold($("q").value.trim()), only=$("onlyOff").checked, st=stats();
+  let hits = CARDS.filter(c=> (!only || S.suspended[c.id]) && (q==="" ? only : c.key.includes(q)));
+  $("qCount").textContent = hits.length? hits.length+" Treffer" : (q||only? "keine Treffer" : "");
+  hits=hits.slice(0,80);
+  const wrap=$("results"); wrap.innerHTML="";
+  for(const c of hits){
+    const r=st[c.id]; const off=!!S.suspended[c.id];
+    const d=document.createElement("div"); d.className="item"+(off?" off":"");
+    d.innerHTML=`<div class="t"><div class="l lat">${esc(c.lemma)} <span class="note" style="font-weight:400;font-style:italic">${esc(c.info)}</span></div><div class="d">${esc(c.bed)}</div></div>
+      <span class="tag">${esc(c.lekt.split("; ")[0])}</span><span class="tag">${r? (isLearned(r)?"gelernt": r.iv===0?"üben":r.iv+" T."):"neu"}</span>
+      <button class="btn small ghost">${off?"Aktivieren":"Aussetzen"}</button>`;
+    d.querySelector("button").onclick=()=>{ if(off) delete S.suspended[c.id]; else S.suspended[c.id]=1; save(); renderSearch(); toast(off?"Karte wieder aktiv":"Karte ausgesetzt"); };
+    wrap.appendChild(d);
+  }
+}
+$("q").oninput=renderSearch; $("onlyOff").onchange=renderSearch;
+
+// ---------- Einstellungen ----------
+function renderSettings(){
+  for(const k of ["goal","fGood","fStrong","fWrong","newPerDay","first1","first3"]) $(k).value=S.set[k];
+  seg("dirSeg", S.set.dir); seg("bigSeg", String(S.set.big)); seg("themeSeg", S.set.theme);
+  $("ver").textContent=VERSION; $("nCards").textContent=CARDS.length;
+  $("dirPill").textContent = S.set.dir==="LD"? "L → D" : "D → L";
+  $("bkInfo").textContent = S.lastBackup? "Zuletzt gesichert: "+S.lastBackup : "Noch nie gesichert";
+}
+function seg(id,v){ $(id).querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v===v)); }
+for(const k of ["goal","fGood","fStrong","fWrong","newPerDay","first1","first3"]){
+  $(k).onchange=()=>{ const min=+$(k).min, max=+$(k).max; let v=parseFloat($(k).value); if(isNaN(v)) v=DEFAULTS[k]; v=Math.min(max,Math.max(min,v)); S.set[k]=v; $(k).value=v; save(); Q=null; };
+}
+$("dirSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.dir=b.dataset.v; save(); renderSettings(); Q=null; toast(S.set.dir==="LD"?"Latein → Deutsch":"Deutsch → Latein"); };
+$("bigSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.big=+b.dataset.v; save(); applyDisplay(); renderSettings(); };
+$("themeSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.theme=b.dataset.v; save(); applyDisplay(); renderSettings(); };
+function applyDisplay(){
+  document.documentElement.setAttribute("data-big", S.set.big?"1":"0");
+  if(S.set.theme==="system") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", S.set.theme);
+}
+$("resetBtn").onclick=()=>$("resetConfirm").hidden=false; $("resetNo").onclick=()=>$("resetConfirm").hidden=true;
+$("resetYes").onclick=()=>{ S.stats[S.set.dir]={}; S.daily={date:today(),newN:0,revN:0,doneN:0,extraNew:0}; save(); $("resetConfirm").hidden=true; Q=null; toast("Lernstand gelöscht"); };
+
+// ---------- Sicherung ----------
+function backupCode(){ const payload={app:"fringillus",v:1,version:VERSION,date:new Date().toISOString(),state:S}; return "FRINGILLUS1:"+btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }
+function parseBackup(text){
+  text=(text||"").trim(); let json=text;
+  if(text.startsWith("FRINGILLUS1:")) json=decodeURIComponent(escape(atob(text.slice(12).replace(/\s+/g,""))));
+  const p=JSON.parse(json); if(!p||p.app!=="fringillus"||!p.state) throw new Error("kein Fringillus-Code");
+  return p;
+}
+function markBackup(){ S.lastBackup=today(); save(); renderSettings(); updateBackupBanner(); }
+$("bkCopy").onclick=()=>{ const code=backupCode(); $("bkOut").value=code;
+  const done=()=>{ markBackup(); toast("Code kopiert. Jetzt per Mail an dich selbst schicken."); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(code).then(done).catch(()=>{ $("bkOut").focus(); $("bkOut").select(); toast("Code markiert. Bitte selbst kopieren."); markBackup(); }); }
+  else { $("bkOut").focus(); $("bkOut").select(); toast("Code markiert. Bitte selbst kopieren."); markBackup(); } };
+$("bkFile").onclick=()=>{ const code=backupCode(); $("bkOut").value=code;
+  try{ const blob=new Blob([code],{type:"text/plain"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="fringillus-sicherung-"+today()+".txt"; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},1000); markBackup(); toast("Datei gespeichert (falls der Browser Downloads erlaubt). Der Code steht auch im Feld."); }
+  catch(e){ toast("Datei nicht möglich, nutze „Code kopieren“."); } };
+let pending=null;
+$("bkRestore").onclick=()=>{ try{ pending=parseBackup($("bkIn").value); $("bkConfirm").hidden=false; }catch(e){ toast("Das ist kein gültiger Sicherungscode."); } };
+$("bkFileIn").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ pending=parseBackup(r.result); $("bkConfirm").hidden=false; }catch(err){ toast("Das ist keine gültige Sicherungsdatei."); } }; r.readAsText(f); e.target.value=""; };
+$("bkNo").onclick=()=>{ pending=null; $("bkConfirm").hidden=true; };
+$("bkYes").onclick=()=>{ if(!pending) return; S=pending.state; S.gate=true; save(); S=load(); pending=null; $("bkConfirm").hidden=true; $("bkIn").value=""; applyDisplay(); renderSettings(); Q=null; toast("Lernstand wiederhergestellt ("+(pending&&pending.date||"")+")"); go("lernen"); };
+function updateBackupBanner(){
+  const has = Object.keys(S.stats.LD).length+Object.keys(S.stats.DL).length>0;
+  const age = S.lastBackup? dayDiff(S.lastBackup,today()) : null;
+  const show = has && (age===null || age>=7);
+  $("backupBanner").hidden=!show;
+  $("backupAge").textContent = age===null? "nie" : (age===0?"heute": age+" Tage her");
+}
+
+// ---------- Navigation ----------
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function go(name){
+  document.querySelectorAll(".view").forEach(v=>v.hidden = v.id!=="v-"+name);
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.go===name));
+  if(name==="lernen") startStudy();
+  if(name==="lektionen") renderTiles();
+  if(name==="turbo"){ if($("turboStudy").hidden) { $("turboStart").hidden=false; $("turboResult").hidden=true; renderTurboTiles(); turboInfo(); } }
+  if(name==="suche") renderSearch();
+  if(name==="einstellungen") renderSettings();
+  window.scrollTo(0,0);
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-go]"); if(b) go(b.dataset.go); });
+$("flash").onclick=reveal; $("revealBtn").onclick=reveal;
+$("aWrong").onclick=()=>answer(0); $("aGood").onclick=()=>answer(1); $("aStrong").onclick=()=>answer(2);
+$("undoBtn").onclick=undo;
+$("suspendBtn").onclick=()=>{ if(!cur) return; S.suspended[cur.id]=1; save(); Q.queue.shift(); toast("„"+cur.lemma+"“ ausgesetzt. Unter Suche wieder aktivierbar."); showNext(); };
+$("moreNew").onclick=()=>{ S.daily.extraNew+=5; save(); startStudy(); };
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea,select") || !$("help").hidden) return;
+  const lernen=!$("v-lernen").hidden, turbo=!$("v-turbo").hidden && !$("turboStudy").hidden;
+  if(e.key===" "){ e.preventDefault(); if(lernen) reveal(); if(turbo) turboReveal(); }
+  if(lernen && revealed){ if(e.key==="1") answer(0); if(e.key==="2") answer(1); if(e.key==="3") answer(2); }
+  if(turbo && !$("tBack").hidden){ if(e.key==="1") turboAnswer(false); if(e.key==="2"||e.key==="3") turboAnswer(true); }
+  if(e.key==="z"||e.key==="Z"){ if(lernen) undo(); if(turbo) turboUndo(); }
+});
+let toastT=null; function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2600); }
+$("gateOk").onclick=()=>{ S.gate=true; save(); $("gate").hidden=true; };
+
+// ---------- Hilfe (i-Knöpfe) ----------
+const HELP = {
+lernen:{t:"Langfristig lernen",b:`<p>Dieser Bereich arbeitet wie eine Lernkartei mit Fächern: Was du weißt, kommt in immer größeren Abständen wieder; was du nicht weißt, kommt schnell wieder dran. Jeden Tag zeigt der Trainer dir genau die Karten, die heute fällig sind, dazu ein paar neue.</p>
+<p>Es geht nicht darum, am Morgen vor dem Test schnell zwanzig Wörter in den Kopf zu pressen und sie am Tag danach wieder zu vergessen. Es zählt allein, was am Ende des Schuljahres und in der Oberstufe noch da ist. Dafür reichen fünf bis zehn Minuten am Tag, jeden Tag, am besten zu einer festen Zeit. Die Wirkung liegt in der Regelmäßigkeit, nicht im langen Nachdenken bei jeder Vokabel.</p>
+<p>Eine Vokabel gilt als gelernt, wenn ihr Abstand das Zielintervall erreicht hat (unter „Mehr“ einstellbar). Für kurzfristiges Üben vor einem Test gibt es den Turbo.</p>`},
+zahlen:{t:"Die drei Zahlen",b:`<p><b>Heute fällig:</b> Karten, deren Abstand abgelaufen ist. Sie sollten heute dran sein, sonst stauen sie sich.</p>
+<p><b>Neu heute:</b> Wie viele neue Vokabeln du heute schon begonnen hast und wie viele der Trainer pro Tag dazunimmt (einstellbar unter „Mehr“).</p>
+<p><b>Heute gelernt:</b> Wie viele Karten du heute schon bewertet hast. Der Balken darunter zeigt, wie weit du mit der heutigen Runde bist.</p>`},
+streak:{t:"Lernserie",b:`<p>Die Flamme zählt, an wie vielen Tagen hintereinander du gelernt hast. Ein Tag zählt, sobald du eine Karte bewertet hast. Lässt du einen Tag aus, beginnt die Zählung von vorn.</p><p>Die Serie ist nur ein Ansporn. Entscheidend ist, dass die fälligen Karten täglich drankommen.</p>`},
+aufdecken:{t:"Erst aufsagen, dann aufdecken",b:`<p>Sag Lernformen und Bedeutung halblaut auf, bevor du die Karte umdrehst: bei Substantiven Genitiv und Genus, bei Verben die Stammformen bzw. Lernformen. Beim Abfragen wird nicht geschrieben.</p>
+<p>Nicht lange überlegen: Wenn es nach ein paar Sekunden nicht da ist, aufdecken und ehrlich „Nicht gewusst“ wählen. Am Rechner: Leertaste.</p>`},
+bewerten:{t:"Nicht gewusst, Gewusst, Sicher gewusst",b:`<p>Bewerte dich ehrlich; die App kann es nicht prüfen. „Gewusst“ heißt: vollständig und sicher, mit allen Lernformen. „Irgendwas mit …“ zählt nicht und gehört zu „Nicht gewusst“.</p>
+<p><b>Nicht gewusst:</b> Die Karte kommt heute noch einmal und fängt danach mit kleinem Abstand neu an, wie eine Karte, die zurück ins erste Fach wandert.</p>
+<p><b>Gewusst:</b> Der Abstand bis zum nächsten Mal wächst (bisheriger Abstand mal Faktor gewusst).</p>
+<p><b>Sicher gewusst:</b> Nur wenn das Wort sofort und ohne Zögern da war. Der Abstand wächst stärker.</p>
+<p>Die kleine Angabe unter jedem Knopf zeigt, wann die Karte dann wiederkommt. Am Rechner: Tasten 1, 2, 3.</p>`},
+zurueck:{t:"Zurück",b:`<p>Nimmt die letzte Bewertung zurück, etwa wenn du dich vertippt hast. Die Karte erscheint wieder mit ihrem vorherigen Stand. Am Rechner: Taste Z.</p>`},
+aussetzen:{t:"Aussetzen",b:`<p>Nimmt diese Vokabel aus dem Lernen heraus, zum Beispiel weil du sie längst sicher kannst oder weil sie doppelt vorkommt. Ihr Lernstand bleibt erhalten.</p><p>Unter „Suche“ findest du ausgesetzte Vokabeln mit dem Haken „nur ausgesetzte zeigen“ wieder und kannst sie dort wieder aktivieren.</p>`},
+lektionen:{t:"Lektionen wählen",b:`<p>Hier legst du fest, aus welchen Lektionen neue Vokabeln kommen und welche wiederholt werden. Antippen schaltet eine Lektion an oder ab; der grüne Anteil zeigt, wie viel davon schon gelernt ist.</p>
+<p>Für den Vokabeltestplan wählst du einfach alle Lektionen an, die im Plan stehen. Wie oft eine einzelne Karte drankommt, regelt der Trainer dann selbst nach deinen Antworten.</p>
+<p>Abwählen löscht nichts: Der Lernstand der Lektion bleibt erhalten und wird beim nächsten Anwählen weiterverwendet.</p>`},
+upto:{t:"Alle bis Lektion / alle ab",b:`<p><b>Alle bis Lektion</b> wählt alle Lektionen von Anfang an bis zur gewählten Nummer an, praktisch, wenn du alles Bisherige wiederholen willst.</p><p><b>Alle ab</b> schaltet sämtliche Lektionen ab, etwa um danach nur einzelne wieder anzuwählen. Der Lernstand bleibt dabei erhalten.</p>`},
+turbo:{t:"Turbo: kurzfristig üben",b:`<p>Der Turbo ist für den Tag vor dem Test oder für den ersten Durchgang einer neuen Lektion: ein bis vier Lektionen einmal komplett, in zufälliger Reihenfolge, am Ende eine Liste der nicht gewussten Wörter, die du gleich noch einmal üben kannst.</p>
+<p>Der Turbo verändert deinen Lernstand nicht und ersetzt das tägliche Lernen nicht. Was du hier übst, ist morgen wieder halb weg, wenn es nicht auch im langfristigen Lernen unter „Lernen“ vorkommt.</p>`},
+turboStart:{t:"Turbo starten",b:`<p>Tippe oben die Lektionen an, die du durchgehen willst (höchstens vier), dann „Turbo starten“. „Auswahl leeren“ nimmt alle Haken weg. Die Auswahl hier ist unabhängig von den Lektionen, die du langfristig lernst.</p>`},
+suche:{t:"Suche",b:`<p>Findet jede Vokabel, auch ohne Längen- oder Akzentzeichen. Zu jedem Treffer siehst du Lektion und Lernstand.</p><p>Mit dem Haken „nur ausgesetzte zeigen“ siehst du die Vokabeln, die du beim Lernen ausgesetzt hast, und kannst sie wieder aktivieren.</p>`},
+dir:{t:"Lernrichtung",b:`<p><b>Fremdsprache → Deutsch</b> ist der Normalfall und entspricht dem Test: Du siehst das Wort, nennst Lernformen und Bedeutung.</p><p><b>Deutsch → Fremdsprache</b> ist schwerer: Du siehst die Bedeutung und nennst das fremdsprachige Wort mit seinen Lernformen. Gut für alle, die mehr wollen.</p><p>Beide Richtungen haben einen getrennten Lernstand.</p>`},
+goal:{t:"Zielintervall",b:`<p>Ab diesem Abstand in Tagen gilt eine Vokabel als gelernt und wird nicht mehr abgefragt, so wie Karten, die du im letzten Fach der Lernkartei gewusst hast.</p><p>90 Tage ist ein guter Wert, 180 für Ehrgeizige. Erhöhst du den Wert später, kommen bereits gelernte Karten wieder in die Wiederholung. Gelöscht wird dabei nichts.</p>`},
+fGood:{t:"Faktor gewusst",b:`<p>Nach „Gewusst“ wird der bisherige Abstand mit diesem Faktor multipliziert. Beispiel mit 1,4: Aus 10 Tagen werden 14 Tage, aus 14 dann 20.</p><p>Ein kleinerer Faktor bedeutet häufigere Wiederholung: sicherer, aber mehr Arbeit. 1,4 ist ein guter Standard.</p>`},
+fStrong:{t:"Faktor sicher gewusst",b:`<p>Dasselbe für „Sicher gewusst“. Beispiel mit 2,2: Aus 10 Tagen werden 22 Tage. So erreichen Wörter, die du wirklich kannst, schneller das Zielintervall.</p>`},
+fWrong:{t:"Faktor nicht gewusst",b:`<p>Nach „Nicht gewusst“ kommt die Karte heute noch einmal. Weißt du sie dann, startet sie mit dem alten Abstand mal diesem Faktor. Beispiel mit 0,5: Aus 20 Tagen werden 10 Tage.</p><p>0 bedeutet: ganz von vorn, als wäre die Karte neu. 0,5 ist ein guter Standard.</p>`},
+newPerDay:{t:"Neue Vokabeln pro Tag",b:`<p>So viele noch nie gesehene Vokabeln aus den angewählten Lektionen nimmt der Trainer pro Tag dazu. 10 ist ein guter Wert.</p><p>Jede neue Karte bringt in den folgenden Tagen Wiederholungen mit sich. Wird es zu viel, senke diese Zahl, statt Tage auszulassen. An einzelnen Tagen kannst du unter „Lernen“ fünf zusätzliche neue nehmen.</p>`},
+first:{t:"Erster Abstand",b:`<p>Nach wie vielen Tagen eine neue Karte nach dem ersten „Gewusst“ bzw. „Sicher gewusst“ wiederkommt. Standard: 1 Tag bzw. 3 Tage. Das entspricht den ersten Fächern der Lernkartei; danach wachsen die Abstände mit den Faktoren.</p>`},
+anzeige:{t:"Anzeige",b:`<p><b>Schriftgröße „Groß“</b> vergrößert die Karten und Knöpfe.</p><p><b>Farbschema „Gerät“</b> folgt der Einstellung deines Handys (hell oder dunkel); „Hell“ und „Dunkel“ legen es fest.</p>`},
+sicherung:{t:"Sicherung",b:`<p>Dein Lernstand liegt nur in diesem Browser auf diesem Gerät. Geht das Handy verloren, wird es zurückgesetzt oder der Browser-Speicher geleert, ist er weg.</p><p>Kopiere deshalb regelmäßig, etwa einmal die Woche, den Sicherungscode und schicke ihn dir per Mail oder lege ihn in der Cloud ab. Der Hinweis oben im Bereich „Lernen“ erinnert dich daran. Auf einem neuen Gerät fügst du den Code unter „Wiederherstellen“ ein.</p>`},
+bkCopy:{t:"Code kopieren / Als Datei speichern",b:`<p><b>Code kopieren</b> legt den Sicherungscode in die Zwischenablage. Füge ihn danach in eine Mail an dich selbst oder in eine Notiz ein.</p><p><b>Als Datei speichern</b> speichert denselben Code als Textdatei, am Rechner am einfachsten. Auf dem Handy hängt es vom Browser ab, ob das klappt; dann nimm „Code kopieren“.</p>`},
+bkRestore:{t:"Wiederherstellen",b:`<p>Ersetzt den Lernstand auf diesem Gerät durch den aus dem eingefügten Code oder der gewählten Datei. Das brauchst du auf einem neuen Handy oder nach einem Verlust.</p><p>Achtung: Der bisherige Lernstand auf diesem Gerät wird dabei überschrieben. Im Zweifel vorher sichern.</p>`},
+reset:{t:"Lernstand löschen",b:`<p>Löscht den gesamten Lernstand der aktuellen Lernrichtung: alle Abstände, Serien und ausgesetzten Vokabeln. Das lässt sich nicht rückgängig machen; vorher sichern. Die Lektionsauswahl und die Einstellungen bleiben.</p>`}
+};
+function showHelp(k){ const h=HELP[k]; if(!h) return; $("helpT").textContent=h.t; $("helpB").innerHTML=h.b; $("help").hidden=false; $("helpX").focus(); }
+function hideHelp(){ $("help").hidden=true; }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-help]"); if(b){ e.preventDefault(); e.stopPropagation(); showHelp(b.dataset.help); } });
+$("helpX").onclick=hideHelp; $("help").onclick=e=>{ if(e.target===$("help")) hideHelp(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !$("help").hidden) hideHelp(); });
+
+// ---------- App-Installation und Offline-Modus ----------
+(function(){
+  const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone===true;
+  let embedded=false; try{ embedded = window.self!==window.top; }catch(e){ embedded=true; }
+  const ua=navigator.userAgent, ios=/iPad|iPhone|iPod/.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+  let deferred=null;
+  if(standalone) $("pwaDone").hidden=false; else if(embedded) $("pwaEmbedded").hidden=false; else $("pwaSteps").hidden=false;
+  window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferred=e; });
+  window.addEventListener("appinstalled",()=>{ toast("Installiert. Öffne die App und füge deinen Code ein."); });
+  $("pwaCopy").onclick=()=>$("bkCopy").click();
+  $("pwaInstall").onclick=()=>{
+    if(deferred){ deferred.prompt(); deferred=null; return; }
+    $("pwaManualText").textContent = ios
+      ? (/CriOS|FxiOS|EdgiOS/.test(ua) ? "Tippe auf das Teilen-Symbol und dann auf „Zum Home-Bildschirm“. Fehlt der Eintrag, öffne die Seite in Safari."
+                                        : "Tippe unten in Safari auf das Teilen-Symbol (Quadrat mit Pfeil nach oben) und dann auf „Zum Home-Bildschirm“.")
+      : "Öffne das Menü deines Browsers (⋮) und wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.";
+    $("pwaManual").hidden=false;
+  };
+  $("pwaToRestore").onclick=()=>{ $("bkIn").scrollIntoView({block:"center"}); $("bkIn").focus(); };
+  function offMsg(m){ $("pwaOff").textContent=m; $("pwaOff2").textContent=m; }
+  if(!embedded && "serviceWorker" in navigator && location.protocol==="https:"){
+    navigator.serviceWorker.register("sw.js").then(()=>navigator.serviceWorker.ready).then(()=>offMsg("Offline-Modus bereit: funktioniert auch ohne Internet.")).catch(()=>{});
+  }
+  if(standalone && navigator.storage && navigator.storage.persist){ try{ navigator.storage.persist(); }catch(e){} }
+})();
+
+// ---------- Start ----------
+applyDisplay();
+if(!S.gate) $("gate").hidden=false;
+go("lernen");
+</script>
+
+</body>
+</html>
