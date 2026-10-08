@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tafel-Memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root {
+  --grund: #17130f; --flaeche: #221c16; --linie: #3d3226; --gold: #d9a95b; --ton: #c8662f;
+  --hell: #f3e9d8; --grau: #b3a48c;
+  --karteA: #f6eedf; --karteB: #e3ecf2; --tinte: #1d1712;
+  --s1: #d9a95b; --s2: #6fb0c9; --warn: #e08a6f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: var(--grund); color: var(--hell); font-family: "Gentium Book Plus", "Gentium Plus", "GFS Porson", serif; overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+button, select, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+/* Grundaufbau: Kopf, dann Spieler 1 | Spielfeld | Spieler 2 */
+#app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+header { display: flex; align-items: center; gap: 1.2vw; padding: 0.8vh 1.2vw; border-bottom: 2px solid var(--linie); }
+header h1 { font-size: 2.6vh; font-weight: normal; letter-spacing: 0.1em; font-variant: small-caps; color: var(--gold); }
+header .satz { font-size: 2.1vh; color: var(--grau); font-style: italic; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+header button { background: var(--flaeche); color: var(--hell); border: 1px solid var(--linie); border-radius: 0.6vh; padding: 0.6vh 1.2vw; font-size: 2vh; }
+header button:hover { border-color: var(--gold); }
+main { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 0; }
+.spieler { display: flex; flex-direction: column; min-width: 0; padding: 1.2vh 1vw; gap: 1vh; border: 3px solid transparent; border-radius: 1.2vh; margin: 1vh 0.6vw; transition: border-color .3s, background .3s; }
+.spieler.dran { border-color: var(--farbe); background: color-mix(in srgb, var(--farbe) 9%, transparent); }
+.spieler .kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 1vw; }
+.spieler .name { font-size: 3.6vh; color: var(--farbe); outline: none; min-width: 3em; border-bottom: 1px dashed transparent; }
+.spieler .name:focus { border-bottom-color: var(--farbe); }
+.spieler .punkte { font-size: 5.4vh; font-weight: bold; color: var(--hell); }
+.spieler .ablage { flex: 1; min-height: 0; position: relative; }
+.spieler .ablage .paar { position: absolute; display: flex; gap: 3%; cursor: zoom-in; }
+.spieler .ablage .paar .gesicht { flex: 1; border-radius: 0.6vh; box-shadow: 0 0.3vh 0.8vh #0008; }
+#p1 { --farbe: var(--s1); }
+#p2 { --farbe: var(--s2); }
+.dranhinweis { font-size: 2vh; color: var(--farbe); visibility: hidden; letter-spacing: 0.08em; }
+.spieler.dran .dranhinweis { visibility: visible; }
+
+#feld { position: relative; display: grid; gap: var(--luecke); align-content: center; justify-content: center; padding: 1vh 0; }
+.karte { width: var(--k); height: var(--k); perspective: 120vh; cursor: pointer; }
+.karte.weg { visibility: hidden; pointer-events: none; }
+.karte .innen { position: relative; width: 100%; height: 100%; transition: transform .45s; transform-style: preserve-3d; }
+.karte.offen .innen { transform: rotateY(180deg); }
+.karte .ruecken, .karte .gesicht { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 0.8vh; }
+.karte .ruecken { background: #2b2219 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M0 23H22V1H6V17H16V7H11' fill='none' stroke='%23d9a95b' stroke-opacity='.55' stroke-width='1.4'/%3E%3C/svg%3E") center / 34% repeat; border: 0.25vh solid #6b5232; box-shadow: 0 0.4vh 1vh #000a; }
+.karte:hover .ruecken { border-color: var(--gold); }
+.karte .ruecken span { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); min-width: 38%; padding: 2% 6%; border-radius: 99px; background: #17130fe6; border: 1px solid #6b5232; text-align: center; font-size: calc(var(--k) * .2); color: var(--gold); }
+.karte .gesicht { transform: rotateY(180deg); box-shadow: 0 0.4vh 1vh #000a; }
+.gesicht { background: var(--karteA); color: var(--tinte); overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6%; }
+.gesicht.b { background: var(--karteB); }
+.gesicht.bild { padding: 0; background: #0d0b09; }
+.gesicht img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.gesicht .txt { line-height: 1.12; overflow-wrap: normal; word-break: normal; hyphens: manual; max-width: 100%; }
+.gesicht .sub { font-style: italic; opacity: .75; margin-top: .25em; }
+.karte.treffer .gesicht { box-shadow: 0 0 0 0.5vh var(--gold), 0 0.4vh 1vh #000a; }
+.karte.fehl .gesicht { box-shadow: 0 0 0 0.5vh #b04a3a, 0 0.4vh 1vh #000a; }
+.flug { position: fixed; z-index: 50; transition: left .7s ease-in-out, top .7s ease-in-out, width .7s ease-in-out, height .7s ease-in-out; }
+
+#zudecken { position: absolute; left: 50%; bottom: 1.5vh; transform: translateX(-50%); background: #000c; color: var(--hell); padding: 0.8vh 1.6vw; border-radius: 3vh; font-size: 2.2vh; pointer-events: none; display: none; z-index: 5; }
+
+/* Dialoge */
+.schleier { position: fixed; inset: 0; background: #000b; display: none; align-items: center; justify-content: center; z-index: 100; }
+.schleier.an { display: flex; }
+.dialog { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 1.4vh; padding: 3vh 2.4vw; width: min(92vw, 110vh); max-height: 94vh; overflow: auto; font-size: 2.2vh; }
+.dialog h2 { font-weight: normal; font-variant: small-caps; letter-spacing: .08em; color: var(--gold); font-size: 3.4vh; margin-bottom: 2vh; }
+.dialog label { display: block; color: var(--grau); margin: 1.6vh 0 .5vh; }
+.dialog select, .dialog input[type=text], .dialog textarea { width: 100%; background: var(--grund); color: var(--hell); border: 1px solid var(--linie); border-radius: .6vh; padding: .8vh .8vw; font-size: 2.2vh; }
+.dialog textarea { height: 26vh; resize: vertical; font-size: 2vh; line-height: 1.4; user-select: text; -webkit-user-select: text; }
+.dialog .reihe { display: flex; gap: 1.5vw; flex-wrap: wrap; }
+.dialog .reihe > div { flex: 1; min-width: 12em; }
+.dialog .knoepfe { display: flex; gap: 1vw; justify-content: flex-end; margin-top: 2.4vh; flex-wrap: wrap; }
+.dialog .knoepfe button, .dialog .klein { background: var(--grund); color: var(--hell); border: 1px solid var(--linie); border-radius: .6vh; padding: .9vh 1.4vw; }
+.dialog .knoepfe button.haupt { background: var(--ton); border-color: var(--ton); color: #fff; }
+.dialog .hinweis { color: var(--grau); font-size: 1.8vh; margin-top: .6vh; line-height: 1.4; }
+.dialog .hinweis code { color: var(--hell); }
+.dialog .check { display: flex; align-items: center; gap: .6vw; color: var(--hell); margin-top: 1.4vh; }
+.dialog .check input { width: 2.4vh; height: 2.4vh; }
+#vorschau { display: flex; gap: .5vw; flex-wrap: wrap; margin-top: 1vh; }
+#vorschau img { height: 7vh; border-radius: .4vh; }
+
+#gross .dialog { width: auto; display: flex; gap: 2vw; background: transparent; border: none; }
+#gross .gesicht { width: 40vh; height: 40vh; border-radius: 1.2vh; }
+#ende h2 { font-size: 5vh; text-align: center; }
+#ende p { text-align: center; font-size: 3vh; margin-top: 1vh; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Memory</h1>
+    <div class="satz" id="satzname"></div>
+    <button id="wechsel" title="Falls ein Zug falsch gezählt wurde">Spieler wechseln</button>
+    <button id="neu">Neues Spiel</button>
+    <button id="vollbild">Vollbild</button>
+  </header>
+  <main>
+    <section class="spieler" id="p1">
+      <div class="kopf"><div class="name" contenteditable="true" spellcheck="false">Spieler 1</div><div class="punkte">0</div></div>
+      <div class="dranhinweis">AM ZUG</div>
+      <div class="ablage"></div>
+    </section>
+    <section id="feld"><div id="zudecken">Tippen zum Zudecken</div></section>
+    <section class="spieler" id="p2">
+      <div class="kopf"><div class="name" contenteditable="true" spellcheck="false">Spieler 2</div><div class="punkte">0</div></div>
+      <div class="dranhinweis">AM ZUG</div>
+      <div class="ablage"></div>
+    </section>
+  </main>
+</div>
+
+<!-- Spielauswahl -->
+<div class="schleier" id="start"><div class="dialog">
+  <h2>Neues Spiel</h2>
+  <label for="wahlSatz">Kartensatz</label>
+  <select id="wahlSatz"></select>
+  <div class="reihe" id="lektionsfilter">
+    <div><label for="vonK">von Lektion</label><select id="vonK"></select></div>
+    <div><label for="bisK">bis Lektion</label><select id="bisK"></select></div>
+  </div>
+  <div class="reihe">
+    <div><label for="anzahl">Anzahl der Karten</label><select id="anzahl"></select></div>
+    <div><label for="zudeckmodus">Falsche Paare zudecken</label>
+      <select id="zudeckmodus"><option value="klick">nach Tippen (Zeit zum Besprechen)</option><option value="3">nach 3 Sekunden</option><option value="5">nach 5 Sekunden</option></select></div>
+  </div>
+  <div class="reihe">
+    <div><label for="name1">Spieler links</label><input type="text" id="name1"></div>
+    <div><label for="name2">Spieler rechts</label><input type="text" id="name2"></div>
+  </div>
+  <label class="check"><input type="checkbox" id="farbig" checked> beide Kartenseiten farbig unterscheiden (z. B. griechisch hell, deutsch blau)</label>
+  <div class="hinweis" id="satzinfo"></div>
+  <div class="knoepfe">
+    <a href="bildnachweis.html" target="_blank" style="color: var(--grau); align-self: center; margin-right: auto;">Bildnachweis</a>
+    <button id="eigenOeffnen">Eigene Kartensätze …</button>
+    <button class="haupt" id="los">Spiel starten</button>
+  </div>
+</div></div>
+
+<!-- Eigene Kartensätze -->
+<div class="schleier" id="editor"><div class="dialog">
+  <h2>Eigener Kartensatz</h2>
+  <div class="reihe">
+    <div><label for="eigenWahl">Vorhandene eigene Sätze</label><select id="eigenWahl"></select></div>
+    <div><label for="eigenName">Name des Satzes</label><input type="text" id="eigenName" placeholder="z. B. Apologie 17a–18a"></div>
+  </div>
+  <label for="eigenText">Paare – eine Zeile pro Paar, linke und rechte Karte durch Tabulator oder <b>|</b> getrennt</label>
+  <textarea id="eigenText" spellcheck="false" placeholder="ἀνήρ | der Mann&#10;λύω | ich löse&#10;λύεις | 2. Sg. Ind. Präs. Akt.&#10;bild:zeus.jpg | Ζεύς"></textarea>
+  <div class="hinweis">
+    Zusatzzeile klein unter der Karte: <code>ἀνήρ ; ὁ | der Mann</code> (nach Semikolon).
+    Bilder: unten hochladen, dann in einer Zeile <code>bild:Dateiname</code> schreiben.
+    Ohne zweite Spalte entsteht ein Paar aus zwei gleichen Karten (klassisches Memory).
+    Aus Tabellen (Excel, Word, Quizlet-Export) lässt sich direkt hineinkopieren.
+  </div>
+  <label>Bilder</label>
+  <div class="reihe">
+    <div><input type="file" id="bildDateien" accept="image/*" multiple></div>
+  </div>
+  <label class="check"><input type="checkbox" id="bildPaare"> hochgeladene Bilder automatisch als Paare eintragen: Bild – Dateiname (z. B. <i>Ζεύς.jpg</i> → Karte „Ζεύς“)</label>
+  <div id="vorschau"></div>
+  <div class="hinweis" id="meldung" style="color: var(--warn)"></div>
+  <div class="knoepfe">
+    <button id="eigenLoeschen">Satz löschen</button>
+    <button id="eigenExport">Als Datei sichern</button>
+    <button id="eigenImportKnopf">Datei laden</button><input type="file" id="eigenImport" accept=".json,application/json" hidden>
+    <button id="eigenZurueck">Zurück</button>
+    <button class="haupt" id="eigenSpeichern">Speichern</button>
+  </div>
+</div></div>
+
+<div class="schleier" id="gross"><div class="dialog"></div></div>
+<div class="schleier" id="ende"><div class="dialog">
+  <h2 id="endeTitel"></h2><p id="endeText"></p>
+  <div class="knoepfe" style="justify-content:center"><button id="nochmal" class="haupt">Nochmal mit demselben Satz</button><button id="andererSatz">Anderer Satz</button></div>
+</div></div>
+
+<script src="decks.js"></script>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const speicher = {
+  lesen(k, ersatz) { try { const v = localStorage.getItem("memory." + k); return v ? JSON.parse(v) : ersatz; } catch { return ersatz; } },
+  schreiben(k, v) { try { localStorage.setItem("memory." + k, JSON.stringify(v)); return true; } catch { return false; } }
+};
+
+// ---------- Kartensätze ----------
+const eingebaut = (window.MEMORY_DECKS || []);
+let eigene = speicher.lesen("eigene", []);          // [{id, name, gruppe:'Eigene', paare, bilder:{name:dataURL}}]
+const alleSaetze = () => [...eingebaut, ...eigene];
+const satzMitId = id => alleSaetze().find(d => d.id === id);
+
+// Kartengesicht als DOM
+function gesicht(seite, seiteB, satz) {
+  const g = document.createElement("div");
+  g.className = "gesicht" + (seiteB && zustand.farbig ? " b" : "");
+  if (seite.i) {
+    g.classList.add("bild");
+    const img = document.createElement("img");
+    img.src = (satz && satz.bilder && satz.bilder[seite.i]) || seite.i;
+    img.alt = "";
+    g.appendChild(img);
+  } else {
+    const t = document.createElement("div"); t.className = "txt"; t.textContent = seite.t; g.appendChild(t);
+    if (seite.s) { const s = document.createElement("div"); s.className = "sub"; s.textContent = seite.s; g.appendChild(s); }
+  }
+  return g;
+}
+
+// Schrift so groß wie möglich, ohne dass etwas übersteht
+function einpassen(g) {
+  const t = g.querySelector(".txt"); if (!t) return;
+  const s = g.querySelector(".sub");
+  const h = g.clientHeight, w = g.clientWidth;
+  let lo = 4, hi = Math.max(8, h * 0.42), best = lo;
+  for (let i = 0; i < 12; i++) {
+    const m = (lo + hi) / 2;
+    t.style.fontSize = m + "px"; if (s) s.style.fontSize = (m * 0.55) + "px";
+    const passt = g.scrollHeight <= h + 1 && g.scrollWidth <= w + 1 && t.scrollWidth <= t.clientWidth + 1;
+    if (passt) { best = m; lo = m; } else hi = m;
+  }
+  t.style.fontSize = best + "px"; if (s) s.style.fontSize = (best * 0.55) + "px";
+}
+
+// ---------- Spielzustand ----------
+const zustand = {
+  satzId: null, von: null, bis: null, anzahl: 64, zudeck: "klick", farbig: true,
+  karten: [], offen: [], sperre: false, dran: 0, punkte: [0, 0], paareBei: [[], []], wartetAufTipp: false
+};
+Object.assign(zustand, speicher.lesen("einstellungen", {}));
+
+const norm = s => (s || "").normalize("NFC").replace(/\s+/g, " ").trim().toLowerCase();
+const schluessel = seite => seite.i ? "bild:" + seite.i : norm(seite.t);
+
+function gefiltertePaare(satz, von, bis) {
+  let p = satz.paare;
+  if (p.some(x => x.k) && von && bis) {
+    const ks = kategorien(satz); const a = ks.indexOf(von), b = ks.indexOf(bis);
+    const lo = Math.min(a, b), hi = Math.max(a, b);
+    const erlaubt = new Set(ks.slice(lo, hi + 1));
+    p = p.filter(x => !x.k || erlaubt.has(x.k));  // Paare ohne Lektion (z. B. Götternamen) immer dabei
+  }
+  return p;
+}
+function kategorien(satz) { const s = []; for (const p of satz.paare) if (p.k && !s.includes(p.k)) s.push(p.k); return s; }
+
+function mischen(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// Paare ziehen; keine Karte darf zweimal mit gleichem Inhalt vorkommen (sonst wären Paare mehrdeutig)
+function ziehePaare(paare, n) {
+  const gewaehlt = [], belegt = new Set();
+  for (const p of mischen([...paare])) {
+    const ka = schluessel(p.a), kb = p.b ? schluessel(p.b) : ka;
+    if (belegt.has(ka) || belegt.has(kb)) continue;
+    belegt.add(ka); belegt.add(kb); gewaehlt.push(p);
+    if (gewaehlt.length >= n) break;
+  }
+  return gewaehlt;
+}
+function moeglichePaare(paare) { return ziehePaare(paare, Infinity).length; }
+
+const RASTER = { 16: [4, 4], 20: [5, 4], 24: [6, 4], 30: [6, 5], 36: [6, 6], 42: [7, 6], 48: [8, 6], 56: [8, 7], 64: [8, 8] };
+
+function spielStarten() {
+  const satz = satzMitId(zustand.satzId); if (!satz) { zeigeStart(); return; }
+  const paare = ziehePaare(gefiltertePaare(satz, zustand.von, zustand.bis), zustand.anzahl / 2);
+  const n = paare.length * 2;
+  const sp0 = Math.ceil(Math.sqrt(n));
+  let [sp, ze] = RASTER[n] || [sp0, Math.ceil(n / sp0)];
+  zustand.raster = [sp, ze];
+  zustand.karten = mischen(paare.flatMap((p, i) => [
+    { paar: i, seite: p.a, b: false },
+    { paar: i, seite: p.b || p.a, b: !!p.b }
+  ]));
+  zustand.satz = satz;
+  zustand.offen = []; zustand.sperre = false; zustand.dran = 0; zustand.punkte = [0, 0]; zustand.paareBei = [[], []]; zustand.wartetAufTipp = false;
+  $("#satzname").textContent = satz.name + (zustand.von ? `  ·  ${zustand.von}–${zustand.bis}` : "") + `  ·  ${paare.length} Paare`;
+  const feld = $("#feld");
+  feld.querySelectorAll(".karte").forEach(k => k.remove());
+  feld.style.gridTemplateColumns = `repeat(${sp}, var(--k))`;
+  zustand.karten.forEach((k, idx) => {
+    const el = document.createElement("div"); el.className = "karte"; el.dataset.idx = idx;
+    el.innerHTML = `<div class="innen"><div class="ruecken"><span>${idx + 1}</span></div></div>`;
+    el.querySelector(".innen").appendChild(gesicht(k.seite, k.b, satz));
+    el.addEventListener("click", () => klick(idx));
+    k.el = el; feld.appendChild(el);
+  });
+  document.querySelectorAll(".ablage").forEach(a => a.innerHTML = "");
+  anzeigen(); groessen();
+}
+
+function groessen() {
+  const main = $("main"), feld = $("#feld");
+  const [sp, ze] = zustand.raster || [8, 8];
+  const H = main.clientHeight - 2 * innerHeight / 100;
+  // Spielfeld so groß wie möglich, Spielerbereiche mindestens 17 % der Breite
+  const maxB = innerWidth * 0.64;
+  const luecke = Math.max(4, Math.min(H, maxB) * 0.012);
+  const k = Math.floor(Math.min((H - luecke * (ze - 1)) / ze, (maxB - luecke * (sp - 1)) / sp));
+  feld.style.setProperty("--k", k + "px"); feld.style.setProperty("--luecke", luecke + "px");
+  requestAnimationFrame(() => {
+    document.querySelectorAll("#feld .gesicht").forEach(einpassen);
+    [0, 1].forEach(ablageOrdnen);
+  });
+}
+
+function anzeigen() {
+  ["#p1", "#p2"].forEach((s, i) => {
+    $(s).classList.toggle("dran", zustand.dran === i);
+    $(s + " .punkte").textContent = zustand.punkte[i];
+  });
+}
+
+function klick(idx) {
+  if (zustand.wartetAufTipp) { zudecken(); return; }
+  if (zustand.sperre) return;
+  const k = zustand.karten[idx];
+  if (k.gefunden || zustand.offen.includes(idx)) return;
+  k.el.classList.add("offen");
+  zustand.offen.push(idx);
+  if (zustand.offen.length < 2) return;
+  zustand.sperre = true;
+  const [a, b] = zustand.offen.map(i => zustand.karten[i]);
+  if (a.paar === b.paar) {
+    setTimeout(() => { a.el.classList.add("treffer"); b.el.classList.add("treffer"); }, 450);
+    setTimeout(() => paarAblegen(a, b), 1400);
+  } else {
+    setTimeout(() => {
+      a.el.classList.add("fehl"); b.el.classList.add("fehl");
+      if (zustand.zudeck === "klick") { zustand.wartetAufTipp = true; $("#zudecken").style.display = "block"; }
+      else setTimeout(zudecken, (+zustand.zudeck) * 1000);
+    }, 450);
+  }
+}
+
+function zudecken() {
+  zustand.wartetAufTipp = false; $("#zudecken").style.display = "none";
+  zustand.offen.forEach(i => zustand.karten[i].el.classList.remove("offen", "fehl"));
+  zustand.offen = [];
+  zustand.dran = 1 - zustand.dran;
+  setTimeout(() => { zustand.sperre = false; }, 300);
+  anzeigen();
+}
+
+function paarAblegen(a, b) {
+  if (a.b && !b.b) [a, b] = [b, a];
+  const sp = zustand.dran;
+  a.gefunden = b.gefunden = true;
+  zustand.punkte[sp]++;
+  const eintrag = { a, b };
+  zustand.paareBei[sp].push(eintrag);
+  // Platzhalter in der Ablage anlegen, dann die Karten dorthin fliegen lassen
+  const ablage = document.querySelectorAll(".ablage")[sp];
+  const paarEl = document.createElement("div"); paarEl.className = "paar"; paarEl.style.visibility = "hidden";
+  const ga = gesicht(a.seite, a.b, zustand.satz), gb = gesicht(b.seite, b.b, zustand.satz);
+  paarEl.append(ga, gb); ablage.appendChild(paarEl);
+  paarEl.addEventListener("click", () => gross(a, b));
+  eintrag.el = paarEl;
+  ablageOrdnen(sp);
+  const ziele = [ga.getBoundingClientRect(), gb.getBoundingClientRect()];
+  let fertig = 0;
+  [a, b].forEach((k, i) => {
+    const r = k.el.getBoundingClientRect();
+    const f = gesicht(k.seite, k.b, zustand.satz); f.classList.add("flug");
+    Object.assign(f.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px", borderRadius: "0.8vh" });
+    document.body.appendChild(f); einpassen(f);
+    k.el.classList.add("weg");
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const z = ziele[i];
+      Object.assign(f.style, { left: z.left + "px", top: z.top + "px", width: z.width + "px", height: z.height + "px" });
+      const txt = f.querySelector(".txt");
+      if (txt) { f.querySelector(".txt").style.transition = "font-size .7s"; }
+    }));
+    setTimeout(() => {
+      f.remove();
+      if (++fertig === 2) {
+        paarEl.style.visibility = "visible"; paarEl.querySelectorAll(".gesicht").forEach(einpassen);
+        zustand.offen = []; zustand.sperre = false; anzeigen();
+        if (zustand.karten.every(k => k.gefunden)) setTimeout(spielEnde, 600);
+      }
+    }, 760);
+  });
+  anzeigen();
+}
+
+// Abgelegte Paare so groß wie möglich im Spielerbereich anordnen
+function ablageOrdnen(sp) {
+  const ablage = document.querySelectorAll(".ablage")[sp];
+  const paare = [...ablage.querySelectorAll(".paar")]; const n = paare.length; if (!n) return;
+  const W = ablage.clientWidth, H = ablage.clientHeight;
+  let best = { s: 0 };
+  for (let spalten = 1; spalten <= 6; spalten++) {
+    const zeilen = Math.ceil(n / spalten);
+    const gap = 0.06;
+    // ein Paar ist 2,06 Kartenbreiten breit und 1 Kartenhöhe hoch
+    const s = Math.min(W / (spalten * 2.06 + (spalten - 1) * 0.25), H / (zeilen + (zeilen - 1) * gap * 2));
+    if (s > best.s) best = { s, spalten };
+  }
+  const s = Math.min(best.s, H * 0.3), spalten = best.spalten;
+  const pw = s * 2.06, abstandX = spalten > 1 ? (W - spalten * pw) / (spalten - 1) : 0, abstandY = s * 0.12;
+  paare.forEach((p, i) => {
+    const sx = i % spalten, zy = Math.floor(i / spalten);
+    Object.assign(p.style, { width: pw + "px", height: s + "px", left: (spalten > 1 ? sx * (pw + Math.min(abstandX, s * .5)) : (W - pw) / 2) + "px", top: zy * (s + abstandY) + "px" });
+    p.querySelectorAll(".gesicht").forEach(g => { g.style.height = s + "px"; g.style.width = s + "px"; einpassen(g); });
+  });
+}
+
+function gross(a, b) {
+  const d = $("#gross .dialog"); d.innerHTML = "";
+  [a, b].forEach(k => { const g = gesicht(k.seite, k.b, zustand.satz); d.appendChild(g); });
+  $("#gross").classList.add("an");
+  d.querySelectorAll(".gesicht").forEach(einpassen);
+}
+$("#gross").addEventListener("click", () => $("#gross").classList.remove("an"));
+
+function spielEnde() {
+  const n = [...document.querySelectorAll(".spieler .name")].map(e => e.textContent.trim());
+  const [p1, p2] = zustand.punkte;
+  $("#endeTitel").textContent = p1 === p2 ? "Unentschieden!" : `${p1 > p2 ? n[0] : n[1]} gewinnt!`;
+  $("#endeText").textContent = `${n[0]}: ${p1} Paare  ·  ${n[1]}: ${p2} Paare`;
+  $("#ende").classList.add("an");
+}
+$("#nochmal").onclick = () => { $("#ende").classList.remove("an"); spielStarten(); };
+$("#andererSatz").onclick = () => { $("#ende").classList.remove("an"); zeigeStart(); };
+
+// ---------- Startdialog ----------
+function satzListeFuellen(sel, liste, gewaehlt) {
+  sel.innerHTML = "";
+  const gruppen = {};
+  liste.forEach(d => (gruppen[d.gruppe || "Eigene"] ||= []).push(d));
+  for (const [g, ds] of Object.entries(gruppen)) {
+    const og = document.createElement("optgroup"); og.label = g;
+    ds.forEach(d => { const o = document.createElement("option"); o.value = d.id; o.textContent = `${d.name} (${d.paare.length})`; og.appendChild(o); });
+    sel.appendChild(og);
+  }
+  if (gewaehlt && liste.some(d => d.id === gewaehlt)) sel.value = gewaehlt;
+}
+function zeigeStart() {
+  satzListeFuellen($("#wahlSatz"), alleSaetze(), zustand.satzId);
+  const n = document.querySelectorAll(".spieler .name");
+  $("#name1").value = n[0].textContent.trim(); $("#name2").value = n[1].textContent.trim();
+  $("#zudeckmodus").value = zustand.zudeck; $("#farbig").checked = zustand.farbig;
+  startAktualisieren(true);
+  $("#start").classList.add("an");
+}
+function startAktualisieren(erstesMal) {
+  const satz = satzMitId($("#wahlSatz").value); if (!satz) return;
+  const ks = kategorien(satz);
+  const lf = $("#lektionsfilter");
+  lf.style.display = ks.length ? "" : "none";
+  if (ks.length && (erstesMal !== false || !ks.includes($("#vonK").value))) {
+    const alt = [$("#vonK").value || zustand.von, $("#bisK").value || zustand.bis];
+    ["#vonK", "#bisK"].forEach((s, i) => {
+      $(s).innerHTML = ks.map(k => `<option>${k}</option>`).join("");
+      $(s).value = ks.includes(alt[i]) ? alt[i] : (i ? ks[ks.length - 1] : ks[0]);
+    });
+  }
+  const paare = gefiltertePaare(satz, ks.length ? $("#vonK").value : null, ks.length ? $("#bisK").value : null);
+  const m = moeglichePaare(paare);
+  const sel = $("#anzahl"), alt = +sel.value || zustand.anzahl;
+  const stufen = Object.keys(RASTER).map(Number).filter(z => z / 2 <= m);
+  if (m >= 2 && m * 2 < 64 && !stufen.includes(m * 2)) stufen.push(m * 2);
+  sel.innerHTML = stufen.map(z => `<option value="${z}">${z} Karten (${z / 2} Paare)${z === 64 ? " – volles Feld" : z === m * 2 ? " – alle" : ""}</option>`).join("");
+  sel.value = stufen.includes(alt) ? alt : stufen[stufen.length - 1];
+  $("#satzinfo").textContent = `${paare.length} Paare im Satz${m < paare.length ? `, davon ${m} gleichzeitig spielbar (doppelte Karteninhalte werden nicht zusammen ausgelegt)` : ""}.`;
+  $("#los").disabled = !stufen.length;
+}
+$("#wahlSatz").onchange = () => startAktualisieren(true);
+$("#vonK").onchange = $("#bisK").onchange = () => startAktualisieren(false);
+$("#los").onclick = () => {
+  const satz = satzMitId($("#wahlSatz").value);
+  const hatK = kategorien(satz).length > 0;
+  Object.assign(zustand, {
+    satzId: satz.id, von: hatK ? $("#vonK").value : null, bis: hatK ? $("#bisK").value : null,
+    anzahl: +$("#anzahl").value, zudeck: $("#zudeckmodus").value, farbig: $("#farbig").checked
+  });
+  const n = document.querySelectorAll(".spieler .name");
+  n[0].textContent = $("#name1").value.trim() || "Spieler 1"; n[1].textContent = $("#name2").value.trim() || "Spieler 2";
+  speicher.schreiben("einstellungen", { satzId: zustand.satzId, von: zustand.von, bis: zustand.bis, anzahl: zustand.anzahl, zudeck: zustand.zudeck, farbig: zustand.farbig });
+  $("#start").classList.remove("an");
+  spielStarten();
+};
+
+// ---------- Editor für eigene Sätze ----------
+let bilderPuffer = {};
+const meldung = t => { $("#meldung").textContent = t; };
+function editorLaden(id) {
+  meldung("");
+  const d = eigene.find(x => x.id === id);
+  $("#eigenName").value = d ? d.name : "";
+  bilderPuffer = d ? { ...(d.bilder || {}) } : {};
+  $("#eigenText").value = d ? d.paare.map(p => seiteZuText(p.a) + (p.b ? " | " + seiteZuText(p.b) : "")).join("\n") : "";
+  vorschauZeigen();
+}
+const seiteZuText = s => s.i ? "bild:" + s.i : s.t + (s.s ? " ; " + s.s : "");
+function textZuSeite(x) {
+  x = x.trim();
+  if (/^bild:/i.test(x)) return { i: x.slice(5).trim() };
+  const [t, s] = x.split(/\s;\s?/);
+  return s ? { t: t.trim(), s: s.trim() } : { t: t.trim() };
+}
+function editorListe() {
+  const sel = $("#eigenWahl");
+  sel.innerHTML = `<option value="">– neuer Satz –</option>` + eigene.map(d => `<option value="${d.id}">${d.name}</option>`).join("");
+}
+function vorschauZeigen() {
+  $("#vorschau").innerHTML = Object.entries(bilderPuffer).map(([n, u]) => `<img src="${u}" title="${n}">`).join("");
+}
+$("#eigenOeffnen").onclick = () => { $("#start").classList.remove("an"); editorListe(); editorLaden(""); $("#editor").classList.add("an"); };
+$("#eigenWahl").onchange = e => editorLaden(e.target.value);
+$("#eigenZurueck").onclick = () => { $("#editor").classList.remove("an"); zeigeStart(); };
+$("#bildDateien").onchange = async e => {
+  const zeilen = [];
+  for (const f of e.target.files) {
+    bilderPuffer[f.name] = await verkleinern(f);
+    zeilen.push(`bild:${f.name}` + ($("#bildPaare").checked ? " | " + f.name.replace(/\.[^.]+$/, "") : ""));
+  }
+  const ta = $("#eigenText"); ta.value = (ta.value.trim() ? ta.value.trim() + "\n" : "") + zeilen.join("\n");
+  e.target.value = ""; vorschauZeigen();
+};
+function verkleinern(datei) {
+  return new Promise((ok, fehler) => {
+    const r = new FileReader();
+    r.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const m = 700, f = Math.min(1, m / Math.max(img.width, img.height));
+        const c = document.createElement("canvas"); c.width = Math.round(img.width * f); c.height = Math.round(img.height * f);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        ok(c.toDataURL("image/jpeg", 0.85));
+      };
+      img.onerror = fehler; img.src = r.result;
+    };
+    r.onerror = fehler; r.readAsDataURL(datei);
+  });
+}
+function editorSatz() {
+  const paare = $("#eigenText").value.split(/\r?\n/).map(z => z.trim()).filter(Boolean).map(z => {
+    const teile = z.includes("\t") ? z.split("\t") : z.split(/\s*\|\s*/);
+    const a = textZuSeite(teile[0]), b = teile[1] && teile[1].trim() ? textZuSeite(teile[1]) : null;
+    return b ? { a, b } : { a };
+  });
+  const genutzt = new Set(paare.flatMap(p => [p.a, p.b]).filter(s => s && s.i).map(s => s.i));
+  const bilder = Object.fromEntries(Object.entries(bilderPuffer).filter(([n]) => genutzt.has(n)));
+  const fehlend = [...genutzt].filter(n => !bilder[n]);
+  return { paare, bilder, fehlend };
+}
+$("#eigenSpeichern").onclick = () => {
+  const name = $("#eigenName").value.trim(); if (!name) { meldung("Bitte einen Namen für den Satz angeben."); return; }
+  const { paare, bilder, fehlend } = editorSatz();
+  if (paare.length < 2) { meldung("Bitte mindestens zwei Paare eintragen."); return; }
+  if (fehlend.length) { meldung("Diese Bilder fehlen noch, bitte hochladen: " + fehlend.join(", ")); return; }
+  const id = $("#eigenWahl").value || "eigen-" + Date.now();
+  const satz = { id, name, gruppe: "Eigene", paare, bilder };
+  eigene = eigene.filter(d => d.id !== id).concat(satz);
+  if (!speicher.schreiben("eigene", eigene)) { meldung("Der Browserspeicher ist voll oder gesperrt. Der Satz gilt nur bis zum Schließen der Seite."); return; }
+  zustand.satzId = id;
+  $("#editor").classList.remove("an"); zeigeStart();
+};
+$("#eigenLoeschen").onclick = () => {
+  const id = $("#eigenWahl").value; if (!id) return;
+  const k = $("#eigenLoeschen");
+  if (k.dataset.sicher !== "1") { k.dataset.sicher = "1"; k.textContent = "Wirklich löschen?"; setTimeout(() => { k.dataset.sicher = ""; k.textContent = "Satz löschen"; }, 4000); return; }
+  k.dataset.sicher = ""; k.textContent = "Satz löschen";
+  eigene = eigene.filter(d => d.id !== id); speicher.schreiben("eigene", eigene); editorListe(); editorLaden("");
+};
+$("#eigenExport").onclick = () => {
+  const name = $("#eigenName").value.trim() || "Kartensatz";
+  const { paare, bilder } = editorSatz();
+  const blob = new Blob([JSON.stringify({ name, gruppe: "Eigene", paare, bilder }, null, 1)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name.replace(/[^\wäöüÄÖÜß\- ]+/g, "_") + ".memory.json"; a.click();
+};
+$("#eigenImportKnopf").onclick = () => $("#eigenImport").click();
+$("#eigenImport").onchange = async e => {
+  for (const f of e.target.files) {
+    try {
+      const d = JSON.parse(await f.text());
+      if (!Array.isArray(d.paare)) throw new Error("keine Paare");
+      const satz = { id: "eigen-" + Date.now() + Math.random().toString(36).slice(2, 6), name: d.name || f.name, gruppe: "Eigene", paare: d.paare, bilder: d.bilder || {} };
+      eigene.push(satz);
+    } catch (err) { meldung(`${f.name} ließ sich nicht lesen (${err.message}).`); }
+  }
+  speicher.schreiben("eigene", eigene); editorListe(); e.target.value = "";
+};
+
+// ---------- Kopfleiste ----------
+$("#neu").onclick = zeigeStart;
+$("#wechsel").onclick = () => { if (zustand.sperre && !zustand.wartetAufTipp) return; if (zustand.wartetAufTipp) { zudecken(); return; } zustand.dran = 1 - zustand.dran; anzeigen(); };
+$("#vollbild").onclick = () => { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.(); };
+$("#feld").addEventListener("click", e => { if (zustand.wartetAufTipp && !e.target.closest(".karte")) zudecken(); });
+document.querySelectorAll(".spieler .name").forEach(n => n.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); n.blur(); } }));
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(groessen, 120); });
+// Webschriften kommen oft erst nach dem Aufbau: dann Kartentexte neu einpassen
+if (document.fonts) { document.fonts.ready.then(groessen); document.fonts.addEventListener?.("loadingdone", groessen); }
+
+zeigeStart();
+</script>
+</body>
+</html>
