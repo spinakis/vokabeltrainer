@@ -2345,6 +2345,14 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
+"i": "bilder/hestia.jpg"
+},
+"b": {
+"t": "Ἑστία"
+}
+},
+{
+"a": {
 "i": "bilder/hermes.jpg"
 },
 "b": {
@@ -2745,6 +2753,14 @@ window.MEMORY_DECKS = [
 },
 "b": {
 "t": "Bogen · Köcher · Hirschkuh"
+}
+},
+{
+"a": {
+"i": "bilder/hestia.jpg"
+},
+"b": {
+"t": "Schleier · Herdfeuer"
 }
 },
 {
