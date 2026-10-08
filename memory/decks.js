@@ -16141,5 +16141,9331 @@ window.MEMORY_DECKS = [
 "k": "L35"
 }
 ]
+},
+{
+"id": "pontes",
+"gruppe": "Latein",
+"name": "Pontes (lat – dt)",
+"paare": [
+{
+"a": {
+"t": "avus",
+"s": "avī m."
+},
+"b": {
+"t": "der Großvater"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "cantāre",
+"s": "cantō"
+},
+"b": {
+"t": "singen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "catella",
+"s": "catellae f."
+},
+"b": {
+"t": "das Hündchen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "clāmāre",
+"s": "clāmō"
+},
+"b": {
+"t": "rufen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "currere",
+"s": "currō, cucurrī"
+},
+"b": {
+"t": "laufen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "domina",
+"s": "dominae f."
+},
+"b": {
+"t": "die Hausherrin"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "dominus",
+"s": "dominī m."
+},
+"b": {
+"t": "der Herr, der Hausherr (Dominus: Herr, als Anrede für den christlichen Gott)"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "est"
+},
+"b": {
+"t": "er, sie, es ist; es gibt"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "et",
+"s": "Konj."
+},
+"b": {
+"t": "und (et … et: sowohl … als auch)"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "fīlia",
+"s": "fīliae f."
+},
+"b": {
+"t": "die Tochter"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "fīlius",
+"s": "fīliī m."
+},
+"b": {
+"t": "der Sohn"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "gaudēre",
+"s": "gaudeō"
+},
+"b": {
+"t": "sich freuen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "hīc",
+"s": "Adv."
+},
+"b": {
+"t": "hier"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "labōrāre",
+"s": "labōrō"
+},
+"b": {
+"t": "arbeiten, (+ Abl.) an etwas leiden"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "lūdere",
+"s": "lūdō"
+},
+"b": {
+"t": "spielen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "māter",
+"s": "mātris f."
+},
+"b": {
+"t": "die Mutter"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "pater",
+"s": "patris m."
+},
+"b": {
+"t": "der Vater"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "Salvē!"
+},
+"b": {
+"t": "Sei gegrüßt!"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "serva",
+"s": "servae f."
+},
+"b": {
+"t": "die Sklavin"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "servus",
+"s": "servī m."
+},
+"b": {
+"t": "der Sklave"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "venīre",
+"s": "veniō, vēnī"
+},
+"b": {
+"t": "kommen"
+},
+"k": "S"
+},
+{
+"a": {
+"t": "audīre",
+"s": "audiō"
+},
+"b": {
+"t": "(zu)hören"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "clāmor",
+"s": "clāmōris m."
+},
+"b": {
+"t": "der Lärm, das Geschrei, der Ruf"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "ecce!",
+"s": "+ Nom./Akk."
+},
+"b": {
+"t": "sieh(e)!, sieh(e) da!"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "etiam",
+"s": "Konj."
+},
+"b": {
+"t": "auch, sogar"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "exspectāre",
+"s": "exspectō"
+},
+"b": {
+"t": "erwarten"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "familia",
+"s": "familiae f."
+},
+"b": {
+"t": "die Hausgemeinschaft, die Familie"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "hodiē",
+"s": "Adv."
+},
+"b": {
+"t": "heute"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "ibī",
+"s": "Adv."
+},
+"b": {
+"t": "dort"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "intrāre",
+"s": "intrō"
+},
+"b": {
+"t": "betreten, eintreten"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "nam",
+"s": "Konj."
+},
+"b": {
+"t": "denn"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "nōn"
+},
+"b": {
+"t": "nicht"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "nunc",
+"s": "Adv."
+},
+"b": {
+"t": "nun, jetzt"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "quaerere",
+"s": "quaerō, quaesīvī, quaesītum"
+},
+"b": {
+"t": "1. suchen; 2. fragen"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "quid?",
+"s": "Interrog.-Pron."
+},
+"b": {
+"t": "was?"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "rīdēre",
+"s": "rīdeō, rīsī, rīsum"
+},
+"b": {
+"t": "lachen, jdn. auslachen"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "rogāre",
+"s": "rogō"
+},
+"b": {
+"t": "fragen"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "sed",
+"s": "Konj."
+},
+"b": {
+"t": "aber, sondern"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "subitō",
+"s": "Adv."
+},
+"b": {
+"t": "plötzlich"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "tenēre",
+"s": "teneō, tenuī, tentum"
+},
+"b": {
+"t": "halten"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "tum",
+"s": "Adv."
+},
+"b": {
+"t": "dann, darauf, da (zeitlich)"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "ubī?",
+"s": "Adv."
+},
+"b": {
+"t": "wo?"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "vidēre",
+"s": "videō, vīdī"
+},
+"b": {
+"t": "sehen"
+},
+"k": "L1"
+},
+{
+"a": {
+"t": "adhūc",
+"s": "Adv."
+},
+"b": {
+"t": "bis jetzt, noch"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "amāre",
+"s": "amō"
+},
+"b": {
+"t": "lieben, mögen"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "ātrium",
+"s": "ātriī n."
+},
+"b": {
+"t": "das Atrium"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "culīna",
+"s": "culīnae f."
+},
+"b": {
+"t": "die Küche"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "cūr?",
+"s": "Adv."
+},
+"b": {
+"t": "warum?"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "dēbēre",
+"s": "dēbeō, dēbuī"
+},
+"b": {
+"t": "müssen (nōn dēbēre: nicht dürfen)"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "dīcere",
+"s": "dīcō, dīxī, dictum"
+},
+"b": {
+"t": "sagen, sprechen, reden"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "explēre",
+"s": "expleō, explēvī, explētum"
+},
+"b": {
+"t": "erfüllen"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "frāter",
+"s": "frātris m."
+},
+"b": {
+"t": "der Bruder"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "illīc",
+"s": "Adv."
+},
+"b": {
+"t": "dort"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "itaque",
+"s": "Adv."
+},
+"b": {
+"t": "deshalb"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "iterum",
+"s": "Adv."
+},
+"b": {
+"t": "wieder"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "labor",
+"s": "labōris m."
+},
+"b": {
+"t": "die Mühe, die Arbeit"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "līberī",
+"s": "līberōrum m. Pl."
+},
+"b": {
+"t": "die Kinder"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "neglegere",
+"s": "neglegō, neglēxī, neglēctum"
+},
+"b": {
+"t": "vernachlässigen, nicht beachten"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "officium",
+"s": "officiī n."
+},
+"b": {
+"t": "die Pflicht"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "ōtium",
+"s": "ōtiī n."
+},
+"b": {
+"t": "die Ruhe, die Freizeit"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "parentēs",
+"s": "parent(i)um m. Pl."
+},
+"b": {
+"t": "die Eltern"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "pergere",
+"s": "pergō, perrēxī, perrēctum"
+},
+"b": {
+"t": "etw. weiter tun, fortsetzen"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "peristȳlium",
+"s": "peristȳliī n."
+},
+"b": {
+"t": "das Peristyl"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "placēre",
+"s": "placeō, placuī, placitum"
+},
+"b": {
+"t": "gefallen, Spaß machen (mihī placet: ich fasse den Beschluss)"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "puella",
+"s": "puellae f."
+},
+"b": {
+"t": "das Mädchen"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "puer",
+"s": "puerī m."
+},
+"b": {
+"t": "das Kind, der Junge"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "respondēre",
+"s": "respondeō, respondī"
+},
+"b": {
+"t": "antworten"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "Salvēte!"
+},
+"b": {
+"t": "Seid gegrüßt!"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "semper",
+"s": "Adv."
+},
+"b": {
+"t": "immer"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "soror",
+"s": "sorōris f."
+},
+"b": {
+"t": "die Schwester"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "statim",
+"s": "Adv."
+},
+"b": {
+"t": "sofort"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "vir",
+"s": "virī m."
+},
+"b": {
+"t": "der Mann"
+},
+"k": "L2"
+},
+{
+"a": {
+"t": "ad",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "zu (… hin); bei"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "adiuvāre",
+"s": "adiuvō, adiūvī"
+},
+"b": {
+"t": "unterstützen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "agere",
+"s": "agō, ēgī, āctum"
+},
+"b": {
+"t": "tun, handeln"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "alere",
+"s": "alō, aluī"
+},
+"b": {
+"t": "nähren, ernähren"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "ante",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "vor"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "autem",
+"s": "Konj."
+},
+"b": {
+"t": "aber"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "bene",
+"s": "Adv."
+},
+"b": {
+"t": "gut"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "bōs",
+"s": "bovis m."
+},
+"b": {
+"t": "das Rind, der Ochse"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "caedere",
+"s": "caedō, cecīdī, caesum"
+},
+"b": {
+"t": "töten, schlachten"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "canis",
+"s": "canis m."
+},
+"b": {
+"t": "der Hund"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "cēna",
+"s": "cēnae f."
+},
+"b": {
+"t": "die Mahlzeit, das Essen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "certē",
+"s": "Adv."
+},
+"b": {
+"t": "sicher, gewiss"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "dēlectāre",
+"s": "dēlectō"
+},
+"b": {
+"t": "erfreuen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "ego"
+},
+"b": {
+"t": "ich"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "equus",
+"s": "equī m."
+},
+"b": {
+"t": "das Pferd"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "esse",
+"s": "sum, fuī"
+},
+"b": {
+"t": "sein"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "hortus",
+"s": "hortī m."
+},
+"b": {
+"t": "der Garten"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "iam",
+"s": "Adv."
+},
+"b": {
+"t": "schon, gleich, jetzt (nōn iam: nicht mehr)"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "igitur",
+"s": "Adv."
+},
+"b": {
+"t": "also"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "in + Akk.",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "in (…hinein); gegen; nach; auf"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "īnstruere",
+"s": "īnstruō, īnstrūxī, īnstrūctum"
+},
+"b": {
+"t": "anweisen, unterrichten; bauen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "nōs",
+"s": "Pers.-Pron."
+},
+"b": {
+"t": "wir"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "obsecrāre",
+"s": "obsecrō"
+},
+"b": {
+"t": "anflehen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "parāre",
+"s": "parō"
+},
+"b": {
+"t": "vorbereiten, zubereiten; (+ Inf.) sich vorbereiten, etwas zu tun; verschaffen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "paulō post",
+"s": "Adv."
+},
+"b": {
+"t": "ein wenig später"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "per",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "(örtl.) über, durch; (zeitl.) durch, hindurch, während, in"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "properāre",
+"s": "properō"
+},
+"b": {
+"t": "eilen, sich beeilen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "salūtāre",
+"s": "salūtō"
+},
+"b": {
+"t": "grüßen"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "servāre",
+"s": "servō"
+},
+"b": {
+"t": "retten"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "tū",
+"s": "Pers.-Pron."
+},
+"b": {
+"t": "du"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "uxor",
+"s": "uxōris f."
+},
+"b": {
+"t": "die Ehefrau"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "vīlla",
+"s": "vīllae f."
+},
+"b": {
+"t": "das Landhaus, das Landgut"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "vōs",
+"s": "Pers.-Pron."
+},
+"b": {
+"t": "ihr"
+},
+"k": "L3"
+},
+{
+"a": {
+"t": "atque",
+"s": "Konj."
+},
+"b": {
+"t": "und"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "cōnsīdere",
+"s": "cōnsīdō, cōnsēdī"
+},
+"b": {
+"t": "sich hinsetzen, sich niederlassen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "discere",
+"s": "discō"
+},
+"b": {
+"t": "lernen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "discipula",
+"s": "discipulae f."
+},
+"b": {
+"t": "die Schülerin"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "discipulus",
+"s": "discipulī m."
+},
+"b": {
+"t": "der Schüler"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "docēre",
+"s": "doceō, docuī, doctum"
+},
+"b": {
+"t": "unterrichten, lehren"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "domum"
+},
+"b": {
+"t": "nach Hause"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "dūcere",
+"s": "dūcō, dūxī, ductum"
+},
+"b": {
+"t": "führen, ziehen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "ergō",
+"s": "Adv."
+},
+"b": {
+"t": "deshalb, also"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "habēre",
+"s": "habeō, habuī, habitum"
+},
+"b": {
+"t": "haben, halten (prō certō habēre: für sicher halten, sich sicher sein)"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "ita",
+"s": "Adv."
+},
+"b": {
+"t": "so"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "legere",
+"s": "legō, lēgī"
+},
+"b": {
+"t": "lesen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "magister",
+"s": "magistrī m."
+},
+"b": {
+"t": "der Lehrer"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "monēre",
+"s": "moneō, monuī, monitum"
+},
+"b": {
+"t": "ermahnen, mahnen; warnen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "mōnstrāre",
+"s": "mōnstrō"
+},
+"b": {
+"t": "zeigen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "-ne?"
+},
+"b": {
+"t": "zeigt an, dass es sich um eine Frage handelt"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "nōlī",
+"s": "nōlīte Sg./Pl. + Inf."
+},
+"b": {
+"t": "zeigt an, dass es sich um ein Verbot handelt"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "nōnne?"
+},
+"b": {
+"t": "etwa nicht?, doch wohl?"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "num?"
+},
+"b": {
+"t": "denn?, etwa?"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "portāre",
+"s": "portō"
+},
+"b": {
+"t": "tragen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "posse",
+"s": "possum, potuī"
+},
+"b": {
+"t": "können"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "posteā",
+"s": "Adv."
+},
+"b": {
+"t": "danach, später"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "pūnīre",
+"s": "pūniō"
+},
+"b": {
+"t": "bestrafen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "-que",
+"s": "Konj."
+},
+"b": {
+"t": "und"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "quis?",
+"s": "Interrog.-Pron."
+},
+"b": {
+"t": "wer?"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "schola",
+"s": "scholae f."
+},
+"b": {
+"t": "die Schule"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "scrībere",
+"s": "scrībō, scrīpsī, scriptum"
+},
+"b": {
+"t": "schreiben"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "sedēre",
+"s": "sedeō"
+},
+"b": {
+"t": "sitzen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "tabula",
+"s": "tabulae f."
+},
+"b": {
+"t": "das Wachstäfelchen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "tacēre",
+"s": "taceō"
+},
+"b": {
+"t": "schweigen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "vocāre",
+"s": "vocō"
+},
+"b": {
+"t": "rufen"
+},
+"k": "L4"
+},
+{
+"a": {
+"t": "accēdere",
+"s": "accēdō, accessī"
+},
+"b": {
+"t": "sich nähern, herbeikommen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "accūsāre",
+"s": "accūsō"
+},
+"b": {
+"t": "beschuldigen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "amīca",
+"s": "amīcae f."
+},
+"b": {
+"t": "die Freundin"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "amīcus",
+"s": "amīcī m."
+},
+"b": {
+"t": "der Freund"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "aureus",
+"s": "-a, -um"
+},
+"b": {
+"t": "golden"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "aut",
+"s": "Konj."
+},
+"b": {
+"t": "oder"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "bonus",
+"s": "-a, -um (Komp. melior, Superl. optimus)"
+},
+"b": {
+"t": "gut"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "capere",
+"s": "capiō, cēpī, captum"
+},
+"b": {
+"t": "fangen, ergreifen; einnehmen; gefangen nehmen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "cōnspicere",
+"s": "cōnspiciō, cōnspexī, cōnspectum"
+},
+"b": {
+"t": "erblicken, sehen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "cupere",
+"s": "cupiō, cupīvī"
+},
+"b": {
+"t": "wollen, wünschen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "dōnum",
+"s": "dōnī n."
+},
+"b": {
+"t": "das Geschenk"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "facere",
+"s": "faciō, fēcī, factum"
+},
+"b": {
+"t": "machen, tun"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "forum",
+"s": "forī n."
+},
+"b": {
+"t": "das Forum, der Marktplatz"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "fugere",
+"s": "fugiō, fūgī + Akk."
+},
+"b": {
+"t": "fliehen (vor), entkommen (vor), meiden"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "fūr",
+"s": "fūris m."
+},
+"b": {
+"t": "der Dieb"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "homō",
+"s": "hominis m."
+},
+"b": {
+"t": "der Mensch, der Mann"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "incipere",
+"s": "incipiō, coepī, inceptum"
+},
+"b": {
+"t": "anfangen, beginnen"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "īrātus",
+"s": "-a, -um"
+},
+"b": {
+"t": "zornig, wütend"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "magnus",
+"s": "-a, -um (Komp. maior, Superl. maximus)"
+},
+"b": {
+"t": "groß"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "malus",
+"s": "-a, -um (Komp. pēior, Superl. pessimus)"
+},
+"b": {
+"t": "schlecht, böse"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "manēre",
+"s": "maneō"
+},
+"b": {
+"t": "bleiben, erwarten"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "miser",
+"s": "-a, -um"
+},
+"b": {
+"t": "arm, unglücklich"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "monumentum",
+"s": "monumentī n."
+},
+"b": {
+"t": "das Denkmal, das Grabmal"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "mors",
+"s": "mortis f."
+},
+"b": {
+"t": "der Tod"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "multī",
+"s": "-ae, -a (Komp. plūrēs, Superl. plūrimī)"
+},
+"b": {
+"t": "viele"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "parvus",
+"s": "-a, -um (Komp. minor, Superl. minimus)"
+},
+"b": {
+"t": "klein"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "praebēre",
+"s": "praebeō, praebuī, praebitum"
+},
+"b": {
+"t": "bieten, gewähren, anbieten"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "profectō",
+"s": "Adv."
+},
+"b": {
+"t": "tatsächlich"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "prope",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "nahe bei; in die Nähe (von)"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "pulcher",
+"s": "-chra, -chrum"
+},
+"b": {
+"t": "schön"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "rēctus",
+"s": "-a, -um"
+},
+"b": {
+"t": "gerade, richtig, ehrlich"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "reddere",
+"s": "reddō, reddidī, redditum"
+},
+"b": {
+"t": "zurückgeben"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "Rōmānus",
+"s": "-a, -um"
+},
+"b": {
+"t": "römisch"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "statua",
+"s": "statuae f."
+},
+"b": {
+"t": "die Statue"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "tam",
+"s": "Adv."
+},
+"b": {
+"t": "so"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "tūtus",
+"s": "-a, -um"
+},
+"b": {
+"t": "sicher"
+},
+"k": "L5"
+},
+{
+"a": {
+"t": "agitātor",
+"s": "agitātōris m."
+},
+"b": {
+"t": "der Wagenlenker"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "arcēre",
+"s": "arceō, arcuī"
+},
+"b": {
+"t": "abwehren, fernhalten"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "audītor",
+"s": "audītōris m."
+},
+"b": {
+"t": "der Zuhörer"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "canere",
+"s": "canō"
+},
+"b": {
+"t": "ertönen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "cēterī",
+"s": "-ae, -a Pl."
+},
+"b": {
+"t": "die übrigen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "Circus Maximus",
+"s": "Circī Maximī m."
+},
+"b": {
+"t": "der Circus Maximus"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "crēscere",
+"s": "crēscō, crēvī"
+},
+"b": {
+"t": "wachsen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "cūnctī",
+"s": "-ae, -a Pl."
+},
+"b": {
+"t": "alle"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "dare",
+"s": "dō, dedī, datum"
+},
+"b": {
+"t": "geben"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "eius",
+"s": "nicht-refl. Poss.-Pron."
+},
+"b": {
+"t": "sein(e), ihr(e), dessen, deren"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "eōrum",
+"s": "eārum, eōrum nicht-refl. Poss.-Pron. Pl."
+},
+"b": {
+"t": "deren"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "ferē",
+"s": "Adv."
+},
+"b": {
+"t": "fast, etwa"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "gaudium",
+"s": "gaudiī n."
+},
+"b": {
+"t": "die Freude"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "imperātor",
+"s": "imperātōris m."
+},
+"b": {
+"t": "der Kaiser, der Feldherr"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "incitāre",
+"s": "incitō"
+},
+"b": {
+"t": "antreiben, anfeuern"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "inter",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "zwischen, unter"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "meus",
+"s": "-a, -um Poss.-Pron."
+},
+"b": {
+"t": "mein(e)"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "mortuus",
+"s": "-a, -um"
+},
+"b": {
+"t": "tot"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "noster",
+"s": "-tra, -trum Poss.-Pron."
+},
+"b": {
+"t": "unser(e)"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "pecūnia",
+"s": "pecūniae f."
+},
+"b": {
+"t": "das Geld"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "praeclārus",
+"s": "-a, -um"
+},
+"b": {
+"t": "berühmt, ausgezeichnet"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "praestāre",
+"s": "praestō, praestitī, –"
+},
+"b": {
+"t": "sich hervortun, sich auszeichnen, besser sein; zeigen, erweisen; (+ Dat.) jdn. überragen, übertreffen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "sē",
+"s": "refl. Pers.-Pron. Akk."
+},
+"b": {
+"t": "sich; im AcI auch: er, sie, ihn; sie (Pl.)"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "sīgnum",
+"s": "sīgnī n."
+},
+"b": {
+"t": "das Zeichen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "simul",
+"s": "Adv."
+},
+"b": {
+"t": "gleichzeitig, zugleich"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "spectāre",
+"s": "spectō"
+},
+"b": {
+"t": "anschauen, betrachten, sehen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "spectātor",
+"s": "spectātōris m."
+},
+"b": {
+"t": "der Zuschauer"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "surgere",
+"s": "surgō, surrēxī, surrēctum"
+},
+"b": {
+"t": "aufstehen, sich erheben"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "suus",
+"s": "-a, -um refl. Poss.-Pron."
+},
+"b": {
+"t": "sein(e), ihr(e)"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "tandem",
+"s": "Adv."
+},
+"b": {
+"t": "schließlich, endlich"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "tangere",
+"s": "tangō, tetigī, tāctum"
+},
+"b": {
+"t": "berühren"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "tuba",
+"s": "tubae f."
+},
+"b": {
+"t": "die Trompete"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "tunica",
+"s": "tunicae f."
+},
+"b": {
+"t": "die Tunika"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "tuus",
+"s": "-a, -um Poss.-Pron."
+},
+"b": {
+"t": "dein(e)"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "verbum",
+"s": "verbī n."
+},
+"b": {
+"t": "das Wort"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "vester",
+"s": "-tra, -trum Poss.-Pron."
+},
+"b": {
+"t": "euer, eure"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "victor",
+"s": "victōris m."
+},
+"b": {
+"t": "der Sieger"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "vincere",
+"s": "vincō, vīcī, victum"
+},
+"b": {
+"t": "siegen, besiegen; umstimmen, erweichen"
+},
+"k": "L6"
+},
+{
+"a": {
+"t": "ā, ab",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "von"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "accipere",
+"s": "accipiō, accēpī, acceptum"
+},
+"b": {
+"t": "annehmen, aufnehmen, empfangen; erfahren"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "aestās",
+"s": "aestātis f."
+},
+"b": {
+"t": "der Sommer"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "aqua",
+"s": "aquae f."
+},
+"b": {
+"t": "das Wasser"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "at",
+"s": "Konj."
+},
+"b": {
+"t": "aber"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "cōgitāre",
+"s": "cōgitō"
+},
+"b": {
+"t": "denken"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "cōnsilium",
+"s": "cōnsiliī n."
+},
+"b": {
+"t": "der Rat, die Beratung; der Plan"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "cum + Abl.",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "mit, zusammen mit"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "dēpōnere",
+"s": "dēpōnō, dēposuī"
+},
+"b": {
+"t": "ablegen"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "ē, ex",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "aus (… heraus), von, seit"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "ēgregius",
+"s": "-a, -um"
+},
+"b": {
+"t": "hervorragend, herausragend, ausgezeichnet"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "errāre",
+"s": "errō"
+},
+"b": {
+"t": "irren, sich irren"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "excitāre",
+"s": "excitō"
+},
+"b": {
+"t": "aufschrecken, aufwecken"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "hōra",
+"s": "hōrae f."
+},
+"b": {
+"t": "die Stunde"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "in + Abl.",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "in, an, auf, bei"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "īre",
+"s": "eō, iī"
+},
+"b": {
+"t": "gehen"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "iūcundus",
+"s": "-a, -um"
+},
+"b": {
+"t": "erfreulich, angenehm"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "molestus",
+"s": "-a, -um"
+},
+"b": {
+"t": "lästig, unangenehm"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "nihil"
+},
+"b": {
+"t": "nichts"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "occupātus",
+"s": "-a, -um"
+},
+"b": {
+"t": "beschäftigt"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "patrōnus",
+"s": "patrōnī m."
+},
+"b": {
+"t": "der Schutzherr, der Patron"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "paucī",
+"s": "-ae, -a Pl."
+},
+"b": {
+"t": "wenige, nur wenige"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "prīmum",
+"s": "Adv."
+},
+"b": {
+"t": "zunächst, zuerst"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "quō?",
+"s": "Adv."
+},
+"b": {
+"t": "wohin?"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "saepe",
+"s": "Adv."
+},
+"b": {
+"t": "oft"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "sēcum"
+},
+"b": {
+"t": "bei sich"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "septimus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der siebte"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "sermō",
+"s": "sermōnis m."
+},
+"b": {
+"t": "das Gespräch"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "silentium",
+"s": "silentiī n."
+},
+"b": {
+"t": "die Stille, das Schweigen"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "thermae",
+"s": "thermārum f. Pl."
+},
+"b": {
+"t": "die Thermen"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "toga",
+"s": "togae f."
+},
+"b": {
+"t": "die Toga"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "vestis",
+"s": "vestis f."
+},
+"b": {
+"t": "die Kleidung"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "vōx",
+"s": "vōcis f."
+},
+"b": {
+"t": "die Stimme"
+},
+"k": "L7"
+},
+{
+"a": {
+"t": "adesse",
+"s": "adsum, adfuī"
+},
+"b": {
+"t": "da sein, anwesend sein; (+ Dat.) jdm. beistehen, helfen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "aliī",
+"s": "-ae, -a Pl."
+},
+"b": {
+"t": "andere"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "animadvertere",
+"s": "animadvertō, animadvertī, animadversum"
+},
+"b": {
+"t": "merken, bemerken"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "arēna",
+"s": "arēnae f."
+},
+"b": {
+"t": "die Arena"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "arma",
+"s": "armōrum n. Pl."
+},
+"b": {
+"t": "die Waffen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "aspicere",
+"s": "aspiciō"
+},
+"b": {
+"t": "ansehen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "cadere",
+"s": "cadō, cecidī, –"
+},
+"b": {
+"t": "fallen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "dēfendere",
+"s": "dēfendō, dēfendī, dēfēnsum"
+},
+"b": {
+"t": "verteidigen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "gladiātor",
+"s": "gladiātōris m."
+},
+"b": {
+"t": "der Gladiator"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "gladius",
+"s": "gladiī m."
+},
+"b": {
+"t": "das Schwert"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "humī"
+},
+"b": {
+"t": "auf dem Boden"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "iacēre",
+"s": "iaceō"
+},
+"b": {
+"t": "liegen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "iactāre",
+"s": "iactō"
+},
+"b": {
+"t": "werfen, schleudern"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "īgnōtus",
+"s": "-a, -um"
+},
+"b": {
+"t": "unbekannt"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "inquit",
+"s": "3. P. Sg."
+},
+"b": {
+"t": "er, sie, es sagt; er, sie, es sagte"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "intendere",
+"s": "intendō"
+},
+"b": {
+"t": "(gegen jdn.) richten"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "iūdicium",
+"s": "iūdiciī n."
+},
+"b": {
+"t": "das Urteil, die Meinung"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "mittere",
+"s": "mittō, mīsī, missum"
+},
+"b": {
+"t": "schicken, wegschicken"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "neque",
+"s": "Konj."
+},
+"b": {
+"t": "und nicht, aber nicht"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "oppūgnāre",
+"s": "oppūgnō"
+},
+"b": {
+"t": "angreifen, bestürmen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "petere",
+"s": "petō, petīvī, petītum"
+},
+"b": {
+"t": "angreifen; aufsuchen; fordern, (er)bitten"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "pūgna",
+"s": "pūgnae f."
+},
+"b": {
+"t": "der Kampf"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "pūgnāre",
+"s": "pūgnō"
+},
+"b": {
+"t": "kämpfen"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "putāre",
+"s": "putō"
+},
+"b": {
+"t": "glauben, meinen; jdn. für etw. halten"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "rūrsus",
+"s": "Adv."
+},
+"b": {
+"t": "wieder, von neuem"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "saevus",
+"s": "-a, -um"
+},
+"b": {
+"t": "wild, heftig"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "valdē",
+"s": "Adv."
+},
+"b": {
+"t": "sehr"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "vīvere",
+"s": "vīvō, vīxī, –"
+},
+"b": {
+"t": "leben"
+},
+"k": "L8"
+},
+{
+"a": {
+"t": "abīre",
+"s": "abeō, abiī"
+},
+"b": {
+"t": "weggehen, verschwinden"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "aperīre",
+"s": "aperiō, aperuī, apertum"
+},
+"b": {
+"t": "öffnen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "bibere",
+"s": "bibō"
+},
+"b": {
+"t": "trinken"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "cēdere",
+"s": "cēdō, cessī"
+},
+"b": {
+"t": "gehen, (zurück)weichen; nachgeben"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "cēnsēre",
+"s": "cēnseō, cēnsuī, cēnsum"
+},
+"b": {
+"t": "denken, meinen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "convīvium",
+"s": "convīviī n."
+},
+"b": {
+"t": "das Gastmahl, das Festessen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "corrumpere",
+"s": "corrumpō, corrūpī, corruptum"
+},
+"b": {
+"t": "verderben"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "cūrāre",
+"s": "cūrō"
+},
+"b": {
+"t": "(+ dē) sich kümmern um; (+ ut) dafür sorgen, dass"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "dē",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "über, von"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "enim",
+"s": "Konj."
+},
+"b": {
+"t": "nämlich"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "fortūnae",
+"s": "fortūnārum f. Pl."
+},
+"b": {
+"t": "das Vermögen, die Reichtümer"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "iānua",
+"s": "iānuae f."
+},
+"b": {
+"t": "die Tür"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "improbus",
+"s": "-a, -um"
+},
+"b": {
+"t": "schlecht, böse"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "īnstāre",
+"s": "īnstō, īnstitī, –"
+},
+"b": {
+"t": "bevorstehen, drohen; verfolgen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "īnstituere",
+"s": "īnstituō, īnstituī, īnstitūtum"
+},
+"b": {
+"t": "veranstalten, ausrichten; errichten; unterrichten, unterweisen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "is",
+"s": "ea, id Dem.-Pron./Pers.-Pron."
+},
+"b": {
+"t": "dieser, diese, dieses; er, sie, es; (+ quī, quae, quod) der(jenige), der"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "licet"
+},
+"b": {
+"t": "es ist erlaubt"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "modo",
+"s": "Adv."
+},
+"b": {
+"t": "bloß, nur; gerade (eben)"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "nocēre",
+"s": "noceō"
+},
+"b": {
+"t": "schaden"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "pārēre",
+"s": "pāreō"
+},
+"b": {
+"t": "gehorchen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "perdere",
+"s": "perdō"
+},
+"b": {
+"t": "verschwenden, vergeuden"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "poena",
+"s": "poenae f."
+},
+"b": {
+"t": "die Strafe, die Buße"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "reprehendere",
+"s": "reprehendō, reprehendī, reprehēnsum"
+},
+"b": {
+"t": "tadeln"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "rūrī"
+},
+"b": {
+"t": "auf dem Land"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "scīre",
+"s": "sciō"
+},
+"b": {
+"t": "wissen, kennen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "sinere",
+"s": "sinō"
+},
+"b": {
+"t": "lassen, zulassen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "studēre",
+"s": "studeō"
+},
+"b": {
+"t": "bemühen"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "vīta",
+"s": "vītae f."
+},
+"b": {
+"t": "das Leben"
+},
+"k": "L9"
+},
+{
+"a": {
+"t": "abstinēre",
+"s": "abstineō, abstinuī"
+},
+"b": {
+"t": "fernhalten"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "arx",
+"s": "arcis f. (Gen. Pl. arcium)"
+},
+"b": {
+"t": "die Festung, die Anhöhe"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "ascendere",
+"s": "ascendō, ascendī"
+},
+"b": {
+"t": "besteigen, hinaufsteigen"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "custōs",
+"s": "custōdis m."
+},
+"b": {
+"t": "der Wächter"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "dea",
+"s": "deae f."
+},
+"b": {
+"t": "die Göttin"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "deus",
+"s": "deī m."
+},
+"b": {
+"t": "der Gott (Deus, Deī m.: der christliche Gott)"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "fābula",
+"s": "fābulae f."
+},
+"b": {
+"t": "die Sage, die Erzählung"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "famēs",
+"s": "famis f."
+},
+"b": {
+"t": "der Hunger"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "fēmina",
+"s": "fēminae f."
+},
+"b": {
+"t": "die Frau"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "forte",
+"s": "Adv."
+},
+"b": {
+"t": "zufällig"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "mīles",
+"s": "mīlitis m."
+},
+"b": {
+"t": "der Soldat"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "nārrāre",
+"s": "nārrō"
+},
+"b": {
+"t": "erzählen"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "neque … neque"
+},
+"b": {
+"t": "weder … noch"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "nox",
+"s": "noctis f. (Gen. Pl. noctium)"
+},
+"b": {
+"t": "die Nacht"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "nūper",
+"s": "Adv."
+},
+"b": {
+"t": "neulich"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "obsidēre",
+"s": "obsideō, obsēdī"
+},
+"b": {
+"t": "belagern"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "prīmus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der erste"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "procul",
+"s": "Adv."
+},
+"b": {
+"t": "von fern, weit (weg), von weitem"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "quondam",
+"s": "Adv."
+},
+"b": {
+"t": "einst"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "sacer",
+"s": "sacra, sacrum"
+},
+"b": {
+"t": "heilig, geweiht"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "sacrum",
+"s": "sacrī n."
+},
+"b": {
+"t": "das Opfer"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "saxum",
+"s": "saxī n."
+},
+"b": {
+"t": "der Fels"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "tamen",
+"s": "Adv."
+},
+"b": {
+"t": "dennoch, trotzdem"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "templum",
+"s": "templī n."
+},
+"b": {
+"t": "der Tempel"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "urgēre",
+"s": "urgeō, ursī"
+},
+"b": {
+"t": "drängen, bedrängen"
+},
+"k": "L10"
+},
+{
+"a": {
+"t": "accendere",
+"s": "accendō, accendī"
+},
+"b": {
+"t": "anzünden, entzünden"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "adhibēre",
+"s": "adhibeō, adhibuī, adhibitum"
+},
+"b": {
+"t": "anwenden, hinzuziehen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "aliī … aliī"
+},
+"b": {
+"t": "einige … andere, die einen … die anderen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "appārēre",
+"s": "appāreō, appāruī"
+},
+"b": {
+"t": "erscheinen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "cōnstruere",
+"s": "cōnstruō, cōnstrūxī"
+},
+"b": {
+"t": "bauen, errichten"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "crēdere",
+"s": "crēdō, crēdidī"
+},
+"b": {
+"t": "vertrauen, Glauben schenken, glauben"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "dēlēre",
+"s": "dēleō, dēlēvī, dēlētum"
+},
+"b": {
+"t": "zerstören, vernichten"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "dolus",
+"s": "dolī m."
+},
+"b": {
+"t": "die List"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "dōnāre",
+"s": "dōnō"
+},
+"b": {
+"t": "schenken"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "dubitāre",
+"s": "dubitō"
+},
+"b": {
+"t": "zögern, zweifeln"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "duo",
+"s": "duae, duo (Abl. duōbus)"
+},
+"b": {
+"t": "zwei"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "fallere",
+"s": "fallō, fefellī"
+},
+"b": {
+"t": "täuschen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "hic",
+"s": "haec, hoc Dem.-Pron."
+},
+"b": {
+"t": "dieser, diese, dieses; der, die, das hier"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "ille",
+"s": "illa, illud Dem.-Pron."
+},
+"b": {
+"t": "jener, jene, jenes; der, die, das dort; jener, jene, jenes berühmte"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "intereā",
+"s": "Adv."
+},
+"b": {
+"t": "inzwischen, in der Zwischenzeit"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "īra",
+"s": "īrae f."
+},
+"b": {
+"t": "der Zorn"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "lacrima",
+"s": "lacrimae f."
+},
+"b": {
+"t": "die Träne"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "occīdere",
+"s": "occīdō, occīdī"
+},
+"b": {
+"t": "töten"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "occultāre",
+"s": "occultō"
+},
+"b": {
+"t": "verbergen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "perīculum",
+"s": "perīculī n."
+},
+"b": {
+"t": "die Gefahr"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "porta",
+"s": "portae f."
+},
+"b": {
+"t": "das Tor"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "proximus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der nächste"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "quamquam",
+"s": "Subj."
+},
+"b": {
+"t": "obwohl"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "quia",
+"s": "Subj."
+},
+"b": {
+"t": "weil"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "recipere",
+"s": "recipiō, recēpī, receptum"
+},
+"b": {
+"t": "zurückziehen, aufnehmen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "relinquere",
+"s": "relinquō, relīquī, relictum"
+},
+"b": {
+"t": "zurücklassen, verlassen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "sacerdōs",
+"s": "sacerdōtis m./f."
+},
+"b": {
+"t": "der Priester, die Priesterin"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "sīgnificāre",
+"s": "sīgnificō"
+},
+"b": {
+"t": "anzeigen, bedeuten, bezeichnen"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "sine",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "ohne"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "socius",
+"s": "sociī m."
+},
+"b": {
+"t": "der Gefährte"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "tēctum",
+"s": "tēctī n."
+},
+"b": {
+"t": "das Haus, das Dach"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "timēre",
+"s": "timeō, timuī"
+},
+"b": {
+"t": "(sich) fürchten; (+ Akk.) Angst haben vor; (+ prō) sich fürchten um, Angst haben um"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "timor",
+"s": "timōris m."
+},
+"b": {
+"t": "die Furcht, die Angst"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "tunc",
+"s": "Adv."
+},
+"b": {
+"t": "dann, damals"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "ūnus",
+"s": "-a, -um (Gen. ūnīus, Dat. ūnī)"
+},
+"b": {
+"t": "einer"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "urbs",
+"s": "urbis f. (Gen. Pl. urbium)"
+},
+"b": {
+"t": "die Stadt"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "vērus",
+"s": "-a, -um"
+},
+"b": {
+"t": "wahr, richtig (rē vērā: in Wahrheit)"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "vīvus",
+"s": "-a, -um"
+},
+"b": {
+"t": "lebendig, lebend"
+},
+"k": "L11"
+},
+{
+"a": {
+"t": "adīre",
+"s": "adeō, adiī"
+},
+"b": {
+"t": "an jdn. herangehen, sich jdm. nähern; auf sich nehmen"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "annus",
+"s": "annī m."
+},
+"b": {
+"t": "das Jahr"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "cum + Perf.",
+"s": "Subj. + Perf."
+},
+"b": {
+"t": "als (plötzlich)"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "dēspērāre",
+"s": "dēspērō"
+},
+"b": {
+"t": "aufgeben, verzweifeln"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "dextra",
+"s": "dextrae f."
+},
+"b": {
+"t": "die rechte Hand"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "diū",
+"s": "Adv."
+},
+"b": {
+"t": "lange"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "fātum",
+"s": "fātī n."
+},
+"b": {
+"t": "das Schicksal, der Schicksalsspruch"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "flamma",
+"s": "flammae f."
+},
+"b": {
+"t": "die Flamme"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "īnfīrmus",
+"s": "-a, -um"
+},
+"b": {
+"t": "schwach, geschwächt"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "iter",
+"s": "itineris n."
+},
+"b": {
+"t": "der Weg, der Marsch, die Fahrt"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "lītus",
+"s": "lītoris n."
+},
+"b": {
+"t": "die Küste, der Strand"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "mūnus",
+"s": "mūneris n."
+},
+"b": {
+"t": "die Aufgabe"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "nāvis",
+"s": "nāvis f. (Gen. Pl. nāvium)"
+},
+"b": {
+"t": "das Schiff"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "nōmen",
+"s": "nōminis n."
+},
+"b": {
+"t": "der Name"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "novus",
+"s": "-a, -um"
+},
+"b": {
+"t": "neu"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "oculus",
+"s": "oculī m."
+},
+"b": {
+"t": "das Auge"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "patria",
+"s": "patriae f."
+},
+"b": {
+"t": "die Heimat"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "penātēs",
+"s": "penātium m. Pl."
+},
+"b": {
+"t": "die Penaten"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "perīre",
+"s": "pereō, periī"
+},
+"b": {
+"t": "ums Leben kommen, sterben"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "pius",
+"s": "-a, -um"
+},
+"b": {
+"t": "pflichtbewusst"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "prō",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "für"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "respicere",
+"s": "respiciō, respexī"
+},
+"b": {
+"t": "zurückblicken"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "ruīnae",
+"s": "ruīnārum f. Pl."
+},
+"b": {
+"t": "die Ruinen, die Trümmer"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "temptāre",
+"s": "temptō"
+},
+"b": {
+"t": "versuchen, prüfen, auf die Probe stellen"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "trādere",
+"s": "trādō, trādidī, trāditum"
+},
+"b": {
+"t": "übergeben, anvertrauen; überliefern"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "ubīque",
+"s": "Adv."
+},
+"b": {
+"t": "überall"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "umbra",
+"s": "umbrae f."
+},
+"b": {
+"t": "der Schatten, das Schattenbild"
+},
+"k": "L12"
+},
+{
+"a": {
+"t": "bellum",
+"s": "bellī n."
+},
+"b": {
+"t": "der Krieg"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "cōgnōscere",
+"s": "cōgnōscō, cōgnōvī, cōgnitum"
+},
+"b": {
+"t": "erfahren, erkennen; kennenlernen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "cōnsistere",
+"s": "cōnsistō, cōnstitī"
+},
+"b": {
+"t": "haltmachen, sich aufstellen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "deinde",
+"s": "Adv."
+},
+"b": {
+"t": "hierauf, dann"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "dēligere",
+"s": "dēligō, dēlēgī, dēlēctum"
+},
+"b": {
+"t": "auswählen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "error",
+"s": "errōris m."
+},
+"b": {
+"t": "die Irrfahrt; der Irrtum, der Fehler"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "exīre",
+"s": "exeō, exiī"
+},
+"b": {
+"t": "hinausgehen, herausgehen, verlassen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "fīnis",
+"s": "fīnis m. (Gen. Pl. fīnium)"
+},
+"b": {
+"t": "das Ende, das Ziel, die Grenze (fīnēs, fīnium m. Pl.: das Gebiet)"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "futūrus",
+"s": "-a, -um"
+},
+"b": {
+"t": "zukünftig"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "grātia",
+"s": "grātiae f."
+},
+"b": {
+"t": "der Dank; die Gunst, die Beliebtheit (grātiās agere: danken, Dank sagen)"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "habitāre",
+"s": "habitō"
+},
+"b": {
+"t": "wohnen, bewohnen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "hostis",
+"s": "hostis m. (Gen. Pl. hostium)"
+},
+"b": {
+"t": "der Feind"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "ipse",
+"s": "ipsa, ipsum Dem.-Pron."
+},
+"b": {
+"t": "selbst, persönlich, direkt, unmittelbar"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "mox",
+"s": "Adv."
+},
+"b": {
+"t": "bald"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "post",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "nach"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "prōvidēre",
+"s": "prōvideō, prōvīdī, prōvīsum"
+},
+"b": {
+"t": "voraussehen, vorhersehen; (+ Dat.) Vorsorge treffen, sorgen für"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "quandō?",
+"s": "Adv."
+},
+"b": {
+"t": "wann?"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "subīre",
+"s": "subeō, subiī"
+},
+"b": {
+"t": "ertragen, auf sich nehmen"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "tempus",
+"s": "temporis n."
+},
+"b": {
+"t": "die Zeit, der Zeitpunkt"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "terra",
+"s": "terrae f."
+},
+"b": {
+"t": "die Erde, das Land"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "tot"
+},
+"b": {
+"t": "so viele"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "voluntās",
+"s": "voluntātis f."
+},
+"b": {
+"t": "der Wille, der Wunsch"
+},
+"k": "L13"
+},
+{
+"a": {
+"t": "anteā",
+"s": "Adv."
+},
+"b": {
+"t": "vorher, früher, zuvor"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "appellāre",
+"s": "appellō"
+},
+"b": {
+"t": "ansprechen, nennen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "avis",
+"s": "avis f. (Gen. Pl. avium)"
+},
+"b": {
+"t": "der Vogel"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "caedēs",
+"s": "caedis f."
+},
+"b": {
+"t": "die Ermordung, der Mord"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "condere",
+"s": "condō, condidī, conditum"
+},
+"b": {
+"t": "gründen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "contendere",
+"s": "contendō, contendī"
+},
+"b": {
+"t": "behaupten"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "convenīre",
+"s": "conveniō, convēnī"
+},
+"b": {
+"t": "zusammenkommen; (+ Akk.) jdn. treffen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "duodecim"
+},
+"b": {
+"t": "zwölf"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "invenīre",
+"s": "inveniō, invēnī, inventum"
+},
+"b": {
+"t": "finden"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "lupa",
+"s": "lupae f."
+},
+"b": {
+"t": "die Wölfin"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "mūrus",
+"s": "mūrī m."
+},
+"b": {
+"t": "die Mauer"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "ō(h)!"
+},
+"b": {
+"t": "oh, ach"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "occupāre",
+"s": "occupō"
+},
+"b": {
+"t": "einnehmen, besetzen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "pāstor",
+"s": "pāstōris m."
+},
+"b": {
+"t": "der Hirte"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "quod",
+"s": "Subj."
+},
+"b": {
+"t": "weil"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "regere",
+"s": "regō, rēxī"
+},
+"b": {
+"t": "lenken, herrschen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "rēgnum",
+"s": "rēgnī n."
+},
+"b": {
+"t": "die Herrschaft, das Königtum, das Königreich"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "rēx",
+"s": "rēgis m."
+},
+"b": {
+"t": "der König"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "rīpa",
+"s": "rīpae f."
+},
+"b": {
+"t": "das Ufer"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "scelestus",
+"s": "-a, -um"
+},
+"b": {
+"t": "verbrecherisch"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "sex"
+},
+"b": {
+"t": "sechs"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "uterque"
+},
+"b": {
+"t": "jeder von beiden"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "vix",
+"s": "Adv."
+},
+"b": {
+"t": "kaum"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "volāre",
+"s": "volō"
+},
+"b": {
+"t": "eilen, fliegen"
+},
+"k": "L14"
+},
+{
+"a": {
+"t": "ager",
+"s": "agrī m."
+},
+"b": {
+"t": "der Acker, das Feld"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "auris",
+"s": "auris f. (Gen. Pl. aurium)"
+},
+"b": {
+"t": "das Ohr"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "avāritia",
+"s": "avāritiae f."
+},
+"b": {
+"t": "die Habgier, der Geiz"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "cīvis",
+"s": "cīvis m. (Gen. Pl. cīvium)"
+},
+"b": {
+"t": "der Bürger"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "glōria",
+"s": "glōriae f."
+},
+"b": {
+"t": "die Ehre, der Ruhm"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "iacere",
+"s": "iaciō, iēcī"
+},
+"b": {
+"t": "werfen"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "lapis",
+"s": "lapidis m."
+},
+"b": {
+"t": "der Stein"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "lēx",
+"s": "lēgis f."
+},
+"b": {
+"t": "das Gesetz"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "lūxuria",
+"s": "lūxuriae f."
+},
+"b": {
+"t": "die Genusssucht"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "mūtāre",
+"s": "mūtō"
+},
+"b": {
+"t": "verändern, (ver)wandeln"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "nōbilēs",
+"s": "nōbilium m. Pl."
+},
+"b": {
+"t": "die Adligen"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "opprimere",
+"s": "opprimō, oppressī, oppressum"
+},
+"b": {
+"t": "unterdrücken"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "pellere",
+"s": "pellō, pepulī, pulsum"
+},
+"b": {
+"t": "vertreiben"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "populus",
+"s": "populī m."
+},
+"b": {
+"t": "das Volk"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "probus",
+"s": "-a, -um"
+},
+"b": {
+"t": "anständig, tüchtig, gut"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "quamdiū?"
+},
+"b": {
+"t": "wie lange?"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "rōstra",
+"s": "rōstrōrum n. Pl."
+},
+"b": {
+"t": "die Rednerbühne (auf dem Forum Romanum)"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "sēdēs",
+"s": "sēdis f."
+},
+"b": {
+"t": "der Wohnsitz"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "vērō",
+"s": "Adv."
+},
+"b": {
+"t": "wirklich, tatsächlich, aber"
+},
+"k": "L15"
+},
+{
+"a": {
+"t": "afficere",
+"s": "afficiō, affēcī, affectum + Abl."
+},
+"b": {
+"t": "mit etw. versehen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "aliter",
+"s": "Adv."
+},
+"b": {
+"t": "sonst, andernfalls, anders, auf andere Art"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "apud",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "bei"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "ārdēre",
+"s": "ārdeō, ārsī"
+},
+"b": {
+"t": "brennen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "castra",
+"s": "castrōrum n. Pl."
+},
+"b": {
+"t": "das Lager, das Kriegslager"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "facinus",
+"s": "facinoris n."
+},
+"b": {
+"t": "die Handlung, die Tat"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "flūmen",
+"s": "flūminis n."
+},
+"b": {
+"t": "der Fluss"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "foedus",
+"s": "foederis n."
+},
+"b": {
+"t": "der Vertrag, der Friedensvertrag, das Bündnis"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "honor",
+"s": "honōris m."
+},
+"b": {
+"t": "die Ehre"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "iubēre",
+"s": "iubeō, iussī, iussum"
+},
+"b": {
+"t": "befehlen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "laudāre",
+"s": "laudō, laudāvī, laudātum"
+},
+"b": {
+"t": "loben"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "lībertās",
+"s": "lībertātis f."
+},
+"b": {
+"t": "die Freiheit"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "nōnnūllī",
+"s": "-ae, -a Pl."
+},
+"b": {
+"t": "einige, manche"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "nūntius",
+"s": "nūntiī m."
+},
+"b": {
+"t": "der Bote"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "ob",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "wegen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "obses",
+"s": "obsidis m./f."
+},
+"b": {
+"t": "die Geisel"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "pōnere",
+"s": "pōnō, posuī, positum"
+},
+"b": {
+"t": "stellen, aufstellen, setzen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "quī",
+"s": "quae, quod Rel.-/Interrog.-Pron."
+},
+"b": {
+"t": "der, die, das; welcher, welche, welches"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "redūcere",
+"s": "redūcō, redūxī, reductum"
+},
+"b": {
+"t": "zurückführen, hinbringen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "remittere",
+"s": "remittō, remīsī, remissum"
+},
+"b": {
+"t": "zurückschicken"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "repetere",
+"s": "repetō, repetīvī, repetītum"
+},
+"b": {
+"t": "zurückverlangen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "rumpere",
+"s": "rumpō, rūpī, ruptum"
+},
+"b": {
+"t": "brechen, zerbrechen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "sī",
+"s": "Subj."
+},
+"b": {
+"t": "wenn"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "sollicitāre",
+"s": "sollicitō"
+},
+"b": {
+"t": "beunruhigen, erregen"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "tēlum",
+"s": "tēlī n."
+},
+"b": {
+"t": "das Geschoss, das Wurfgeschoss"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "virtūs",
+"s": "virtūtis f."
+},
+"b": {
+"t": "die Tapferkeit, die Tugend"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "vulnus",
+"s": "vulneris n."
+},
+"b": {
+"t": "die Wunde"
+},
+"k": "L16"
+},
+{
+"a": {
+"t": "ācer",
+"s": "ācris, ācre"
+},
+"b": {
+"t": "energisch, heftig, scharf"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "alius",
+"s": "alia, aliud (Gen. alterīus, Dat. aliī)"
+},
+"b": {
+"t": "ein anderer"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "audāx",
+"s": "Gen. audācis"
+},
+"b": {
+"t": "wagemutig, frech"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "audēre",
+"s": "audeō"
+},
+"b": {
+"t": "wagen"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "celer",
+"s": "celeris, celere"
+},
+"b": {
+"t": "schnell"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "comes",
+"s": "comitis m."
+},
+"b": {
+"t": "der Begleiter"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "dīvidere",
+"s": "dīvidō, dīvīsī, dīvīsum"
+},
+"b": {
+"t": "teilen, unterteilen"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "fēlīx",
+"s": "Gen. fēlīcis"
+},
+"b": {
+"t": "glücklich"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "grandis",
+"s": "grande"
+},
+"b": {
+"t": "groß, bedeutend"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "gravis",
+"s": "grave"
+},
+"b": {
+"t": "schwer, charakterfest, ernst"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "illūstris",
+"s": "illūstre"
+},
+"b": {
+"t": "bekannt, berühmt"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "ingēns",
+"s": "Gen. ingentis"
+},
+"b": {
+"t": "ungeheuer groß"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "modus",
+"s": "modī m."
+},
+"b": {
+"t": "die Art, die Weise"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "mōs",
+"s": "mōris m."
+},
+"b": {
+"t": "die Sitte, der Brauch (mōrēs, mōrum m. Pl.: der Charakter)"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "omnis",
+"s": "omne"
+},
+"b": {
+"t": "(Sg.) jeder, ganz; (Pl.) alle"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "prōvincia",
+"s": "prōvinciae f."
+},
+"b": {
+"t": "die Provinz"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "rēgius",
+"s": "-a, -um"
+},
+"b": {
+"t": "königlich"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "sibī",
+"s": "Dat."
+},
+"b": {
+"t": "sich; im AcI auch: ihm, ihr, ihn, ihnen"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "singulāris",
+"s": "singulāre"
+},
+"b": {
+"t": "einzigartig"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "ubī",
+"s": "Subj."
+},
+"b": {
+"t": "als, sobald"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "varius",
+"s": "-a, -um"
+},
+"b": {
+"t": "verschieden, verschiedenartig"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "vās",
+"s": "vāsis n."
+},
+"b": {
+"t": "das Gefäß"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "velut"
+},
+"b": {
+"t": "wie zum Beispiel"
+},
+"k": "L17"
+},
+{
+"a": {
+"t": "amor",
+"s": "amōris m."
+},
+"b": {
+"t": "die Liebe"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "an?"
+},
+"b": {
+"t": "oder (etwa)?"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "audācia",
+"s": "audāciae f."
+},
+"b": {
+"t": "die Frechheit, der Mut"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "brevis",
+"s": "breve"
+},
+"b": {
+"t": "kurz"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "captīvus",
+"s": "captīvī m."
+},
+"b": {
+"t": "der Gefangene"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "carcer",
+"s": "carceris m."
+},
+"b": {
+"t": "das Gefängnis"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "carmen",
+"s": "carminis n."
+},
+"b": {
+"t": "das Gedicht, das Lied"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "colligere",
+"s": "colligō, collēgī, collēctum"
+},
+"b": {
+"t": "sammeln"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "cum + Indikativ Impf.",
+"s": "Subj. + Indikativ Impf."
+},
+"b": {
+"t": "(jedes Mal) wenn"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "dīves",
+"s": "Gen. dīvitis (Abl. Sg. -e, Nom. Pl. n. -a, Gen. Pl. -um)"
+},
+"b": {
+"t": "reich"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "dormīre",
+"s": "dormiō"
+},
+"b": {
+"t": "schlafen"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "dux",
+"s": "ducis m."
+},
+"b": {
+"t": "der Anführer"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "expōnere",
+"s": "expōnō, exposuī, expositum"
+},
+"b": {
+"t": "aussetzen; darstellen, beschreiben"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "gerere",
+"s": "gerō, gessī, gestum"
+},
+"b": {
+"t": "tragen, ausführen (sē gerere: sich verhalten)"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "laus",
+"s": "laudis f."
+},
+"b": {
+"t": "das Lob"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "nāvigāre",
+"s": "nāvigō"
+},
+"b": {
+"t": "segeln"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "nōbilis",
+"s": "nōbile"
+},
+"b": {
+"t": "adlig, vornehm"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "nūllus",
+"s": "-a, -um (Gen. nūllīus, Dat. nūllī)"
+},
+"b": {
+"t": "keiner"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "perturbāre",
+"s": "perturbō"
+},
+"b": {
+"t": "verwirren, in Unruhe versetzen"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "pīrāta",
+"s": "pīrātae m."
+},
+"b": {
+"t": "der Seeräuber, der Pirat"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "poscere",
+"s": "poscō, poposcī, –"
+},
+"b": {
+"t": "fordern"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "propinquus",
+"s": "-a, -um"
+},
+"b": {
+"t": "nahe, benachbart"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "quīnquāgintā"
+},
+"b": {
+"t": "fünfzig"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "recitāre",
+"s": "recitō"
+},
+"b": {
+"t": "vorlesen"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "redīre",
+"s": "redeō, rediī, reditum"
+},
+"b": {
+"t": "zurückkehren, zurückgehen"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "solvere",
+"s": "solvō, solvī, solūtum"
+},
+"b": {
+"t": "zahlen, bezahlen, lösen, losbinden"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "supplicium",
+"s": "suppliciī n."
+},
+"b": {
+"t": "die Todesstrafe"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "tantum",
+"s": "Adv."
+},
+"b": {
+"t": "nur"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "terrēre",
+"s": "terreō, terruī, territum"
+},
+"b": {
+"t": "jdn. erschrecken"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "terror",
+"s": "terrōris m."
+},
+"b": {
+"t": "der Schrecken"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "vīgintī"
+},
+"b": {
+"t": "zwanzig"
+},
+"k": "L18"
+},
+{
+"a": {
+"t": "aeternus",
+"s": "-a, -um"
+},
+"b": {
+"t": "ewig"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "coniūrātiō",
+"s": "coniūrātiōnis f."
+},
+"b": {
+"t": "die Verschwörung"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "contemnere",
+"s": "contemnō, contempsī, contemptum"
+},
+"b": {
+"t": "verachten"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "dēsinere",
+"s": "dēsinō, dēsiī, dēsitum"
+},
+"b": {
+"t": "aufhören"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "etsī",
+"s": "Subj."
+},
+"b": {
+"t": "auch wenn"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "excēdere",
+"s": "excēdō, excessī, excessum"
+},
+"b": {
+"t": "hinausgehen, sich entfernen"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "īgnōrāre",
+"s": "īgnōrō"
+},
+"b": {
+"t": "nicht kennen, nicht wissen (nōn īgnōrāre: sehr gut kennen, sehr gut wissen)"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "immō",
+"s": "Adv."
+},
+"b": {
+"t": "vielmehr, ja sogar"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "incendere",
+"s": "incendō, incendī, incēnsum"
+},
+"b": {
+"t": "in Brand stecken, entflammen"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "interesse",
+"s": "intersum, interfuī, –"
+},
+"b": {
+"t": "sich dazwischen befinden; (+ Dat.) an etw. teilnehmen"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "iste",
+"s": "ista, istud Dem.-Pron."
+},
+"b": {
+"t": "dieser da, diese da, dieses da"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "latēre",
+"s": "lateō, latuī, –"
+},
+"b": {
+"t": "verborgen sein, versteckt sein"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "nēmō",
+"s": "(Gen. nūllīus, Dat. nēminī, Akk. nēminem, Abl. nūllō)"
+},
+"b": {
+"t": "niemand"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "nōndum",
+"s": "Adv."
+},
+"b": {
+"t": "noch nicht"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "nostrum",
+"s": "Gen. von nōs"
+},
+"b": {
+"t": "von uns"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "ōrātiō",
+"s": "ōrātiōnis f."
+},
+"b": {
+"t": "die Rede"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "pars",
+"s": "partis f."
+},
+"b": {
+"t": "der Teil"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "patēre",
+"s": "pateō, patuī, –"
+},
+"b": {
+"t": "offensichtlich sein, offen stehen (patet + AcI: es ist offensichtlich, dass …)"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "patrēs cōnscrīptī",
+"s": "patrum cōnscrīptōrum m. Pl."
+},
+"b": {
+"t": "die Senatoren"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "proinde",
+"s": "Adv."
+},
+"b": {
+"t": "also, deswegen"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "quamdiū"
+},
+"b": {
+"t": "so lange (wie)"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "salvus",
+"s": "-a, -um"
+},
+"b": {
+"t": "gesund, wohlbehalten; gerettet"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "satis",
+"s": "Adv."
+},
+"b": {
+"t": "genug (satis est + AcI: es ist genug, dass …)"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "ūnā",
+"s": "Adv."
+},
+"b": {
+"t": "zusammen"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "vestrum",
+"s": "Gen. von vōs"
+},
+"b": {
+"t": "von euch"
+},
+"k": "L19"
+},
+{
+"a": {
+"t": "accidere",
+"s": "accidō, accidī, –"
+},
+"b": {
+"t": "geschehen, zustoßen"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "āmittere",
+"s": "āmittō, āmīsī, āmissum"
+},
+"b": {
+"t": "verlieren"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "cōgere",
+"s": "cōgō, coēgī, coāctum"
+},
+"b": {
+"t": "(+ Akk. + Inf.) jdn. zwingen, etw. zu tun; (+ Akk.) jdn. zusammenbringen, versammeln"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "cōnstituere",
+"s": "cōnstituō, cōnstituī, cōnstitūtum"
+},
+"b": {
+"t": "beschließen"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "dulcis",
+"s": "dulce"
+},
+"b": {
+"t": "süß, angenehm"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "dum",
+"s": "Subj. + Präs."
+},
+"b": {
+"t": "während"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "effugere",
+"s": "effugiō, effūgī, –"
+},
+"b": {
+"t": "entfliehen, entkommen"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "frūstrā",
+"s": "Adv."
+},
+"b": {
+"t": "vergeblich, umsonst"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "imprīmīs",
+"s": "Adv."
+},
+"b": {
+"t": "vor allem, besonders"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "īnsula",
+"s": "īnsulae f."
+},
+"b": {
+"t": "die Insel"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "memoria",
+"s": "memoriae f."
+},
+"b": {
+"t": "das Gedächtnis, die Erinnerung"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "numquam",
+"s": "Adv."
+},
+"b": {
+"t": "niemals"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "ōrnāre",
+"s": "ōrnō"
+},
+"b": {
+"t": "ausrüsten, schmücken"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "postquam",
+"s": "Subj. + Perf."
+},
+"b": {
+"t": "nachdem"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "praeter",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "an … vorbei"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "situs",
+"s": "-a, -um"
+},
+"b": {
+"t": "befindlich, gelegen"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "unda",
+"s": "undae f."
+},
+"b": {
+"t": "die Welle, die Flut"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "vinculum",
+"s": "vinculī n."
+},
+"b": {
+"t": "die Fessel"
+},
+"k": "L20"
+},
+{
+"a": {
+"t": "abesse",
+"s": "absum, āfuī, –"
+},
+"b": {
+"t": "weg sein, entfernt sein"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "animus",
+"s": "animī m."
+},
+"b": {
+"t": "der Geist, das Gemüt, das Herz, der Mut"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "bēstia",
+"s": "bēstiae f."
+},
+"b": {
+"t": "das (wilde) Tier"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "commovēre",
+"s": "commoveō, commōvī, commōtum"
+},
+"b": {
+"t": "bewegen, veranlassen; (jdn.) rühren"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "dēmum",
+"s": "Adv."
+},
+"b": {
+"t": "endlich"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "dēsīderium",
+"s": "dēsīderiī n."
+},
+"b": {
+"t": "die Sehnsucht"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "diēs",
+"s": "diēī m."
+},
+"b": {
+"t": "der Tag"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "dolor",
+"s": "dolōris m."
+},
+"b": {
+"t": "der Schmerz"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "fidēs",
+"s": "fideī f."
+},
+"b": {
+"t": "der Schutz, der Beistand; die Zuverlässigkeit, die Treue; der Glaube"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "flēre",
+"s": "fleō, flēvī, flētum"
+},
+"b": {
+"t": "(be)weinen"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "lūx",
+"s": "lūcis f."
+},
+"b": {
+"t": "das Licht, das Tageslicht"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "mandāre",
+"s": "mandō"
+},
+"b": {
+"t": "übergeben, auftragen, befehlen"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "nōn modo … sed etiam"
+},
+"b": {
+"t": "nicht nur … sondern auch"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "nūptiae",
+"s": "nūptiārum f. Pl."
+},
+"b": {
+"t": "die Hochzeit"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "optāre",
+"s": "optō"
+},
+"b": {
+"t": "wünschen"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "ōrāre",
+"s": "ōrō"
+},
+"b": {
+"t": "(er)bitten"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "perniciēs",
+"s": "perniciēī f."
+},
+"b": {
+"t": "das Verderben"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "pervenīre",
+"s": "perveniō, pervēnī, perventum"
+},
+"b": {
+"t": "gelangen"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "pēs",
+"s": "pedis m."
+},
+"b": {
+"t": "der Fuß; der Fuß als Längenmaß (ca. 30 cm)"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "plēnus",
+"s": "-a, -um + Gen."
+},
+"b": {
+"t": "voll"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "quaesō"
+},
+"b": {
+"t": "(ich) bitte!"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "rēgīna",
+"s": "rēgīnae f."
+},
+"b": {
+"t": "die Königin"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "rēs",
+"s": "reī f."
+},
+"b": {
+"t": "die Sache, der Vorfall"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "salūs",
+"s": "salūtis f."
+},
+"b": {
+"t": "das Wohlergehen; der Gruß; die Rettung"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "spēs",
+"s": "speī f."
+},
+"b": {
+"t": "die Hoffnung"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "superāre",
+"s": "superō"
+},
+"b": {
+"t": "überwältigen, besiegen"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "turba",
+"s": "turbae f."
+},
+"b": {
+"t": "die Menge"
+},
+"k": "L21"
+},
+{
+"a": {
+"t": "arbor",
+"s": "arboris f."
+},
+"b": {
+"t": "der Baum"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "aurum",
+"s": "aurī n."
+},
+"b": {
+"t": "das Gold"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "cēnāre",
+"s": "cēnō"
+},
+"b": {
+"t": "speisen, die Hauptmahlzeit zu sich nehmen"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "cibus",
+"s": "cibī m."
+},
+"b": {
+"t": "die Speise"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "dīvitiae",
+"s": "dīvitiārum f. Pl."
+},
+"b": {
+"t": "der Reichtum"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "fingere",
+"s": "fingō, fīnxī, fictum"
+},
+"b": {
+"t": "vorstellen, ausdenken"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "(ab-/ad-/ex-/per-/red-/sub-)iēns",
+"s": "Gen. euntis"
+},
+"b": {
+"t": "PPA von īre"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "līberāre",
+"s": "līberō"
+},
+"b": {
+"t": "befreien"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "maximē",
+"s": "Adv."
+},
+"b": {
+"t": "am meisten, ganz besonders"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "mīrus",
+"s": "-a, -um"
+},
+"b": {
+"t": "wunderbar, erstaunlich"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "nisī",
+"s": "Subj."
+},
+"b": {
+"t": "wenn nicht"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "ōs",
+"s": "ōris n."
+},
+"b": {
+"t": "der Mund"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "pōculum",
+"s": "pōculī n."
+},
+"b": {
+"t": "der Becher"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "prūdēns",
+"s": "Gen. prūdentis, Adv. prūdenter"
+},
+"b": {
+"t": "klug"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "sīc",
+"s": "Adv."
+},
+"b": {
+"t": "so"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "stultus",
+"s": "-a, -um"
+},
+"b": {
+"t": "dumm"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "torquēre",
+"s": "torqueō, torsī, tortum"
+},
+"b": {
+"t": "foltern"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "trahere",
+"s": "trahō, trāxī, tractum"
+},
+"b": {
+"t": "ziehen"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "venia",
+"s": "veniae f."
+},
+"b": {
+"t": "die Verzeihung"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "vīnum",
+"s": "vīnī n."
+},
+"b": {
+"t": "der Wein"
+},
+"k": "L22"
+},
+{
+"a": {
+"t": "cīvitās",
+"s": "cīvitātis f. (Gen. Pl. cīvitātium)"
+},
+"b": {
+"t": "die Bürgerschaft, der Staat; das Bürgerrecht"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "cōnfirmāre",
+"s": "cōnfirmō"
+},
+"b": {
+"t": "bestätigen"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "cōnscrībere",
+"s": "cōnscrībō, cōnscrīpsī, cōnscrīptum"
+},
+"b": {
+"t": "anwerben"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "contrā",
+"s": "Präp. + Akk."
+},
+"b": {
+"t": "gegen"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "dictum",
+"s": "dictī n."
+},
+"b": {
+"t": "die Äußerung, der Ausspruch"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "fidēlis",
+"s": "fidēle"
+},
+"b": {
+"t": "treu"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "hūc",
+"s": "Adv."
+},
+"b": {
+"t": "hierher, hierhin"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "imperāre",
+"s": "imperō"
+},
+"b": {
+"t": "befehlen"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "imperium",
+"s": "imperiī n."
+},
+"b": {
+"t": "der Befehl, die Herrschaft; das Herrschaftsgebiet, das (Römische) Reich"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "inopia",
+"s": "inopiae f."
+},
+"b": {
+"t": "die Armut, die Not"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "intermittere",
+"s": "intermittō, intermīsī, intermissum"
+},
+"b": {
+"t": "einschieben, verstreichen lassen"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "libenter",
+"s": "Adv."
+},
+"b": {
+"t": "gern"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "mēnsis",
+"s": "mēnsis m. (Gen. Pl. mēnsium)"
+},
+"b": {
+"t": "der Monat"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "nūntiāre",
+"s": "nūntiō"
+},
+"b": {
+"t": "melden"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "obtinēre",
+"s": "obtineō, obtinuī, obtentum"
+},
+"b": {
+"t": "erhalten, innehaben"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "paulum",
+"s": "Adv."
+},
+"b": {
+"t": "ein wenig"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "philosophus",
+"s": "philosophī m."
+},
+"b": {
+"t": "der Philosoph"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "praedicāre",
+"s": "praedicō"
+},
+"b": {
+"t": "rühmen, lobend hervorheben"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "sōl",
+"s": "sōlis m."
+},
+"b": {
+"t": "die Sonne"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "sub",
+"s": "Präp. + Abl."
+},
+"b": {
+"t": "unter"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "tantum … quantum"
+},
+"b": {
+"t": "so viel … wie, so weit … wie"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "turpis",
+"s": "turpe"
+},
+"b": {
+"t": "schimpflich, hässlich"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "velle",
+"s": "volō, voluī, –"
+},
+"b": {
+"t": "wollen, wünschen"
+},
+"k": "L23"
+},
+{
+"a": {
+"t": "causa",
+"s": "causae f."
+},
+"b": {
+"t": "der Grund, die Ursache, der Streitfall, die (Gerichts-)Verhandlung (meā causā: meinetwegen)"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "cōpiae",
+"s": "cōpiārum f. Pl."
+},
+"b": {
+"t": "die Truppen"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "fundere",
+"s": "fundō, fūdī, fūsum"
+},
+"b": {
+"t": "zerstreuen, forttreiben"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "gēns",
+"s": "gentis f. (Gen. Pl. gentium)"
+},
+"b": {
+"t": "der Volksstamm"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "intellegere",
+"s": "intellegō, intellēxī, intellēctum"
+},
+"b": {
+"t": "bemerken, einsehen, verstehen"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "Italicus",
+"s": "-a, -um"
+},
+"b": {
+"t": "italisch"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "laetitia",
+"s": "laetitiae f."
+},
+"b": {
+"t": "die Freude"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "maximus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der größte"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "nōmināre",
+"s": "nōminō"
+},
+"b": {
+"t": "jdn. etwas nennen"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "praetereā",
+"s": "Adv."
+},
+"b": {
+"t": "außerdem"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "proelium",
+"s": "proeliī n."
+},
+"b": {
+"t": "der Kampf"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "quem?",
+"s": "Interrog.-Pron. Akk."
+},
+"b": {
+"t": "wen?"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "quoque",
+"s": "Adv. (nachgestellt)"
+},
+"b": {
+"t": "auch"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "scīlicet",
+"s": "Adv."
+},
+"b": {
+"t": "selbstverständlich, natürlich"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "tertius",
+"s": "-a, -um"
+},
+"b": {
+"t": "der dritte"
+},
+"k": "L24"
+},
+{
+"a": {
+"t": "adeō",
+"s": "Adv."
+},
+"b": {
+"t": "so sehr"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "ars",
+"s": "artis f. (Gen. Pl. artium)"
+},
+"b": {
+"t": "die Geschicklichkeit, die Kunst; die Wissenschaft"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "efficere",
+"s": "efficiō, effēcī, effectum"
+},
+"b": {
+"t": "herstellen, bauen; bewirken"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "expūgnāre",
+"s": "expūgnō"
+},
+"b": {
+"t": "erobern"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "fōrma",
+"s": "fōrmae f."
+},
+"b": {
+"t": "die Form"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "geōmetricus",
+"s": "-a, -um"
+},
+"b": {
+"t": "geometrisch"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "ingenium",
+"s": "ingeniī n."
+},
+"b": {
+"t": "die Begabung, das Talent"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "īnstrūmentum",
+"s": "īnstrūmentī n."
+},
+"b": {
+"t": "das Gerät, das Werkzeug"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "māchina",
+"s": "māchinae f."
+},
+"b": {
+"t": "die Maschine"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "mathēmaticus",
+"s": "-a, -um"
+},
+"b": {
+"t": "mathematisch, Mathematik-"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "moenia",
+"s": "moenium n. Pl."
+},
+"b": {
+"t": "die Stadtmauer"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "mora",
+"s": "morae f."
+},
+"b": {
+"t": "die Verzögerung"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "nē",
+"s": "Subj. + Konjunktiv"
+},
+"b": {
+"t": "dass nicht, damit nicht"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "pendēre",
+"s": "pendeō, pependī, –"
+},
+"b": {
+"t": "hängen, herabhängen"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "posterī",
+"s": "posterōrum m. Pl."
+},
+"b": {
+"t": "die Nachkommen, die Nachwelt"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "postulāre",
+"s": "postulō"
+},
+"b": {
+"t": "fordern"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "praeesse",
+"s": "praesum, praefuī, – + Dat."
+},
+"b": {
+"t": "befehligen, den Oberbefehl haben über"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "tantus",
+"s": "-a, -um"
+},
+"b": {
+"t": "so groß, so viel"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "turbāre",
+"s": "turbō"
+},
+"b": {
+"t": "stören, in Unordnung bringen"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "undique",
+"s": "Adv."
+},
+"b": {
+"t": "von allen Seiten, von überall (her)"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "ut + Konjunktiv",
+"s": "Subj. + Konjunktiv"
+},
+"b": {
+"t": "(so) dass, damit, (um …) zu"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "ūtilis",
+"s": "ūtile"
+},
+"b": {
+"t": "nützlich"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "victōria",
+"s": "victōriae f."
+},
+"b": {
+"t": "der Sieg"
+},
+"k": "L25"
+},
+{
+"a": {
+"t": "abdūcere",
+"s": "abdūcō, abdūxī, abductum"
+},
+"b": {
+"t": "abführen, wegführen"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "caelum",
+"s": "caelī n."
+},
+"b": {
+"t": "der Himmel"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "clādēs",
+"s": "clādis f. (Gen. Pl. clādium)"
+},
+"b": {
+"t": "die Niederlage"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "cōnspectus",
+"s": "cōnspectūs m."
+},
+"b": {
+"t": "der Anblick, das Blickfeld"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "cum + Konjunktiv",
+"s": "Subj. + Konjunktiv"
+},
+"b": {
+"t": "als, nachdem; weil; obwohl"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "cupidus",
+"s": "-a, -um + Gen."
+},
+"b": {
+"t": "begierig (nach etwas)"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "ēventus",
+"s": "ēventūs m."
+},
+"b": {
+"t": "der Ausgang"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "exercitus",
+"s": "exercitūs m."
+},
+"b": {
+"t": "das Heer"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "fortis",
+"s": "forte"
+},
+"b": {
+"t": "mutig, tapfer"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "impellere",
+"s": "impellō, impulī, impulsum"
+},
+"b": {
+"t": "veranlassen"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "impetus",
+"s": "impetūs m."
+},
+"b": {
+"t": "der Angriff"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "īnsidiae",
+"s": "īnsidiārum f. Pl."
+},
+"b": {
+"t": "der Hinterhalt"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "legiō",
+"s": "legiōnis f."
+},
+"b": {
+"t": "die Legion (Heereseinheit, ca. 4000 – 6000 Mann)"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "locus",
+"s": "locī m."
+},
+"b": {
+"t": "der Ort, der Platz"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "manus",
+"s": "manūs f."
+},
+"b": {
+"t": "die Hand"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "metus",
+"s": "metūs m."
+},
+"b": {
+"t": "die Furcht"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "persuādēre",
+"s": "persuādeō, persuāsī, persuāsum"
+},
+"b": {
+"t": "(+ AcI) überzeugen; (+ Dat. + ut) überreden (mihī persuāsum est: ich bin überzeugt)"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "placidus",
+"s": "-a, -um"
+},
+"b": {
+"t": "friedfertig, ruhig"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "prīnceps",
+"s": "prīncipis m."
+},
+"b": {
+"t": "der Fürst, der Erste"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "quattuor"
+},
+"b": {
+"t": "vier"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "servitūs",
+"s": "servitūtis f."
+},
+"b": {
+"t": "die Knechtschaft, die Sklaverei"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "silva",
+"s": "silvae f."
+},
+"b": {
+"t": "der Wald"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "tendere",
+"s": "tendō, tetendī, tentum"
+},
+"b": {
+"t": "strecken, spannen"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "terribilis",
+"s": "terribile"
+},
+"b": {
+"t": "schrecklich"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "trēs",
+"s": "trēs, tria"
+},
+"b": {
+"t": "drei"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "tumultus",
+"s": "tumultūs m."
+},
+"b": {
+"t": "der Tumult, der Aufruhr, der Kriegslärm"
+},
+"k": "L26"
+},
+{
+"a": {
+"t": "adicere",
+"s": "adiciō, adiēcī, adiectum"
+},
+"b": {
+"t": "hinzusetzen, hinzufügen"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "adulēscēns",
+"s": "adulēscentis m./f."
+},
+"b": {
+"t": "der junge Mann, die junge Frau"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "aedificāre",
+"s": "aedificō"
+},
+"b": {
+"t": "bauen"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "auctor",
+"s": "auctōris m."
+},
+"b": {
+"t": "der Veranlasser, der Urheber"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "caput",
+"s": "capitis n."
+},
+"b": {
+"t": "der Kopf"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "cottīdiē",
+"s": "Adv."
+},
+"b": {
+"t": "täglich"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "ēdere",
+"s": "ēdidī, ēditum"
+},
+"b": {
+"t": "veranstalten, herausgeben"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "ēligere",
+"s": "ēligō, ēlēgī, ēlēctum"
+},
+"b": {
+"t": "auswählen"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "figūra",
+"s": "figūrae f."
+},
+"b": {
+"t": "die Gestalt, die Figur"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "frōns",
+"s": "frontis f."
+},
+"b": {
+"t": "die Vorderseite, die Stirn"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "hospes",
+"s": "hospitis m."
+},
+"b": {
+"t": "der Gast, der Fremde"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "īgnārus",
+"s": "-a, -um"
+},
+"b": {
+"t": "unkundig, unwissend"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "lūdus",
+"s": "lūdī m."
+},
+"b": {
+"t": "das Spiel, das Schauspiel"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "medius",
+"s": "-a, -um"
+},
+"b": {
+"t": "der mittlere, mitten (in)"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "observāre",
+"s": "observō"
+},
+"b": {
+"t": "beobachten"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "ōmen",
+"s": "ōminis n."
+},
+"b": {
+"t": "das Vorzeichen"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "praesēns",
+"s": "Gen. praesentis"
+},
+"b": {
+"t": "anwesend"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "quīdam",
+"s": "quaedam, quoddam (Akk. Sg. m./f. quendam, quandam, Gen. Pl. quōrundam, quārundam)"
+},
+"b": {
+"t": "ein bestimmter, gewisser; (Pl.) einige, manche"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "quotiēns",
+"s": "Subj."
+},
+"b": {
+"t": "wie oft, sooft"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "sīdus",
+"s": "sīderis n."
+},
+"b": {
+"t": "der Stern, das Sternbild"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "solēre",
+"s": "soleō + Inf."
+},
+"b": {
+"t": "gewohnt sein, pflegen, gewöhnlich etw. tun"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "succēdere",
+"s": "succēdō, successī, successum"
+},
+"b": {
+"t": "an die Stelle treten, nachfolgen"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "summus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der oberste, der höchste, oben(auf)"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "tālis",
+"s": "tāle"
+},
+"b": {
+"t": "so beschaffen, solch ein"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "theātrum",
+"s": "theātrī n."
+},
+"b": {
+"t": "das Theater"
+},
+"k": "L27"
+},
+{
+"a": {
+"t": "augēre",
+"s": "augeō, auxī, auctum"
+},
+"b": {
+"t": "vergrößern, vermehren"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "celebrāre",
+"s": "celebrō"
+},
+"b": {
+"t": "feiern, rühmen"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "compōnere",
+"s": "compōnō, composuī, compositum"
+},
+"b": {
+"t": "zusammensetzen, ordnen, verfassen"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "domus",
+"s": "domūs f. (Gen. Pl. domōrum, Akk. Pl. domōs)"
+},
+"b": {
+"t": "das Haus, die Familie, die Hausgemeinschaft"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "flōrēre",
+"s": "flōreō, flōruī, –"
+},
+"b": {
+"t": "blühen"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "frūctus",
+"s": "frūctūs m."
+},
+"b": {
+"t": "die Frucht"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "frūmentum",
+"s": "frūmentī n."
+},
+"b": {
+"t": "das Getreide"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "longus",
+"s": "-a, -um"
+},
+"b": {
+"t": "lang, weit"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "negāre",
+"s": "negō"
+},
+"b": {
+"t": "ablehnen, verneinen, sich weigern"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "orbis",
+"s": "orbis m."
+},
+"b": {
+"t": "der Kreis (orbis terrārum: der Erdkreis, die Erde)"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "pāx",
+"s": "pācis f."
+},
+"b": {
+"t": "der Frieden"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "permittere",
+"s": "permittō, permīsī, permissum"
+},
+"b": {
+"t": "erlauben, gestatten"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "perpetuus",
+"s": "-a, -um"
+},
+"b": {
+"t": "ununterbrochen, fortlaufend, beständig"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "poēta",
+"s": "poētae m."
+},
+"b": {
+"t": "der Dichter"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "potestās",
+"s": "potestātis f."
+},
+"b": {
+"t": "die Macht, die Gewalt, die Möglichkeit"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "quantus",
+"s": "-a, -um?"
+},
+"b": {
+"t": "wie groß?, wie viel?"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "saeculum",
+"s": "saeculī n."
+},
+"b": {
+"t": "das Zeitalter, das Jahrhundert"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "statuere",
+"s": "statuō, statuī, statūtum"
+},
+"b": {
+"t": "beschließen, festsetzen"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "ultimus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der letzte, der äußerste"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "umquam",
+"s": "Adv."
+},
+"b": {
+"t": "jemals"
+},
+"k": "L28"
+},
+{
+"a": {
+"t": "altus",
+"s": "-a, -um"
+},
+"b": {
+"t": "hoch, tief"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "certāmen",
+"s": "certāminis n."
+},
+"b": {
+"t": "der Wettkampf, der Wettstreit"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "clam",
+"s": "Adv."
+},
+"b": {
+"t": "heimlich"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "claudere",
+"s": "claudō, clausī, clausum"
+},
+"b": {
+"t": "schließen, verschließen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "concēdere",
+"s": "concēdō, concessī, concessum"
+},
+"b": {
+"t": "erlauben, zugestehen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "cōnsulere",
+"s": "cōnsulō, cōnsuluī, cōnsultum"
+},
+"b": {
+"t": "sich beraten, beratschlagen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "dēclārāre",
+"s": "dēclārō"
+},
+"b": {
+"t": "jdn. (öffentlich) zu etwas erklären, ausrufen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "dēportāre",
+"s": "dēportō"
+},
+"b": {
+"t": "wegtragen, fortschaffen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "dīligere",
+"s": "dīligō, dīlēxī, dīlēctum"
+},
+"b": {
+"t": "lieben, wertschätzen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "ēvenīre",
+"s": "ēveniō, ēvēnī, ēventum"
+},
+"b": {
+"t": "sich ereignen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "iūdex",
+"s": "iūdicis m."
+},
+"b": {
+"t": "der Richter"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "meritō",
+"s": "Adv."
+},
+"b": {
+"t": "mit Recht, aus gutem Grund"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "necesse est"
+},
+"b": {
+"t": "es ist nötig, man muss"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "nescīre",
+"s": "nesciō"
+},
+"b": {
+"t": "nicht wissen, nicht kennen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "offendere",
+"s": "offendō, offendī, offēnsum"
+},
+"b": {
+"t": "beleidigen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "oppidum",
+"s": "oppidī n."
+},
+"b": {
+"t": "die (Land-)Stadt"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "parere",
+"s": "pariō, peperī, partum"
+},
+"b": {
+"t": "hervorbringen, gebären"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "pertinēre",
+"s": "pertineō, pertinuī, –"
+},
+"b": {
+"t": "sich erstrecken, sich beziehen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "pūblicus",
+"s": "-a, -um"
+},
+"b": {
+"t": "öffentlich"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "quīn etiam"
+},
+"b": {
+"t": "ja sogar, ja vielmehr"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "quōmodo?",
+"s": "Adv."
+},
+"b": {
+"t": "wie?, auf welche Weise?"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "rēs pūblica",
+"s": "reī pūblicae f."
+},
+"b": {
+"t": "der Staat, das Gemeinwesen"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "simulāre",
+"s": "simulō"
+},
+"b": {
+"t": "vortäuschen, so tun, als ob"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "tamquam",
+"s": "Adv."
+},
+"b": {
+"t": "wie, als ob"
+},
+"k": "L29"
+},
+{
+"a": {
+"t": "afferre",
+"s": "afferō, attulī, allātum"
+},
+"b": {
+"t": "heranbringen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "ait",
+"s": "3. P. Sg."
+},
+"b": {
+"t": "er, sie, es sagt; er, sie, es sagte"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "alter",
+"s": "-a, -um (Gen. alterīus, Dat. alterī)"
+},
+"b": {
+"t": "der eine, der andere"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "auxilium",
+"s": "auxiliī n."
+},
+"b": {
+"t": "die Hilfe"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "concordia",
+"s": "concordiae f."
+},
+"b": {
+"t": "die Eintracht, die Harmonie"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "sē cōnferre",
+"s": "cōnferō, contulī, collātum"
+},
+"b": {
+"t": "sich begeben"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "cursus",
+"s": "cursūs m."
+},
+"b": {
+"t": "der Lauf, die Fahrt"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "dolēre",
+"s": "doleō, doluī, –"
+},
+"b": {
+"t": "Schmerz empfinden, bedauern"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "familiāris",
+"s": "familiāre"
+},
+"b": {
+"t": "vertraut"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "ferre",
+"s": "ferō, tulī, lātum"
+},
+"b": {
+"t": "tragen, bringen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "frangere",
+"s": "frangō, frēgī, frāctum"
+},
+"b": {
+"t": "zerbrechen, schwächen, entkräften"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "gemitus",
+"s": "gemitūs m."
+},
+"b": {
+"t": "das Seufzen, das Stöhnen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "īnferre",
+"s": "īnferō, intulī, illātum"
+},
+"b": {
+"t": "hineintragen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "iussū"
+},
+"b": {
+"t": "auf Befehl"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "laedere",
+"s": "laedō, laesī, laesum"
+},
+"b": {
+"t": "verletzen, beschädigen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "laetus",
+"s": "-a, -um"
+},
+"b": {
+"t": "fröhlich"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "littera",
+"s": "litterae f."
+},
+"b": {
+"t": "der Buchstabe (litterae, litterārum f. Pl.: der Brief)"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "mēns",
+"s": "mentis f."
+},
+"b": {
+"t": "die Gesinnung, der Gedanke, die Absicht, der Sinn"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "nimis",
+"s": "Adv."
+},
+"b": {
+"t": "zu, zu sehr"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "offerre",
+"s": "offerō, obtulī, oblātum"
+},
+"b": {
+"t": "anbieten"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "optimus",
+"s": "-a, -um"
+},
+"b": {
+"t": "der beste"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "paene",
+"s": "Adv."
+},
+"b": {
+"t": "beinahe, fast"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "potēns",
+"s": "Gen. potentis, Adv. potenter"
+},
+"b": {
+"t": "mächtig"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "prōdūcere",
+"s": "prōdūcō, prōdūxī, prōductum"
+},
+"b": {
+"t": "vor(an)führen, in die Länge ziehen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "restituere",
+"s": "restituō, restituī, restitūtum"
+},
+"b": {
+"t": "wiederherstellen"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "sinus",
+"s": "sinūs m."
+},
+"b": {
+"t": "die Bucht"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "tollere",
+"s": "tollō, sustulī, sublātum"
+},
+"b": {
+"t": "beseitigen, hochheben"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "ūsque ad"
+},
+"b": {
+"t": "bis zu"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "utinam"
+},
+"b": {
+"t": "wenn doch, hoffentlich"
+},
+"k": "L30"
+},
+{
+"a": {
+"t": "aedificium",
+"s": "aedificiī n."
+},
+"b": {
+"t": "das Gebäude"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "āter",
+"s": "ātra, ātrum"
+},
+"b": {
+"t": "schwarz, grauenvoll"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "cārus",
+"s": "-a, -um"
+},
+"b": {
+"t": "lieb, teuer"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "cinis",
+"s": "cineris m."
+},
+"b": {
+"t": "die Asche"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "cōnārī",
+"s": "cōnor + Inf."
+},
+"b": {
+"t": "versuchen, etw. zu tun"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "dēscendere",
+"s": "dēscendō, dēscendī, dēscēnsum"
+},
+"b": {
+"t": "herabsteigen, herabkommen; sich senken"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "difficilis",
+"s": "difficile"
+},
+"b": {
+"t": "schwer, schwierig"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "discēdere",
+"s": "discēdō, discessī, discessum"
+},
+"b": {
+"t": "auseinandergehen, weggehen, sich entfernen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "domō"
+},
+"b": {
+"t": "aus dem Haus, von zuhause"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "ēgredī",
+"s": "ēgredior, ēgressus sum"
+},
+"b": {
+"t": "hinausgehen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "epistula",
+"s": "epistulae f."
+},
+"b": {
+"t": "der Brief"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "fierī",
+"s": "fīō, factus sum"
+},
+"b": {
+"t": "werden, entstehen, geschehen, gemacht werden (ita fit, ut + Konjunktiv: so geschieht es, dass)"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "hortārī",
+"s": "hortor"
+},
+"b": {
+"t": "ermahnen, auffordern"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "ingredī",
+"s": "ingredior, ingressus sum"
+},
+"b": {
+"t": "hineingehen, betreten"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "levis",
+"s": "leve"
+},
+"b": {
+"t": "leicht"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "marītus",
+"s": "marītī m."
+},
+"b": {
+"t": "der Ehemann"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "morī",
+"s": "morior, mortuus sum"
+},
+"b": {
+"t": "sterben"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "mōtus",
+"s": "mōtūs m."
+},
+"b": {
+"t": "die Bewegung"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "nūbēs",
+"s": "nūbis f."
+},
+"b": {
+"t": "die Wolke"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "oblīvīscī",
+"s": "oblīvīscor, oblītus sum"
+},
+"b": {
+"t": "vergessen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "precārī",
+"s": "precor"
+},
+"b": {
+"t": "bitten (um), wünschen, beten"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "prius",
+"s": "Adv."
+},
+"b": {
+"t": "früher, eher"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "proficīscī",
+"s": "proficīscor, profectus sum"
+},
+"b": {
+"t": "aufbrechen, sich auf den Weg machen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "quam",
+"s": "Adv."
+},
+"b": {
+"t": "als; wie, wie sehr"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "querī",
+"s": "queror, questus sum"
+},
+"b": {
+"t": "klagen, sich beklagen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "somnus",
+"s": "somnī m."
+},
+"b": {
+"t": "der Schlaf"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "studium",
+"s": "studiī n."
+},
+"b": {
+"t": "die Studie, die Wissenschaft, der Eifer, die Beschäftigung"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "tenebrae",
+"s": "tenebrārum f. Pl."
+},
+"b": {
+"t": "die Finsternis, die Dunkelheit"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "tuērī",
+"s": "tueor, tuitus sum"
+},
+"b": {
+"t": "schützen, beschützen"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "valēre",
+"s": "valeō, valuī, –"
+},
+"b": {
+"t": "stark sein, gesund sein"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "via",
+"s": "viae f."
+},
+"b": {
+"t": "der Weg"
+},
+"k": "L31"
+},
+{
+"a": {
+"t": "cum + Indikativ Präs./Perf.",
+"s": "Subj. + Indikativ Präs./Perf."
+},
+"b": {
+"t": "(zu dem Zeitpunkt) wenn, als; sobald"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "dīligēns",
+"s": "Gen. dīligentis, Adv. dīligenter"
+},
+"b": {
+"t": "gründlich, gewissenhaft, sorgfältig"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "impōnere",
+"s": "impōnō, imposuī, impositum"
+},
+"b": {
+"t": "auferlegen"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "interficere",
+"s": "interficiō, interfēcī, interfectum"
+},
+"b": {
+"t": "umbringen, töten"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "interior",
+"s": "Gen. interiōris (Nom. Sg. n. interius)"
+},
+"b": {
+"t": "der innere, der tiefere, tief (in)"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "lātus",
+"s": "-a, -um"
+},
+"b": {
+"t": "breit, weit"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "magistrātus",
+"s": "magistrātūs m."
+},
+"b": {
+"t": "der Beamte, der Magistrat"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "nōlle",
+"s": "nōlō, nōluī, –"
+},
+"b": {
+"t": "nicht wollen"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "oportet",
+"s": "oportuit + AcI"
+},
+"b": {
+"t": "es ist nötig, dass; es gehört sich, dass"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "ops",
+"s": "opis f."
+},
+"b": {
+"t": "die Hilfe, die Kraft"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "parātus",
+"s": "-a, -um"
+},
+"b": {
+"t": "bereit"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "perterrēre",
+"s": "perterreō, perterruī, perterritum"
+},
+"b": {
+"t": "jdn. gewaltig erschrecken"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "praeceptum",
+"s": "praeceptī n."
+},
+"b": {
+"t": "die Vorschrift, der Befehl"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "praecipere",
+"s": "praecipiō, praecēpī, praeceptum"
+},
+"b": {
+"t": "vorschreiben, befehlen"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "sānctus",
+"s": "-a, -um"
+},
+"b": {
+"t": "heilig"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "spīritus",
+"s": "spīritūs m."
+},
+"b": {
+"t": "der Geist, der Atem, der Hauch"
+},
+"k": "T1"
+},
+{
+"a": {
+"t": "amphitheātrum",
+"s": "amphitheātrī n."
+},
+"b": {
+"t": "das Amphitheater"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "carēre",
+"s": "careō, caruī, – + Abl."
+},
+"b": {
+"t": "nicht haben, frei sein von"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "circus",
+"s": "circī m."
+},
+"b": {
+"t": "die Rennbahn, der Zirkus"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "colere",
+"s": "colō, coluī, cultum"
+},
+"b": {
+"t": "verehren, achten; pflegen, betreiben"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "corripere",
+"s": "corripiō, corripuī, correptum"
+},
+"b": {
+"t": "befallen, in Beschlag nehmen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "dēmōnstrāre",
+"s": "dēmōnstrō"
+},
+"b": {
+"t": "beweisen, darlegen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "dēnique",
+"s": "Adv."
+},
+"b": {
+"t": "zuletzt, endlich"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "falsus",
+"s": "-a, -um"
+},
+"b": {
+"t": "falsch, trügerisch"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "furor",
+"s": "furōris m."
+},
+"b": {
+"t": "die Wut, die Raserei"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "genus",
+"s": "generis n."
+},
+"b": {
+"t": "die Art, die Weise"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "loquī",
+"s": "loquor, locūtus sum"
+},
+"b": {
+"t": "sagen, sprechen, reden"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "minus",
+"s": "Adv."
+},
+"b": {
+"t": "weniger"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "orīrī",
+"s": "orior, ortus sum"
+},
+"b": {
+"t": "sich erheben, entstehen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "plērīque",
+"s": "plēraeque, plēraque"
+},
+"b": {
+"t": "die meisten, sehr viele"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "probāre",
+"s": "probō"
+},
+"b": {
+"t": "billigen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "quārē",
+"s": "Adv."
+},
+"b": {
+"t": "weshalb, deshalb"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "ruere",
+"s": "ruō, ruī, rutum"
+},
+"b": {
+"t": "stürzen, eilen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "scelus",
+"s": "sceleris n."
+},
+"b": {
+"t": "das Verbrechen"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "vītāre",
+"s": "vītō"
+},
+"b": {
+"t": "meiden, vermeiden"
+},
+"k": "T2"
+},
+{
+"a": {
+"t": "adipiscī",
+"s": "adipiscor, adeptus sum"
+},
+"b": {
+"t": "erreichen"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "administrāre",
+"s": "administrō"
+},
+"b": {
+"t": "verwalten"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "commūnis",
+"s": "commūne"
+},
+"b": {
+"t": "gemeinsam"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "contingere",
+"s": "contingō, contigī, contāctum"
+},
+"b": {
+"t": "gelingen, glücken"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "domesticus",
+"s": "-a, -um"
+},
+"b": {
+"t": "häuslich, zum Haushalt gehörig"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "exercēre",
+"s": "exerceō, exercuī, exercitum"
+},
+"b": {
+"t": "üben, ausüben"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "Latīnus",
+"s": "-a, -um"
+},
+"b": {
+"t": "lateinisch"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "lingua",
+"s": "linguae f."
+},
+"b": {
+"t": "die Sprache"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "ōrātor",
+"s": "ōrātōris m."
+},
+"b": {
+"t": "der Redner"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "patrius",
+"s": "-a, -um"
+},
+"b": {
+"t": "väterlich, heimatlich"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "prīmō",
+"s": "Adv."
+},
+"b": {
+"t": "zuerst, zunächst"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "pūrus",
+"s": "-a, -um"
+},
+"b": {
+"t": "rein, sauber"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "rēs familiāris",
+"s": "reī familiāris f."
+},
+"b": {
+"t": "das Vermögen"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "sōlus",
+"s": "-a, -um (Gen. sōlīus, Dat. sōlī)"
+},
+"b": {
+"t": "allein, nur"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "tam … quam"
+},
+"b": {
+"t": "so … wie"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "ut + Indikativ",
+"s": "Konj. + Indikativ"
+},
+"b": {
+"t": "wie"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "ūtī",
+"s": "ūtor, ūsus sum + Abl."
+},
+"b": {
+"t": "etw. benutzen, verwenden, gebrauchen"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "vacuus",
+"s": "-a, -um"
+},
+"b": {
+"t": "leer, frei"
+},
+"k": "T3"
+},
+{
+"a": {
+"t": "comparāre",
+"s": "comparō"
+},
+"b": {
+"t": "vergleichen"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "cōnsuētūdō",
+"s": "cōnsuētūdinis f."
+},
+"b": {
+"t": "die Gewohnheit"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "disciplīna",
+"s": "disciplīnae f."
+},
+"b": {
+"t": "die Ordnung, die Disziplin"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "exstinguere",
+"s": "exstinguō, exstīnxī, exstīnctum"
+},
+"b": {
+"t": "löschen, auslöschen"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "exter(us)",
+"s": "-a, -um (Komp. exterior, Superl. extrēmus)"
+},
+"b": {
+"t": "(Pos./Komp.) der äußere, (Superl.) der äußerste"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "mīlle",
+"s": "(Pl. mīlia)"
+},
+"b": {
+"t": "tausend"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "omnīnō",
+"s": "Adv."
+},
+"b": {
+"t": "ganz und gar, überhaupt, völlig"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "patī",
+"s": "patior, passus sum"
+},
+"b": {
+"t": "erdulden, ertragen"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "quidem",
+"s": "Adv."
+},
+"b": {
+"t": "jedenfalls, freilich"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "rārus",
+"s": "-a, -um"
+},
+"b": {
+"t": "selten"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "sitis",
+"s": "sitis f. (Akk. Sg. sitim, Abl. Sg. sitī)"
+},
+"b": {
+"t": "der Durst"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "vīrēs",
+"s": "vīrium f. Pl."
+},
+"b": {
+"t": "die Macht, die Streitkräfte"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "vīs",
+"s": "– f. (Akk. Sg. vim, Abl. Sg. vī)"
+},
+"b": {
+"t": "die Kraft, die Gewalt"
+},
+"k": "T4"
+},
+{
+"a": {
+"t": "appāret"
+},
+"b": {
+"t": "es scheint, dass"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "blandus",
+"s": "-a, -um"
+},
+"b": {
+"t": "schmeichlerisch, schmeichelnd"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "cāseus",
+"s": "cāseī m."
+},
+"b": {
+"t": "der Käse"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "cōnsūmere",
+"s": "cōnsūmō, cōnsūmpsī, cōnsūmptum"
+},
+"b": {
+"t": "verzehren, essen"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "corpus",
+"s": "corporis n."
+},
+"b": {
+"t": "der Körper"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "corvus",
+"s": "corvī m."
+},
+"b": {
+"t": "der Rabe"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "dubium",
+"s": "dubiī n."
+},
+"b": {
+"t": "der Zweifel"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "ēmittere",
+"s": "ēmittō, ēmīsī, ēmissum"
+},
+"b": {
+"t": "loslassen, losschicken"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "invidia",
+"s": "invidiae f."
+},
+"b": {
+"t": "der Neid"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "rapere",
+"s": "rapiō, rapuī, raptum"
+},
+"b": {
+"t": "(an sich) raffen, rauben"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "spērāre",
+"s": "spērō"
+},
+"b": {
+"t": "hoffen"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "suspicere",
+"s": "suspiciō, suspexī, suspectum"
+},
+"b": {
+"t": "in die Höhe sehen, aufwärts blicken"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "trīstis",
+"s": "trīste"
+},
+"b": {
+"t": "traurig"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "vulpēs",
+"s": "vulpis f."
+},
+"b": {
+"t": "der Fuchs"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "vultus",
+"s": "vultūs m."
+},
+"b": {
+"t": "das Gesicht, der Gesichtsausdruck, die Miene"
+},
+"k": "T5"
+},
+{
+"a": {
+"t": "amātor",
+"s": "amātōris m."
+},
+"b": {
+"t": "der Liebhaber, der Verehrer"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "cōnfitērī",
+"s": "cōnfiteor, cōnfessus sum"
+},
+"b": {
+"t": "(ein-)gestehen, bekennen"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "decem"
+},
+"b": {
+"t": "zehn"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "doctus",
+"s": "-a, -um"
+},
+"b": {
+"t": "gelehrt, gebildet"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "dūrus",
+"s": "-a, -um"
+},
+"b": {
+"t": "hart"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "iuvenis",
+"s": "iuvenis m./f."
+},
+"b": {
+"t": "der junge Mann, die junge Frau; Pl. die jungen Leute"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "mollis",
+"s": "molle"
+},
+"b": {
+"t": "weich"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "octō"
+},
+"b": {
+"t": "acht"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "precēs",
+"s": "precum f. Pl."
+},
+"b": {
+"t": "die Bitte(n)"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "prōmittere",
+"s": "prōmittō, prōmīsī, prōmissum"
+},
+"b": {
+"t": "versprechen"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "reus",
+"s": "reī m."
+},
+"b": {
+"t": "der Angeklagte"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "rudis",
+"s": "rude"
+},
+"b": {
+"t": "unerfahren, ungeschickt; roh"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "tabella",
+"s": "tabellae f."
+},
+"b": {
+"t": "das Wachstäfelchen"
+},
+"k": "T6"
+},
+{
+"a": {
+"t": "vidērī",
+"s": "videor, vīsus sum"
+},
+"b": {
+"t": "(er-)scheinen, für etwas gehalten werden, gelten"
+},
+"k": "T6"
+}
+]
 }
 ];
