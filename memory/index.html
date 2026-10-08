@@ -178,6 +178,32 @@ main { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 0; }
   <div class="knoepfe" style="justify-content:center"><button id="nochmal" class="haupt">Nochmal mit demselben Satz</button><button id="andererSatz">Anderer Satz</button></div>
 </div></div>
 
+
+<div id="sperre" style="position:fixed;inset:0;z-index:300;background:var(--grund);display:flex;align-items:center;justify-content:center">
+  <form id="sperreForm" class="dialog" style="width:min(92vw,60vh);text-align:center">
+    <h2>Memory</h2>
+    <label for="sperreCode">Zugangscode</label>
+    <input type="password" id="sperreCode" inputmode="numeric" autocomplete="off" style="text-align:center;font-size:4vh;letter-spacing:.3em">
+    <div class="hinweis" id="sperreFehler" style="min-height:1.5em"></div>
+    <div class="knoepfe" style="justify-content:center"><button class="haupt" type="submit">Öffnen</button></div>
+  </form>
+</div>
+<script>
+(() => {
+  const pruef = s => { let h = 0x811c9dc5; for (const b of new TextEncoder().encode("tafel-memory:" + s)) h = Math.imul(h ^ b, 0x01000193) >>> 0; return h.toString(16).padStart(8, "0"); };
+  const sp = document.getElementById("sperre");
+  let offen = false; try { offen = localStorage.getItem("memory.zugang") === "b839733e"; } catch {}
+  if (offen) { sp.remove(); return; }
+  setTimeout(() => document.getElementById("sperreCode").focus(), 50);
+  document.getElementById("sperreForm").addEventListener("submit", e => {
+    e.preventDefault();
+    if (pruef(document.getElementById("sperreCode").value.trim()) === "b839733e") {
+      try { localStorage.setItem("memory.zugang", "b839733e"); } catch {}
+      sp.remove();
+    } else { document.getElementById("sperreFehler").textContent = "Der Code stimmt nicht."; document.getElementById("sperreCode").select(); }
+  });
+})();
+</script>
 <script src="decks.js"></script>
 <script>
 "use strict";
