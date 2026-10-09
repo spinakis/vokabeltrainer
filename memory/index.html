@@ -81,6 +81,16 @@ main { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 0; }
 .dialog .hinweis code { color: var(--hell); }
 .dialog .check { display: flex; align-items: center; gap: .6vw; color: var(--hell); margin-top: 1.4vh; }
 .dialog .check input { width: 2.4vh; height: 2.4vh; }
+#lektionsfilter { margin-top: 1.4vh; }
+#lektionsfilter .lekkopf { display: flex; align-items: baseline; gap: 1vw; flex-wrap: wrap; margin: 1.6vh 0 .6vh; }
+#lektionsfilter .lekkopf label { margin: 0; }
+#lektionsfilter .lekkopf .klein { margin-left: auto; padding: .5vh 1vw; }
+#lektionsfilter .lekkopf .klein + .klein { margin-left: 0; }
+#lekraster { display: flex; flex-wrap: wrap; gap: .7vh .5vw; }
+#lekraster .lek { background: var(--grund); color: var(--hell); border: 1px solid var(--linie); border-radius: .6vh; padding: .5vh .8vw; min-width: 3.4em; cursor: pointer; font-size: 2vh; }
+#lekraster .lek.an { background: var(--gold); border-color: var(--gold); color: var(--tinte); font-weight: bold; }
+#lekraster .lek.anker { outline: .3vh dashed var(--hell); outline-offset: .2vh; }
+#lekraster .lek:focus-visible { outline: .3vh solid var(--hell); outline-offset: .2vh; }
 #vorschau { display: flex; gap: .5vw; flex-wrap: wrap; margin-top: 1vh; }
 #vorschau img { height: 7vh; border-radius: .4vh; }
 
@@ -119,9 +129,15 @@ main { display: grid; grid-template-columns: 1fr auto 1fr; min-height: 0; }
   <h2>Neues Spiel</h2>
   <label for="wahlSatz">Kartensatz</label>
   <select id="wahlSatz"></select>
-  <div class="reihe" id="lektionsfilter">
-    <div><label for="vonK">von Lektion</label><select id="vonK"></select></div>
-    <div><label for="bisK">bis Lektion</label><select id="bisK"></select></div>
+  <div id="lektionsfilter">
+    <div class="lekkopf">
+      <label id="lekLabel">Lektionen <span id="lekanzahl"></span></label>
+      <button type="button" class="klein" id="lekAlle">alle</button>
+      <button type="button" class="klein" id="lekKeine">keine</button>
+    </div>
+    <div id="lekraster" role="group" aria-labelledby="lekLabel"></div>
+    <label class="check"><input type="checkbox" id="lekBereich"> Bereich wählen: erst die erste, dann die letzte Lektion antippen</label>
+    <div class="hinweis">Beliebig viele Lektionen antippen, auch nicht zusammenhängende. Mit Umschalt + Klick (oder dem Haken oben) wählt man eine ganze Reihe.</div>
   </div>
   <div class="reihe">
     <div><label for="anzahl">Anzahl der Karten</label><select id="anzahl"></select></div>
@@ -253,7 +269,7 @@ function einpassen(g) {
 
 // ---------- Spielzustand ----------
 const zustand = {
-  satzId: null, von: null, bis: null, anzahl: 64, zudeck: "klick", farbig: true,
+  satzId: null, lektionen: null, auswahl: {}, anzahl: 64, zudeck: "klick", farbig: true,
   karten: [], offen: [], sperre: false, dran: 0, punkte: [0, 0], paareBei: [[], []], wartetAufTipp: false
 };
 Object.assign(zustand, speicher.lesen("einstellungen", {}));
@@ -261,17 +277,32 @@ Object.assign(zustand, speicher.lesen("einstellungen", {}));
 const norm = s => (s || "").normalize("NFC").replace(/\s+/g, " ").trim().toLowerCase();
 const schluessel = seite => seite.i ? "bild:" + seite.i : norm(seite.t);
 
-function gefiltertePaare(satz, von, bis) {
-  let p = satz.paare;
-  if (p.some(x => x.k) && von && bis) {
-    const ks = kategorien(satz); const a = ks.indexOf(von), b = ks.indexOf(bis);
-    const lo = Math.min(a, b), hi = Math.max(a, b);
-    const erlaubt = new Set(ks.slice(lo, hi + 1));
-    p = p.filter(x => !x.k || erlaubt.has(x.k));  // Paare ohne Lektion (z. B. Götternamen) immer dabei
-  }
-  return p;
+// Lektionen eines Paares: "ks" (Liste, wenn ein Wort in mehreren Lektionen steht), sonst "k"
+const lektionenVon = p => p.ks || (p.k ? [p.k] : []);
+function gefiltertePaare(satz, auswahl) {
+  if (!auswahl) return satz.paare;
+  const erlaubt = new Set(auswahl);
+  // Paare ohne Lektion (z. B. Götternamen) sind immer dabei
+  return satz.paare.filter(p => { const l = lektionenVon(p); return !l.length || l.some(k => erlaubt.has(k)); });
 }
-function kategorien(satz) { const s = []; for (const p of satz.paare) if (p.k && !s.includes(p.k)) s.push(p.k); return s; }
+function kategorien(satz) {
+  if (satz.lektionen) return satz.lektionen;
+  const s = [];
+  for (const p of satz.paare) for (const k of lektionenVon(p)) if (!s.includes(k)) s.push(k);
+  return s;
+}
+// "L3–L5, L8" aus der Auswahl; leer, wenn alle Lektionen gewählt sind
+function lektionsText(satz, auswahl) {
+  const ks = kategorien(satz);
+  if (!auswahl || auswahl.length >= ks.length) return "";
+  const idx = ks.map((k, i) => auswahl.includes(k) ? i : -1).filter(i => i >= 0);
+  const teile = []; let i = 0;
+  while (i < idx.length) {
+    let j = i; while (j + 1 < idx.length && idx[j + 1] === idx[j] + 1) j++;
+    teile.push(i === j ? ks[idx[i]] : `${ks[idx[i]]}–${ks[idx[j]]}`); i = j + 1;
+  }
+  return teile.join(", ");
+}
 
 function mischen(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
@@ -292,7 +323,7 @@ const RASTER = { 16: [4, 4], 20: [5, 4], 24: [6, 4], 30: [6, 5], 36: [6, 6], 42:
 
 function spielStarten() {
   const satz = satzMitId(zustand.satzId); if (!satz) { zeigeStart(); return; }
-  const paare = ziehePaare(gefiltertePaare(satz, zustand.von, zustand.bis), zustand.anzahl / 2);
+  const paare = ziehePaare(gefiltertePaare(satz, zustand.lektionen), zustand.anzahl / 2);
   const n = paare.length * 2;
   const sp0 = Math.ceil(Math.sqrt(n));
   let [sp, ze] = RASTER[n] || [sp0, Math.ceil(n / sp0)];
@@ -303,7 +334,7 @@ function spielStarten() {
   ]));
   zustand.satz = satz;
   zustand.offen = []; zustand.sperre = false; zustand.dran = 0; zustand.punkte = [0, 0]; zustand.paareBei = [[], []]; zustand.wartetAufTipp = false;
-  $("#satzname").textContent = satz.name + (zustand.von ? `  ·  ${zustand.von}–${zustand.bis}` : "") + `  ·  ${paare.length} Paare`;
+  $("#satzname").textContent = satz.name + (lektionsText(satz, zustand.lektionen) ? `  ·  ${lektionsText(satz, zustand.lektionen)}` : "") + `  ·  ${paare.length} Paare`;
   const feld = $("#feld");
   feld.querySelectorAll(".karte").forEach(k => k.remove());
   feld.style.gridTemplateColumns = `repeat(${sp}, var(--k))`;
@@ -472,40 +503,68 @@ function zeigeStart() {
   startAktualisieren(true);
   $("#start").classList.add("an");
 }
+// ---------- Lektionsauswahl im Startdialog ----------
+let lekSet = new Set(), lekAnker = null, lekKs = [];
+function lekRasterLaden(satz) {
+  lekKs = kategorien(satz); lekAnker = null;
+  const gespeichert = (zustand.auswahl || {})[satz.id];
+  if (Array.isArray(gespeichert)) lekSet = new Set(gespeichert.filter(k => lekKs.includes(k)));
+  else if (zustand.von && zustand.satzId === satz.id) {   // alte Einstellung "von … bis" übernehmen
+    const a = lekKs.indexOf(zustand.von), b = lekKs.indexOf(zustand.bis);
+    lekSet = a < 0 || b < 0 ? new Set(lekKs) : new Set(lekKs.slice(Math.min(a, b), Math.max(a, b) + 1));
+  } else lekSet = new Set(lekKs);
+}
+function lekZeichnen(satz) {
+  const z = {}; for (const p of satz.paare) for (const k of lektionenVon(p)) z[k] = (z[k] || 0) + 1;
+  $("#lekraster").innerHTML = lekKs.map(k =>
+    `<button type="button" class="lek${lekSet.has(k) ? " an" : ""}${k === lekAnker ? " anker" : ""}" data-k="${k}" aria-pressed="${lekSet.has(k)}" title="${z[k] || 0} Paare">${k}</button>`).join("");
+  $("#lekanzahl").textContent = `(${lekSet.size} von ${lekKs.length})`;
+}
+$("#lekraster").onclick = e => {
+  const b = e.target.closest("button.lek"); if (!b) return;
+  const k = b.dataset.k, bereichsModus = $("#lekBereich").checked;
+  if ((e.shiftKey || bereichsModus) && lekAnker !== null && lekAnker !== k) {
+    const a = lekKs.indexOf(lekAnker), i = lekKs.indexOf(k);
+    for (let j = Math.min(a, i); j <= Math.max(a, i); j++) lekSet.add(lekKs[j]);
+    lekAnker = bereichsModus ? null : k;
+  } else {
+    if (lekSet.has(k)) lekSet.delete(k); else lekSet.add(k);
+    lekAnker = k;
+  }
+  startAktualisieren(false);
+};
+$("#lekAlle").onclick = () => { lekSet = new Set(lekKs); lekAnker = null; startAktualisieren(false); };
+$("#lekKeine").onclick = () => { lekSet = new Set(); lekAnker = null; startAktualisieren(false); };
+
 function startAktualisieren(erstesMal) {
   const satz = satzMitId($("#wahlSatz").value); if (!satz) return;
   const ks = kategorien(satz);
-  const lf = $("#lektionsfilter");
-  lf.style.display = ks.length ? "" : "none";
-  if (ks.length && (erstesMal !== false || !ks.includes($("#vonK").value))) {
-    const alt = [$("#vonK").value || zustand.von, $("#bisK").value || zustand.bis];
-    ["#vonK", "#bisK"].forEach((s, i) => {
-      $(s).innerHTML = ks.map(k => `<option>${k}</option>`).join("");
-      $(s).value = ks.includes(alt[i]) ? alt[i] : (i ? ks[ks.length - 1] : ks[0]);
-    });
-  }
-  const paare = gefiltertePaare(satz, ks.length ? $("#vonK").value : null, ks.length ? $("#bisK").value : null);
+  $("#lektionsfilter").style.display = ks.length ? "" : "none";
+  if (ks.length) { if (erstesMal !== false) lekRasterLaden(satz); lekZeichnen(satz); }
+  const paare = gefiltertePaare(satz, ks.length ? ks.filter(k => lekSet.has(k)) : null);
   const m = moeglichePaare(paare);
   const sel = $("#anzahl"), alt = +sel.value || zustand.anzahl;
   const stufen = Object.keys(RASTER).map(Number).filter(z => z / 2 <= m);
   if (m >= 2 && m * 2 < 64 && !stufen.includes(m * 2)) stufen.push(m * 2);
   sel.innerHTML = stufen.map(z => `<option value="${z}">${z} Karten (${z / 2} Paare)${z === 64 ? " – volles Feld" : z === m * 2 ? " – alle" : ""}</option>`).join("");
   sel.value = stufen.includes(alt) ? alt : stufen[stufen.length - 1];
-  $("#satzinfo").textContent = `${paare.length} Paare im Satz${m < paare.length ? `, davon ${m} gleichzeitig spielbar (doppelte Karteninhalte werden nicht zusammen ausgelegt)` : ""}.`;
+  $("#satzinfo").textContent = ks.length && !lekSet.size ? "Bitte mindestens eine Lektion wählen."
+    : `${paare.length} Paare ${ks.length ? "in der Auswahl" : "im Satz"}${m < paare.length ? `, davon ${m} gleichzeitig spielbar (doppelte Karteninhalte werden nicht zusammen ausgelegt)` : ""}.`;
   $("#los").disabled = !stufen.length;
 }
 $("#wahlSatz").onchange = () => startAktualisieren(true);
-$("#vonK").onchange = $("#bisK").onchange = () => startAktualisieren(false);
 $("#los").onclick = () => {
   const satz = satzMitId($("#wahlSatz").value);
   const hatK = kategorien(satz).length > 0;
   Object.assign(zustand, {
-    satzId: satz.id, von: hatK ? $("#vonK").value : null, bis: hatK ? $("#bisK").value : null,
+    satzId: satz.id, lektionen: hatK ? lekKs.filter(k => lekSet.has(k)) : null,
     anzahl: +$("#anzahl").value, zudeck: $("#zudeckmodus").value, farbig: $("#farbig").checked
   });
   const n = document.querySelectorAll(".spieler .name");
   n[0].textContent = $("#name1").value.trim() || "Spieler 1"; n[1].textContent = $("#name2").value.trim() || "Spieler 2";
-  speicher.schreiben("einstellungen", { satzId: zustand.satzId, von: zustand.von, bis: zustand.bis, anzahl: zustand.anzahl, zudeck: zustand.zudeck, farbig: zustand.farbig });
+  if (hatK) zustand.auswahl = { ...zustand.auswahl, [satz.id]: zustand.lektionen };
+  zustand.von = zustand.bis = null;
+  speicher.schreiben("einstellungen", { satzId: zustand.satzId, auswahl: zustand.auswahl, anzahl: zustand.anzahl, zudeck: zustand.zudeck, farbig: zustand.farbig });
   $("#start").classList.remove("an");
   spielStarten();
 };

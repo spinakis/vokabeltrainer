@@ -16162,6 +16162,46 @@ window.MEMORY_DECKS = [
 "id": "pontes",
 "gruppe": "Latein",
 "name": "Pontes (lat – dt)",
+"lektionen": [
+"S",
+"L1",
+"L2",
+"L3",
+"L4",
+"L5",
+"L6",
+"L7",
+"L8",
+"L9",
+"L10",
+"L11",
+"L12",
+"L13",
+"L14",
+"L15",
+"L16",
+"L17",
+"L18",
+"L19",
+"L20",
+"L21",
+"L22",
+"L23",
+"L24",
+"L25",
+"L26",
+"L27",
+"L28",
+"L29",
+"L30",
+"L31",
+"T1",
+"T2",
+"T3",
+"T4",
+"T5",
+"T6"
+],
 "paare": [
 {
 "a": {
@@ -16211,7 +16251,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "laufen"
 },
-"k": "S"
+"k": "S",
+"ks": [
+"S",
+"L12"
+]
 },
 {
 "a": {
@@ -16231,7 +16275,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Herr, der Hausherr (Dominus: Herr, als Anrede für den christlichen Gott)"
 },
-"k": "S"
+"k": "S",
+"ks": [
+"S",
+"T1"
+]
 },
 {
 "a": {
@@ -16250,7 +16298,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "und (et … et: sowohl … als auch)"
 },
-"k": "S"
+"k": "S",
+"ks": [
+"S",
+"L19"
+]
 },
 {
 "a": {
@@ -16300,7 +16352,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "arbeiten, (+ Abl.) an etwas leiden"
 },
-"k": "S"
+"k": "S",
+"ks": [
+"S",
+"L15"
+]
 },
 {
 "a": {
@@ -16369,7 +16425,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "kommen"
 },
-"k": "S"
+"k": "S",
+"ks": [
+"S",
+"L10"
+]
 },
 {
 "a": {
@@ -16379,7 +16439,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(zu)hören"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L10"
+]
 },
 {
 "a": {
@@ -16409,7 +16473,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "auch, sogar"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L29"
+]
 },
 {
 "a": {
@@ -16459,7 +16527,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "betreten, eintreten"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L9",
+"L10"
+]
 },
 {
 "a": {
@@ -16498,7 +16571,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. suchen; 2. fragen"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"T6"
+]
 },
 {
 "a": {
@@ -16518,7 +16595,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "lachen, jdn. auslachen"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L4",
+"L14",
+"L16"
+]
 },
 {
 "a": {
@@ -16558,7 +16641,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "halten"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L22"
+]
 },
 {
 "a": {
@@ -16588,7 +16675,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sehen"
 },
-"k": "L1"
+"k": "L1",
+"ks": [
+"L1",
+"L10"
+]
 },
 {
 "a": {
@@ -16648,7 +16739,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "müssen (nōn dēbēre: nicht dürfen)"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L10"
+]
 },
 {
 "a": {
@@ -16658,7 +16753,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sagen, sprechen, reden"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L10",
+"L16",
+"T2"
+]
 },
 {
 "a": {
@@ -16668,7 +16769,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "erfüllen"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L16"
+]
 },
 {
 "a": {
@@ -16738,7 +16843,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "vernachlässigen, nicht beachten"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L20"
+]
 },
 {
 "a": {
@@ -16778,7 +16887,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "etw. weiter tun, fortsetzen"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L21"
+]
 },
 {
 "a": {
@@ -16798,7 +16911,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gefallen, Spaß machen (mihī placet: ich fasse den Beschluss)"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L31"
+]
 },
 {
 "a": {
@@ -16828,7 +16945,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "antworten"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L11"
+]
 },
 {
 "a": {
@@ -16887,7 +17008,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zu (… hin); bei"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L10"
+]
 },
 {
 "a": {
@@ -16897,7 +17022,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "unterstützen"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L10"
+]
 },
 {
 "a": {
@@ -16907,7 +17036,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "tun, handeln"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L17"
+]
 },
 {
 "a": {
@@ -16917,7 +17050,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nähren, ernähren"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L14"
+]
 },
 {
 "a": {
@@ -16967,7 +17104,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "töten, schlachten"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L14",
+"L16"
+]
 },
 {
 "a": {
@@ -17036,7 +17178,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sein"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L11"
+]
 },
 {
 "a": {
@@ -17056,7 +17202,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schon, gleich, jetzt (nōn iam: nicht mehr)"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L6"
+]
 },
 {
 "a": {
@@ -17076,7 +17226,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "in (…hinein); gegen; nach; auf"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L8",
+"L13",
+"L15"
+]
 },
 {
 "a": {
@@ -17086,7 +17242,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "anweisen, unterrichten; bauen"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L14",
+"L16"
+]
 },
 {
 "a": {
@@ -17116,7 +17277,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "vorbereiten, zubereiten; (+ Inf.) sich vorbereiten, etwas zu tun; verschaffen"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L14",
+"L17"
+]
 },
 {
 "a": {
@@ -17136,7 +17302,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(örtl.) über, durch; (zeitl.) durch, hindurch, während, in"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L28"
+]
 },
 {
 "a": {
@@ -17166,7 +17336,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "retten"
 },
-"k": "L3"
+"k": "L3",
+"ks": [
+"L3",
+"L10"
+]
 },
 {
 "a": {
@@ -17226,7 +17400,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich hinsetzen, sich niederlassen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L13"
+]
 },
 {
 "a": {
@@ -17266,7 +17444,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "unterrichten, lehren"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L20"
+]
 },
 {
 "a": {
@@ -17285,7 +17467,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "führen, ziehen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L11",
+"L16"
+]
 },
 {
 "a": {
@@ -17305,7 +17492,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "haben, halten (prō certō habēre: für sicher halten, sich sicher sein)"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L14",
+"L23"
+]
 },
 {
 "a": {
@@ -17325,7 +17517,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "lesen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L10"
+]
 },
 {
 "a": {
@@ -17345,7 +17541,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ermahnen, mahnen; warnen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L11",
+"L20"
+]
 },
 {
 "a": {
@@ -17412,7 +17613,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "können"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L11"
+]
 },
 {
 "a": {
@@ -17432,7 +17637,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bestrafen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L16"
+]
 },
 {
 "a": {
@@ -17472,7 +17681,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schreiben"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L10",
+"L16"
+]
 },
 {
 "a": {
@@ -17512,7 +17726,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "rufen"
 },
-"k": "L4"
+"k": "L4",
+"ks": [
+"L4",
+"L16"
+]
 },
 {
 "a": {
@@ -17522,7 +17740,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich nähern, herbeikommen"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L11"
+]
 },
 {
 "a": {
@@ -17582,7 +17804,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gut"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T4"
+]
 },
 {
 "a": {
@@ -17592,7 +17818,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "fangen, ergreifen; einnehmen; gefangen nehmen"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L12",
+"L18"
+]
 },
 {
 "a": {
@@ -17602,7 +17833,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "erblicken, sehen"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L10",
+"L22"
+]
 },
 {
 "a": {
@@ -17612,7 +17848,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wollen, wünschen"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L11"
+]
 },
 {
 "a": {
@@ -17632,7 +17872,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "machen, tun"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L10",
+"L16"
+]
 },
 {
 "a": {
@@ -17652,7 +17897,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "fliehen (vor), entkommen (vor), meiden"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L10"
+]
 },
 {
 "a": {
@@ -17682,7 +17931,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "anfangen, beginnen"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L14",
+"L27"
+]
 },
 {
 "a": {
@@ -17702,7 +17956,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "groß"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T4"
+]
 },
 {
 "a": {
@@ -17712,7 +17970,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schlecht, böse"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T4"
+]
 },
 {
 "a": {
@@ -17742,7 +18004,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Denkmal, das Grabmal"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L25"
+]
 },
 {
 "a": {
@@ -17762,7 +18028,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "viele"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T4"
+]
 },
 {
 "a": {
@@ -17772,7 +18042,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "klein"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T4"
+]
 },
 {
 "a": {
@@ -17782,7 +18056,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bieten, gewähren, anbieten"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L17"
+]
 },
 {
 "a": {
@@ -17802,7 +18080,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nahe bei; in die Nähe (von)"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L20"
+]
 },
 {
 "a": {
@@ -17832,7 +18114,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zurückgeben"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"L16"
+]
 },
 {
 "a": {
@@ -17862,7 +18148,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "so"
 },
-"k": "L5"
+"k": "L5",
+"ks": [
+"L5",
+"T3"
+]
 },
 {
 "a": {
@@ -17892,7 +18182,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "abwehren, fernhalten"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L10"
+]
 },
 {
 "a": {
@@ -17962,7 +18256,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "geben"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L11",
+"L26"
+]
 },
 {
 "a": {
@@ -18012,7 +18311,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Kaiser, der Feldherr"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L24"
+]
 },
 {
 "a": {
@@ -18092,7 +18395,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich hervortun, sich auszeichnen, besser sein; zeigen, erweisen; (+ Dat.) jdn. überragen, übertreffen"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L23",
+"L29"
+]
 },
 {
 "a": {
@@ -18102,7 +18410,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich; im AcI auch: er, sie, ihn; sie (Pl.)"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L23"
+]
 },
 {
 "a": {
@@ -18152,7 +18464,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aufstehen, sich erheben"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L30"
+]
 },
 {
 "a": {
@@ -18182,7 +18498,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "berühren"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L16"
+]
 },
 {
 "a": {
@@ -18252,7 +18572,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "siegen, besiegen; umstimmen, erweichen"
 },
-"k": "L6"
+"k": "L6",
+"ks": [
+"L6",
+"L15",
+"L24",
+"T6"
+]
 },
 {
 "a": {
@@ -18272,7 +18598,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "annehmen, aufnehmen, empfangen; erfahren"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L16",
+"T4"
+]
 },
 {
 "a": {
@@ -18322,7 +18653,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Rat, die Beratung; der Plan"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L14"
+]
 },
 {
 "a": {
@@ -18342,7 +18677,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ablegen"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L10"
+]
 },
 {
 "a": {
@@ -18352,7 +18691,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aus (… heraus), von, seit"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L21"
+]
 },
 {
 "a": {
@@ -18382,7 +18725,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aufschrecken, aufwecken"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L10"
+]
 },
 {
 "a": {
@@ -18412,7 +18759,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gehen"
 },
-"k": "L7"
+"k": "L7",
+"ks": [
+"L7",
+"L11"
+]
 },
 {
 "a": {
@@ -18590,7 +18941,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "da sein, anwesend sein; (+ Dat.) jdm. beistehen, helfen"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L13"
+]
 },
 {
 "a": {
@@ -18610,7 +18965,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "merken, bemerken"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L10",
+"L25"
+]
 },
 {
 "a": {
@@ -18650,7 +19010,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "fallen"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L26"
+]
 },
 {
 "a": {
@@ -18660,7 +19024,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verteidigen"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L10",
+"L16"
+]
 },
 {
 "a": {
@@ -18709,7 +19078,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "werfen, schleudern"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L10",
+"L16"
+]
 },
 {
 "a": {
@@ -18729,7 +19103,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er, sie, es sagt; er, sie, es sagte"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L11"
+]
 },
 {
 "a": {
@@ -18759,7 +19137,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schicken, wegschicken"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L17"
+]
 },
 {
 "a": {
@@ -18769,7 +19151,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "und nicht, aber nicht"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L16"
+]
 },
 {
 "a": {
@@ -18779,7 +19165,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "angreifen, bestürmen"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L10"
+]
 },
 {
 "a": {
@@ -18789,7 +19179,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "angreifen; aufsuchen; fordern, (er)bitten"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L11",
+"L26"
+]
 },
 {
 "a": {
@@ -18809,7 +19204,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "kämpfen"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L10"
+]
 },
 {
 "a": {
@@ -18819,7 +19218,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "glauben, meinen; jdn. für etw. halten"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L24"
+]
 },
 {
 "a": {
@@ -18859,7 +19262,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "leben"
 },
-"k": "L8"
+"k": "L8",
+"ks": [
+"L8",
+"L20"
+]
 },
 {
 "a": {
@@ -18879,7 +19286,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "öffnen"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L11",
+"T5"
+]
 },
 {
 "a": {
@@ -18899,7 +19311,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gehen, (zurück)weichen; nachgeben"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L13"
+]
 },
 {
 "a": {
@@ -18909,7 +19325,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "denken, meinen"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"T3"
+]
 },
 {
 "a": {
@@ -18929,7 +19349,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verderben"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L16"
+]
 },
 {
 "a": {
@@ -18939,7 +19363,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(+ dē) sich kümmern um; (+ ut) dafür sorgen, dass"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L27"
+]
 },
 {
 "a": {
@@ -18999,7 +19427,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bevorstehen, drohen; verfolgen"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L18"
+]
 },
 {
 "a": {
@@ -19009,7 +19441,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "veranstalten, ausrichten; errichten; unterrichten, unterweisen"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L13",
+"T3"
+]
 },
 {
 "a": {
@@ -19019,7 +19456,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dieser, diese, dieses; er, sie, es; (+ quī, quae, quod) der(jenige), der"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L16"
+]
 },
 {
 "a": {
@@ -19038,7 +19479,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bloß, nur; gerade (eben)"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L22"
+]
 },
 {
 "a": {
@@ -19078,7 +19523,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Strafe, die Buße"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"T6"
+]
 },
 {
 "a": {
@@ -19088,7 +19537,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "tadeln"
 },
-"k": "L9"
+"k": "L9",
+"ks": [
+"L9",
+"L16"
+]
 },
 {
 "a": {
@@ -19197,7 +19650,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Gott (Deus, Deī m.: der christliche Gott)"
 },
-"k": "L10"
+"k": "L10",
+"ks": [
+"L10",
+"T1",
+"T2",
+"T3"
+]
 },
 {
 "a": {
@@ -19406,7 +19865,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "anwenden, hinzuziehen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"T6"
+]
 },
 {
 "a": {
@@ -19455,7 +19918,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zerstören, vernichten"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L26"
+]
 },
 {
 "a": {
@@ -19495,7 +19962,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zwei"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L24"
+]
 },
 {
 "a": {
@@ -19635,7 +20106,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zurückziehen, aufnehmen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L16"
+]
 },
 {
 "a": {
@@ -19645,7 +20120,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zurücklassen, verlassen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L16"
+]
 },
 {
 "a": {
@@ -19705,7 +20184,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(sich) fürchten; (+ Akk.) Angst haben vor; (+ prō) sich fürchten um, Angst haben um"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12"
+]
 },
 {
 "a": {
@@ -19755,7 +20238,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wahr, richtig (rē vērā: in Wahrheit)"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L27"
+]
 },
 {
 "a": {
@@ -19775,7 +20262,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "an jdn. herangehen, sich jdm. nähern; auf sich nehmen"
 },
-"k": "L12"
+"k": "L12",
+"ks": [
+"L12",
+"L13"
+]
 },
 {
 "a": {
@@ -19865,7 +20356,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Weg, der Marsch, die Fahrt"
 },
-"k": "L12"
+"k": "L12",
+"ks": [
+"L12",
+"L20"
+]
 },
 {
 "a": {
@@ -20005,7 +20500,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "versuchen, prüfen, auf die Probe stellen"
 },
-"k": "L12"
+"k": "L12",
+"ks": [
+"L12",
+"L22"
+]
 },
 {
 "a": {
@@ -20015,7 +20514,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "übergeben, anvertrauen; überliefern"
 },
-"k": "L12"
+"k": "L12",
+"ks": [
+"L12",
+"L16"
+]
 },
 {
 "a": {
@@ -20055,7 +20558,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "erfahren, erkennen; kennenlernen"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"L17"
+]
 },
 {
 "a": {
@@ -20085,7 +20592,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "auswählen"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"L19"
+]
 },
 {
 "a": {
@@ -20095,7 +20606,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Irrfahrt; der Irrtum, der Fehler"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"L22"
+]
 },
 {
 "a": {
@@ -20115,7 +20630,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Ende, das Ziel, die Grenze (fīnēs, fīnium m. Pl.: das Gebiet)"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"L28"
+]
 },
 {
 "a": {
@@ -20135,7 +20654,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Dank; die Gunst, die Beliebtheit (grātiās agere: danken, Dank sagen)"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"L15",
+"L22"
+]
 },
 {
 "a": {
@@ -20195,7 +20719,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "voraussehen, vorhersehen; (+ Dat.) Vorsorge treffen, sorgen für"
 },
-"k": "L13"
+"k": "L13",
+"ks": [
+"L13",
+"T1"
+]
 },
 {
 "a": {
@@ -20304,7 +20832,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gründen"
 },
-"k": "L14"
+"k": "L14",
+"ks": [
+"L14",
+"L16"
+]
 },
 {
 "a": {
@@ -20324,7 +20856,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zusammenkommen; (+ Akk.) jdn. treffen"
 },
-"k": "L14"
+"k": "L14",
+"ks": [
+"L14",
+"L23"
+]
 },
 {
 "a": {
@@ -20343,7 +20879,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "finden"
 },
-"k": "L14"
+"k": "L14",
+"ks": [
+"L14",
+"L16"
+]
 },
 {
 "a": {
@@ -20610,7 +21150,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "unterdrücken"
 },
-"k": "L15"
+"k": "L15",
+"ks": [
+"L15",
+"L16"
+]
 },
 {
 "a": {
@@ -20620,7 +21164,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "vertreiben"
 },
-"k": "L15"
+"k": "L15",
+"ks": [
+"L15",
+"L16"
+]
 },
 {
 "a": {
@@ -20699,7 +21247,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sonst, andernfalls, anders, auf andere Art"
 },
-"k": "L16"
+"k": "L16",
+"ks": [
+"L16",
+"T4"
+]
 },
 {
 "a": {
@@ -21089,7 +21641,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Sitte, der Brauch (mōrēs, mōrum m. Pl.: der Charakter)"
 },
-"k": "L17"
+"k": "L17",
+"ks": [
+"L17",
+"L23"
+]
 },
 {
 "a": {
@@ -21129,7 +21685,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich; im AcI auch: ihm, ihr, ihn, ihnen"
 },
-"k": "L17"
+"k": "L17",
+"ks": [
+"L17",
+"L23"
+]
 },
 {
 "a": {
@@ -21307,7 +21867,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aussetzen; darstellen, beschreiben"
 },
-"k": "L18"
+"k": "L18",
+"ks": [
+"L18",
+"T4"
+]
 },
 {
 "a": {
@@ -21317,7 +21881,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "tragen, ausführen (sē gerere: sich verhalten)"
 },
-"k": "L18"
+"k": "L18",
+"ks": [
+"L18",
+"T3"
+]
 },
 {
 "a": {
@@ -21436,7 +22004,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zahlen, bezahlen, lösen, losbinden"
 },
-"k": "L18"
+"k": "L18",
+"ks": [
+"L18",
+"L20"
+]
 },
 {
 "a": {
@@ -21555,7 +22127,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht kennen, nicht wissen (nōn īgnōrāre: sehr gut kennen, sehr gut wissen)"
 },
-"k": "L19"
+"k": "L19",
+"ks": [
+"L19",
+"L23"
+]
 },
 {
 "a": {
@@ -21704,7 +22280,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gesund, wohlbehalten; gerettet"
 },
-"k": "L19"
+"k": "L19",
+"ks": [
+"L19",
+"T1"
+]
 },
 {
 "a": {
@@ -21764,7 +22344,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(+ Akk. + Inf.) jdn. zwingen, etw. zu tun; (+ Akk.) jdn. zusammenbringen, versammeln"
 },
-"k": "L20"
+"k": "L20",
+"ks": [
+"L20",
+"L25"
+]
 },
 {
 "a": {
@@ -21864,7 +22448,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ausrüsten, schmücken"
 },
-"k": "L20"
+"k": "L20",
+"ks": [
+"L20",
+"L25"
+]
 },
 {
 "a": {
@@ -22004,7 +22592,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Schutz, der Beistand; die Zuverlässigkeit, die Treue; der Glaube"
 },
-"k": "L21"
+"k": "L21",
+"ks": [
+"L21",
+"L22",
+"T2",
+"T3"
+]
 },
 {
 "a": {
@@ -22034,7 +22628,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "übergeben, auftragen, befehlen"
 },
-"k": "L21"
+"k": "L21",
+"ks": [
+"L21",
+"L25"
+]
 },
 {
 "a": {
@@ -22152,7 +22750,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Wohlergehen; der Gruß; die Rettung"
 },
-"k": "L21"
+"k": "L21",
+"ks": [
+"L21",
+"L31",
+"T1",
+"T4"
+]
 },
 {
 "a": {
@@ -22392,7 +22996,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Bürgerschaft, der Staat; das Bürgerrecht"
 },
-"k": "L23"
+"k": "L23",
+"ks": [
+"L23",
+"L26"
+]
 },
 {
 "a": {
@@ -22472,7 +23080,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Befehl, die Herrschaft; das Herrschaftsgebiet, das (Römische) Reich"
 },
-"k": "L23"
+"k": "L23",
+"ks": [
+"L23",
+"L28"
+]
 },
 {
 "a": {
@@ -22621,7 +23233,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Grund, die Ursache, der Streitfall, die (Gerichts-)Verhandlung (meā causā: meinetwegen)"
 },
-"k": "L24"
+"k": "L24",
+"ks": [
+"L24",
+"L27",
+"T6"
+]
 },
 {
 "a": {
@@ -22781,7 +23398,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Geschicklichkeit, die Kunst; die Wissenschaft"
 },
-"k": "L25"
+"k": "L25",
+"ks": [
+"L25",
+"T3"
+]
 },
 {
 "a": {
@@ -22791,7 +23412,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "herstellen, bauen; bewirken"
 },
-"k": "L25"
+"k": "L25",
+"ks": [
+"L25",
+"L28"
+]
 },
 {
 "a": {
@@ -22971,7 +23596,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(so) dass, damit, (um …) zu"
 },
-"k": "L25"
+"k": "L25",
+"ks": [
+"L25",
+"T3",
+"T6"
+]
 },
 {
 "a": {
@@ -23161,7 +23791,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(+ AcI) überzeugen; (+ Dat. + ut) überreden (mihī persuāsum est: ich bin überzeugt)"
 },
-"k": "L26"
+"k": "L26",
+"ks": [
+"L26",
+"L27"
+]
 },
 {
 "a": {
@@ -23181,7 +23815,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Fürst, der Erste"
 },
-"k": "L26"
+"k": "L26",
+"ks": [
+"L26",
+"L27"
+]
 },
 {
 "a": {
@@ -23540,7 +24178,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Haus, die Familie, die Hausgemeinschaft"
 },
-"k": "L28"
+"k": "L28",
+"ks": [
+"L28",
+"T1"
+]
 },
 {
 "a": {
@@ -24048,7 +24690,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zerbrechen, schwächen, entkräften"
 },
-"k": "L30"
+"k": "L30",
+"ks": [
+"L30",
+"T4"
+]
 },
 {
 "a": {
@@ -24344,7 +24990,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "werden, entstehen, geschehen, gemacht werden (ita fit, ut + Konjunktiv: so geschieht es, dass)"
 },
-"k": "L31"
+"k": "L31",
+"ks": [
+"L31",
+"T4"
+]
 },
 {
 "a": {
@@ -24464,7 +25114,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "als; wie, wie sehr"
 },
-"k": "L31"
+"k": "L31",
+"ks": [
+"L31",
+"T5"
+]
 },
 {
 "a": {
@@ -24544,7 +25198,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(zu dem Zeitpunkt) wenn, als; sobald"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T4",
+"T5",
+"T6"
+]
 },
 {
 "a": {
@@ -24554,7 +25214,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gründlich, gewissenhaft, sorgfältig"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T6"
+]
 },
 {
 "a": {
@@ -24594,7 +25258,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "breit, weit"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T4"
+]
 },
 {
 "a": {
@@ -24604,7 +25272,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Beamte, der Magistrat"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T3"
+]
 },
 {
 "a": {
@@ -24614,7 +25286,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht wollen"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T2",
+"T5",
+"T6"
+]
 },
 {
 "a": {
@@ -24644,7 +25322,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bereit"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T2",
+"T4"
+]
 },
 {
 "a": {
@@ -24654,7 +25337,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "jdn. gewaltig erschrecken"
 },
-"k": "T1"
+"k": "T1",
+"ks": [
+"T1",
+"T2"
+]
 },
 {
 "a": {
@@ -24704,7 +25391,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Amphitheater"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T3",
+"T5",
+"T6"
+]
 },
 {
 "a": {
@@ -24714,7 +25407,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht haben, frei sein von"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T4"
+]
 },
 {
 "a": {
@@ -24734,7 +25431,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verehren, achten; pflegen, betreiben"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T3"
+]
 },
 {
 "a": {
@@ -24754,7 +25455,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "beweisen, darlegen"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T6"
+]
 },
 {
 "a": {
@@ -24764,7 +25469,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zuletzt, endlich"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T4"
+]
 },
 {
 "a": {
@@ -24774,7 +25483,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "falsch, trügerisch"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T6"
+]
 },
 {
 "a": {
@@ -24804,7 +25517,13 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sagen, sprechen, reden"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T3",
+"T5",
+"T6"
+]
 },
 {
 "a": {
@@ -24814,7 +25533,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "weniger"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T4"
+]
 },
 {
 "a": {
@@ -24874,7 +25597,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Verbrechen"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T3"
+]
 },
 {
 "a": {
@@ -24884,7 +25611,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "meiden, vermeiden"
 },
-"k": "T2"
+"k": "T2",
+"ks": [
+"T2",
+"T3"
+]
 },
 {
 "a": {
@@ -24894,7 +25625,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "erreichen"
 },
-"k": "T3"
+"k": "T3",
+"ks": [
+"T3",
+"T4"
+]
 },
 {
 "a": {
@@ -24944,7 +25679,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "üben, ausüben"
 },
-"k": "T3"
+"k": "T3",
+"ks": [
+"T3",
+"T6"
+]
 },
 {
 "a": {
@@ -24964,7 +25703,12 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Sprache"
 },
-"k": "T3"
+"k": "T3",
+"ks": [
+"T3",
+"T5",
+"T6"
+]
 },
 {
 "a": {
@@ -25043,7 +25787,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wie"
 },
-"k": "T3"
+"k": "T3",
+"ks": [
+"T3",
+"T6"
+]
 },
 {
 "a": {
@@ -25053,7 +25801,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "etw. benutzen, verwenden, gebrauchen"
 },
-"k": "T3"
+"k": "T3",
+"ks": [
+"T3",
+"T6"
+]
 },
 {
 "a": {
@@ -25103,7 +25855,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "löschen, auslöschen"
 },
-"k": "T4"
+"k": "T4",
+"ks": [
+"T4",
+"T5"
+]
 },
 {
 "a": {
@@ -25123,7 +25879,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "tausend"
 },
-"k": "T4"
+"k": "T4",
+"ks": [
+"T4",
+"T6"
+]
 },
 {
 "a": {
@@ -25173,7 +25933,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Durst"
 },
-"k": "T4"
+"k": "T4",
+"ks": [
+"T4",
+"T5"
+]
 },
 {
 "a": {
@@ -25183,7 +25947,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Macht, die Streitkräfte"
 },
-"k": "T4"
+"k": "T4",
+"ks": [
+"T4",
+"T6"
+]
 },
 {
 "a": {
@@ -25193,7 +25961,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Kraft, die Gewalt"
 },
-"k": "T4"
+"k": "T4",
+"ks": [
+"T4",
+"T6"
+]
 },
 {
 "a": {
@@ -25212,7 +25984,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schmeichlerisch, schmeichelnd"
 },
-"k": "T5"
+"k": "T5",
+"ks": [
+"T5",
+"T6"
+]
 },
 {
 "a": {
