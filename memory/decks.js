@@ -19895,7 +19895,7 @@ window.MEMORY_DECKS = [
 "s": "haec, hoc Dem.-Pron."
 },
 "b": {
-"t": "dieser, diese, dieses; der, die, das hier"
+"t": "der, die, das hier; dieser, diese, dieses"
 },
 "k": "L11"
 },
@@ -19905,7 +19905,7 @@ window.MEMORY_DECKS = [
 "s": "illa, illud Dem.-Pron."
 },
 "b": {
-"t": "jener, jene, jenes; der, die, das dort; jener, jene, jenes berühmte"
+"t": "der, die, das dort; jener, jene, jenes; jener, jene, jenes berühmte"
 },
 "k": "L11"
 },
