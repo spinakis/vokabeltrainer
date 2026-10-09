@@ -32,7 +32,7 @@ window.MEMORY_DECKS = [
 "t": "ὅδε"
 },
 "b": {
-"t": "der hier"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -59,7 +59,7 @@ window.MEMORY_DECKS = [
 "t": "ἐκεῖνος"
 },
 "b": {
-"t": "der da"
+"t": "der da, jener"
 },
 "k": "L1"
 },
@@ -68,7 +68,7 @@ window.MEMORY_DECKS = [
 "t": "οὗτος"
 },
 "b": {
-"t": "der hier"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -415,7 +415,7 @@ window.MEMORY_DECKS = [
 "t": "ὅδε"
 },
 "b": {
-"t": "der hier"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -442,7 +442,7 @@ window.MEMORY_DECKS = [
 "t": "ἐκεῖνος"
 },
 "b": {
-"t": "der da"
+"t": "der da, jener"
 },
 "k": "L1"
 },
@@ -451,7 +451,7 @@ window.MEMORY_DECKS = [
 "t": "οὗτος"
 },
 "b": {
-"t": "der hier"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -4617,7 +4617,7 @@ window.MEMORY_DECKS = [
 "t": "ὅδε"
 },
 "b": {
-"t": "dieser"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -4645,7 +4645,7 @@ window.MEMORY_DECKS = [
 "t": "ἐκεῖνος"
 },
 "b": {
-"t": "jener"
+"t": "der da, jener"
 },
 "k": "L1"
 },
@@ -4654,7 +4654,7 @@ window.MEMORY_DECKS = [
 "t": "οὗτος"
 },
 "b": {
-"t": "dieser"
+"t": "der hier, dieser"
 },
 "k": "L1"
 },
@@ -8420,7 +8420,7 @@ window.MEMORY_DECKS = [
 "s": "αὕτη, τοῦτο"
 },
 "b": {
-"t": "dieser, diese, dieses"
+"t": "der/die/das hier; dieser, diese, dieses"
 },
 "k": "L14"
 },
