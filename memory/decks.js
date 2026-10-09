@@ -4,6 +4,10 @@ window.MEMORY_DECKS = [
 "id": "uiiia-l1-2-goetter",
 "gruppe": "Vokabeln",
 "name": "Lektion 1–2 und Götternamen (gr – dt)",
+"lektionen": [
+"L1",
+"L2"
+],
 "paare": [
 {
 "a": {
@@ -376,6 +380,17 @@ window.MEMORY_DECKS = [
 "id": "uiiia-vokabelheft",
 "gruppe": "Vokabeln",
 "name": "Vokabelheft UIIIa (gr – dt)",
+"lektionen": [
+"L1",
+"L2",
+"L3",
+"L3Ü",
+"L4",
+"L5",
+"L6",
+"L7",
+"L7Ü"
+],
 "paare": [
 {
 "a": {
@@ -512,7 +527,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht"
 },
-"k": "L2"
+"k": "L2",
+"ks": [
+"L2",
+"L3"
+]
 },
 {
 "a": {
@@ -852,15 +871,6 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "οὐ = οὐκ = οὐχ"
-},
-"b": {
-"t": "nicht"
-},
-"k": "L3"
-},
-{
-"a": {
 "t": "ἀλλά"
 },
 "b": {
@@ -1085,7 +1095,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aus"
 },
-"k": "L3Ü"
+"k": "L3Ü",
+"ks": [
+"L3Ü",
+"L6"
+]
 },
 {
 "a": {
@@ -1546,16 +1560,6 @@ window.MEMORY_DECKS = [
 "t": "Krieg führen, kämpfen"
 },
 "k": "L5"
-},
-{
-"a": {
-"t": "ἐκ",
-"s": "m. Gen."
-},
-"b": {
-"t": "aus"
-},
-"k": "L6"
 },
 {
 "a": {
@@ -4549,6 +4553,46 @@ window.MEMORY_DECKS = [
 "id": "mythologia",
 "gruppe": "Vokabeln",
 "name": "Mythologia-Wortschatz, ganzes Buch (gr – dt)",
+"lektionen": [
+"L1",
+"L2",
+"L3",
+"L3Ü",
+"L4",
+"L5",
+"L6",
+"L7",
+"L7Ü",
+"L8",
+"L9",
+"L10",
+"L11",
+"L12",
+"L12Ü",
+"L13",
+"L14",
+"L15",
+"L16",
+"L17",
+"L18",
+"L19",
+"L20",
+"L21",
+"L22",
+"L23",
+"L24",
+"L25",
+"L26",
+"L27",
+"L28",
+"L29",
+"L30",
+"L31",
+"L32",
+"L33",
+"L34",
+"L35"
+],
 "paare": [
 {
 "a": {
@@ -4557,7 +4601,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wer?"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4566,7 +4610,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er (sie, es) ist"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4575,7 +4619,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dieser"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4585,7 +4629,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der …"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4594,7 +4638,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ein anderer"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4603,7 +4647,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "jener"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4612,7 +4656,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dieser"
 },
-"k": "L01"
+"k": "L1"
 },
 {
 "a": {
@@ -4622,7 +4666,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Freund"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4631,7 +4675,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er liebt"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4640,7 +4684,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. und 2. auch"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4650,7 +4694,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er unterstützt, hilft"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4659,7 +4703,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "deswegen"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4668,7 +4712,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er vertraut"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4678,7 +4722,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Furcht"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4687,7 +4731,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht"
 },
-"k": "L02"
+"k": "L2",
+"ks": [
+"L2",
+"L3"
+]
 },
 {
 "a": {
@@ -4696,7 +4744,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "es gibt"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4706,7 +4754,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "in, bei"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4715,7 +4763,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "denn, nämlich"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4725,7 +4773,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Krieg"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4734,7 +4782,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der eine den anderen"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4743,7 +4791,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er beschützt, bewacht"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4752,7 +4800,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er rettet"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4762,7 +4810,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nach"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4772,7 +4820,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Tod"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4782,7 +4830,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Feind"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4791,7 +4839,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er bestraft"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4801,7 +4849,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er nimmt Rache für jdn."
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4811,7 +4859,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "so, auf diese Weise"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4820,7 +4868,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er tötet"
 },
-"k": "L02"
+"k": "L2"
 },
 {
 "a": {
@@ -4829,7 +4877,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zwölf"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4839,7 +4887,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Gott"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4848,7 +4896,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er (be-) wohnt"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4857,7 +4905,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "unsterblich"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4866,7 +4914,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sie sind"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4876,7 +4924,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "jeder (einzelne)"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4885,7 +4933,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. aber 2. und"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4894,7 +4942,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er hat, hält"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4903,7 +4951,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "eigen"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4912,7 +4960,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(zwar) … aber, einerseits … andererseits"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4922,7 +4970,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Herr"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4932,7 +4980,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Mensch"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4942,7 +4990,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Eid"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4951,7 +4999,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die … (Artikel)"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4961,7 +5009,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Schwester"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4970,7 +5018,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "und"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4980,7 +5028,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Frau"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -4990,7 +5038,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Ehe"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5000,7 +5048,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dennoch"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5010,7 +5058,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "oft"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5019,7 +5067,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er täuscht, betrügt"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5029,16 +5077,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Sohn"
 },
-"k": "L03"
-},
-{
-"a": {
-"t": "οὐ = οὐκ = οὐχ (Lektion 3)"
-},
-"b": {
-"t": "nicht"
-},
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5047,7 +5086,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. aber 2. sondern"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5056,7 +5095,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er schießt mit dem Bogen, er trifft (mit einem Pfeil)"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5066,7 +5105,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er kümmert sich (um etw.)"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5076,7 +5115,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Musik"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5086,7 +5125,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Kunst, das Können"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5096,7 +5135,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "und der, und die"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5106,7 +5145,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Jagd"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5116,7 +5155,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Göttin"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5126,7 +5165,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Plan, die Absicht"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5136,7 +5175,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er herrscht über jdn."
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5145,7 +5184,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er trägt, bringt"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5155,7 +5194,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Fluss"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5165,7 +5204,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Meer"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5175,7 +5214,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Liebe"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5185,7 +5224,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Klugheit, Weisheit"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5195,7 +5234,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Kampf, die Schlacht"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5205,7 +5244,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Sieg"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5214,7 +5253,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er verehrt, pflegt"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5223,7 +5262,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er opfert"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5232,7 +5271,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sowohl … als auch …, … und …"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5242,7 +5281,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Freude"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5252,7 +5291,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Arbeit, Mühe"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5261,7 +5300,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er gibt, bietet"
 },
-"k": "L03"
+"k": "L3"
 },
 {
 "a": {
@@ -5270,7 +5309,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der eine … der andere die eine …, die andere"
 },
-"k": "L03Ü"
+"k": "L3Ü"
 },
 {
 "a": {
@@ -5280,7 +5319,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aus"
 },
-"k": "L03Ü"
+"k": "L3Ü"
 },
 {
 "a": {
@@ -5290,7 +5329,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Kopf"
 },
-"k": "L03Ü"
+"k": "L3Ü"
 },
 {
 "a": {
@@ -5300,7 +5339,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zuerst"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5309,7 +5348,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er sagt"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5318,7 +5357,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ich fordere (auf) => (auf)fordern"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5328,7 +5367,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Apfel"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5337,7 +5376,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ich"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5346,7 +5385,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ich bin => sein*"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5355,7 +5394,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht nur …, sondern auch …"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5365,7 +5404,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. schön 2. gut"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5375,7 +5414,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "mächtig, möglich, fähig"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5384,7 +5423,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wollen, bereit sein"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5394,7 +5433,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. die Herrschaft (über etw./ jdn.) 2. der Anfang"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5403,7 +5442,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "du"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5413,7 +5452,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "jung, neu"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5423,7 +5462,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zu (… hin), gegen"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5433,7 +5472,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Junge"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5443,7 +5482,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Ruhm"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5452,7 +5491,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wenn"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5462,7 +5501,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. glauben, meinen 2. (jdn.) halten (für …)"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5472,7 +5511,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schließlich"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5481,7 +5520,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ihr"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5491,7 +5530,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Geschenk"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5501,7 +5540,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "von"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5510,7 +5549,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nehmen, bekommen"
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5520,7 +5559,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "es gefällt jdm."
 },
-"k": "L04"
+"k": "L4"
 },
 {
 "a": {
@@ -5529,7 +5568,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(ver-)sammeln"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5539,7 +5578,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "euer"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5548,7 +5587,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zustimmen"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5557,7 +5596,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "beenden"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5567,7 +5606,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schlecht, feige"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5577,7 +5616,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Sterbliche"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5587,7 +5626,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wieder"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5597,7 +5636,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Waffe"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5606,7 +5645,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schicken"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5616,7 +5655,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Friede"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5625,7 +5664,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "machen"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5635,7 +5674,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "in (… hinein), nach, gegen (feindlich)"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5645,7 +5684,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Haus"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5654,7 +5693,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "führen, treiben"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5664,7 +5703,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sehr, heftig"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5673,7 +5712,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schädigen"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5683,7 +5722,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "beginnen (mit etw.)"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5693,7 +5732,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "furchtbar, gewaltig, tüchtig"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5703,7 +5742,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Wort, die Rede"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5713,7 +5752,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sorgen dafür, dass …"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5722,7 +5761,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(auf)lösen"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5731,7 +5770,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. als, nachdem 2. weil"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5740,7 +5779,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "also, folglich"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5749,7 +5788,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "Krieg führen"
 },
-"k": "L05"
+"k": "L5"
 },
 {
 "a": {
@@ -5759,7 +5798,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "aus"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5768,7 +5807,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "kommen, gekommen sein"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5777,7 +5816,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "finden"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5786,7 +5825,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bewundern, sich wundern"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5796,7 +5835,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Frau"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5805,7 +5844,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "gebären, erzeugen"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5815,7 +5854,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Kind"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5824,7 +5863,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "hassen"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5834,7 +5873,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "fliehen (vor jdm.)"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5844,7 +5883,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Feld, der Acker"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5853,7 +5892,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verlassen, (zurück-) lassen"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5862,7 +5901,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bemitleiden"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5872,7 +5911,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sofort"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5881,7 +5920,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zu Boden werfen"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5890,7 +5929,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nehmen, fangen"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5900,7 +5939,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "später"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5909,7 +5948,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "töten"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5918,7 +5957,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zwei"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5928,7 +5967,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. die Schlange 2. der Drache"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5937,7 +5976,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. wahrnehmen 2. denken"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5947,7 +5986,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Unglück"
 },
-"k": "L06"
+"k": "L6"
 },
 {
 "a": {
@@ -5957,7 +5996,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Jugend, Pubertät"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -5966,7 +6005,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ratlos sein"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -5975,7 +6014,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht wissen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -5984,7 +6023,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wie?"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -5994,7 +6033,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Leben"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6004,7 +6043,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "es ist nötig, man muss"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6013,7 +6052,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "weggehen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6023,7 +6062,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Ort"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6032,7 +6071,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "betrachten, prüfen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6042,7 +6081,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Weg"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6051,7 +6090,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der eine … der andere"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6061,7 +6100,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "hebt die Anrede hervor, wird aber nicht übersetzt"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6070,7 +6109,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "zeigen, sagen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6080,7 +6119,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ohne"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6090,7 +6129,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Sorge"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6100,7 +6139,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "mit"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6109,7 +6148,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "weder … noch …"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6119,7 +6158,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Reichtum"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6129,7 +6168,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "immer"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6138,7 +6177,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nennen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6148,7 +6187,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. das Glück 2. der Wohlstand"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6158,7 +6197,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Schlechtigkeit"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6168,7 +6207,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "damals, dann"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6177,7 +6216,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(zu)lassen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6186,7 +6225,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "machen, tun"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6196,7 +6235,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "viel(e)"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6206,7 +6245,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Tugend, Tüchtigkeit"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6216,7 +6255,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "schwierig"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6225,7 +6264,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. wie 2. als 3. dass"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6235,7 +6274,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "leicht"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6245,7 +6284,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "klein, kurz"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6254,7 +6293,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nicht (bei Imperativen)"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6264,7 +6303,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Zeit"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6273,7 +6312,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "widersprechen, sich widersetzen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6282,7 +6321,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "und … nicht (bei Imperativen)"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6292,7 +6331,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Werk, die Arbeit, die Tat"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6301,7 +6340,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ehren"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6310,7 +6349,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "für immer"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6319,7 +6358,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. auswählen 2. entscheiden, urteilen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6328,7 +6367,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nun, jetzt"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6338,7 +6377,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "welcher/e/es (von beiden)"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6348,7 +6387,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Ruhe"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6358,7 +6397,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "auf"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6368,7 +6407,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Fels, Stein"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6377,7 +6416,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sitzen, sich setzen"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6387,7 +6426,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "lang, groß"
 },
-"k": "L07"
+"k": "L7"
 },
 {
 "a": {
@@ -6396,7 +6435,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "laufen"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6405,7 +6444,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "siegen, besiegen"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6415,7 +6454,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die List"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6424,7 +6463,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bleiben, (er)warten"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6433,7 +6472,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "übermütig sein"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6442,7 +6481,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. dass 2. weil"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6451,7 +6490,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "begegnen"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6461,7 +6500,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "hier"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
@@ -6471,17 +6510,17 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sich freuen über …"
 },
-"k": "L07Ü"
+"k": "L7Ü"
 },
 {
 "a": {
-"t": "ἐπὶ … (m. Akk.)",
+"t": "ἐπὶ …",
 "s": "(m. Akk.)"
 },
 "b": {
 "t": "zu … hin, gegen"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6491,7 +6530,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Giganten"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6501,7 +6540,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Riese"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6511,7 +6550,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "himmlisch"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6520,7 +6559,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Erde"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6529,7 +6568,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "besiegen"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6539,7 +6578,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Welt, Ordnung"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6549,7 +6588,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. furchtbar 2. furchtsam"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6559,7 +6598,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. angreifen (jdn.), 2. versuchen (zu tun)"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6568,7 +6607,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. also 2. wirklich"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6577,7 +6616,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "Krieg führen, ins Feld ziehen"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6587,7 +6626,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Heer"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6596,7 +6635,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "helfen, zu Hilfe eilen"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6606,7 +6645,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bereitwillig, eifrig"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6616,17 +6655,17 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Hilfe"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
-"t": "μετὰ … (m. Gen.)",
+"t": "μετὰ …",
 "s": "(m. Gen.)"
 },
 "b": {
 "t": "mit"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6635,7 +6674,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "loben"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6645,7 +6684,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wegen"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6654,7 +6693,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "beenden"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6664,7 +6703,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Himmel"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6674,7 +6713,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der alte Mann"
 },
-"k": "L08"
+"k": "L8"
 },
 {
 "a": {
@@ -6684,7 +6723,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Löwe"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6694,7 +6733,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(irgendwann) einmal, einst"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6704,7 +6743,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Bauer"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6713,7 +6752,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "hören"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6722,7 +6761,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "erschrecken"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6732,7 +6771,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "die Haut"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6741,7 +6780,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bringen, besorgen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6751,7 +6790,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bitten, befehlen, (auf)fordern, (dass)"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6760,7 +6799,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "blicken, sehen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6770,7 +6809,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Wald"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6779,7 +6818,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verfolgen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6789,7 +6828,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dort"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6798,7 +6837,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "bereit machen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6808,7 +6847,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "dann, danach, darauf"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6817,7 +6856,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "jagen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6827,7 +6866,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "das Tier"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6836,7 +6875,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "er war"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6845,7 +6884,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "verwunden"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6854,7 +6893,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "so dass"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6863,7 +6902,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "springen"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -6873,7 +6912,7 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "furchtsam, feige"
 },
-"k": "L09"
+"k": "L9"
 },
 {
 "a": {
@@ -7231,7 +7270,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. einnehmen 2. ertappen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7281,7 +7324,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. aufnehmen 2. töten"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7295,13 +7342,17 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἄγω (mit Aoristform)",
+"t": "ἄγω",
 "s": "Aorist: ἤγαγον"
 },
 "b": {
 "t": "führen, treiben"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7398,7 +7449,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "nehmen, bekommen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7408,7 +7463,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "(er)leiden"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7430,13 +7489,17 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἀντι·λέγω (mit Aoristform)",
+"t": "ἀντι·λέγω",
 "s": "Aorist: ἀντ·εῖπον"
 },
 "b": {
 "t": "widersprechen, sich widersetzen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7456,7 +7519,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "1. werfen 2. treffen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7466,7 +7533,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "haben, halten"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7486,17 +7557,25 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sterben"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
-"t": "κατα·λείπω (mit Aoristform)",
+"t": "κατα·λείπω",
 "s": "Aorist: κατ·έλιπον"
 },
 "b": {
 "t": "verlassen, (zurück) lassen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7506,7 +7585,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sehen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7516,7 +7599,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "sagen"
 },
-"k": "L11"
+"k": "L11",
+"ks": [
+"L11",
+"L12Ü"
+]
 },
 {
 "a": {
@@ -7588,7 +7675,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "περὶ … (m. Gen.)",
+"t": "περὶ …",
 "s": "(m. Gen.)"
 },
 "b": {
@@ -7664,7 +7751,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "der Athener"
 },
-"k": "L12"
+"k": "L12",
+"ks": [
+"L12",
+"L13"
+]
 },
 {
 "a": {
@@ -7805,143 +7896,13 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἄγω (mit Aoristform, Lektion 12Ü)",
-"s": "Aorist: ἤγαγον"
-},
-"b": {
-"t": "führen, treiben"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "ἀν·αιρέ·ω (mit Aoristform)",
-"s": "Aorist: ἀν·εῖλον"
-},
-"b": {
-"t": "1. aufnehmen 2. töten"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "ἀντι·λέγω (mit Aoristform, Lektion 12Ü)",
-"s": "Aorist: ἀντ·εῖπον"
-},
-"b": {
-"t": "widersprechen, sich widersetzen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "ἀπο·θνῄσκω (mit Aoristform)",
-"s": "Aorist: ἀπ·έθανον"
-},
-"b": {
-"t": "sterben"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "βάλλω (mit Aoristform)",
-"s": "Aorist: ἔβαλον"
-},
-"b": {
-"t": "1. werfen 2. treffen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "ἔχω (mit Aoristform)",
-"s": "Aorist: ἔσχον"
-},
-"b": {
-"t": "haben, halten"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "κατα·λαμβάνω (mit Aoristform)",
-"s": "Aorist: κατ·έλαβον"
-},
-"b": {
-"t": "1. einnehmen 2. ertappen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "κατα·λείπω (mit Aoristform, Lektion 12Ü)",
-"s": "Aorist: κατ·έλιπον"
-},
-"b": {
-"t": "verlassen, (zurück) lassen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "λαμβάνω (mit Aoristform)",
-"s": "Aorist: ἔλαβον"
-},
-"b": {
-"t": "nehmen, bekommen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "λέγω (mit Aoristform)",
-"s": "Aorist: εἶπον"
-},
-"b": {
-"t": "sagen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "ὁρά·ω (mit Aoristform)",
-"s": "Aorist: εἶδον"
-},
-"b": {
-"t": "sehen"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "πάσχω (mit Aoristform)",
-"s": "Aorist: ἔπαθον"
-},
-"b": {
-"t": "(er)leiden"
-},
-"k": "L12Ü"
-},
-{
-"a": {
-"t": "τυγχάνω (mit Aoristform)",
+"t": "τυγχάνω",
 "s": "Aorist: ἔτυχον; (m. Gen.)"
 },
 "b": {
 "t": "treffen, erreichen, bekommen (etw./jdn.)"
 },
 "k": "L12Ü"
-},
-{
-"a": {
-"t": "Ἀθηναῖος (Lektion 13)",
-"s": "ὁ"
-},
-"b": {
-"t": "der Athener"
-},
-"k": "L13"
 },
 {
 "a": {
@@ -8639,7 +8600,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "διὰ … (m. Gen.)",
+"t": "διὰ …",
 "s": "(m. Gen.)"
 },
 "b": {
@@ -8733,7 +8694,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "mehr, eher"
 },
-"k": "L14"
+"k": "L14",
+"ks": [
+"L14",
+"L22"
+]
 },
 {
 "a": {
@@ -8897,7 +8862,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "fragen"
 },
-"k": "L15"
+"k": "L15",
+"ks": [
+"L15",
+"L16"
+]
 },
 {
 "a": {
@@ -8949,7 +8918,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "κρατέ·ω (Lektion 15)",
+"t": "κρατέ·ω",
 "s": "1. (m. Akk.) 2. (m. Gen.)"
 },
 "b": {
@@ -8974,7 +8943,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "warum?"
 },
-"k": "L15"
+"k": "L15",
+"ks": [
+"L15",
+"L16"
+]
 },
 {
 "a": {
@@ -9072,7 +9045,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "wie zum Beispiel"
 },
-"k": "L15"
+"k": "L15",
+"ks": [
+"L15",
+"L16"
+]
 },
 {
 "a": {
@@ -9483,24 +9460,6 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐρωτά·ω (Lektion 16)"
-},
-"b": {
-"t": "fragen"
-},
-"k": "L16"
-},
-{
-"a": {
-"t": "διὰ τί; (Lektion 16)"
-},
-"b": {
-"t": "warum?"
-},
-"k": "L16"
-},
-{
-"a": {
 "t": "ἀπο·κρίνομαι"
 },
 "b": {
@@ -9610,15 +9569,6 @@ window.MEMORY_DECKS = [
 },
 "b": {
 "t": "gewiss"
-},
-"k": "L16"
-},
-{
-"a": {
-"t": "οἷον (Lektion 16)"
-},
-"b": {
-"t": "wie zum Beispiel"
 },
 "k": "L16"
 },
@@ -9799,7 +9749,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "αἱρέ·ω (mit Aoristform)",
+"t": "αἱρέ·ω",
 "s": "Aorist: ἑλεῖν"
 },
 "b": {
@@ -9915,7 +9865,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἔρχομαι (mit Aoristform)",
+"t": "ἔρχομαι",
 "s": "Aorist: ἦλθον"
 },
 "b": {
@@ -9975,7 +9925,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "μανθάνω (mit Aoristform)",
+"t": "μανθάνω",
 "s": "Aorist: ἔμαθον"
 },
 "b": {
@@ -10033,7 +9983,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐμ·πίπτω εἰς … (mit Aoristform)",
+"t": "ἐμ·πίπτω εἰς …",
 "s": "Aorist: ἐν·έπεσον"
 },
 "b": {
@@ -10149,7 +10099,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "φεύγω (mit Aoristform)",
+"t": "φεύγω",
 "s": "Aorist: ἔφυγον"
 },
 "b": {
@@ -10332,7 +10282,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐσθίω (mit Aoristform)",
+"t": "ἐσθίω",
 "s": "Aorist: ἔφαγον"
 },
 "b": {
@@ -10456,7 +10406,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "εὑρίσκω (mit Aoristform)",
+"t": "εὑρίσκω",
 "s": "Aorist: ηὗρον"
 },
 "b": {
@@ -10622,7 +10572,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "τιτρώσκω (mit Aoristform)",
+"t": "τιτρώσκω",
 "s": "Aorist: ἔτρωσα"
 },
 "b": {
@@ -10651,7 +10601,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "γελά·ω (mit Aoristform)",
+"t": "γελά·ω",
 "s": "Aorist: ἐγέλασα"
 },
 "b": {
@@ -10854,7 +10804,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ὑπὸ … (m. Gen.)",
+"t": "ὑπὸ …",
 "s": "(m. Gen.)"
 },
 "b": {
@@ -11018,7 +10968,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἀφ·ικνέ·ομαι (mit Aoristform)",
+"t": "ἀφ·ικνέ·ομαι",
 "s": "Aorist: ἀφ·ικόμην"
 },
 "b": {
@@ -11425,7 +11375,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "γίγνομαι (mit Aoristform)",
+"t": "γίγνομαι",
 "s": "Aorist: ἐγενόμην"
 },
 "b": {
@@ -11520,7 +11470,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "αἰδέ·ομαι (mit Aoristform)",
+"t": "αἰδέ·ομαι",
 "s": "(m. Akk.); Aorist: ᾐδέσθην"
 },
 "b": {
@@ -11539,7 +11489,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἥδομαι (mit Aoristform)",
+"t": "ἥδομαι",
 "s": "(m. Dat.); Aorist: ἥσθην"
 },
 "b": {
@@ -11559,7 +11509,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "λαμβάνω (mit Aoristform, Lektion 22)",
+"t": "λαμβάνω",
 "s": "Aor. Pass.: ἐλήφθην"
 },
 "b": {
@@ -11625,7 +11575,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐπὶ … (m. Dat.)",
+"t": "ἐπὶ …",
 "s": "(m. Dat.)"
 },
 "b": {
@@ -11645,7 +11595,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ὀργίζομαι (mit Aoristform)",
+"t": "ὀργίζομαι",
 "s": "Aorist: ὠργίσθην"
 },
 "b": {
@@ -11696,16 +11646,6 @@ window.MEMORY_DECKS = [
 },
 "b": {
 "t": "der Zorn"
-},
-"k": "L22"
-},
-{
-"a": {
-"t": "μᾶλλον (Lektion 22)",
-"s": "(Adv.)"
-},
-"b": {
-"t": "mehr, eher"
 },
 "k": "L22"
 },
@@ -11777,7 +11717,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "τιτρώσκω (mit Aoristform, Lektion 22)",
+"t": "τιτρώσκω",
 "s": "Aor. Pass.: ἐτρώθην"
 },
 "b": {
@@ -12019,7 +11959,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "φοβέ·ομαι, μὴ … (m. Konj.)",
+"t": "φοβέ·ομαι, μὴ …",
 "s": "(m. Konj.)"
 },
 "b": {
@@ -12191,7 +12131,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "suchen"
 },
-"k": "L23"
+"k": "L23",
+"ks": [
+"L23",
+"L33"
+]
 },
 {
 "a": {
@@ -12672,7 +12616,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἔχω (m. Inf.)",
+"t": "ἔχω",
 "s": "(m. Inf.)"
 },
 "b": {
@@ -13232,7 +13176,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "παρὰ … (m. Dat.)",
+"t": "παρὰ …",
 "s": "(m. Dat.)"
 },
 "b": {
@@ -13358,7 +13302,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "φοβέ·ομαι, μὴ … (mit Aoristform)",
+"t": "φοβέ·ομαι, μὴ …",
 "s": "Aorist: ἐφοβήθην"
 },
 "b": {
@@ -13492,7 +13436,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "βαίνω (mit Aoristform)",
+"t": "βαίνω",
 "s": "Aorist: ἔβην"
 },
 "b": {
@@ -13627,7 +13571,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "γιγνώσκω (mit Aoristform)",
+"t": "γιγνώσκω",
 "s": "Aorist: ἔγνων"
 },
 "b": {
@@ -13695,7 +13639,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ὡς (m. Partizip)",
+"t": "ὡς",
 "s": "(m. Partizip)"
 },
 "b": {
@@ -13807,7 +13751,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἄν (Lektion 28)",
+"t": "ἄν",
 "s": "(m. Ind. Impf. oder Aor. im Hauptsatz)"
 },
 "b": {
@@ -13874,7 +13818,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "κρατέ·ω (m. Gen.)",
+"t": "κρατέ·ω",
 "s": "(m. Gen.)"
 },
 "b": {
@@ -13924,7 +13868,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "πείθομαι (mit Aoristform)",
+"t": "πείθομαι",
 "s": "Aorist: ἐπείσθην"
 },
 "b": {
@@ -14058,7 +14002,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "παύομαι (m. Gen.)",
+"t": "παύομαι",
 "s": "(m. Gen.)"
 },
 "b": {
@@ -14068,7 +14012,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἄν (Lektion 29)",
+"t": "ἄν",
 "s": "(m. Optativ im Hauptsatz)"
 },
 "b": {
@@ -14117,7 +14061,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐπὶ … (m. Dat., Lektion 29)",
+"t": "ἐπὶ …",
 "s": "(m. Dat.)"
 },
 "b": {
@@ -14580,7 +14524,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "παρὰ … (m. Akk.)",
+"t": "παρὰ …",
 "s": "(m. Akk.)"
 },
 "b": {
@@ -14774,7 +14718,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "es verhält sich …"
 },
-"k": "L31"
+"k": "L31",
+"ks": [
+"L31",
+"L35"
+]
 },
 {
 "a": {
@@ -14787,13 +14735,17 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐπὶ … (m. Dat., Lektion 31)",
+"t": "ἐπὶ …",
 "s": "(m. Dat.)"
 },
 "b": {
 "t": "für, zum Zweck"
 },
-"k": "L31"
+"k": "L31",
+"ks": [
+"L31",
+"L35"
+]
 },
 {
 "a": {
@@ -14939,7 +14891,11 @@ window.MEMORY_DECKS = [
 "b": {
 "t": "ebenso"
 },
-"k": "L32"
+"k": "L32",
+"ks": [
+"L32",
+"L34"
+]
 },
 {
 "a": {
@@ -15003,13 +14959,17 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "δίδωμι (Lektion 32)",
+"t": "δίδωμι",
 "s": "Inf. Aorist: δοῦναι"
 },
 "b": {
 "t": "geben"
 },
-"k": "L32"
+"k": "L32",
+"ks": [
+"L32",
+"L35"
+]
 },
 {
 "a": {
@@ -15051,7 +15011,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "πρὶν … (m. Inf.)",
+"t": "πρὶν …",
 "s": "(m. Inf.)"
 },
 "b": {
@@ -15061,7 +15021,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐν·τυγχάνω (mit Aoristform)",
+"t": "ἐν·τυγχάνω",
 "s": "(m. Dat.); Aorist: ἐν·έτυχον"
 },
 "b": {
@@ -15080,20 +15040,11 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἥδομαι (m. Part.)",
+"t": "ἥδομαι",
 "s": "(m. Part.)"
 },
 "b": {
 "t": "gern (etw. tun)"
-},
-"k": "L33"
-},
-{
-"a": {
-"t": "ζητέ·ω (Lektion 33)"
-},
-"b": {
-"t": "suchen"
 },
 "k": "L33"
 },
@@ -15234,7 +15185,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "κάμνω (m. Part.)",
+"t": "κάμνω",
 "s": "(m. Part.)"
 },
 "b": {
@@ -15351,16 +15302,6 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ὡσαύτως (Lektion 34)",
-"s": "(Adv.)"
-},
-"b": {
-"t": "ebenso"
-},
-"k": "L34"
-},
-{
-"a": {
 "t": "ποικίλος (mit Endungen)",
 "s": "η, ον"
 },
@@ -15431,7 +15372,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ὑπὸ … (m. Akk.)",
+"t": "ὑπὸ …",
 "s": "(m. Akk.)"
 },
 "b": {
@@ -15687,16 +15628,6 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἔχει (Lektion 35)",
-"s": "(m. Adv.)"
-},
-"b": {
-"t": "es verhält sich …"
-},
-"k": "L35"
-},
-{
-"a": {
 "t": "οἱ ἄνδρες δικασταί"
 },
 "b": {
@@ -15912,16 +15843,6 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "ἐπὶ … (m. Dat., Lektion 35)",
-"s": "(m. Dat.)"
-},
-"b": {
-"t": "für, zum Zweck"
-},
-"k": "L35"
-},
-{
-"a": {
 "t": "τεκμήριον",
 "s": "τό"
 },
@@ -16014,7 +15935,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "αἰσθάνομαι (mit Aoristform)",
+"t": "αἰσθάνομαι",
 "s": "Aorist: ᾐσθόμην"
 },
 "b": {
@@ -16044,17 +15965,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "δίδωμι (Lektion 35)",
-"s": "Inf. Aorist: δοῦναι"
-},
-"b": {
-"t": "geben"
-},
-"k": "L35"
-},
-{
-"a": {
-"t": "ὡς (m. Superlativ)",
+"t": "ὡς",
 "s": "(m. Superlativ)"
 },
 "b": {
@@ -16100,7 +16011,7 @@ window.MEMORY_DECKS = [
 },
 {
 "a": {
-"t": "πρὶν … (m. Ind.)",
+"t": "πρὶν …",
 "s": "(m. Ind.)"
 },
 "b": {
