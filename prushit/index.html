@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#EEF1F4">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Prushit">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<title>Prushit</title>
+<meta name="description" content="Persönlicher Vokabeltrainer Hebräisch">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --surface2:#E3E8EE; --ink:#1E2A38; --ink2:#55637A; --line:#CBD3DD;
+  --accent:#3B5B92; --accent-ink:#FFFFFF; --slate:#8A6A2E;
+  --ok:#5E7A2E; --ok-bg:#E4ECD3; --warn:#B8860B; --warn-bg:#F5E9C4; --bad:#B23A3A; --bad-bg:#F3D6D6;
+  --shadow:0 1px 2px rgba(30,42,56,.08),0 8px 24px rgba(30,42,56,.10);
+  --fs:17px; --lemma:2.4rem; --radius:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#141A21; --surface:#1E2731; --surface2:#28333F; --ink:#E9EDF1; --ink2:#A3AFBE; --line:#3A4654;
+  --accent:#8FA8D8; --accent-ink:#1A0F08; --slate:#D4B26E;
+  --ok:#A5C46B; --ok-bg:#2C3A1E; --warn:#E0B84C; --warn-bg:#3E3418; --bad:#E07A7A; --bad-bg:#442222;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#141A21; --surface:#1E2731; --surface2:#28333F; --ink:#E9EDF1; --ink2:#A3AFBE; --line:#3A4654;
+  --accent:#8FA8D8; --accent-ink:#1A0F08; --slate:#D4B26E;
+  --ok:#A5C46B; --ok-bg:#2C3A1E; --warn:#E0B84C; --warn-bg:#3E3418; --bad:#E07A7A; --bad-bg:#442222;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+:root[data-big="1"]{ --fs:20px; --lemma:2.9rem; }
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--fs);line-height:1.45;-webkit-text-size-adjust:100%}
+.lat{font-family:"Noto Serif Hebrew","SBL Hebrew","Times New Roman",serif;unicode-bidi:plaintext;font-style:normal!important}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--slate);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55em .8em}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.2}
+.app{max-width:600px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;padding:14px 16px 8px}
+.top h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.55rem;letter-spacing:.01em}
+.top .sub{color:var(--ink2);font-size:.85rem}
+.finch{width:38px;height:38px;flex:none}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--ink2);font-size:.8rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill b{color:var(--ink)}
+.flame{width:20px;height:20px;flex:none;transition:filter .4s,opacity .4s}
+.flame .fo,.flame .fi{transition:fill .4s}
+.flame.l0{opacity:.55}.flame.l0 .fo{fill:var(--line)}.flame.l0 .fi{fill:var(--surface)}
+.flame.l1{opacity:.95}.flame.l1 .fo{fill:#D98B57}.flame.l1 .fi{fill:#F2CFA0}
+.flame.l2 .fo{fill:#E8862E}.flame.l2 .fi{fill:#FFD66B}.flame.l2{filter:drop-shadow(0 0 3px rgba(232,134,46,.55))}
+.flame.l3 .fo{fill:#F2561A}.flame.l3 .fi{fill:#FFE36B}.flame.l3{filter:drop-shadow(0 0 6px rgba(255,138,40,.85));animation:flicker 2.4s ease-in-out infinite}
+@keyframes flicker{0%,100%{filter:drop-shadow(0 0 6px rgba(255,138,40,.85))}50%{filter:drop-shadow(0 0 9px rgba(255,160,60,1))}}
+@media (prefers-reduced-motion: reduce){.flame.l3{animation:none}}
+main{flex:1;padding:8px 16px 96px}
+.view[hidden]{display:none}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center}
+.tabs .in{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:600px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;color:var(--ink2);font-size:.72rem}
+.tab svg{width:24px;height:24px}
+.tab[aria-selected="true"]{color:var(--accent);background:var(--surface2)}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.7em 1.1em;border-radius:12px;background:var(--surface2);color:var(--ink);font-weight:700;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;border:1px solid var(--line)}
+.btn.small{min-height:38px;padding:.4em .8em;font-size:.9rem;font-weight:400}
+.btn[disabled]{opacity:.45;cursor:default}
+.note{color:var(--ink2);font-size:.9rem}
+.eyebrow{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);font-weight:700}
+/* Lernkarte */
+.study{display:flex;flex-direction:column;gap:14px}
+.flash{min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center;cursor:pointer;position:relative}
+.flash .lemma{font-size:var(--lemma);font-weight:600;line-height:1.15;color:var(--ink)}
+.flash .info{direction:ltr;unicode-bidi:isolate;font-size:1.45rem;color:var(--ink2);font-style:italic;line-height:1.3}
+.flash .bed{font-size:1.25rem;margin-top:8px}
+.flash .meta{position:absolute;left:16px;right:16px;bottom:12px;display:flex;justify-content:space-between;color:var(--ink2);font-size:.78rem;font-variant-numeric:tabular-nums}
+.flash .hint{color:var(--ink2);font-size:.9rem}
+.flash hr{border:0;border-top:1px dashed var(--line);margin:8px 30px}
+.answers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.answers .btn{flex-direction:column;gap:2px;min-height:64px;padding:.5em .3em;font-size:.95rem;line-height:1.15;text-align:center}
+.answers .btn small{font-weight:400;font-size:.75rem;opacity:.85;font-variant-numeric:tabular-nums}
+.btn.bad{background:var(--bad-bg);color:var(--bad)}
+.btn.good{background:var(--warn-bg);color:var(--warn)}
+.btn.strong{background:var(--ok-bg);color:var(--ok)}
+.reveal{display:flex;justify-content:center}
+.progress{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);width:0}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface);border-radius:12px;padding:10px 12px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.78rem;color:var(--ink2)}
+/* Stapel */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.tile{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-variant-numeric:tabular-nums}
+.tile b{font-size:1.15rem}
+.tile small{font-size:.7rem;color:var(--ink2);white-space:nowrap}
+.tile[aria-pressed="true"]{border-color:var(--accent);background:var(--surface)}
+.tile[aria-pressed="true"] b{color:var(--accent)}
+.tile .bar{width:100%;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-top:4px}
+.tile .bar i{display:block;height:100%;background:var(--ok)}
+/* Suche */
+.list{display:flex;flex-direction:column;gap:6px}
+.item{background:var(--surface);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+.item .t{flex:1;min-width:0}
+.item .t .l{font-size:1.15rem;font-weight:600}
+.item .t .d{color:var(--ink2);font-size:.9rem}
+.item.off{opacity:.55}
+.tag{font-size:.72rem;padding:2px 7px;border-radius:999px;background:var(--surface2);color:var(--ink2);white-space:nowrap}
+/* Einstellungen */
+.field{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.field:last-child{border-bottom:0}
+.field label{flex:1}
+.field small{display:block;color:var(--ink2);font-size:.8rem}
+.field input[type=number]{width:5.5em;text-align:right;font-variant-numeric:tabular-nums}
+.seg{display:inline-flex;background:var(--surface2);border-radius:10px;padding:3px}
+.seg button{padding:.35em .7em;border-radius:8px;font-size:.9rem}
+.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow);font-weight:700}
+textarea.code{width:100%;min-height:90px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;word-break:break-all}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%}
+.toast.show{opacity:1}
+.banner{background:var(--warn-bg);color:var(--ink);border-radius:12px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:.9rem}
+.banner .btn{min-height:36px;padding:.3em .7em;font-size:.85rem;background:var(--surface)}
+.gate{position:fixed;inset:0;background:var(--bg);z-index:20;overflow:auto;padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.gate .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.gate .in p{margin:0}
+.result{display:flex;flex-direction:column;gap:8px}
+.result ul{margin:0;padding-left:1.2em;columns:2;column-gap:20px}
+@media (max-width:420px){.result ul{columns:1}}
+.i{position:relative;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--slate);color:var(--slate);background:transparent;font-family:"Crimson Pro",Georgia,serif;font-style:italic;font-weight:700;font-size:.95rem;line-height:1;vertical-align:middle;margin-left:6px;flex:none;cursor:pointer}
+.i::after{content:"";position:absolute;inset:-9px}
+.i:hover{background:var(--surface2)}
+.field label .i{margin-left:4px;vertical-align:-3px}
+.help{position:fixed;inset:0;background:rgba(20,26,33,.55);z-index:30;display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.help[hidden]{display:none}
+.help-box{background:var(--surface);color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px 16px;max-width:520px;width:100%;max-height:80vh;overflow:auto}
+.help-box h2{font-size:1.15rem;margin:0 0 8px;font-family:"Atkinson Hyperlegible",system-ui,sans-serif}
+.help-box p{margin:0 0 .7em;font-size:.95rem}
+.help-box p:last-of-type{margin-bottom:0}
+.help-box .row{margin-top:14px;justify-content:flex-end}
+@media (min-width:600px){.help{align-items:center}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div id="gate" class="gate" hidden>
+  <div class="in">
+    <svg class="finch" viewBox="0 0 48 48" width="56" height="56" aria-hidden="true"><use href="#finchsym"/></svg>
+    <h1 style="font-size:2.2rem;font-family:Georgia,serif">Prushit</h1>
+    <p><b>פְּרוּשִׁית</b>, das Finklein: persönlicher Vokabeltrainer für Hebräisch mit gestaffelter Wiederholung. Die Vokabeln kommen in Stapeln dazu, je nachdem, was gerade gebraucht wird.</p>
+    <p>Nur für den eigenen Gebrauch, nicht zur Weitergabe.</p>
+    <p>Dein Lernstand wird nur auf diesem Gerät gespeichert. Sichere ihn regelmäßig unter <b>Sicherung</b>, sonst ist er bei Verlust des Handys weg.</p>
+    <p>Das kleine <b>i</b> neben jeder Funktion erklärt, wofür sie da ist.</p>
+    <button class="btn primary" id="gateOk">Verstanden, los geht's</button>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="finchsym" viewBox="0 0 48 48">
+    <path d="M9 30c2-9 9-15 18-15 5 0 8 2 11 5l6 1-5 3c1 6-3 12-11 13-5 1-9 0-12-2l-7 6 2-8c-1-1-2-2-2-3z" fill="#3B5B92"/>
+    <path d="M14 31c3-6 8-9 14-9 3 0 6 1 8 3-1 5-4 8-9 9-5 1-9 0-13-3z" fill="#D9C08A"/>
+    <circle cx="31" cy="20.5" r="1.6" fill="#141A21"/>
+    <path d="M38 20l6 1-5 3z" fill="#E0B84C"/>
+    <path d="M13 36l-5 5 2-7" fill="#3B5B92"/>
+  </symbol>
+</svg>
+
+<div class="app">
+  <header class="top">
+    <svg class="finch" aria-hidden="true"><use href="#finchsym"/></svg>
+    <div><h1>Prushit</h1><div class="sub">פְּרוּשִׁית · Hebräisch</div></div>
+    <div class="spacer"></div>
+    <button type="button" class="pill" title="Lernserie in Tagen" data-help="streak" style="cursor:pointer"><svg class="flame l0" id="flame" viewBox="0 0 24 24" aria-hidden="true"><path class="fo" d="M12 2.2c.6 3.6 5.6 6.2 5.6 11.6a5.6 5.6 0 0 1-11.2 0c0-2.3 1.1-4.1 2.6-5.3.2 1.8 1 3.1 2.1 3.3C11.6 8.9 9.4 6.4 12 2.2z"/><path class="fi" d="M12 19.6a2.3 2.3 0 0 1-2.3-2.3c0-1.2.8-2 1.3-2.7.2.8.7 1.3 1.2 1.4.6-.9.1-2 .3-2.9 1 .9 1.8 2 1.8 4.2a2.3 2.3 0 0 1-2.3 2.3z"/></svg> <b id="streak">0</b></button>
+    <span class="pill" title="Lernrichtung" id="dirPill">H → D</span>
+  </header>
+
+  <main>
+    <!-- Lernen -->
+    <section class="view" id="v-lernen">
+      <div class="stack">
+        <div id="backupBanner" class="banner" hidden><span>Letzte Sicherung: <b id="backupAge">nie</b>. Sichere deinen Lernstand.</span><span class="spacer"></span><button class="btn" id="bkNow">Jetzt sichern</button></div>
+        <div class="row" style="justify-content:space-between"><div class="eyebrow">Langfristig lernen <button type="button" class="i" data-help="lernen" aria-label="Erklärung">i</button></div><span class="note">5 bis 10 Minuten, jeden Tag <button type="button" class="i" data-help="zahlen" aria-label="Erklärung">i</button></span></div>
+        <div class="statrow">
+          <div class="stat"><b id="sDue">0</b><span>heute fällig</span></div>
+          <div class="stat"><b id="sNew">0</b><span>neu heute</span></div>
+          <div class="stat"><b id="sDone">0</b><span>heute gelernt</span></div>
+        </div>
+        <div class="progress"><i id="prog"></i></div>
+        <div class="study" id="study">
+          <div class="card flash" id="flash" role="button" tabindex="0" aria-label="Karte aufdecken">
+            <div class="lemma lat" id="front"></div>
+            <div id="back" hidden>
+              <hr>
+              <div class="info lat" id="info"></div>
+              <div class="bed" id="bed"></div>
+            </div>
+            <div class="hint" id="hint">Tippen zum Aufdecken</div>
+            <div class="meta"><span id="metaLekt"></span><span id="metaIv"></span></div>
+          </div>
+          <div class="reveal" id="revealRow"><button class="btn primary" id="revealBtn" style="min-width:60%">Aufdecken</button><button type="button" class="i" data-help="aufdecken" aria-label="Erklärung">i</button></div>
+          <div class="answers" id="answers" hidden>
+            <div class="note" style="grid-column:1/-1;text-align:center;margin-bottom:-4px">Ehrlich bewerten <button type="button" class="i" data-help="bewerten" aria-label="Erklärung">i</button></div>
+            <button class="btn bad" id="aWrong">Nicht gewusst<small id="nWrong"></small></button>
+            <button class="btn good" id="aGood">Gewusst<small id="nGood"></small></button>
+            <button class="btn strong" id="aStrong">Sicher gewusst<small id="nStrong"></small></button>
+          </div>
+          <div class="row" style="justify-content:space-between">
+            <span><button class="btn small ghost" id="undoBtn" disabled>↶ Zurück</button><button type="button" class="i" data-help="zurueck" aria-label="Erklärung">i</button></span>
+            <span class="note" id="queueNote" style="flex-basis:100%;text-align:center;order:3"></span>
+            <span><button class="btn small ghost" id="suspendBtn">Aussetzen</button><button type="button" class="i" data-help="aussetzen" aria-label="Erklärung">i</button></span>
+          </div>
+        </div>
+        <div class="card" id="empty" hidden>
+          <div class="stack">
+            <h2 id="emptyTitle">Für heute alles erledigt</h2>
+            <p class="note" id="emptyText"></p>
+            <div id="moreNewWrap" class="stack" style="gap:6px"><div class="note">Heute noch neue Vokabeln dazunehmen:</div>
+            <div class="row" id="moreNew"><button class="btn small" data-n="5">5 neue</button><button class="btn small" data-n="10">10 neue</button><button class="btn small" data-n="20">20 neue</button><button class="btn small" data-n="30">30 neue</button><button class="btn small" data-n="50">50 neue</button></div></div>
+            <div class="row" id="pickRow"><button class="btn" data-go="lektionen">Stapel wählen</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stapel -->
+    <section class="view" id="v-lektionen" hidden>
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Stapel <button type="button" class="i" data-help="lektionen" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:.3em 0 0">Antippen schaltet einen Stapel an oder ab. Der Lernstand bleibt erhalten. Grün zeigt, wie viel davon schon gelernt ist.</p>
+        </div>
+        <div class="row">
+          <label class="note" for="upto">Alle bis Stapel</label>
+          <select id="upto"></select>
+          <button class="btn small" id="uptoBtn">anwählen</button>
+          <span class="spacer"></span>
+          <button class="btn small ghost" id="noneBtn">alle ab</button><button type="button" class="i" data-help="upto" aria-label="Erklärung">i</button>
+        </div>
+        <div class="grid" id="tiles"></div>
+      </div>
+    </section>
+
+    <!-- Turbo -->
+    <section class="view" id="v-turbo" hidden>
+      <div class="stack">
+        <div>
+          <div class="eyebrow">Turbo-Modus <button type="button" class="i" data-help="turbo" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:.3em 0 0">Bis zu vier Stapel einmal komplett durch, in zufälliger Reihenfolge. Der Lernstand wird nicht verändert. Die Auswahl hier ist unabhängig von den Stapel, die du langfristig lernst.</p>
+        </div>
+        <div class="card" id="turboStart">
+          <div class="stack">
+            <div class="eyebrow">Turbo-Stapel (max. 4)</div>
+            <div class="grid" id="turboTiles"></div>
+            <div class="note" id="turboInfo"></div>
+            <div class="row"><button class="btn primary" id="turboGo">Turbo starten</button><button class="btn small ghost" id="turboClear">Auswahl leeren</button><button type="button" class="i" data-help="turboStart" aria-label="Erklärung">i</button></div>
+          </div>
+        </div>
+        <div class="study" id="turboStudy" hidden>
+          <div class="progress"><i id="tProg"></i></div>
+          <div class="card flash" id="tFlash" role="button" tabindex="0" aria-label="Karte aufdecken">
+            <div class="lemma lat" id="tFront"></div>
+            <div id="tBack" hidden><hr><div class="info lat" id="tInfo"></div><div class="bed" id="tBed"></div></div>
+            <div class="hint" id="tHint">Tippen zum Aufdecken</div>
+            <div class="meta"><span id="tMeta"></span><span id="tCount"></span></div>
+          </div>
+          <div class="reveal" id="tRevealRow"><button class="btn primary" id="tRevealBtn" style="min-width:60%">Aufdecken</button></div>
+          <div class="answers" id="tAnswers" hidden style="grid-template-columns:1fr 1fr">
+            <button class="btn bad" id="tWrong">Nicht gewusst</button>
+            <button class="btn strong" id="tRight">Gewusst</button>
+          </div>
+          <div class="row"><button class="btn small ghost" id="tUndo" disabled>↶ Zurück</button><span class="spacer"></span><button class="btn small ghost" id="tStop">Abbrechen</button></div>
+        </div>
+        <div class="card result" id="turboResult" hidden>
+          <h2>Ergebnis</h2>
+          <div class="statrow"><div class="stat"><b id="tR1">0</b><span>gewusst</span></div><div class="stat"><b id="tR2">0</b><span>nicht gewusst</span></div><div class="stat"><b id="tR3">0 %</b><span>Quote</span></div></div>
+          <div id="tMissedWrap"><div class="eyebrow" style="margin:8px 0 4px">Noch einmal ansehen</div><ul id="tMissed" class="lat"></ul></div>
+          <div class="row"><button class="btn primary" id="tAgain">Nur die nicht gewussten</button><button class="btn" id="tNew">Neue Runde</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suche -->
+    <section class="view" id="v-suche" hidden>
+      <div class="stack">
+        <input type="search" id="q" placeholder="Suchen: Hebräisch mit oder ohne Nikud, oder Deutsch" autocomplete="off" aria-label="Vokabel suchen">
+        <div class="row note"><label><input type="checkbox" id="onlyOff"> nur ausgesetzte zeigen</label><button type="button" class="i" data-help="suche" aria-label="Erklärung">i</button><span class="spacer"></span><span id="qCount"></span></div>
+        <div class="list" id="results"></div>
+      </div>
+    </section>
+
+    <!-- Einstellungen -->
+    <section class="view" id="v-einstellungen" hidden>
+      <div class="stack">
+        <div class="card" id="pwaCard">
+          <div class="eyebrow" style="margin-bottom:6px">Als App auf dem Handy</div>
+          <div id="pwaEmbedded" hidden><p class="note" style="margin:0">Installieren kannst du Prushit nur, wenn du die Seite direkt unter ihrer eigenen Adresse im Browser öffnest, nicht in dieser Vorschau.</p></div>
+          <div id="pwaDone" hidden class="stack">
+            <p class="note" style="margin:0">Prushit läuft als App auf diesem Gerät. <span id="pwaOff"></span></p>
+            <p class="note" style="margin:0">Du hast vorher im Browser gelernt? Füge dort kopierten Code hier ein, dann geht es mit deinem alten Lernstand weiter.</p>
+            <div class="row"><button class="btn" id="pwaToRestore">Code einfügen</button></div>
+          </div>
+          <div id="pwaSteps" hidden class="stack">
+            <p class="note" style="margin:0">Mit eigenem Symbol auf dem Home-Bildschirm, ohne Internet nutzbar, und der Lernstand wird nicht vom Browser aufgeräumt. Die App beginnt mit leerem Lernstand, darum in dieser Reihenfolge:</p>
+            <div class="field"><label><b>1.</b> Lernstand mitnehmen<small>Kopiert deinen Sicherungscode in die Zwischenablage</small></label><button class="btn small" id="pwaCopy">Code kopieren</button></div>
+            <div class="field"><label><b>2.</b> Prushit installieren<small id="pwaHow">Legt das Symbol auf den Home-Bildschirm</small></label><button class="btn small primary" id="pwaInstall">Installieren</button></div>
+            <div class="field"><label><b>3.</b> App öffnen und Code einfügen<small>In der App unter „Mehr“ bei „Wiederherstellen“</small></label></div>
+            <div id="pwaManual" class="banner" hidden><span id="pwaManualText"></span></div>
+            <p class="note" style="margin:0" id="pwaOff2"></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Lernen</div>
+          <div class="field"><label>Lernrichtung <button type="button" class="i" data-help="dir" aria-label="Erklärung">i</button><small>Getrennter Lernstand je Richtung</small></label>
+            <div class="seg" id="dirSeg"><button data-v="LD" aria-pressed="true">Hebräisch → Deutsch</button><button data-v="DL" aria-pressed="false">Deutsch → Hebräisch</button></div></div>
+          <div class="field"><label for="goal">Zielintervall (Tage) <button type="button" class="i" data-help="goal" aria-label="Erklärung">i</button><small>Ab diesem Abstand gilt eine Vokabel als gelernt. 90 empfohlen, 180 für Ehrgeizige.</small></label><input type="number" id="goal" min="7" max="365" step="1"></div>
+          <div class="field"><label for="fGood">Faktor gewusst <button type="button" class="i" data-help="fGood" aria-label="Erklärung">i</button><small>Abstand × Faktor nach „Gewusst“</small></label><input type="number" id="fGood" min="1.1" max="5" step="0.1"></div>
+          <div class="field"><label for="fStrong">Faktor sicher gewusst <button type="button" class="i" data-help="fStrong" aria-label="Erklärung">i</button><small>Abstand × Faktor nach „Sicher gewusst“</small></label><input type="number" id="fStrong" min="1.2" max="8" step="0.1"></div>
+          <div class="field"><label for="fWrong">Faktor nicht gewusst <button type="button" class="i" data-help="fWrong" aria-label="Erklärung">i</button><small>Neuer Abstand nach „Nicht gewusst“, die Karte kommt heute noch einmal</small></label><input type="number" id="fWrong" min="0" max="1" step="0.1"></div>
+          <div class="field"><label for="newPerDay">Neue Vokabeln pro Tag <button type="button" class="i" data-help="newPerDay" aria-label="Erklärung">i</button><small>10 ist gut, 20 für fleißige Tage</small></label><input type="number" id="newPerDay" min="0" max="100" step="1"></div>
+          <div class="field"><label for="first1">Erster Abstand nach „Gewusst“ (Tage) <button type="button" class="i" data-help="first" aria-label="Erklärung">i</button></label><input type="number" id="first1" min="1" max="30" step="1"></div>
+          <div class="field"><label for="first3">Erster Abstand nach „Sicher gewusst“ (Tage) <button type="button" class="i" data-help="first" aria-label="Erklärung">i</button></label><input type="number" id="first3" min="1" max="60" step="1"></div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Anzeige</div>
+          <div class="field"><label>Schriftgröße <button type="button" class="i" data-help="anzeige" aria-label="Erklärung">i</button></label><div class="seg" id="bigSeg"><button data-v="0" aria-pressed="true">Normal</button><button data-v="1" aria-pressed="false">Groß</button></div></div>
+          <div class="field"><label>Farbschema <button type="button" class="i" data-help="anzeige" aria-label="Erklärung">i</button></label><div class="seg" id="themeSeg"><button data-v="system" aria-pressed="true">Gerät</button><button data-v="light" aria-pressed="false">Hell</button><button data-v="dark" aria-pressed="false">Dunkel</button></div></div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Sicherung <button type="button" class="i" data-help="sicherung" aria-label="Erklärung">i</button></div>
+          <p class="note" style="margin:0 0 10px">Der Lernstand liegt nur in diesem Browser. Kopiere den Code regelmäßig und schicke ihn dir per Mail oder speichere ihn in der Cloud. Auf einem neuen Handy fügst du ihn unten ein.</p>
+          <div class="stack">
+            <div class="row"><button class="btn primary" id="bkCopy">Code kopieren</button><button class="btn" id="bkFile">Als Datei speichern</button><button type="button" class="i" data-help="bkCopy" aria-label="Erklärung">i</button><span class="note" id="bkInfo"></span></div>
+            <textarea class="code" id="bkOut" readonly aria-label="Sicherungscode"></textarea>
+            <div class="eyebrow">Wiederherstellen <button type="button" class="i" data-help="bkRestore" aria-label="Erklärung">i</button></div>
+            <textarea class="code" id="bkIn" placeholder="Sicherungscode hier einfügen" aria-label="Sicherungscode einfügen"></textarea>
+            <div class="row"><button class="btn primary" id="bkPaste">Aus Zwischenablage einfügen</button><button class="btn" id="bkRestore">Aus Code wiederherstellen</button><label class="btn">Datei wählen<input type="file" id="bkFileIn" accept=".json,.txt,application/json" hidden></label></div>
+            <div id="bkConfirm" class="banner" hidden><span>Das ersetzt den Lernstand auf diesem Gerät. Sicher?</span><span class="spacer"></span><button class="btn" id="bkYes">Ja, ersetzen</button><button class="btn" id="bkNo">Nein</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom:6px">Sonstiges</div>
+          <div class="field"><label>Lernstand dieser Richtung löschen <button type="button" class="i" data-help="reset" aria-label="Erklärung">i</button><small>Unwiderruflich. Vorher sichern.</small></label><button class="btn small ghost" id="resetBtn">Löschen</button></div>
+          <div id="resetConfirm" class="banner" hidden><span>Wirklich alles löschen?</span><span class="spacer"></span><button class="btn" id="resetYes">Ja</button><button class="btn" id="resetNo">Nein</button></div>
+                    <p class="note" style="margin:10px 0 0">Persönlicher Trainer, nicht zur Weitergabe. Tasten am Rechner: Leertaste aufdecken, 1 / 2 / 3 bewerten, Z zurück. Version <span id="ver"></span>, <span id="nCards"></span> Vokabeln.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Bereiche"><div class="in">
+    <button class="tab" data-go="lernen" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h10M7 14h6"/></svg>Lernen</button>
+    <button class="tab" data-go="lektionen" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>Stapel</button>
+    <button class="tab" data-go="turbo" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Turbo</button>
+    <button class="tab" data-go="suche" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Suche</button>
+    <button class="tab" data-go="einstellungen" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Mehr</button>
+  </div></nav>
+</div>
+<div class="help" id="help" hidden><div class="help-box" role="dialog" aria-modal="true" aria-labelledby="helpT"><h2 id="helpT"></h2><div id="helpB"></div><div class="row"><button class="btn primary" id="helpX">Verstanden</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const VERSION = "2026-10-18.edc8a6";
+const DATA = [["מִשְׁפָּחָה","f., Pl. מִשְׁפָּחוֹת · mischpachá","Familie","1","i0001","משפחה"],["אָב","m., Pl. אָבוֹת · aw","Vater","1","i0002","אב"],["אַבָּא","m. · ába","Papa, Vater (auch als Anrede)","1","i0003","אבא"],["אֵם","f., Pl. אִמָּהוֹת · em","Mutter","1","i0004","אם"],["אִמָּא","f. · íma","Mama, Mutter (auch als Anrede)","1","i0005","אימא"],["הוֹרִים","m. Pl. · horím","Eltern","1","i0006","הורים"],["בֵּן","m., Pl. בָּנִים · ben","Sohn","1","i0007","בן"],["בַּת","f., Pl. בָּנוֹת · bat","Tochter","1","i0008","בת"],["יְלָדִים","m. Pl., Sg. יֶלֶד · jeladím","Kinder","1","i0009","ילדים"],["אָח","m., Pl. אַחִים · ach","Bruder","1","i0010","אח"],["אָחוֹת","f., Pl. אֲחָיוֹת · achót","Schwester","1","i0011","אחות"],["סַבָּא","m. · sába","Großvater, Opa","1","i0012","סבא"],["סַבְתָא","f. · sávta","Großmutter, Oma","1","i0013","סבתא"],["סַבָּא רַבָּא","m. · sába rába","Urgroßvater","1","i0014","סבא רבא"],["סַבְתָא רַבָּתָא","f. · sávta rabáta","Urgroßmutter","1","i0015","סבתא רבתא"],["נֶכֶד","m., Pl. נְכָדִים · néched","Enkel","1","i0016","נכד"],["נֶכְדָּה","f., Pl. נְכָדוֹת · nechdá","Enkelin","1","i0017","נכדה"],["נִין","m., Pl. נִינִים · nin","Urenkel","1","i0018","נין"],["נִינָה","f. · niná","Urenkelin","1","i0019","נינה"],["דּוֹד","m., Pl. דּוֹדִים · dod","Onkel","1","i0020","דוד"],["דּוֹדָה","f., Pl. דּוֹדוֹת · dodá","Tante","1","i0021","דודה"],["בֶּן דּוֹד","m., Pl. בְּנֵי דּוֹדִים · ben dod","Cousin","1","i0022","בן דוד"],["בַּת דּוֹדָה","f. · bat dodá","Cousine","1","i0023","בת דודה"],["אַחְיָן","m., Pl. אַחְיָנִים · achján","Neffe","1","i0024","אחיין"],["אַחְיָנִית","f. · achjanít","Nichte","1","i0025","אחיינית"],["בַּעַל","m. · bá'al","Ehemann","1","i0026","בעל"],["אִשָּׁה","f., Pl. נָשִׁים · ischá","Ehefrau; Frau","1","i0027","אישה"],["בֶּן זוּג","m. · ben sug","Partner, Lebensgefährte","1","i0028","בן זוג"],["בַּת זוּג","f. · bat sug","Partnerin, Lebensgefährtin","1","i0029","בת זוג"],["חָם","m. · cham","Schwiegervater","1","i0030","חם"],["חָמוֹת","f. · chamót","Schwiegermutter","1","i0031","חמות"],["חוֹתֵן","m. · chotén","Schwiegervater (Vater der Ehefrau, gehoben)","1","i0032","חותן"],["חוֹתֶנֶת","f. · choténet","Schwiegermutter (Mutter der Ehefrau, gehoben)","1","i0033","חותנת"],["חָתָן","m., Pl. חֲתָנִים · chatán","Schwiegersohn; Bräutigam","1","i0034","חתן"],["כַּלָּה","f., Pl. כַּלּוֹת · kalá","Schwiegertochter; Braut","1","i0035","כלה"],["גִּיס","m., Pl. גִּיסִים · gis","Schwager","1","i0036","גיס"],["גִּיסָה","f. · gisá","Schwägerin","1","i0037","גיסה"],["תְּאוֹמִים","m. Pl. · te'omím","Zwillinge","1","i0038","תאומים"],["קְרוֹבֵי מִשְׁפָּחָה","m. Pl. · krowéj mischpachá","Verwandte","1","i0039","קרובי משפחה"],["אַלְמָן","m. · almán","Witwer","1","i0040","אלמן"],["אַלְמָנָה","f. · almaná","Witwe","1","i0041","אלמנה"],["הַתַּפּוּחַ לֹא נוֹפֵל רָחוֹק מֵהָעֵץ","Redewendung · hatapúach lo nofél rachók meha'éz","Der Apfel fällt nicht weit vom Stamm (wörtl. vom Baum).","1","i0079","התפוח לא נופל רחוק מהעץ"],["דָּם סָמִיךְ מִמַּיִם","Redewendung · dam samích mimájim","Blut ist dicker als Wasser.","1","i0080","דם סמיך מימייים"],["מַעֲשֵׂה אָבוֹת סִימָן לְבָנִים","Redewendung · maaséh awót simán lewaním","Die Geschichte wiederholt sich (wörtl. die Taten der Väter sind ein Zeichen für die Söhne).","1","i0081","מעשה אבות סימן לבנים"],["אָח לְצָרָה","Redewendung · ach lezará","Freund in der Not (wörtl. ein Bruder für die Not)","1","i0082","אח לצרה"],["יַלְדֵי שַׁמֶּנֶת","Redewendung · jaldéj schaménet","verwöhnte Kinder reicher Eltern (wörtl. Sahnekinder)","1","i0083","ילדי שמנת"],["בֶּן זְקוּנִים","Redewendung · ben skuním","spätgeborener Sohn, Nesthäkchen","1","i0084","בן זקונים"],["אָב שַׁכּוּל","Redewendung · aw schakúl","Vater, der ein Kind verloren hat (f. אֵם שַׁכּוּלָה)","1","i0085","אב שכול"],["מִדּוֹר לְדוֹר","Redewendung · midór ledór","von Generation zu Generation","1","i0086","מידור לדור"],["שְׁאֵר בָּשָׂר","Redewendung · sche'ér basár","Blutsverwandter (gehoben)","1","i0087","שאר בשר"],["כִּבּוּד אָב וָאֵם","Redewendung · kibúd aw wa'ém","Ehrung von Vater und Mutter (Elterngebot)","1","i0088","כיבוד אב ואם"],["טֶבַע","m. · téwa","Natur","2","i0042","טבע"],["נוֹף","m., Pl. נוֹפִים · nof","Landschaft; Aussicht","2","i0043","נוף"],["יָם","m., Pl. יַמִּים · jam","Meer","2","i0044","ים"],["אוֹקְיָנוֹס","m., Pl. אוֹקְיָנוֹסִים · okjanós","Ozean","2","i0045","אוקיינוס"],["חוֹף","m., Pl. חוֹפִים · chof","Strand; Küste","2","i0046","חוף"],["גַּל","m., Pl. גַּלִּים · gal","Welle","2","i0047","גל"],["מִפְרָץ","m., Pl. מִפְרָצִים · mifráz","Bucht","2","i0048","מפרץ"],["אִי","m., Pl. אִיִּים · i","Insel","2","i0049","אי"],["חֲצִי אִי","m. · chazí i","Halbinsel","2","i0050","חצי אי"],["נָהָר","m., Pl. נְהָרוֹת · nahár","Fluss","2","i0051","נהר"],["נַחַל","m., Pl. נְחָלִים · náchal","Bach; Wadi (oft nur im Winter wasserführend)","2","i0052","נחל"],["אֲגַם","m., Pl. אֲגַמִּים · agám","See","2","i0053","אגם"],["מַעְיָן","m., Pl. מַעְיָנוֹת · ma'ján","Quelle","2","i0054","מעיין"],["מַפַּל מַיִם","m., Pl. מַפְּלֵי מַיִם · mapál májim","Wasserfall","2","i0055","מפל מייים"],["מַיִם","m. Pl. · májim","Wasser","2","i0056","מייים"],["הַר","m., Pl. הָרִים · har","Berg","2","i0057","הר"],["גִּבְעָה","f., Pl. גְּבָעוֹת · giw'á","Hügel","2","i0058","גבעה"],["הַר גַּעַשׁ","m., Pl. הָרֵי גַּעַשׁ · har gá'asch","Vulkan","2","i0059","הר געש"],["צוּק","m., Pl. צוּקִים · zuk","Klippe, Steilfels","2","i0060","צוק"],["סֶלַע","m., Pl. סְלָעִים · séla","Fels","2","i0061","סלע"],["אֶבֶן","f., Pl. אֲבָנִים · éwen","Stein","2","i0062","אבן"],["קַנְיוֹן","m., Pl. קַנְיוֹנִים · kanjón","Schlucht, Canyon","2","i0063","קניון"],["עֵמֶק","m., Pl. עֲמָקִים · émek","Tal","2","i0064","עמק"],["בִּקְעָה","f., Pl. בְּקָעוֹת · bik'á","Talebene, Senke","2","i0065","בקעה"],["מִישׁוֹר","m., Pl. מִישׁוֹרִים · mischór","Ebene","2","i0066","מישור"],["שְׁפֵלָה","f. · schfelá","Tiefland, Niederung","2","i0067","שפלה"],["רָמָה","f., Pl. רָמוֹת · ramá","Hochebene","2","i0068","רמה"],["מַכְתֵּשׁ","m., Pl. מַכְתְּשִׁים · machtésch","Erosionskrater (Machtesch)","2","i0069","מכתש"],["מִדְבָּר","m. · midbár","Wüste","2","i0070","מדבר"],["מְעָרָה","f., Pl. מְעָרוֹת · me'ará","Höhle","2","i0071","מערה"],["חוֹל","m. · chol","Sand","2","i0072","חול"],["אֲדָמָה","f. · adamá","Erde, Boden","2","i0073","אדמה"],["יַעַר","m., Pl. יְעָרוֹת · já'ar","Wald","2","i0074","יער"],["שָׂדֶה","m., Pl. שָׂדוֹת · sadé","Feld","2","i0075","שדה"],["עֵץ","m., Pl. עֵצִים · ez","Baum","2","i0076","עץ"],["פֶּרַח","m., Pl. פְּרָחִים · pérach","Blume","2","i0077","פרח"],["שְׁמוּרַת טֶבַע","f., Pl. שְׁמוּרוֹת טֶבַע · schmurát téwa","Naturschutzgebiet","2","i0078","שמורת טבע"],["כְּטִפָּה בַּיָּם","Redewendung · ketipá bajám","wie ein Tropfen im Meer","2","i0089","כטיפה ביים"],["הַשֶּׁקֶט שֶׁלִּפְנֵי הַסְּעָרָה","Redewendung · haschéket schelifnéj hasse'ará","die Ruhe vor dem Sturm","2","i0090","השקט שלפני הסערה"],["לֹא רוֹאִים אֶת הַיַּעַר מֵרֹב עֵצִים","Redewendung · lo ro'ím et hajá'ar merów ezím","den Wald vor lauter Bäumen nicht sehen","2","i0091","לא רואים את הייער מרוב עצים"],["לְהָזִיז הָרִים","Redewendung · lehasís harím","Berge versetzen","2","i0092","להזיז הרים"],["סְעָרָה בְּכוֹס מַיִם","Redewendung · se'ará bechós májim","Sturm im Wasserglas","2","i0093","סערה בכוס מייים"],["כַּחוֹל אֲשֶׁר עַל שְׂפַת הַיָּם","Redewendung · kachól aschér al sfat hajám","wie Sand am Meer (sehr viele)","2","i0094","כחול אשר על שפת היים"],["רוּחַ גַּבִּית","Redewendung · rúach gabít","Rückenwind (Unterstützung)","2","i0095","רוח גבית"],["מַיִם שְׁקֵטִים חוֹדְרִים עָמֹק","Redewendung · májim schketím chodrím amók","Stille Wasser gründen tief.","2","i0096","מייים שקטים חודרים עמוק"],["לֹא דֻּבִּים וְלֹא יַעַר","Redewendung · lo dubím weló já'ar","völlig erfunden (wörtl. weder Bären noch Wald)","2","i0097","לא דובים ולא יער"],["כָּל הַנְּחָלִים הוֹלְכִים אֶל הַיָּם","Redewendung · kol hanechalím holchím el hajám","Alle Flüsse fließen ins Meer (Kohelet 1,7).","2","i0098","כל הנחלים הולכים אל היים"],["אֶת","et","Akkusativpartikel vor bestimmtem Objekt (unübersetzt)","3","i0099","את"],["שֶׁל","schel","von (Besitz)","3","i0100","של"],["הוּא, הִיא","hu, hi","er, sie","3","i0101","הוא היא"],["עַל","al","auf; über","3","i0102","על"],["לֹא","lo","nicht; nein","3","i0103","לא"],["זֶה, זֹאת","se, sot","dies(es), das","3","i0104","זה זאת"],["כָּל","kol","jeder, ganz, alle (הַכֹּל alles)","3","i0105","כל"],["גַּם","gam","auch","3","i0106","גם"],["אֲנִי","aní","ich","3","i0107","אני"],["יוֹתֵר","jotér","mehr","3","i0108","יותר"],["עִם","im","mit","3","i0109","עים"],["אוֹ","o","oder","3","i0110","או"],["אִם","im","wenn, falls; ob","3","i0111","אים"],["כִּי","ki","denn, weil; dass","3","i0112","כי"],["מָה","ma","was","3","i0113","מה"],["לִי, לוֹ","לְ־ mit Endung: לִי, לְךָ, לוֹ, לָהּ, לָנוּ, לָהֶם · li, lo","mir, ihm (dir, ihr, uns, ihnen)","3","i0114","לי לו"],["בֵּין","bejn","zwischen","3","i0115","בין"],["אֲבָל","awál","aber","3","i0116","אבל"],["עַד","ad","bis","3","i0117","עד"],["עַצְמוֹ","עַצְמִי, עַצְמָהּ, עַצְמָם · azmó","(er) selbst","3","i0118","עצמו"],["עוֹד","od","noch; weiter","3","i0119","עוד"],["רַק","rak","nur","3","i0120","רק"],["כְּבָר","kwar","schon","3","i0121","כבר"],["כָּךְ","kach","so","3","i0122","כך"],["כְּמוֹ","kmo","wie","3","i0123","כמו"],["מִי","mi","wer","3","i0124","מי"],["מְאֹד","meód","sehr","3","i0125","מאוד"],["לְפִי","lefí","gemäß, laut","3","i0126","לפי"],["אַחֲרֵי","acharéj","nach (zeitlich)","3","i0127","אחרי"],["כְּדֵי","kdej","um … zu","3","i0128","כדי"],["אֵלֶּה","éle","diese (Pl.)","3","i0129","אלה"],["לָכֵן","lachén","deshalb","3","i0130","לכן"],["לְצַד","lezád","neben","3","i0131","לצד"],["אֵצֶל","ézel","bei (Personen)","3","i0132","אצל"],["כָּאן","kan","hier","3","i0133","כאן"],["אָז","as","dann, damals","3","i0134","אז"],["לִפְנֵי","lifnéj","vor","3","i0135","לפני"],["עֲבוּר","awúr","für","3","i0136","עבור"],["כַּמָּה","káma","wie viel; einige","3","i0137","כמה"],["כֵּן","ken","ja; so","3","i0138","כן"],["אֶלָּא","éla","sondern","3","i0139","אלא"],["שָׁם","scham","dort","3","i0140","שם"],["לְאַחַר","leachár","nach (gehoben)","3","i0141","לאחר"],["בְּלִי","bli","ohne","3","i0142","בלי"],["לְעִתִּים","leitím","manchmal","3","i0143","לעיתים"],["הַרְבֵּה","harbé","viel","3","i0144","הרבה"],["אֶל","el","zu, nach (Richtung)","3","i0145","אל"],["פֹּה","po","hier","3","i0146","פוה"],["אֵיךְ","ejch","wie","3","i0147","איך"],["הֲכִי","hachí","am (meisten): הֲכִי טוֹב am besten","3","i0148","הכי"],["עֲדַיִן","adájin","noch (immer)","3","i0149","עדייין"],["פָּחוֹת","pachót","weniger","3","i0150","פחות"],["בְּמִסְגֶּרֶת","bemisgéret","im Rahmen (von)","3","i0151","במסגרת"],["בִּגְלַל","biglál","wegen","3","i0152","בגלל"],["מֵעֵבֶר","meéwer","über … hinaus; jenseits","3","i0153","מעבר"],["בִּלְבַד","bilwád","nur, lediglich","3","i0154","בלבד"],["אַף","af","kein (אַף אֶחָד niemand); sogar","3","i0155","אף"],["בְּמֶשֶׁךְ","bemésech","während","3","i0156","במשך"],["בְּעִקָּר","beikár","hauptsächlich","3","i0157","בעיקר"],["לְלֹא","leló","ohne (gehoben)","3","i0158","ללא"],["בְּעִקְבוֹת","beikwót","infolge, nach","3","i0159","בעקבות"],["מִתּוֹךְ","mitóch","aus (… heraus), von","3","i0160","מיתוך"],["מוּל","mul","gegenüber","3","i0161","מול"],["בְּתוֹךְ","betóch","innerhalb, in","3","i0162","בתוך"],["בְּדִיּוּק","bedijúk","genau","3","i0163","בדייוק"],["כֵּיצַד","kejzád","wie (gehoben)","3","i0164","כיצד"],["בְּאֶמְצָעוּת","beemzaút","mittels, mit Hilfe von","3","i0165","באמצעות"],["רֹב","row","Mehrheit (לְרֹב meistens)","3","i0166","רוב"],["יַחֲסִית","jachasít","relativ, verhältnismäßig","3","i0167","יחסית"],["כִּמְעַט","kim'át","fast","3","i0168","כמעט"],["לְמָשָׁל","lemaschál","zum Beispiel","3","i0169","למשל"],["עַכְשָׁו","achscháw","jetzt","3","i0170","עכשו"],["אַךְ","ach","aber, jedoch (gehoben)","3","i0171","אך"],["נֶגֶד","néged","gegen","3","i0172","נגד"],["קֹדֶם","kódem","zuerst; vorher (קֹדֶם כֹּל vor allem)","3","i0173","קודם"],["בִּמְקוֹם","bimkóm","anstatt","3","i0174","במקום"],["כְּלוֹמַר","klomár","das heißt","3","i0175","כלומר"],["תָּמִיד","tamíd","immer","3","i0176","תמיד"],["אֲשֶׁר","aschér","der, die, das (Relativ, gehoben)","3","i0177","אשר"],["בְּמַקְבִּיל","bemakbíl","gleichzeitig, parallel","3","i0178","במקביל"],["כַּאֲשֶׁר","kaaschér","als, wenn","3","i0179","כאשר"],["יַחַד","jáchad","zusammen","3","i0180","יחד"],["אֲפִלּוּ","afílu","sogar","3","i0181","אפילו"],["מַשֶּׁהוּ","máschehu","etwas","3","i0182","משהו"],["דַּי","daj","ziemlich; genug (מִדַּי zu sehr)","3","i0183","די"],["לְעֻמַּת","leumát","im Vergleich zu","3","i0184","לעומת"],["לְאֹרֶךְ","leórech","entlang; während","3","i0185","לאורך"],["דַּוְקָא","dáwka","ausgerechnet; gerade","3","i0186","דוקא"],["לִקְרַאת","likrát","auf … zu; gegen (zeitlich)","3","i0187","לקראת"],["מַסְפִּיק","maspík","genug","3","i0188","מספיק"],["בֶּאֱמֶת","beemét","wirklich","3","i0189","באמת"],["שׁוּם","schum","kein (שׁוּם דָּבָר nichts)","3","i0190","שום"],["הָיָה","Inf. לִהְיוֹת · hajá","sein","4","i0191","הייה"],["יֵשׁ","יֵשׁ לִי ich habe · jesch","es gibt; haben","4","i0192","יש"],["אֶפְשָׁר","אִי אֶפְשָׁר unmöglich · efschár","möglich; man kann","4","i0193","אפשר"],["הִגִּיעַ","Inf. לְהַגִּיעַ · higía","ankommen, erreichen","4","i0194","היגיע"],["עָשָׂה","Inf. לַעֲשׂוֹת · asá","machen, tun","4","i0195","עשה"],["צָרִיךְ","f. צְרִיכָה · zarích","müssen; brauchen","4","i0196","צריך"],["יָכוֹל","f. יְכוֹלָה · jachól","können","4","i0197","יכול"],["אָמַר","Inf. לוֹמַר · amár","sagen","4","i0198","אמר"],["אֵינוֹ","אֵינָהּ, אֵינָם · ejnó","ist nicht (gehoben)","4","i0199","אינו"],["נָתַן","Inf. לָתֵת · natán","geben (נִתָּן es ist möglich)","4","i0200","נתן"],["דִּבֵּר","Inf. לְדַבֵּר · dibér","sprechen (מְדֻבָּר בְּ es handelt sich um)","4","i0201","דיבר"],["קִבֵּל","Inf. לְקַבֵּל · kibél","bekommen, erhalten","4","i0202","קיבל"],["נִמְצָא","Inf. לְהִמָּצֵא · nimzá","sich befinden; gefunden werden","4","i0203","נמצא"],["אֵין","אֵין לִי ich habe nicht · ejn","es gibt nicht","4","i0204","אין"],["הִסְבִּיר","Inf. לְהַסְבִּיר · hisbír","erklären","4","i0205","הסביר"],["עָלוּל","f. עֲלוּלָה · alúl","könnte (bei Unerwünschtem), droht zu","4","i0206","עלול"],["הוֹבִיל","Inf. לְהוֹבִיל · howíl","führen, anführen","4","i0207","הוביל"],["עָבַר","Inf. לַעֲבֹר · awár","vorbeigehen, überqueren (בֶּעָבָר früher; לְשֶׁעָבַר ehemalig)","4","i0208","עבר"],["מָכַר","Inf. לִמְכֹּר · machár","verkaufen","4","i0209","מכר"],["נִמְכַּר","nimkár","verkauft werden","4","i0210","נמכר"],["הִשְׁתַּמֵּשׁ","Inf. לְהִשְׁתַּמֵּשׁ בְּ · hischtamésch","benutzen","4","i0211","השתמש"],["בִּקֵּשׁ","Inf. לְבַקֵּשׁ · bikésch","bitten, wollen","4","i0212","ביקש"],["נִכְנַס","Inf. לְהִכָּנֵס · nichnás","hineingehen, eintreten","4","i0213","נכנס"],["הִתְחִיל","Inf. לְהַתְחִיל · hitchíl","anfangen","4","i0214","התחיל"],["הִצְלִיחַ","Inf. לְהַצְלִיחַ · hizlíach","Erfolg haben; schaffen","4","i0215","הצליח"],["רָצָה","Inf. לִרְצוֹת · razá","wollen","4","i0216","רצה"],["הִמְשִׁיךְ","Inf. לְהַמְשִׁיךְ · himschích","fortsetzen, weitermachen","4","i0217","המשיך"],["נִדְרָשׁ","nidrásch","erforderlich, verlangt","4","i0218","נדרש"],["כּוֹלֵל","kolél","umfassen; einschließlich","4","i0219","כולל"],["נִשְׁאַר","Inf. לְהִשָּׁאֵר · nisch'ár","bleiben","4","i0220","נשאר"],["צָפוּי","f. צְפוּיָה · zafúj","voraussichtlich, erwartet","4","i0221","צפוי"],["חָשַׁב","Inf. לַחְשֹׁב · chascháw","denken","4","i0222","חשב"],["יִצֵּר","Inf. לְיַצֵּר · jizér","herstellen, produzieren","4","i0223","ייצר"],["עָשׂוּי","f. עֲשׂוּיָה · asúj","könnte, dürfte; gemacht (aus)","4","i0224","עשוי"],["פָּעַל","Inf. לִפְעֹל · paál","wirken, handeln, tätig sein","4","i0225","פעל"],["נִפְתַּח","niftách","sich öffnen, eröffnet werden","4","i0226","נפתח"],["עִשֵּׁן","Inf. לְעַשֵּׁן · ischén","rauchen","4","i0227","עישן"],["הֵבִין","Inf. לְהָבִין · hewín","verstehen","4","i0228","הבין"],["הֶעֱבִיר","Inf. לְהַעֲבִיר · heewír","übertragen, überweisen, verlegen","4","i0229","העביר"],["פָּתַח","Inf. לִפְתֹּחַ · patách","öffnen","4","i0230","פתח"],["יָדַע","Inf. לָדַעַת · jadá","wissen","4","i0231","ידע"],["הוֹסִיף","Inf. לְהוֹסִיף · hosíf","hinzufügen","4","i0232","הוסיף"],["הִכִּיר","Inf. לְהַכִּיר · hikír","kennen, kennenlernen","4","i0233","היכיר"],["סִפֵּר","Inf. לְסַפֵּר · sipér","erzählen","4","i0234","סיפר"],["חַיָּב","f. חַיֶּבֶת · chajáw","müssen, verpflichtet sein","4","i0235","חייב"],["אָמוּר","f. אֲמוּרָה · amúr","sollen (כָּאָמוּר wie gesagt)","4","i0236","אמור"],["הֶרְאָה","Inf. לְהַרְאוֹת · her'á","zeigen","4","i0237","הראה"],["תָּלוּי","f. תְּלוּיָה · talúj","abhängig (בְּ von)","4","i0238","תלוי"],["הִשְׁתַּנָּה","Inf. לְהִשְׁתַּנּוֹת · hischtaná","sich ändern","4","i0239","השתנה"],["עָבַד","Inf. לַעֲבֹד · awád","arbeiten","4","i0240","עבד"],["הִשְׁפִּיעַ","Inf. לְהַשְׁפִּיעַ עַל · hischpía","beeinflussen","4","i0241","השפיע"],["הִשְׁקִיעַ","Inf. לְהַשְׁקִיעַ · hischkía","investieren","4","i0242","השקיע"],["עָמַד","Inf. לַעֲמֹד · amád","stehen (עוֹמֵד לְ im Begriff sein)","4","i0243","עמד"],["נִקְבַּע","nikbá","festgelegt werden","4","i0244","נקבע"],["יָצַר","Inf. לִיצֹר · jazár","schaffen, erzeugen","4","i0245","יצר"],["הֶעֱרִיךְ","Inf. לְהַעֲרִיךְ · heerích","schätzen; einschätzen","4","i0246","העריך"],["בָּנָה","Inf. לִבְנוֹת · baná","bauen","4","i0247","בנה"],["פִּתֵּחַ","Inf. לְפַתֵּחַ · pitéach","entwickeln","4","i0248","פיתח"],["קָרָה","Inf. לִקְרוֹת · kará","geschehen, passieren","4","i0249","קרה"],["נִהֵל","Inf. לְנַהֵל · nihél","leiten, führen (מְנַהֵל Leiter)","4","i0250","ניהל"],["כָּתַב","Inf. לִכְתֹּב · katáw","schreiben","4","i0251","כתב"],["שִׁנָּה","Inf. לְשַׁנּוֹת · schiná","ändern","4","i0252","שינה"],["רָאָה","Inf. לִרְאוֹת · ra'á","sehen","4","i0253","ראה"],["הֶחְלִיט","Inf. לְהַחְלִיט · hechlít","entscheiden","4","i0254","החליט"],["חָזַר","Inf. לַחֲזֹר · chasár","zurückkehren; wiederholen","4","i0255","חזר"],["שִׁלֵּם","Inf. לְשַׁלֵּם · schilém","bezahlen","4","i0256","שילם"],["הוֹכִיחַ","Inf. לְהוֹכִיחַ · hochíach","beweisen","4","i0257","הוכיח"],["זָכַר","Inf. לִזְכֹּר · sachár","sich erinnern","4","i0258","זכר"],["סִיֵּעַ","Inf. לְסַיֵּעַ · sijéa","helfen, unterstützen","4","i0259","סייע"],["שָׁנָה","f., Pl. שָׁנִים · schaná","Jahr","5","i0260","שנה"],["שֶׁקֶל","m., Pl. שְׁקָלִים · schékel","Schekel","5","i0261","שקל"],["חֶבְרָה","f., Pl. חֲבָרוֹת · chewrá","Firma; Gesellschaft","5","i0262","חברה"],["יוֹם","m., Pl. יָמִים · jom","Tag","5","i0263","יום"],["בַּיִת","m., Pl. בָּתִּים · bájit","Haus","5","i0264","בייית"],["מַחֲלָה","f., Pl. מַחֲלוֹת · machalá","Krankheit","5","i0265","מחלה"],["עוֹלָם","m., Pl. עוֹלָמוֹת · olám","Welt (מֵעוֹלָם לֹא nie)","5","i0266","עולם"],["טִפּוּל","m., Pl. טִפּוּלִים · tipúl","Behandlung, Pflege","5","i0267","טיפול"],["חֵלֶק","m., Pl. חֲלָקִים · chélek","Teil","5","i0268","חלק"],["עֵסֶק","m., Pl. עֲסָקִים · ések","Geschäft, Betrieb","5","i0269","עסק"],["דָּבָר","m., Pl. דְּבָרִים · dawár","Sache, Ding","5","i0270","דבר"],["חַיִּים","m. Pl. · chajím","Leben","5","i0271","חייים"],["בִּינָה מְלָאכוּתִית","f. · biná melachutít","künstliche Intelligenz","5","i0272","בינה מלאכותית"],["אִישׁ","m., Pl. אֲנָשִׁים · isch","Mann; Pl. Leute","5","i0273","איש"],["עֲבוֹדָה","f., Pl. עֲבוֹדוֹת · awodá","Arbeit","5","i0274","עבודה"],["עוֹבֵד","m., Pl. עוֹבְדִים · owéd","Angestellter, Arbeitnehmer","5","i0275","עובד"],["דֶּרֶךְ","f., Pl. דְּרָכִים · dérech","Weg (דֶּרֶךְ über, via)","5","i0276","דרך"],["מְדִינָה","f., Pl. מְדִינוֹת · mediná","Staat, Land","5","i0277","מדינה"],["מָקוֹם","m., Pl. מְקוֹמוֹת · makóm","Ort, Platz","5","i0278","מקום"],["תְּחוּם","m., Pl. תְּחוּמִים · tchum","Bereich, Gebiet","5","i0279","תחום"],["מְחִיר","m., Pl. מְחִירִים · mechír","Preis","5","i0280","מחיר"],["מִשְׂרָד","m., Pl. מִשְׂרָדִים · misrád","Büro; Ministerium","5","i0281","משרד"],["זְמַן","m., Pl. זְמַנִּים · sman","Zeit","5","i0282","זמן"],["מַעֲרֶכֶת","f., Pl. מַעֲרָכוֹת · maaréchet","System","5","i0283","מערכת"],["בְּדִיקָה","f., Pl. בְּדִיקוֹת · bdiká","Untersuchung, Test","5","i0284","בדיקה"],["כְּלִי","m., Pl. כֵּלִים · kli","Gerät, Werkzeug; Gefäß","5","i0285","כלי"],["צַעַד","m., Pl. צְעָדִים · zá'ad","Schritt; Maßnahme","5","i0286","צעד"],["תַּקְצִיב","m., Pl. תַּקְצִיבִים · takzíw","Budget, Haushalt","5","i0287","תקציב"],["פַּעַם","f., Pl. פְּעָמִים · pá'am","Mal (פַּעַם einmal, früher)","5","i0288","פעם"],["שׁוּק","m., Pl. שְׁוָקִים · schuk","Markt","5","i0289","שוק"],["מִסְעָדָה","f., Pl. מִסְעָדוֹת · mis'adá","Restaurant","5","i0290","מסעדה"],["מִקְרֶה","m., Pl. מִקְרִים · mikré","Fall; Zufall","5","i0291","מקרה"],["חוֹלֶה","m., Pl. חוֹלִים · cholé","Kranker; krank","5","i0292","חולה"],["טֶכְנוֹלוֹגְיָה","f. · technológja","Technologie","5","i0293","טכנולוגייה"],["אֹפֶן","m. · ófen","Art, Weise (בְּאֹפֶן + Adj.: -weise)","5","i0294","אופן"],["שֻׁתָּף","m., Pl. שֻׁתָּפִים · schutáf","Partner, Teilhaber","5","i0295","שותף"],["צֹרֶךְ","m., Pl. צְרָכִים · zórech","Bedarf (לְצֹרֶךְ zwecks)","5","i0296","צורך"],["רֶשֶׁת","f., Pl. רְשָׁתוֹת · réschet","Netz; Kette (Ladenkette)","5","i0297","רשת"],["קִצּוּץ","m., Pl. קִצּוּצִים · kizúz","Kürzung","5","i0298","קיצוץ"],["עַגְבָנִיָּה","f., Pl. עַגְבָנִיּוֹת · agwanijá","Tomate","5","i0299","עגבנייה"],["שְׁאֵלָה","f., Pl. שְׁאֵלוֹת · sche'elá","Frage","5","i0300","שאלה"],["כְּלָל","m., Pl. כְּלָלִים · klal","Regel (בִּכְלָל überhaupt)","5","i0301","כלל"],["שֵׁרוּת","m., Pl. שֵׁרוּתִים · scherút","Dienst, Service","5","i0302","שרות"],["גִּדּוּל","m., Pl. גִּדּוּלִים · gidúl","Wachstum, Zunahme; Geschwulst","5","i0303","גידול"],["קֶשֶׁר","m., Pl. קְשָׁרִים · késcher","Verbindung, Kontakt","5","i0304","קשר"],["שֶׁטַח","m., Pl. שְׁטָחִים · schétach","Fläche, Gebiet","5","i0305","שטח"],["חֲנוּת","f., Pl. חֲנֻיּוֹת · chanút","Laden, Geschäft","5","i0306","חנות"],["דִּירָה","f., Pl. דִּירוֹת · dirá","Wohnung","5","i0307","דירה"],["שָׁלָב","m., Pl. שְׁלַבִּים · scheláw","Stufe, Phase","5","i0308","שלב"],["שִׁנּוּי","m., Pl. שִׁנּוּיִים · schinúj","Veränderung","5","i0309","שינוי"],["גּוֹרֵם","m., Pl. גּוֹרְמִים · gorém","Faktor; Stelle, Instanz","5","i0310","גורם"],["אֲתָר","m., Pl. אֲתָרִים · atár","Website; Stätte","5","i0311","אתר"],["מוּצָר","m., Pl. מוּצָרִים · muzár","Produkt","5","i0312","מוצר"],["שָׁעָה","f., Pl. שָׁעוֹת · scha'á","Stunde","5","i0313","שעה"],["שָׁבוּעַ","m., Pl. שָׁבוּעוֹת · schawúa","Woche","5","i0314","שבוע"],["מֶרְכָּז","m., Pl. מֶרְכָּזִים · merkás","Zentrum","5","i0315","מרכז"],["סִכּוּן","m., Pl. סִכּוּנִים · sikún","Risiko","5","i0316","סיכון"],["סַרְטָן","m. · sartán","Krebs","5","i0317","סרטן"],["פְּעִילוּת","f., Pl. פְּעִילֻיּוֹת · pe'ilút","Aktivität","5","i0318","פעילות"],["מַצָּב","m., Pl. מַצָּבִים · mazáw","Lage, Zustand","5","i0319","מצב"],["סוֹף","m., Pl. סוֹפִים · sof","Ende (בַּסּוֹף am Ende)","5","i0320","סוף"],["לָקוֹחַ","m., Pl. לָקוֹחוֹת · lakóach","Kunde","5","i0321","לקוח"],["חִסּוּן","m., Pl. חִסּוּנִים · chisún","Impfung","5","i0322","חיסון"],["מֶחְקָר","m., Pl. מֶחְקָרִים · mechkár","Forschung, Studie","5","i0323","מחקר"],["עֵרֶךְ","m., Pl. עֲרָכִים · érech","Wert (בְּעֵרֶךְ etwa)","5","i0324","ערך"],["נַדְלָ״ן","m. · nadlán","Immobilien","5","i0325","נדל״ן"],["פַּעַר","m., Pl. פְּעָרִים · pá'ar","Kluft, Lücke","5","i0326","פער"],["חֹדֶשׁ","m., Pl. חֳדָשִׁים · chódesch","Monat","5","i0327","חודש"],["הַחְלָטָה","f., Pl. הַחְלָטוֹת · hachlatá","Entscheidung","5","i0328","החלטה"],["סוּג","m., Pl. סוּגִים · sug","Art, Sorte","5","i0329","סוג"],["תָּא","m., Pl. תָּאִים · ta","Zelle; Kabine","5","i0330","תא"],["גִּיל","m., Pl. גִּילִים · gil","Alter","5","i0331","גיל"],["רֶגַע","m., Pl. רְגָעִים · réga","Moment","5","i0332","רגע"],["דּוֹלָר","m., Pl. דּוֹלָרִים · dólar","Dollar","5","i0333","דולר"],["הַיְטֶק","m. · hájtek","Hightech(-Branche)","5","i0334","היטק"],["חֶדֶר","m., Pl. חֲדָרִים · chéder","Zimmer","5","i0335","חדר"],["בְּרִיאוּת","f. · bri'út","Gesundheit","5","i0336","בריאות"],["סְטוּדֶנְט","m., Pl. סְטוּדֶנְטִים · stúdent","Student","5","i0337","סטודנט"],["מַהֲלָךְ","m., Pl. מַהֲלָכִים · mahalách","Verlauf; Zug, Schritt (בְּמַהֲלַךְ während)","5","i0338","מהלך"],["שִׁמּוּשׁ","m., Pl. שִׁמּוּשִׁים · schimúsch","Gebrauch, Nutzung","5","i0339","שימוש"],["יָד","f., Pl. יָדַיִם · jad","Hand","5","i0340","יד"],["תַּעֲשִׂיָּה","f., Pl. תַּעֲשִׂיּוֹת · ta'asijá","Industrie","5","i0341","תעשייה"],["רָמָה","f., Pl. רָמוֹת · ramá","Niveau, Ebene (auch: Hochebene)","5","i0342","רמה"],["אָדָם","m. · adám","Mensch","5","i0343","אדם"],["מִשְׁלוֹחַ","m., Pl. מִשְׁלוֹחִים · mischlóach","Lieferung, Versand","5","i0344","משלוח"],["מִסְפָּר","m., Pl. מִסְפָּרִים · mispár","Zahl, Nummer; einige","5","i0345","מספר"],["הוֹצָאָה","f., Pl. הוֹצָאוֹת · hoza'á","Ausgabe (Kosten); Verlag","5","i0346","הוצאה"],["סְנִיף","m., Pl. סְנִיפִים · snif","Filiale","5","i0347","סניף"],["פִּתּוּחַ","m., Pl. פִּתּוּחִים · pitúach","Entwicklung","5","i0348","פיתוח"],["נִתּוּחַ","m., Pl. נִתּוּחִים · nitúach","Operation; Analyse","5","i0349","ניתוח"],["צֶוֶת","m., Pl. צְוָתִים · zéwet","Team","5","i0350","צוות"],["אֶפְשָׁרוּת","f., Pl. אֶפְשָׁרֻיּוֹת · efscharút","Möglichkeit","5","i0351","אפשרות"],["אֵזוֹר","m., Pl. אֲזוֹרִים · esór","Gegend, Region","5","i0352","אזור"],["מֶמְשָׁלָה","f., Pl. מֶמְשָׁלוֹת · memschalá","Regierung","5","i0353","ממשלה"],["רֵאָה","f., Pl. רֵאוֹת · re'á","Lunge","5","i0354","ראה"],["יַעַד","m., Pl. יְעָדִים · já'ad","Ziel","5","i0355","יעד"],["מִמְצָא","m., Pl. מִמְצָאִים · mimzá","Befund","5","i0356","ממצא"],["חָבֵר","m., Pl. חֲבֵרִים · chawér","Freund; Mitglied","5","i0357","חבר"],["רָשׁוּת","f., Pl. רָשֻׁיּוֹת · reschút","Behörde; Erlaubnis","5","i0358","רשות"],["מְגוּרִים","m. Pl. · megurím","Wohnen (Wohn-)","5","i0359","מגורים"],["רֹאשׁ","m., Pl. רָאשִׁים · rosch","Kopf; Chef (רֹאשׁ הַמֶּמְשָׁלָה Premierminister)","5","i0360","ראש"],["שֶׁמֶן","m., Pl. שְׁמָנִים · schémen","Öl","5","i0361","שמן"],["הֲבָנָה","f. · hawaná","Verständnis","5","i0362","הבנה"],["מוּתָג","m., Pl. מוּתָגִים · mutág","Marke","5","i0363","מותג"],["עֲלוּת","f., Pl. עֲלֻיּוֹת · alút","Kosten","5","i0364","עלות"],["מִלְחָמָה","f., Pl. מִלְחָמוֹת · milchamá","Krieg","5","i0365","מלחמה"],["עִסְקָה","f., Pl. עֲסָקוֹת · iská","Geschäft, Deal","5","i0366","עסקה"],["רוֹפֵא","m., Pl. רוֹפְאִים · rofé","Arzt","5","i0367","רופא"],["טַעַם","m., Pl. טְעָמִים · tá'am","Geschmack; Grund","5","i0368","טעם"],["תַּשְׁתִּית","f., Pl. תַּשְׁתִּיּוֹת · taschtít","Infrastruktur","5","i0369","תשתית"],["הֶמְשֵׁךְ","m. · hemschéch","Fortsetzung (בְּהֶמְשֵׁךְ im Weiteren)","5","i0370","המשך"],["תְּשׁוּבָה","f., Pl. תְּשׁוּבוֹת · tschuwá","Antwort","5","i0371","תשובה"],["חֲוָיָה","f., Pl. חֲוָיוֹת · chawajá","Erlebnis","5","i0372","חווייה"],["יִתְרוֹן","m., Pl. יִתְרוֹנוֹת · jitrón","Vorteil","5","i0373","יתרון"],["בַּעֲלוּת","f. · ba'alút","Eigentum, Besitz","5","i0374","בעלות"],["בְּנִיָּה","f. · bnijá","Bau","5","i0375","בנייה"],["כְּאֵב","m., Pl. כְּאֵבִים · ke'éw","Schmerz","5","i0376","כאב"],["פִּלְפֵּל","m., Pl. פִּלְפְּלִים · pilpél","Paprika; Pfeffer","5","i0377","פלפל"],["נְקֻדָּה","f., Pl. נְקֻדּוֹת · nekudá","Punkt","5","i0378","נקודה"],["כַּמּוּת","f., Pl. כַּמֻּיּוֹת · kamút","Menge","5","i0379","כמות"],["מוֹעֲדוֹן","m., Pl. מוֹעֲדוֹנִים · mo'adón","Klub","5","i0380","מועדון"],["קְנִיָּה","f., Pl. קְנִיּוֹת · knijá","Kauf, Einkauf","5","i0381","קנייה"],["שֹׁוִי","m. · schówi","Wert (Marktwert)","5","i0382","שווי"],["יְרִידָה","f., Pl. יְרִידוֹת · jeridá","Rückgang, Abstieg","5","i0383","ירידה"],["סִפּוּר","m., Pl. סִפּוּרִים · sipúr","Geschichte, Erzählung","5","i0384","סיפור"],["פְּרוֹיֶקְט","m., Pl. פְּרוֹיֶקְטִים · projékt","Projekt","5","i0385","פרוייקט"],["פְּרָט","m., Pl. פְּרָטִים · prat","Detail (בִּפְרָט insbesondere)","5","i0386","פרט"],["נָתוּן","m., Pl. נְתוּנִים · natún","Gegebenheit; Pl. Daten","5","i0387","נתון"],["קְהִלָּה","f., Pl. קְהִלּוֹת · kehilá","Gemeinde, Gemeinschaft","5","i0388","קהילה"],["תּוֹצָאָה","f., Pl. תּוֹצָאוֹת · toza'á","Ergebnis","5","i0389","תוצאה"],["מִתְחָם","m., Pl. מִתְחָמִים · mitchám","Gelände, Komplex","5","i0390","מתחם"],["תְּרוּפָה","f., Pl. תְּרוּפוֹת · trufá","Medikament","5","i0391","תרופה"],["סַיְבֶּר","m. · sájber","Cyber-","5","i0392","סיבר"],["הִזְדַּמְּנוּת","f., Pl. הִזְדַּמְּנֻיּוֹת · hisdamnút","Gelegenheit","5","i0393","הזדמנות"],["סְבִיבָה","f., Pl. סְבִיבוֹת · swiwá","Umgebung; Umwelt","5","i0394","סביבה"],["תְּמוּנָה","f., Pl. תְּמוּנוֹת · tmuná","Bild, Foto","5","i0395","תמונה"],["חֲבִילָה","f., Pl. חֲבִילוֹת · chawilá","Paket","5","i0396","חבילה"],["מַס","m., Pl. מִסִּים · mas","Steuer","5","i0397","מס"],["בַּנְק","m., Pl. בַּנְקִים · bank","Bank","5","i0398","בנק"],["אֶתְגָּר","m., Pl. אֶתְגָּרִים · etgár","Herausforderung","5","i0399","אתגר"],["מִשְׁפָּט","m., Pl. מִשְׁפָּטִים · mischpát","Satz; Prozess, Recht","5","i0400","משפט"],["חֵצִי","m. · chézi","Hälfte; halb","5","i0401","חצי"],["סְכוּם","m., Pl. סְכוּמִים · skum","Summe, Betrag","5","i0402","סכום"],["יַזָּם","m., Pl. יַזָּמִים · jasám","Unternehmer, Gründer","5","i0403","יזם"],["כֶּסֶף","m., Pl. כְּסָפִים · késef","Geld; Silber","5","i0404","כסף"],["מַדָּד","m., Pl. מַדָּדִים · madád","Index","5","i0405","מדד"],["תַּסְמִין","m., Pl. תַּסְמִינִים · tasmín","Symptom","5","i0406","תסמין"],["נִהוּל","m. · nihúl","Verwaltung, Management","5","i0407","ניהול"],["לֵב","m., Pl. לְבָבוֹת · lew","Herz (לָשִׂים לֵב aufpassen)","5","i0408","לב"],["מִטְעָן","m., Pl. מִטְעָנִים · mit'án","Ladung; Gepäck; Sprengsatz","5","i0409","מטען"],["מִפְעָל","m., Pl. מִפְעָלִים · mif'ál","Fabrik, Werk","5","i0410","מפעל"],["אֵרוּעַ","m., Pl. אֵרוּעִים · erúa","Ereignis, Veranstaltung","5","i0411","ארוע"],["עִיר","f., Pl. עָרִים · ir","Stadt","5","i0412","עיר"],["מִכְתָּב","m., Pl. מִכְתָּבִים · michtáw","Brief","5","i0413","מכתב"],["בִּטָּחוֹן","m. · bitachón","Sicherheit; Vertrauen","5","i0414","ביטחון"],["מָעוֹן","m., Pl. מְעוֹנוֹת · ma'ón","Wohnheim (מְעוֹנוֹת סְטוּדֶנְטִים)","5","i0415","מעון"],["גּוּף","m., Pl. גּוּפִים · guf","Körper; Organisation","5","i0416","גוף"],["סִיר","m., Pl. סִירִים · sir","Topf","5","i0417","סיר"],["בָּסִיס","m., Pl. בְּסִיסִים · basís","Basis; Stützpunkt","5","i0418","בסיס"],["שִׁלּוּב","m., Pl. שִׁלּוּבִים · schilúw","Kombination, Verbindung","5","i0419","שילוב"],["דַּעַת","f. · dá'at","Meinung; Verstand (לְדַעְתִּי meiner Meinung nach)","5","i0420","דעת"],["חֹמֶר","m., Pl. חֳמָרִים · chómer","Material, Stoff","5","i0421","חומר"],["תּוֹפָעָה","f., Pl. תּוֹפָעוֹת · tofa'á","Erscheinung, Phänomen","5","i0422","תופעה"],["אַפְּלִיקַצְיָה","f., Pl. אַפְּלִיקַצְיוֹת · aplikázja","App","5","i0423","אפליקצייה"],["עָנָף","m., Pl. עֲנָפִים · anáf","Branche; Ast","5","i0424","ענף"],["תְּלוּנָה","f., Pl. תְּלוּנוֹת · tluná","Beschwerde","5","i0425","תלונה"],["חֶשְׁבּוֹן","m., Pl. חֶשְׁבּוֹנוֹת · cheschbón","Rechnung; Konto","5","i0426","חשבון"],["שָׂכָר","m. · sachár","Lohn, Gehalt","5","i0427","שכר"],["שִׁתּוּף","m., Pl. שִׁתּוּפִים · schitúf","Teilen; Beteiligung (שִׁתּוּף פְּעֻלָּה Zusammenarbeit)","5","i0428","שיתוף"],["חֹפֶשׁ","m. · chófesch","Freiheit; Ferien","5","i0429","חופש"],["תְּחִלָּה","f. · tchilá","Anfang (בַּתְּחִלָּה zuerst)","5","i0430","תחילה"],["קַנְיוֹן","m., Pl. קַנְיוֹנִים · kanjón","Einkaufszentrum (auch: Schlucht)","5","i0431","קניון"],["תִּכְנוּן","m. · tichnún","Planung","5","i0432","תכנון"],["קוֹמָה","f., Pl. קוֹמוֹת · komá","Stockwerk","5","i0433","קומה"],["בָּכִיר","Pl. בְּכִירִים · bachír","leitend, ranghoch; leitender Mitarbeiter","5","i0434","בכיר"],["בִּצּוּעַ","m., Pl. בִּצּוּעִים · bizúa","Ausführung; Leistung","5","i0435","ביצוע"],["מִטָּה","f., Pl. מִטּוֹת · mitá","Bett","5","i0436","מיטה"],["חֻפְשָׁה","f., Pl. חֻפְשׁוֹת · chufschá","Urlaub","5","i0437","חופשה"],["רְחוֹב","m., Pl. רְחוֹבוֹת · rechów","Straße","5","i0438","רחוב"],["רֶקַע","m. · réka","Hintergrund","5","i0439","רקע"],["בְּעָיָה","f., Pl. בְּעָיוֹת · be'ajá","Problem","5","i0440","בעייה"],["מוֹדֶל","m., Pl. מוֹדֶלִים · módel","Modell","5","i0441","מודל"],["פְּגִיעָה","f., Pl. פְּגִיעוֹת · pgi'á","Verletzung; Schaden","5","i0442","פגיעה"],["הַזְמָנָה","f., Pl. הַזְמָנוֹת · hasmaná","Bestellung; Einladung","5","i0443","הזמנה"],["מַנְכָּ״ל","m. · mankál","Generaldirektor, CEO","5","i0444","מנכ״ל"],["הַשְׁקָעָה","f., Pl. הַשְׁקָעוֹת · haschka'á","Investition","5","i0445","השקעה"],["נֶכֶס","m., Pl. נְכָסִים · néches","Vermögenswert, Immobilie","5","i0446","נכס"],["פָּנִים","m. Pl. · paním","Gesicht; Innenseite","5","i0447","פנים"],["מַעֲרָךְ","m., Pl. מַעֲרָכִים · ma'arách","Aufstellung, Struktur","5","i0448","מערך"],["תּוֹכְנָה","f., Pl. תּוֹכְנוֹת · tochná","Software","5","i0449","תוכנה"],["נֶזֶק","m., Pl. נְזָקִים · nések","Schaden","5","i0450","נזק"],["נְשִׁימָה","f., Pl. נְשִׁימוֹת · neschimá","Atmung, Atemzug","5","i0451","נשימה"],["מָוֶת","m. · máwet","Tod","5","i0452","מוות"],["עִשּׁוּן","m. · ischún","Rauchen","5","i0453","עישון"],["כִּימוֹתֶרַפְּיָה","f. · kimoterápja","Chemotherapie","5","i0454","כימותרפייה"],["צְרִיכָה","f. · zriká","Konsum, Verbrauch","5","i0455","צריכה"],["יִשְׂרְאֵלִי","f. יִשְׂרְאֵלִית · jisre'elí","israelisch; Israeli","6","i0456","ישראלי"],["גָּדוֹל","f. גְּדוֹלָה · gadól","groß","6","i0457","גדול"],["טוֹב","f. טוֹבָה · tow","gut","6","i0458","טוב"],["נוֹסָף","f. נוֹסֶפֶת · nosáf","zusätzlich, weiterer (בְּנוֹסָף außerdem)","6","i0459","נוסף"],["אַחֲרוֹן","f. אַחֲרוֹנָה · acharón","letzter","6","i0460","אחרון"],["חָדָשׁ","f. חֲדָשָׁה · chadásch","neu","6","i0461","חדש"],["אַחֵר","f. אַחֶרֶת · achér","anderer","6","i0462","אחר"],["מַשְׁמָעוּתִי","f. מַשְׁמָעוּתִית · maschma'utí","bedeutend, wesentlich","6","i0463","משמעותי"],["קָטָן","f. קְטַנָּה · katán","klein","6","i0464","קטן"],["חָשׁוּב","f. חֲשׁוּבָה · chaschúw","wichtig","6","i0465","חשוב"],["רִאשׁוֹן","f. רִאשׁוֹנָה · rischón","erster","6","i0466","ריאשון"],["גָּבוֹהַּ","f. גְּבוֹהָה · gawóa","hoch","6","i0467","גבוה"],["קָשֶׁה","f. קָשָׁה · kasché","schwer, schwierig","6","i0468","קשה"],["רַב","f. רַבָּה; Pl. רַבִּים · raw","viel, groß (רַבִּים viele)","6","i0469","רב"],["טֶכְנוֹלוֹגִי","f. טֶכְנוֹלוֹגִית · technológi","technologisch","6","i0470","טכנולוגי"],["כַּלְכָּלִי","f. כַּלְכָּלִית · kalkalí","wirtschaftlich","6","i0471","כלכלי"],["אֲמֶרִיקָאִי","f. אֲמֶרִיקָאִית · amerikái","amerikanisch","6","i0472","אמריקאי"],["שׁוֹנֶה","f. שׁוֹנָה · schoné","verschieden, anders","6","i0473","שונה"],["יְהוּדִי","f. יְהוּדִיָּה · jehudí","jüdisch; Jude","6","i0474","יהודי"],["שֵׁנִי","f. שְׁנִיָּה; שְׁנַיִם zwei · schení","zweiter","6","i0475","שני"],["אֲמִתִּי","f. אֲמִתִּית · amití","echt, wahr","6","i0476","אמיתי"],["פָּשׁוּט","f. פְּשׁוּטָה · paschút","einfach","6","i0477","פשוט"],["עִסְקִי","f. עִסְקִית · iskí","geschäftlich","6","i0478","עסקי"],["מָלֵא","f. מְלֵאָה · malé","voll","6","i0479","מלא"],["מְשֻׁתָּף","f. מְשֻׁתֶּפֶת · meschutáf","gemeinsam","6","i0480","משותף"],["מֶרְכָּזִי","f. מֶרְכָּזִית · merkasí","zentral","6","i0481","מרכזי"],["נָכוֹן","f. נְכוֹנָה · nachón","richtig","6","i0482","נכון"],["מְבֻגָּר","f. מְבֻגֶּרֶת · mewugár","erwachsen; älter","6","i0483","מבוגר"],["קַיָּם","f. קַיֶּמֶת · kajám","bestehend, vorhanden","6","i0484","קיים"],["בָּא","f. בָּאָה · ba","kommend (הַבָּא der nächste)","6","i0485","בא"],["בָּרוּר","f. בְּרוּרָה · barúr","klar","6","i0486","ברור"],["מְקוֹמִי","f. מְקוֹמִית · mekomí","örtlich, lokal","6","i0487","מקומי"],["לְאֻמִּי","f. לְאֻמִּית · leumí","national","6","i0488","לאומי"],["מִתְקַדֵּם","f. מִתְקַדֶּמֶת · mitkadém","fortgeschritten, modern","6","i0489","מתקדם"],["מֻקְדָּם","f. מֻקְדֶּמֶת · mukdám","früh","6","i0490","מוקדם"],["יָקָר","f. יְקָרָה · jakár","teuer; lieb","6","i0491","יקר"],["פְּרָטִי","f. פְּרָטִית · pratí","privat","6","i0492","פרטי"],["חֶבְרָתִי","f. חֶבְרָתִית · chewratí","sozial, gesellschaftlich","6","i0493","חברתי"],["מִשְׁפַּחְתִּי","f. מִשְׁפַּחְתִּית · mischpachtí","Familien-, familiär","6","i0494","משפחתי"],["כְּלָלִי","f. כְּלָלִית · klalí","allgemein","6","i0495","כללי"],["חָרִיף","f. חֲרִיפָה · charíf","scharf","6","i0496","חריף"],["מַתְאִים","f. מַתְאִימָה · matím","passend","6","i0497","מתאים"],["מִקְצוֹעִי","f. מִקְצוֹעִית · mikzo'í","beruflich, fachlich","6","i0498","מקצועי"],["בִּטְחוֹנִי","f. בִּטְחוֹנִית · bitchoní","sicherheitspolitisch, Sicherheits-","6","i0499","בטחוני"],["יָשִׁיר","f. יְשִׁירָה · jaschír","direkt","6","i0500","ישיר"],["רְפוּאִי","f. רְפוּאִית · refu'í","medizinisch","6","i0501","רפואי"],["חִנּוּךְ","m. · chinúch","Erziehung, Bildungswesen","7","i0502","חינוך"],["בֵּית סֵפֶר","m., Pl. בָּתֵּי סֵפֶר · bejt séfer","Schule","7","i0503","בית ספר"],["תַּלְמִיד","m., Pl. תַּלְמִידִים; f. תַּלְמִידָה · talmíd","Schüler","7","i0504","תלמיד"],["לִמּוּדִים","m. Pl. · limudím","Studium, Unterricht, Lernen","7","i0505","לימודים"],["בַּגְרוּת","f. · bagrút","Abitur, Reifeprüfung (תְּעוּדַת בַּגְרוּת Abiturzeugnis)","7","i0506","בגרות"],["מוֹסָד","m., Pl. מוֹסָדוֹת · mosád","Einrichtung, Institution","7","i0507","מוסד"],["מִקְצוֹעַ","m., Pl. מִקְצוֹעוֹת · mikzóa","Fach; Beruf","7","i0508","מקצוע"],["בְּחִינָה","f., Pl. בְּחִינוֹת · bchiná","Prüfung","7","i0509","בחינה"],["זֶרֶם","m., Pl. זְרָמִים · sérem","Strömung; Schulzweig (staatlich, religiös …)","7","i0510","זרם"],["תְּעוּדָה","f., Pl. תְּעוּדוֹת · te'udá","Zeugnis; Urkunde","7","i0511","תעודה"],["כִּתָּה","f., Pl. כִּתּוֹת · kitá","Klasse; Klassenzimmer","7","i0512","כיתה"],["תִּיכוֹן","m., Pl. תִּיכוֹנִים · tichón","Oberschule (Klassen 10–12)","7","i0513","תיכון"],["יְסוֹדִי","f. יְסוֹדִית · jesodí","Grund- (בֵּית סֵפֶר יְסוֹדִי Grundschule)","7","i0514","יסודי"],["מַמְלַכְתִּי","f. מַמְלַכְתִּית · mamlachtí","staatlich","7","i0515","ממלכתי"],["צִיּוּן","m., Pl. צִיּוּנִים · zijún","Note","7","i0516","צייון"],["חוֹבָה","f. · chowá","Pflicht (לִמּוּד חוֹבָה Schulpflicht)","7","i0517","חובה"],["הֶשֵּׂג","m., Pl. הֶשֵּׂגִים · heség","Leistung, Errungenschaft","7","i0518","השג"],["הַשְׂכָּלָה","f. · haskalá","Bildung (Schul- und Hochschulbildung)","7","i0519","השכלה"],["מַסְלוּל","m., Pl. מַסְלוּלִים · maslúl","Zweig, Laufbahn; Route","7","i0520","מסלול"],["חֲטִיבַת בֵּינַיִם","f. · chatiwát bejnájim","Mittelstufe (Klassen 7–9)","7","i0521","חטיבת בינייים"],["מְגַמָּה","f., Pl. מְגַמּוֹת · megamá","Fachrichtung, Schwerpunkt; Trend","7","i0522","מגמה"],["מִבְחָן","m., Pl. מִבְחָנִים · miwchán","Test, Klassenarbeit","7","i0523","מבחן"],["יְחִידַת לִמּוּד","f., Pl. יְחִידוֹת לִמּוּד · jechidát limúd","Lerneinheit (Niveau eines Abiturfachs)","7","i0524","יחידת לימוד"],["מְמֻצָּע","m. · memuzá","Durchschnitt","7","i0525","ממוצע"],["דָּתִי","f. דָּתִית · datí","religiös","7","i0526","דתי"],["נִבְחָן","m., Pl. נִבְחָנִים · niwchán","Prüfling; geprüft","7","i0527","נבחן"],["שְׁנַת לִמּוּדִים","f. · schnat limudím","Schuljahr","7","i0528","שנת לימודים"],["זַכָּאוּת","f. · saka'út","Berechtigung, Anspruch","7","i0529","זכאות"],["מָתֵמָטִיקָה","f. · matemátika","Mathematik","7","i0530","מתמטיקה"],["אָקָדֵמִי","f. אָקָדֵמִית · akadémi","akademisch","7","i0531","אקדמי"],["לִלְמֹד בְּעַל פֶּה","Redewendung · lilmód be'ál pe","auswendig lernen","7","i0532","ללמוד בעל פה"],["לְהַבְרִיז מִשִּׁעוּר","Redewendung · lehawrís mischiúr","den Unterricht schwänzen (umgangssprachlich)","7","i0533","להבריז מישיעור"],["לָשֶׁבֶת עַל סַפְסַל הַלִּמּוּדִים","Redewendung · laschéwet al safsál halimudím","die Schulbank drücken","7","i0534","לשבת על ספסל הלימודים"],["לַעֲבֹר אֶת הַבְּחִינָה","Redewendung · la'awór et habchiná","die Prüfung bestehen","7","i0535","לעבור את הבחינה"],["לְהִכָּשֵׁל בַּמִּבְחָן","Redewendung · lehikaschél bamiwchán","im Test durchfallen","7","i0536","להיכשל במבחן"],["לְהַעְתִּיק בַּמִּבְחָן","Redewendung · leha'atík bamiwchán","im Test abschreiben","7","i0537","להעתיק במבחן"],["לְהַגִּישׁ עֲבוֹדָה","Redewendung · lehagísch awodá","eine Arbeit abgeben","7","i0538","להגיש עבודה"],["תַּלְמִיד חָכָם","Redewendung · talmíd chachám","Gelehrter (wörtl. weiser Schüler)","7","i0539","תלמיד חכם"],["בֵּית סֵפֶר לַחַיִּים","Redewendung · bejt séfer lachajím","Schule fürs Leben","7","i0540","בית ספר לחייים"],["מִכָּל מְלַמְּדַי הִשְׂכַּלְתִּי","Redewendung · mikól melamdáj hiskálti","Von allen meinen Lehrern habe ich gelernt (Psalm 119,99).","7","i0541","מיכל מלמדי השכלתי"],["הוֹרָאָה","f. · hora'á","Unterrichten, Lehre; Anweisung","8","i0542","הוראה"],["מוֹרֶה","m., Pl. מוֹרִים; f. מוֹרָה · moré","Lehrer","8","i0543","מורה"],["לְמִידָה","f. · lemidá","Lernen","8","i0544","למידה"],["תׇּכְנִית לִמּוּדִים","f. · tochnít limudím","Lehrplan","8","i0545","תוכנית לימודים"],["תַּהֲלִיךְ","m., Pl. תַּהֲלִיכִים · tahalích","Prozess","8","i0546","תהליך"],["תַּפְקִיד","m., Pl. תַּפְקִידִים · tafkíd","Aufgabe, Rolle","8","i0547","תפקיד"],["גִּישָׁה","f., Pl. גִּישׁוֹת · gischá","Ansatz, Zugang","8","i0548","גישה"],["רַעְיוֹן","m., Pl. רַעְיוֹנוֹת · ra'jón","Idee","8","i0549","רעיון"],["מַטָּרָה","f., Pl. מַטָּרוֹת · matará","Ziel","8","i0550","מטרה"],["יְכֹלֶת","f., Pl. יְכֹלוֹת · jechólet","Fähigkeit","8","i0551","יכולת"],["פֵּדָגוֹגְיָה","f. · pedagógja","Pädagogik","8","i0552","פדגוגייה"],["לוֹמֵד","m., Pl. לוֹמְדִים · loméd","Lernender","8","i0553","לומד"],["לִמֵּד","Inf. לְלַמֵּד · liméd","unterrichten, lehren","8","i0554","לימד"],["סְבִיבַת לְמִידָה","f. · swiwát lemidá","Lernumgebung","8","i0555","סביבת למידה"],["הַכְשָׁרָה","f. · hachschará","Ausbildung (הַכְשָׁרַת מוֹרִים Lehrerausbildung)","8","i0556","הכשרה"],["שִׁעוּר","m., Pl. שִׁעוּרִים · schi'úr","Unterrichtsstunde; Lektion","8","i0557","שיעור"],["קֹשִׁי","m., Pl. קְשָׁיִים · kóschi","Schwierigkeit","8","i0558","קושי"],["יֶדַע","m. · jéda","Wissen","8","i0559","ידע"],["אִבְחוּן","m. · ivchún","Diagnose (Lerndiagnostik)","8","i0560","אבחון"],["שִׁיטָה","f., Pl. שִׁיטוֹת · schitá","Methode","8","i0561","שיטה"],["מְיֻמָּנוּת","f., Pl. מְיֻמָּנֻיּוֹת · mejumanút","Fertigkeit, Kompetenz","8","i0562","מיומנות"],["תֹּכֶן","m., Pl. תְּכָנִים · tóchen","Inhalt","8","i0563","תוכן"],["נוֹשֵׂא","m., Pl. נוֹשְׂאִים · nosé","Thema","8","i0564","נושא"],["הִשְׁתַּלְּמוּת","f. · hischtalmút","Fortbildung","8","i0565","השתלמות"],["חִנֵּךְ","Inf. לְחַנֵּךְ · chinéch","erziehen","8","i0566","חינך"],["הַעֲרָכָה","f. · ha'arachá","Bewertung, Beurteilung; Wertschätzung","8","i0567","הערכה"],["חֲשִׁיבָה","f. · chaschiwá","Denken","8","i0568","חשיבה"],["קֶשֶׁב","m. · késchew","Aufmerksamkeit (הַפְרָעַת קֶשֶׁב ADHS)","8","i0569","קשב"],["הַרְצָאָה","f., Pl. הַרְצָאוֹת · harza'á","Vortrag, Vorlesung","8","i0570","הרצאה"],["דִּידַקְטִיקָה","f. · didáktika","Didaktik","8","i0571","דידקטיקה"],["לֹא הַבַּיְשָׁן לָמֵד וְלֹא הַקַּפְּדָן מְלַמֵּד","Redewendung · lo habajschán laméd weló hakapdán melaméd","Der Schüchterne lernt nicht, der Jähzornige lehrt nicht (Sprüche der Väter 2,5).","8","i0572","לא הבישן למד ולא הקפדן מלמד"],["חֲנֹךְ לַנַּעַר עַל פִּי דַרְכּוֹ","Redewendung · chanóch laná'ar al pi darkó","Erziehe den Knaben gemäß seinem Weg (Sprüche 22,6).","8","i0573","חנוך לנער על פי דרכו"],["וּמִתַּלְמִידַי יוֹתֵר מִכֻּלָּם","Redewendung · umitalmidáj jotér mikulám","… und von meinen Schülern am meisten (Taanit 7a).","8","i0574","ומיתלמידי יותר מיכולם"],["לֹא הַמִּדְרָשׁ הוּא הָעִקָּר אֶלָּא הַמַּעֲשֶׂה","Redewendung · lo hamidrásch hu ha'ikár éla hama'asé","Nicht das Studium ist die Hauptsache, sondern die Tat (Sprüche der Väter 1,17).","8","i0575","לא המדרש הוא העיקר אלא המעשה"],["לְהָרִים יָד","Redewendung · leharím jad","sich melden (wörtl. die Hand heben; aber לְהָרִים יָד עַל: jemanden schlagen)","8","i0576","להרים יד"],["אֵין שְׁאֵלוֹת טִפְּשִׁיּוֹת","Redewendung · ejn sche'elót tipschijót","Es gibt keine dummen Fragen.","8","i0577","אין שאלות טפשייות"],["לָשִׂים דָּגֵשׁ עַל","Redewendung · lasím dagésch al","Wert legen auf (wörtl. einen Dagesch setzen)","8","i0578","לשים דגש על"],["עַל קְצֵה הַמַּזְלֵג","Redewendung · al kzeh hamaslég","in aller Kürze (wörtl. auf der Gabelspitze)","8","i0579","על קצה המזלג"],["לַעֲשׂוֹת שִׁעוּרֵי בַּיִת","Redewendung · la'asót schiuréj bájit","die Hausaufgaben machen; sich gut vorbereiten","8","i0580","לעשות שיעורי בייית"],["זֶה לֹא תּוֹרָה מִסִּינַי","Redewendung · se lo torá missináj","Das ist nicht in Stein gemeißelt (wörtl. keine Tora vom Sinai).","8","i0581","זה לא תורה מיסיני"],["תְּקוּפָה","f., Pl. תְּקוּפוֹת · tkufá","Epoche, Zeitraum","9","i0582","תקופה"],["שָׂפָה","f., Pl. שָׂפוֹת · safá","Sprache","9","i0583","שפה"],["יְוָנִי","f. יְוָנִית · jewaní","griechisch (יְוָנִית Griechisch)","9","i0584","יווני"],["לָטִינִי","f. לָטִינִית · latíni","lateinisch (לָטִינִית Latein)","9","i0585","לטיני"],["יְצִירָה","f., Pl. יְצִירוֹת · jezirá","Werk; Schöpfung","9","i0586","יצירה"],["לִפְנֵי הַסְּפִירָה","לַסְּפִירָה nach Christus · lifnéj hasfirá","vor Christus (wörtl. vor der Zählung)","9","i0587","לפני הספירה"],["סִפְרוּת","f. · sifrút","Literatur","9","i0588","ספרות"],["עַתִּיק","f. עַתִּיקָה · atík","alt, antik","9","i0589","עתיק"],["מִלָּה","f., Pl. מִלִּים · milá","Wort","9","i0590","מילה"],["צוּרָה","f., Pl. צוּרוֹת · zurá","Form","9","i0591","צורה"],["רוֹמִי","f. רוֹמִית · romí","römisch","9","i0592","רומי"],["קְלַאסִי","f. קְלַאסִית · klási","klassisch","9","i0593","קלאסי"],["מַחֲזֶה","m., Pl. מַחֲזוֹת · machasé","Theaterstück, Drama","9","i0594","מחזה"],["מָקוֹר","m., Pl. מְקוֹרוֹת · makór","Quelle; Original","9","i0595","מקור"],["חִבּוּר","m., Pl. חִבּוּרִים · chibúr","Abhandlung, Schrift; Verbindung","9","i0596","חיבור"],["הִיסְטוֹרְיָה","f. · histórja","Geschichte","9","i0597","היסטורייה"],["שִׁירָה","f. · schirá","Dichtung, Poesie","9","i0598","שירה"],["מְשׁוֹרֵר","m., Pl. מְשׁוֹרְרִים · meschorér","Dichter","9","i0599","משורר"],["כְּתִיבָה","f. · ktiwá","Schreiben, Schrift","9","i0600","כתיבה"],["טֶקְסְט","m., Pl. טֶקְסְטִים · tekst","Text","9","i0601","טקסט"],["טְרָגֶדְיָה","f. · tragédja","Tragödie","9","i0602","טרגדייה"],["שִׁיר","m., Pl. שִׁירִים · schir","Gedicht; Lied","9","i0603","שיר"],["תַּרְבּוּת","f., Pl. תַּרְבֻּיּוֹת · tarbút","Kultur","9","i0604","תרבות"],["גִּרְסָה","f., Pl. גִּרְסָאוֹת · girsá","Fassung, Version; Lesart","9","i0605","גרסה"],["סִגְנוֹן","m., Pl. סִגְנוֹנוֹת · signón","Stil","9","i0606","סגנון"],["הֲגִיָּה","f. · hagijá","Aussprache","9","i0607","הגייה"],["הַטָּיָה","f., Pl. הַטָּיוֹת · hatajá","Flexion (Deklination, Konjugation)","9","i0608","הטייה"],["פֹּעַל","m., Pl. פְּעָלִים · pó'al","Verb","9","i0609","פועל"],["תַּרְגּוּם","m., Pl. תַּרְגּוּמִים · targúm","Übersetzung","9","i0610","תרגום"],["כְּתַב יָד","m., Pl. כִּתְבֵי יָד · ktaw jad","Handschrift, Manuskript","9","i0611","כתב יד"],["עֲקֵב אֲכִילֶס","Redewendung · akéw achíles","Achillesferse","9","i0612","עקב אכילס"],["סוּס טְרוֹיָאנִי","Redewendung · sus trojáni","Trojanisches Pferd","9","i0613","סוס טרוייאני"],["תֵּבַת פַּנְדּוֹרָה","Redewendung · téwat pandóra","Büchse der Pandora","9","i0614","תבת פנדורה"],["נִצְחוֹן פִּירוּס","Redewendung · nizchón pírus","Pyrrhussieg","9","i0615","נצחון פירוס"],["עֲבוֹדָה סִיזִיפִית","Redewendung · awodá sisífit","Sisyphusarbeit","9","i0616","עבודה סיזיפית"],["בֵּין סְקִילָה לְכָרִיבְּדִיס","Redewendung · bejn skíla lecharíbdis","zwischen Skylla und Charybdis","9","i0617","בין סקילה לכריבדיס"],["הַקֶּשֶׁר הַגּוֹרְדִּי","Redewendung · hakéscher hagórdi","der gordische Knoten","9","i0618","הקשר הגורדי"],["אֻרְוַת אוֹגֵיאָס","Redewendung · urwát ogéjas","Augiasstall","9","i0619","אורוות אוגיאס"],["הַקֻּבִּיָּה הֻטְּלָה","Redewendung · hakubijá hutlá","Die Würfel sind gefallen (alea iacta est).","9","i0620","הקובייה הוטלה"],["בָּאתִי, רָאִיתִי, כָּבַשְׁתִּי","Redewendung · báti, ra'íti, kawáschti","Ich kam, sah und siegte (veni, vidi, vici).","9","i0621","באתי ראיתי כבשתי"],["אֵין בְּעָיָה","Redewendung · ejn be'ajá","kein Problem","10","i0622","אין בעייה"],["יִהְיֶה בְּסֵדֶר","Redewendung · jihjé beséder","Das wird schon gut gehen.","10","i0623","יהייה בסדר"],["לָשִׂים לֵב","Redewendung · lasím lew","aufpassen, beachten (wörtl. das Herz hinlegen)","10","i0624","לשים לב"],["בַּשּׁוּרָה הַתַּחְתּוֹנָה","Redewendung · baschurá hatachtoná","unterm Strich (wörtl. in der untersten Zeile)","10","i0625","בשורה התחתונה"],["עַל הַשֻּׁלְחָן","Redewendung · al haschulchán","auf dem Tisch, zur Debatte","10","i0626","על השולחן"],["לְהוֹרִיד אֶת הַכּוֹבַע","Redewendung · lehoríd et hakówa","den Hut ziehen (vor jemandem)","10","i0627","להוריד את הכובע"],["הַכַּדּוּר בַּמִּגְרָשׁ שֶׁלּוֹ","Redewendung · hakadúr bamigrásch scheló","Der Ball liegt in seinem Feld.","10","i0628","הכדור במגרש שלו"],["לָתֵת אוֹר יָרֹק","Redewendung · latét or jarók","grünes Licht geben","10","i0629","לתת אור ירוק"],["חֲבָל עַל הַזְּמַן","Redewendung · chawál al hasmán","großartig (umgangssprachlich; wörtl. schade um die Zeit)","10","i0630","חבל על הזמן"],["מַכָּה בַּכִּיס","Redewendung · maká bakís","ein Schlag in den Geldbeutel","10","i0631","מכה בכיס"]];
+// DATA: [lemma, info, bedeutung, lektionen] ; id = lemma + "|" + info (stabil über Updates)
+const LESSON_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const LESSON_DATE = {"1": "2026-10-18", "2": "2026-10-18", "3": "2026-10-18", "4": "2026-10-18", "5": "2026-10-18", "6": "2026-10-18", "7": "2026-10-18", "8": "2026-10-18", "9": "2026-10-18", "10": "2026-10-18"};
+const LESSON_TOPIC = {"1": "Verwandtschaft", "2": "Natur", "3": "Zeitung: kleine Wörter", "4": "Zeitung: Verben", "5": "Zeitung: Nomen", "6": "Zeitung: Adjektive", "7": "Schule", "8": "Unterricht", "9": "Altphilologie", "10": "Zeitung: Redewendungen"};
+const CARDS = DATA.map((r,idx)=>{
+  return {id:r[4], lemma:r[0], info:r[1], bed:r[2], lekt:r[3], l1:r[3], ls:[r[3]], idx,
+          key:fold(r[0]+" "+r[1]+" "+r[2]+" "+(r[5]||""))};
+});
+const BYID = Object.create(null); CARDS.forEach(c=>BYID[c.id]=c);
+function fold(s){ return s.normalize("NFD").replace(/[̀-֑ͯ-ׇ]/g,"").replace(/[ךםןףץ]/g,c=>({"ך":"כ","ם":"מ","ן":"נ","ף":"פ","ץ":"צ"})[c]).toLowerCase(); }
+function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function addDays(iso,n){ const d=new Date(iso+"T12:00:00"); d.setDate(d.getDate()+n); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function dayDiff(a,b){ return Math.round((new Date(b+"T12:00:00")-new Date(a+"T12:00:00"))/86400000); }
+function lessonLabel(k){ const d=LESSON_DATE[k], t=LESSON_TOPIC[k]; return "Stapel "+k+(t? ": "+t : "")+(d? " ("+d.slice(8,10)+"."+d.slice(5,7)+"."+d.slice(0,4)+")" : ""); }
+
+// ---------- Zustand ----------
+const KEY = "iwrit.v1";
+const DEFAULTS = {goal:90, fGood:1.4, fStrong:2.2, fWrong:0.5, newPerDay:10, first1:1, first3:3, big:0, theme:"system", dir:"LD"};
+let S = load();
+function load(){
+  let s=null; try{ s=JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){ s=null; }
+  if(!s) s={};
+  s.set = Object.assign({}, DEFAULTS, s.set||{});
+  s.lessons = s.lessons || {}; s.seenLessons = s.seenLessons || {};
+  for(const k of LESSON_KEYS){ if(!s.seenLessons[k]){ s.lessons[k]=true; s.seenLessons[k]=1; } }
+  s.turbo = s.turbo || {lessons:{}};   // eigene Auswahl für den Turbo-Modus (max. 4 Stapel)
+  s.turbo.lessons = s.turbo.lessons || {};
+  s.stats = s.stats || {LD:{}, DL:{}};
+  s.stats.LD = s.stats.LD||{}; s.stats.DL = s.stats.DL||{};
+  s.suspended = s.suspended || {};
+  s.daily = s.daily || {date:today(), newN:0, revN:0, doneN:0, extraNew:0};
+  s.streak = s.streak || {last:null, n:0};
+  s.lastBackup = s.lastBackup || null;
+  s.gate = !!s.gate;
+  return s;
+}
+let saveTimer=null;
+let saveWarned=false;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ if(!saveWarned){ saveWarned=true; toast("Speichern nicht möglich. Privater Modus oder Speicher gesperrt? Dein Lernstand geht beim Schließen verloren."); } } }
+function stats(){ return S.stats[S.set.dir]; }
+function rollDay(){ const t=today(); if(S.daily.date!==t){ S.daily={date:t,newN:0,revN:0,doneN:0,extraNew:0}; save(); } }
+// Sonntage und gesetzliche Feiertage (bundesweit plus 8. März in Berlin) zählen nicht als versäumte Tage.
+function iso(y,m,d){ return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0"); }
+function easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return iso(y,mo,da); }
+function isFreeDay(day){ const d=new Date(day+"T12:00:00"); if(d.getDay()===0) return true; const y=d.getFullYear(), E=easter(y);
+  return [iso(y,1,1),iso(y,3,8),iso(y,5,1),iso(y,10,3),iso(y,12,25),iso(y,12,26),addDays(E,-2),addDays(E,1),addDays(E,39),addDays(E,50)].includes(day); }
+function missedDays(last,t){ const span=dayDiff(last,t); if(span>60) return span; let n=0; for(let d=addDays(last,1); d<t; d=addDays(d,1)) if(!isFreeDay(d)) n++; return n; }
+function bumpStreak(){ const t=today(); if(S.streak.last===t) return; if(S.streak.last && missedDays(S.streak.last,t)===0) S.streak.n++; else S.streak.n=1; S.streak.last=t; }
+function streakShown(){ if(!S.streak.last) return 0; return missedDays(S.streak.last,today())===0? S.streak.n : 0; }
+// Leuchtstufe der Flamme: 1. Lerntag schwach, 2. heller, ab dem 3. hell; jeder Tag ohne Lernen nimmt eine Stufe
+function flameLevel(){ if(!S.streak.last) return 0; return Math.max(0, Math.min(S.streak.n,3) - missedDays(S.streak.last,today())); }
+function renderStreak(){ $("streak").textContent = streakShown(); $("flame").setAttribute("class","flame l"+flameLevel()); }
+
+// ---------- Warteschlange ----------
+function activeCards(){ return CARDS.filter(c=>S.lessons[c.l1] && !S.suspended[c.id]); }
+function isLearned(rec){ return !!rec && rec.iv>=S.set.goal; }
+function buildQueue(){
+  rollDay();
+  const t=today(), st=stats();
+  const due=[], fresh=[];
+  for(const c of activeCards()){
+    const r=st[c.id];
+    if(!r) fresh.push(c);
+    else if(r.due<=t) due.push(c);
+  }
+  due.sort((a,b)=> (st[a.id].iv===0?-1:1)*0 + (st[a.id].due<st[b.id].due?-1:st[a.id].due>st[b.id].due?1:a.idx-b.idx));
+  // Karten, die heute schon falsch waren (iv 0), ans Ende, damit erst die anderen kommen
+  const relearn=due.filter(c=>st[c.id].iv===0), normal=due.filter(c=>st[c.id].iv!==0);
+  const allowNew=Math.max(0, S.set.newPerDay + S.daily.extraNew - S.daily.newN);
+  return {queue: normal.concat(relearn, fresh.slice(0,allowNew)), dueN: due.length, freshAvail: fresh.length, allowNew};
+}
+let Q=null, cur=null, revealed=false, undoStack=[];
+
+function nextIv(rec, ans){
+  const s=S.set;
+  if(!rec || rec.iv===0){
+    // neu oder im Wiederholen nach Fehler
+    if(ans===0) return 0;
+    if(rec && rec.riv) return ans===1? Math.max(1,rec.riv) : Math.max(s.first3, Math.round(rec.riv*s.fStrong/s.fGood));
+    return ans===1? s.first1 : s.first3;
+  }
+  if(ans===0) return 0;
+  let iv = ans===1? Math.round(rec.iv*s.fGood) : Math.round(rec.iv*s.fStrong);
+  iv = Math.max(rec.iv+1, iv);
+  return Math.min(iv, s.goal);
+}
+function previewIvs(rec){
+  const s=S.set;
+  const w = (!rec||rec.iv===0)? "heute" : (Math.max(1,Math.round(rec.iv*s.fWrong))+" T.");
+  return [w, nextIv(rec,1)+" T.", nextIv(rec,2)+" T."];
+}
+function answer(ans){
+  if(!cur) return;
+  const st=stats(), t=today();
+  const prev = st[cur.id]? JSON.parse(JSON.stringify(st[cur.id])) : null;
+  const prevDaily = Object.assign({}, S.daily), prevStreak=Object.assign({}, S.streak);
+  const wasNew = !prev;
+  const iv = nextIv(prev, ans);
+  const rec = prev? prev : {iv:0, due:t, n:0, l:0};
+  if(ans===0){ rec.riv = prev && prev.iv>0 ? Math.max(1,Math.round(prev.iv*S.set.fWrong)) : (rec.riv||0); rec.iv=0; rec.due=t; rec.l=(rec.l||0)+ (prev&&prev.iv>0?1:0); }
+  else { rec.iv=iv; rec.due=addDays(t,iv); delete rec.riv; }
+  rec.n=(rec.n||0)+1; rec.last=t;
+  st[cur.id]=rec;
+  if(wasNew) S.daily.newN++;
+  S.daily.revN++;
+  if(ans>0) S.daily.doneN++;
+  bumpStreak();
+  undoStack.push({id:cur.id, prev, prevDaily, prevStreak, card:cur});
+  if(undoStack.length>50) undoStack.shift();
+  save();
+  // Warteschlange fortschreiben
+  Q.queue.shift();
+  if(ans===0){ const pos=Math.min(Q.queue.length, 3); Q.queue.splice(pos,0,cur); }
+  showNext();
+}
+function undo(){
+  const u=undoStack.pop(); if(!u) return;
+  const st=stats();
+  if(u.prev) st[u.id]=u.prev; else delete st[u.id];
+  S.daily=u.prevDaily; S.streak=u.prevStreak; save();
+  Q.queue = [u.card].concat(Q.queue.filter(c=>c.id!==u.id));
+  showNext();
+}
+function showNext(){
+  rollDay();
+  const st=stats();
+  cur = Q.queue[0]||null; revealed=false;
+  $("undoBtn").disabled = undoStack.length===0;
+  const total = Q.dueN + Math.min(Q.freshAvail, Q.allowNew);
+  $("sDue").textContent = Q.queue.filter(c=>st[c.id]).length;
+  $("sNew").textContent = S.daily.newN + " / " + (S.set.newPerDay+S.daily.extraNew);
+  $("sDone").textContent = S.daily.doneN;
+  const done = Math.max(0, total - Q.queue.length);
+  $("prog").style.width = (total? Math.min(100, 100*done/Math.max(1,total)) : 0)+"%";
+  renderStreak();
+  if(!cur){
+    $("study").hidden=true; $("empty").hidden=false;
+    const act=activeCards().length;
+    $("emptyTitle").textContent = !CARDS.length? "Noch keine Vokabeln" : act? "Für heute alles erledigt" : "Kein Stapel angewählt";
+    $("pickRow").hidden = !CARDS.length;
+    $("emptyText").textContent = !CARDS.length? "Schick Claude die Wörter, die du gerade brauchst; sie kommen als neuer Stapel dazu." : act? `Heute ${S.daily.revN} Karten geübt. ${Q.freshAvail} neue Vokabeln warten in den angewählten Stapel.` : "Wähle unter „Stapel“ aus, was du lernen willst.";
+    $("moreNewWrap").hidden = !(act && Q.freshAvail>0);
+    // nur Stufen anbieten, die sinnvoll sind: die erste Stufe über dem Vorrat bleibt sichtbar, größere nicht
+    let shownOver=false; $("moreNew").querySelectorAll("button").forEach(b=>{ const n=+b.dataset.n; const over=n>Q.freshAvail; b.hidden = over && shownOver; if(over) shownOver=true; b.textContent = over? "alle "+Q.freshAvail : n+" neue"; });
+    return;
+  }
+  $("study").hidden=false; $("empty").hidden=true;
+  const rec=st[cur.id];
+  const LD = S.set.dir==="LD";
+  $("front").textContent = LD? cur.lemma : cur.bed;
+  $("front").classList.toggle("lat", LD);
+  $("info").textContent = cur.info;
+  $("bed").innerHTML = LD? esc(cur.bed) : '<span class="lat" style="font-size:1.6rem;font-weight:600">'+esc(cur.lemma)+'</span>';
+  $("back").hidden=true; $("answers").hidden=true; $("revealRow").hidden=false;
+  $("hint").textContent = LD? "Bedeutung nennen, dann aufdecken" : "Hebräisches Wort nennen, dann aufdecken";
+  $("metaLekt").textContent = (LESSON_TOPIC[cur.lekt]||"Stapel "+cur.lekt) + (rec? "" : " · neu");
+  $("metaIv").textContent = rec? (rec.iv>=S.set.goal? "gelernt ✓" : rec.iv===0? "wiederholen" : "Abstand "+rec.iv+" T.") : "";
+  const p=previewIvs(rec); $("nWrong").textContent=p[0]; $("nGood").textContent=p[1]; $("nStrong").textContent=p[2];
+  $("queueNote").textContent = Q.queue.length+" in der Runde";
+}
+function reveal(){
+  if(!cur||revealed) return; revealed=true;
+  $("back").hidden=false; $("answers").hidden=false; $("revealRow").hidden=true;
+  $("hint").textContent = "";
+}
+function startStudy(){ Q=buildQueue(); showNext(); updateBackupBanner(); }
+
+// ---------- Stapel ----------
+function renderTiles(){
+  const st=stats(); const wrap=$("tiles"); wrap.innerHTML="";
+  const counts={};
+  for(const c of CARDS){ const k=c.l1; counts[k]=counts[k]||{n:0,learned:0,seen:0}; counts[k].n++; const r=st[c.id]; if(r){counts[k].seen++; if(isLearned(r)) counts[k].learned++;} }
+  for(const k of LESSON_KEYS){
+    const cnt=counts[k]||{n:0,learned:0,seen:0};
+    const b=document.createElement("button"); b.className="tile"; b.setAttribute("aria-pressed", !!S.lessons[k]);
+    b.innerHTML = `<b>${k}</b><small>${LESSON_TOPIC[k]||""}</small><small>${cnt.n} Wörter</small><small>${cnt.learned} gelernt</small><div class="bar"><i style="width:${cnt.n?100*cnt.learned/cnt.n:0}%"></i></div>`;
+    b.title = lessonLabel(k);
+    b.onclick=()=>{ S.lessons[k]=!S.lessons[k]; save(); renderTiles(); };
+    wrap.appendChild(b);
+  }
+  const sel=$("upto"); if(!sel.options.length){ for(const k of LESSON_KEYS){ const o=document.createElement("option"); o.value=k; o.textContent=k; sel.appendChild(o);} sel.value="1"; }
+}
+$("uptoBtn").onclick=()=>{ const i=LESSON_KEYS.indexOf($("upto").value); LESSON_KEYS.forEach((k,j)=>{ if(k[0]!=="T") S.lessons[k]= j<=i; }); save(); renderTiles(); toast("Stapel bis "+$("upto").value+" angewählt"); };
+$("noneBtn").onclick=()=>{ S.lessons={}; save(); renderTiles(); };
+
+// ---------- Turbo ----------
+let T={list:[], i:0, right:0, wrong:0, missed:[], undo:[]};
+const TURBO_MAX = 4;
+function turboLessons(){ return LESSON_KEYS.filter(k=>S.turbo.lessons[k]); }
+function turboCards(){ return CARDS.filter(c=>S.turbo.lessons[c.l1] && !S.suspended[c.id]); }
+function renderTurboTiles(){
+  const wrap=$("turboTiles"); wrap.innerHTML="";
+  const counts={}; for(const c of CARDS){ counts[c.l1]=(counts[c.l1]||0)+1; }
+  for(const k of LESSON_KEYS){
+    const b=document.createElement("button"); b.className="tile"; b.setAttribute("aria-pressed", !!S.turbo.lessons[k]);
+    b.innerHTML=`<b>${k}</b><small>${LESSON_TOPIC[k]||""}</small><small>${counts[k]||0} Wörter</small>`; b.title=lessonLabel(k);
+    b.onclick=()=>{
+      if(S.turbo.lessons[k]) delete S.turbo.lessons[k];
+      else if(turboLessons().length>=TURBO_MAX){ toast("Höchstens "+TURBO_MAX+" Stapel im Turbo. Erst eine abwählen."); return; }
+      else S.turbo.lessons[k]=true;
+      save(); renderTurboTiles(); turboInfo();
+    };
+    wrap.appendChild(b);
+  }
+}
+function turboInfo(){ const n=turboCards().length, l=turboLessons(); $("turboInfo").textContent = n? `${n} Vokabeln aus ${l.length===1?"Stapel":"den Stapel"} ${l.join(", ")}.` : "Wähle oben eine bis vier Stapel."; $("turboGo").disabled=!n; }
+$("turboClear").onclick=()=>{ S.turbo.lessons={}; save(); renderTurboTiles(); turboInfo(); };
+function turboStart(list){
+  T={list:shuffle(list.slice()), i:0, right:0, wrong:0, missed:[], undo:[]};
+  $("turboStart").hidden=true; $("turboResult").hidden=true; $("turboStudy").hidden=false; turboShow();
+}
+function turboShow(){
+  const c=T.list[T.i]; $("tUndo").disabled=T.undo.length===0;
+  $("tProg").style.width=(100*T.i/Math.max(1,T.list.length))+"%";
+  if(!c){ turboEnd(); return; }
+  const LD=S.set.dir==="LD";
+  $("tFront").textContent= LD? c.lemma : c.bed; $("tFront").classList.toggle("lat",LD);
+  $("tInfo").textContent=c.info; $("tBed").innerHTML= LD? esc(c.bed) : '<span class="lat" style="font-size:1.6rem;font-weight:600">'+esc(c.lemma)+'</span>';
+  $("tBack").hidden=true; $("tAnswers").hidden=true; $("tRevealRow").hidden=false; $("tHint").textContent="Tippen zum Aufdecken";
+  $("tMeta").textContent=LESSON_TOPIC[c.lekt]||"Stapel "+c.lekt; $("tCount").textContent=(T.i+1)+" / "+T.list.length;
+}
+function turboReveal(){ if($("tBack").hidden){ $("tBack").hidden=false; $("tAnswers").hidden=false; $("tRevealRow").hidden=true; $("tHint").textContent=""; } }
+function turboAnswer(ok){ const c=T.list[T.i]; if(!c) return; T.undo.push({i:T.i, ok}); if(ok) T.right++; else { T.wrong++; T.missed.push(c);} T.i++; turboShow(); }
+function turboUndo(){ const u=T.undo.pop(); if(!u) return; if(u.ok) T.right--; else { T.wrong--; T.missed.pop(); } T.i=u.i; turboShow(); }
+function turboEnd(){
+  $("turboStudy").hidden=true; $("turboResult").hidden=false;
+  $("tR1").textContent=T.right; $("tR2").textContent=T.wrong; $("tR3").textContent=Math.round(100*T.right/Math.max(1,T.right+T.wrong))+" %";
+  $("tMissedWrap").hidden=T.missed.length===0;
+  $("tMissed").innerHTML=T.missed.map(c=>`<li><b>${esc(c.lemma)}</b> ${esc(c.info)} <span class="note">${esc(c.bed)}</span></li>`).join("");
+  $("tAgain").hidden=T.missed.length===0;
+}
+$("turboGo").onclick=()=>turboStart(turboCards());
+$("tAgain").onclick=()=>turboStart(T.missed);
+$("tNew").onclick=()=>{ $("turboResult").hidden=true; $("turboStart").hidden=false; renderTurboTiles(); turboInfo(); };
+$("tStop").onclick=()=>{ $("turboStudy").hidden=true; $("turboStart").hidden=false; renderTurboTiles(); turboInfo(); };
+$("tFlash").onclick=turboReveal; $("tRevealBtn").onclick=turboReveal; $("tWrong").onclick=()=>turboAnswer(false); $("tRight").onclick=()=>turboAnswer(true); $("tUndo").onclick=turboUndo;
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+// ---------- Suche ----------
+function renderSearch(){
+  const q=fold($("q").value.trim()), only=$("onlyOff").checked, st=stats();
+  let hits = CARDS.filter(c=> (!only || S.suspended[c.id]) && (q==="" ? only : c.key.includes(q)));
+  $("qCount").textContent = hits.length? hits.length+" Treffer" : (q||only? "keine Treffer" : "");
+  hits=hits.slice(0,80);
+  const wrap=$("results"); wrap.innerHTML="";
+  for(const c of hits){
+    const r=st[c.id]; const off=!!S.suspended[c.id];
+    const d=document.createElement("div"); d.className="item"+(off?" off":"");
+    d.innerHTML=`<div class="t"><div class="l lat">${esc(c.lemma)} <span class="note" style="font-weight:400;font-style:italic">${esc(c.info)}</span></div><div class="d">${esc(c.bed)}</div></div>
+      <span class="tag">${esc(c.lekt.split("; ")[0])}</span><span class="tag">${r? (isLearned(r)?"gelernt": r.iv===0?"üben":r.iv+" T."):"neu"}</span>
+      <button class="btn small ghost">${off?"Aktivieren":"Aussetzen"}</button>`;
+    d.querySelector("button").onclick=()=>{ if(off) delete S.suspended[c.id]; else S.suspended[c.id]=1; save(); renderSearch(); toast(off?"Karte wieder aktiv":"Karte ausgesetzt"); };
+    wrap.appendChild(d);
+  }
+}
+$("q").oninput=renderSearch; $("onlyOff").onchange=renderSearch;
+
+// ---------- Einstellungen ----------
+function renderSettings(){
+  for(const k of ["goal","fGood","fStrong","fWrong","newPerDay","first1","first3"]) $(k).value=S.set[k];
+  seg("dirSeg", S.set.dir); seg("bigSeg", String(S.set.big)); seg("themeSeg", S.set.theme);
+  $("ver").textContent=VERSION; $("nCards").textContent=CARDS.length;
+  $("dirPill").textContent = S.set.dir==="LD"? "H → D" : "D → H";
+  $("bkInfo").textContent = S.lastBackup? "Zuletzt gesichert: "+S.lastBackup : "Noch nie gesichert";
+}
+function seg(id,v){ $(id).querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v===v)); }
+for(const k of ["goal","fGood","fStrong","fWrong","newPerDay","first1","first3"]){
+  $(k).onchange=()=>{ const min=+$(k).min, max=+$(k).max; let v=parseFloat($(k).value); if(isNaN(v)) v=DEFAULTS[k]; v=Math.min(max,Math.max(min,v)); S.set[k]=v; $(k).value=v; save(); Q=null; };
+}
+$("dirSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.dir=b.dataset.v; save(); renderSettings(); Q=null; toast(S.set.dir==="LD"?"Hebräisch → Deutsch":"Deutsch → Hebräisch"); };
+$("bigSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.big=+b.dataset.v; save(); applyDisplay(); renderSettings(); };
+$("themeSeg").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; S.set.theme=b.dataset.v; save(); applyDisplay(); renderSettings(); };
+function applyDisplay(){
+  document.documentElement.setAttribute("data-big", S.set.big?"1":"0");
+  if(S.set.theme==="system") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", S.set.theme);
+}
+$("resetBtn").onclick=()=>$("resetConfirm").hidden=false; $("resetNo").onclick=()=>$("resetConfirm").hidden=true;
+$("resetYes").onclick=()=>{ S.stats[S.set.dir]={}; S.daily={date:today(),newN:0,revN:0,doneN:0,extraNew:0}; save(); $("resetConfirm").hidden=true; Q=null; toast("Lernstand gelöscht"); };
+
+// ---------- Sicherung ----------
+const APP_ID="iwrit", APP_NAME="Prushit";
+const APP_NAMES={fringillus:"Fringillus", spinakis:"Spinakis", apologie:"Apologie"};
+function backupCode(){ const payload={app:APP_ID,v:1,version:VERSION,date:new Date().toISOString(),state:S}; return APP_ID.toUpperCase()+"1:"+btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }
+// Tolerant gegen alles, was Kopieren auf dem Handy anrichtet: unsichtbare Zeichen, Umbrüche, Groß-/Kleinschreibung des Präfixes.
+// Wirft Fehler mit Kennung: "other:<app>" (Code der Schwester-App), "truncated" (unvollständig), "format" (kein Code).
+function parseBackup(text){
+  text=(text||"").replace(/[\u200b-\u200d\ufeff\u00ad]/g,"").trim();
+  if(!text) throw new Error("empty");
+  const m=/^([a-z]+)1\s*:\s*([\s\S]*)$/i.exec(text); let json=text;
+  if(m || /^eyJ/.test(text)){
+    if(m && m[1].toLowerCase()!==APP_ID) throw new Error("other:"+m[1].toLowerCase());
+    const b64=(m? m[2] : text).replace(/[^A-Za-z0-9+/=]/g,"");
+    try{ json=decodeURIComponent(escape(atob(b64))); }catch(e){ throw new Error("truncated"); }
+  }
+  let p; try{ p=JSON.parse(json); }catch(e){ throw new Error(json.startsWith("{")? "truncated" : "format"); }
+  if(!p||!p.state||!p.app) throw new Error("format");
+  if(p.app!==APP_ID) throw new Error("other:"+p.app);
+  return p;
+}
+function backupError(e){
+  const msg=String(e&&e.message||"");
+  if(msg.startsWith("other:")){ const o=msg.slice(6); return "Das ist ein Code von "+(APP_NAMES[o]||o)+". "+APP_NAME+" braucht einen "+APP_NAME+"-Code (beginnt mit "+APP_ID.toUpperCase()+"1:)."; }
+  if(msg==="empty") return "Das Feld ist noch leer. Tippe auf „Aus Zwischenablage einfügen“ oder halte den Finger ins Feld und wähle „Einfügen“.";
+  if(msg==="truncated") return "Der Code ist unvollständig angekommen. Bitte den ganzen Code noch einmal kopieren, er ist mehrere Zeilen lang.";
+  return "Das ist kein gültiger Sicherungscode. Er beginnt mit "+APP_ID.toUpperCase()+"1: und kommt aus „Code kopieren“.";
+}
+function markBackup(){ S.lastBackup=today(); save(); renderSettings(); updateBackupBanner(); }
+$("bkCopy").onclick=()=>{ const code=backupCode(); $("bkOut").value=code;
+  const done=()=>{ markBackup(); toast("Code kopiert. Jetzt per Mail an dich selbst schicken."); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(code).then(done).catch(()=>{ $("bkOut").focus(); $("bkOut").select(); toast("Code markiert. Bitte selbst kopieren."); markBackup(); }); }
+  else { $("bkOut").focus(); $("bkOut").select(); toast("Code markiert. Bitte selbst kopieren."); markBackup(); } };
+$("bkFile").onclick=()=>{ const code=backupCode(); $("bkOut").value=code;
+  try{ const blob=new Blob([code],{type:"text/plain"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="iwrit-sicherung-"+today()+".txt"; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},1000); markBackup(); toast("Datei gespeichert (falls der Browser Downloads erlaubt). Der Code steht auch im Feld."); }
+  catch(e){ toast("Datei nicht möglich, nutze „Code kopieren“."); } };
+let pending=null;
+$("bkRestore").onclick=()=>{ try{ pending=parseBackup($("bkIn").value); $("bkConfirm").hidden=false; }catch(e){ toast(backupError(e)); } };
+// Liest den Code direkt aus der Zwischenablage (muss im Tipp-Ereignis passieren; iOS fragt dabei mit „Einfügen“ nach)
+async function pasteRestore(){
+  $("bkIn").scrollIntoView({block:"center"});
+  let txt="";
+  try{ if(navigator.clipboard && navigator.clipboard.readText) txt = await navigator.clipboard.readText(); }catch(e){ txt=""; }
+  if(!txt){ $("bkIn").focus(); toast("Kein Zugriff auf die Zwischenablage. Halte den Finger ins Feld und wähle „Einfügen“, dann „Aus Code wiederherstellen“."); return; }
+  $("bkIn").value = txt;
+  try{ pending=parseBackup(txt); $("bkConfirm").hidden=false; $("bkConfirm").scrollIntoView({block:"center"}); }catch(e){ toast(backupError(e)); }
+}
+$("bkPaste").onclick=pasteRestore;
+$("bkFileIn").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ pending=parseBackup(r.result); $("bkConfirm").hidden=false; }catch(err){ toast(backupError(err)); } }; r.readAsText(f); e.target.value=""; };
+$("bkNo").onclick=()=>{ pending=null; $("bkConfirm").hidden=true; };
+$("bkYes").onclick=()=>{ if(!pending) return; S=pending.state; S.gate=true; save(); S=load(); pending=null; $("bkConfirm").hidden=true; $("bkIn").value=""; applyDisplay(); renderSettings(); Q=null; toast("Lernstand wiederhergestellt ("+(pending&&pending.date||"")+")"); go("lernen"); };
+function updateBackupBanner(){
+  const has = Object.keys(S.stats.LD).length+Object.keys(S.stats.DL).length>0;
+  const age = S.lastBackup? dayDiff(S.lastBackup,today()) : null;
+  const show = has && (age===null || age>=7);
+  $("backupBanner").hidden=!show;
+  $("backupAge").textContent = age===null? "nie" : (age===0?"heute": age+" Tage her");
+}
+// „Jetzt sichern“ im Banner: kopiert den Code sofort (innerhalb der Tipp-Geste, sonst verweigert der Browser die Zwischenablage)
+// und zeigt dann den Sicherungsbereich unter „Mehr“, damit der Code sichtbar ist.
+$("bkNow").onclick=()=>{ go("einstellungen"); $("bkCopy").click(); setTimeout(()=>$("bkOut").scrollIntoView({block:"center"}),50); };
+
+// ---------- Navigation ----------
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function go(name){
+  document.querySelectorAll(".view").forEach(v=>v.hidden = v.id!=="v-"+name);
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected", t.dataset.go===name));
+  if(name==="lernen") startStudy();
+  if(name==="lektionen") renderTiles();
+  if(name==="turbo"){ if($("turboStudy").hidden) { $("turboStart").hidden=false; $("turboResult").hidden=true; renderTurboTiles(); turboInfo(); } }
+  if(name==="suche") renderSearch();
+  if(name==="einstellungen") renderSettings();
+  window.scrollTo(0,0);
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-go]"); if(b) go(b.dataset.go); });
+$("flash").onclick=reveal; $("revealBtn").onclick=reveal;
+$("aWrong").onclick=()=>answer(0); $("aGood").onclick=()=>answer(1); $("aStrong").onclick=()=>answer(2);
+$("undoBtn").onclick=undo;
+$("suspendBtn").onclick=()=>{ if(!cur) return; S.suspended[cur.id]=1; save(); Q.queue.shift(); toast("„"+cur.lemma+"“ ausgesetzt. Unter Suche wieder aktivierbar."); showNext(); };
+$("moreNew").onclick=e=>{ const b=e.target.closest("button[data-n]"); if(!b) return; S.daily.extraNew+=Math.min(+b.dataset.n, Q.freshAvail); save(); startStudy(); };
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea,select") || !$("help").hidden) return;
+  const lernen=!$("v-lernen").hidden, turbo=!$("v-turbo").hidden && !$("turboStudy").hidden;
+  if(e.key===" "){ e.preventDefault(); if(lernen) reveal(); if(turbo) turboReveal(); }
+  if(lernen && revealed){ if(e.key==="1") answer(0); if(e.key==="2") answer(1); if(e.key==="3") answer(2); }
+  if(turbo && !$("tBack").hidden){ if(e.key==="1") turboAnswer(false); if(e.key==="2"||e.key==="3") turboAnswer(true); }
+  if(e.key==="z"||e.key==="Z"){ if(lernen) undo(); if(turbo) turboUndo(); }
+});
+let toastT=null; function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),Math.max(2600, m.length*45)); }
+$("gateOk").onclick=()=>{ S.gate=true; save(); $("gate").hidden=true; };
+
+// ---------- Hilfe (i-Knöpfe) ----------
+const HELP = {
+lernen:{t:"Langfristig lernen",b:`<p>Dieser Bereich arbeitet wie eine Lernkartei mit Fächern: Was du weißt, kommt in immer größeren Abständen wieder; was du nicht weißt, kommt schnell wieder dran. Jeden Tag zeigt der Trainer dir genau die Karten, die heute fällig sind, dazu ein paar neue.</p>
+<p>Es geht nicht darum, am Morgen vor dem Test schnell zwanzig Wörter in den Kopf zu pressen und sie am Tag danach wieder zu vergessen. Es zählt allein, was am Ende des Schuljahres und in der Oberstufe noch da ist. Dafür reichen fünf bis zehn Minuten am Tag, jeden Tag, am besten zu einer festen Zeit. Die Wirkung liegt in der Regelmäßigkeit, nicht im langen Nachdenken bei jeder Vokabel.</p>
+<p>Eine Vokabel gilt als gelernt, wenn ihr Abstand das Zielintervall erreicht hat (unter „Mehr“ einstellbar). Für kurzfristiges Üben vor einem Test gibt es den Turbo.</p>`},
+zahlen:{t:"Die drei Zahlen",b:`<p><b>Heute fällig:</b> Karten, deren Abstand abgelaufen ist. Sie sollten heute dran sein, sonst stauen sie sich.</p>
+<p><b>Neu heute:</b> Wie viele neue Vokabeln du heute schon begonnen hast und wie viele der Trainer pro Tag dazunimmt (einstellbar unter „Mehr“).</p>
+<p><b>Heute gelernt:</b> Wie viele Karten du heute schon bewertet hast. Der Balken darunter zeigt, wie weit du mit der heutigen Runde bist.</p>`},
+streak:{t:"Lernserie",b:`<p>Die Zahl neben der Flamme sagt, an wie vielen Tagen hintereinander du gelernt hast. Ein Tag zählt, sobald du eine Karte bewertet hast. Lässt du einen Tag aus, beginnt die Zählung von vorn. Sonntage und gesetzliche Feiertage zählen dabei nicht als versäumt; lernst du an ihnen trotzdem, zählt der Tag mit.</p><p>Die Flamme zeigt, wie gut du in Übung bist: Am ersten Lerntag glimmt sie schwach, am zweiten leuchtet sie heller, ab dem dritten brennt sie hell. Jeder Tag ohne Lernen nimmt ihr wieder eine Stufe, Sonntage und Feiertage ausgenommen.</p><p>Die Serie ist nur ein Ansporn. Entscheidend ist, dass die fälligen Karten täglich drankommen.</p>`},
+aufdecken:{t:"Erst aufsagen, dann aufdecken",b:`<p>Sag Lernformen und Bedeutung halblaut auf, bevor du die Karte umdrehst: bei Nomen Genus und Plural, bei Verben Wurzel und Binjan, soweit sie auf der Karte stehen. Beim Abfragen wird nicht geschrieben.</p>
+<p>Nicht lange überlegen: Wenn es nach ein paar Sekunden nicht da ist, aufdecken und ehrlich „Nicht gewusst“ wählen. Am Rechner: Leertaste.</p>`},
+bewerten:{t:"Nicht gewusst, Gewusst, Sicher gewusst",b:`<p>Bewerte dich ehrlich; die App kann es nicht prüfen. „Gewusst“ heißt: vollständig und sicher, mit allen Lernformen. „Irgendwas mit …“ zählt nicht und gehört zu „Nicht gewusst“.</p>
+<p><b>Nicht gewusst:</b> Die Karte kommt heute noch einmal und fängt danach mit kleinem Abstand neu an, wie eine Karte, die zurück ins erste Fach wandert.</p>
+<p><b>Gewusst:</b> Der Abstand bis zum nächsten Mal wächst (bisheriger Abstand mal Faktor gewusst).</p>
+<p><b>Sicher gewusst:</b> Nur wenn das Wort sofort und ohne Zögern da war. Der Abstand wächst stärker.</p>
+<p>Die kleine Angabe unter jedem Knopf zeigt, wann die Karte dann wiederkommt. Am Rechner: Tasten 1, 2, 3.</p>`},
+zurueck:{t:"Zurück",b:`<p>Nimmt die letzte Bewertung zurück, etwa wenn du dich vertippt hast. Die Karte erscheint wieder mit ihrem vorherigen Stand. Am Rechner: Taste Z.</p>`},
+aussetzen:{t:"Aussetzen",b:`<p>Nimmt diese Vokabel aus dem Lernen heraus, zum Beispiel weil du sie längst sicher kannst oder weil sie doppelt vorkommt. Ihr Lernstand bleibt erhalten.</p><p>Unter „Suche“ findest du ausgesetzte Vokabeln mit dem Haken „nur ausgesetzte zeigen“ wieder und kannst sie dort wieder aktivieren.</p>`},
+lektionen:{t:"Stapel wählen",b:`<p>Hier legst du fest, aus welchen Stapel neue Vokabeln kommen und welche wiederholt werden. Antippen schaltet einen Stapel an oder ab; der grüne Anteil zeigt, wie viel davon schon gelernt ist.</p>
+<p>Für den Vokabeltestplan wählst du einfach alle Stapel an, die im Plan stehen. Wie oft eine einzelne Karte drankommt, regelt der Trainer dann selbst nach deinen Antworten.</p>
+<p>Abwählen löscht nichts: Der Lernstand der Stapel bleibt erhalten und wird beim nächsten Anwählen weiterverwendet.</p>`},
+upto:{t:"Alle bis Stapel / alle ab",b:`<p><b>Alle bis Stapel</b> wählt alle Stapel von Anfang an bis zur gewählten Nummer an, praktisch, wenn du alles Bisherige wiederholen willst.</p><p><b>Alle ab</b> schaltet sämtliche Stapel ab, etwa um danach nur einzelne wieder anzuwählen. Der Lernstand bleibt dabei erhalten.</p>`},
+turbo:{t:"Turbo: kurzfristig üben",b:`<p>Der Turbo ist für den Tag vor dem Test oder für den ersten Durchgang eines neuen Stapels: ein bis vier Stapel einmal komplett, in zufälliger Reihenfolge, am Ende eine Liste der nicht gewussten Wörter, die du gleich noch einmal üben kannst.</p>
+<p>Der Turbo verändert deinen Lernstand nicht und ersetzt das tägliche Lernen nicht. Was du hier übst, ist morgen wieder halb weg, wenn es nicht auch im langfristigen Lernen unter „Lernen“ vorkommt.</p>`},
+turboStart:{t:"Turbo starten",b:`<p>Tippe oben die Stapel an, die du durchgehen willst (höchstens vier), dann „Turbo starten“. „Auswahl leeren“ nimmt alle Haken weg. Die Auswahl hier ist unabhängig von den Stapel, die du langfristig lernst.</p>`},
+suche:{t:"Suche",b:`<p>Findet jede Vokabel, auch ohne Längen- oder Akzentzeichen. Zu jedem Treffer siehst du Stapel und Lernstand.</p><p>Mit dem Haken „nur ausgesetzte zeigen“ siehst du die Vokabeln, die du beim Lernen ausgesetzt hast, und kannst sie wieder aktivieren.</p>`},
+dir:{t:"Lernrichtung",b:`<p><b>Fremdsprache → Deutsch</b> ist der Normalfall und entspricht dem Test: Du siehst das Wort, nennst Lernformen und Bedeutung.</p><p><b>Deutsch → Fremdsprache</b> ist schwerer: Du siehst die Bedeutung und nennst das fremdsprachige Wort mit seinen Lernformen. Gut für alle, die mehr wollen.</p><p>Beide Richtungen haben einen getrennten Lernstand.</p>`},
+goal:{t:"Zielintervall",b:`<p>Ab diesem Abstand in Tagen gilt eine Vokabel als gelernt und wird nicht mehr abgefragt, so wie Karten, die du im letzten Fach der Lernkartei gewusst hast.</p><p>90 Tage ist ein guter Wert, 180 für Ehrgeizige. Erhöhst du den Wert später, kommen bereits gelernte Karten wieder in die Wiederholung. Gelöscht wird dabei nichts.</p>`},
+fGood:{t:"Faktor gewusst",b:`<p>Nach „Gewusst“ wird der bisherige Abstand mit diesem Faktor multipliziert. Beispiel mit 1,4: Aus 10 Tagen werden 14 Tage, aus 14 dann 20.</p><p>Ein kleinerer Faktor bedeutet häufigere Wiederholung: sicherer, aber mehr Arbeit. 1,4 ist ein guter Standard.</p>`},
+fStrong:{t:"Faktor sicher gewusst",b:`<p>Dasselbe für „Sicher gewusst“. Beispiel mit 2,2: Aus 10 Tagen werden 22 Tage. So erreichen Wörter, die du wirklich kannst, schneller das Zielintervall.</p>`},
+fWrong:{t:"Faktor nicht gewusst",b:`<p>Nach „Nicht gewusst“ kommt die Karte heute noch einmal. Weißt du sie dann, startet sie mit dem alten Abstand mal diesem Faktor. Beispiel mit 0,5: Aus 20 Tagen werden 10 Tage.</p><p>0 bedeutet: ganz von vorn, als wäre die Karte neu. 0,5 ist ein guter Standard.</p>`},
+newPerDay:{t:"Neue Vokabeln pro Tag",b:`<p>So viele noch nie gesehene Vokabeln aus den angewählten Stapel nimmt der Trainer pro Tag dazu. 10 ist ein guter Wert.</p><p>Jede neue Karte bringt in den folgenden Tagen Wiederholungen mit sich. Wird es zu viel, senke diese Zahl, statt Tage auszulassen. An einzelnen Tagen kannst du unter „Lernen“ zusätzliche neue dazunehmen, wenn die Runde erledigt ist.</p>`},
+first:{t:"Erster Abstand",b:`<p>Nach wie vielen Tagen eine neue Karte nach dem ersten „Gewusst“ bzw. „Sicher gewusst“ wiederkommt. Standard: 1 Tag bzw. 3 Tage. Das entspricht den ersten Fächern der Lernkartei; danach wachsen die Abstände mit den Faktoren.</p>`},
+anzeige:{t:"Anzeige",b:`<p><b>Schriftgröße „Groß“</b> vergrößert die Karten und Knöpfe.</p><p><b>Farbschema „Gerät“</b> folgt der Einstellung deines Handys (hell oder dunkel); „Hell“ und „Dunkel“ legen es fest.</p>`},
+sicherung:{t:"Sicherung",b:`<p>Dein Lernstand liegt nur in diesem Browser auf diesem Gerät. Geht das Handy verloren, wird es zurückgesetzt oder der Browser-Speicher geleert, ist er weg.</p><p>Kopiere deshalb regelmäßig, etwa einmal die Woche, den Sicherungscode und schicke ihn dir per Mail oder lege ihn in der Cloud ab. Nach sieben Tagen ohne Sicherung erinnert dich ein Hinweis im Bereich „Lernen“; „Jetzt sichern“ dort kopiert den Code sofort. Auf einem neuen Gerät fügst du den Code unter „Wiederherstellen“ ein.</p>`},
+bkCopy:{t:"Code kopieren / Als Datei speichern",b:`<p><b>Code kopieren</b> legt den Sicherungscode in die Zwischenablage. Füge ihn danach in eine Mail an dich selbst oder in eine Notiz ein.</p><p><b>Als Datei speichern</b> speichert denselben Code als Textdatei, am Rechner am einfachsten. Auf dem Handy hängt es vom Browser ab, ob das klappt; dann nimm „Code kopieren“.</p>`},
+bkRestore:{t:"Wiederherstellen",b:`<p>Ersetzt den Lernstand auf diesem Gerät durch den aus dem eingefügten Code oder der gewählten Datei. Das brauchst du auf einem neuen Handy, nach einem Verlust oder beim Umzug von der Webseite in die App.</p><p>Am einfachsten: <b>Aus Zwischenablage einfügen</b> holt den zuvor kopierten Code und fragt dann, ob er den Lernstand ersetzen soll. Das iPhone blendet dabei kurz „Einfügen“ ein, das antippen. Klappt das nicht, halte den Finger ins Feld, wähle „Einfügen“ und tippe auf „Aus Code wiederherstellen“.</p><p>Achtung: Der bisherige Lernstand auf diesem Gerät wird dabei überschrieben. Im Zweifel vorher sichern.</p>`},
+reset:{t:"Lernstand löschen",b:`<p>Löscht den gesamten Lernstand der aktuellen Lernrichtung: alle Abstände, Serien und ausgesetzten Vokabeln. Das lässt sich nicht rückgängig machen; vorher sichern. Die Stapelsauswahl und die Einstellungen bleiben.</p>`}
+};
+function showHelp(k){ const h=HELP[k]; if(!h) return; $("helpT").textContent=h.t; $("helpB").innerHTML=h.b; $("help").hidden=false; $("helpX").focus(); }
+function hideHelp(){ $("help").hidden=true; }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-help]"); if(b){ e.preventDefault(); e.stopPropagation(); showHelp(b.dataset.help); } });
+$("helpX").onclick=hideHelp; $("help").onclick=e=>{ if(e.target===$("help")) hideHelp(); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !$("help").hidden) hideHelp(); });
+
+// ---------- App-Installation und Offline-Modus ----------
+(function(){
+  const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone===true;
+  let embedded=false; try{ embedded = window.self!==window.top; }catch(e){ embedded=true; }
+  const ua=navigator.userAgent, ios=/iPad|iPhone|iPod/.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+  let deferred=null;
+  if(standalone) $("pwaDone").hidden=false; else if(embedded) $("pwaEmbedded").hidden=false; else $("pwaSteps").hidden=false;
+  window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferred=e; });
+  window.addEventListener("appinstalled",()=>{ toast("Installiert. Öffne die App und füge deinen Code ein."); });
+  $("pwaCopy").onclick=()=>$("bkCopy").click();
+  $("pwaInstall").onclick=()=>{
+    if(deferred){ deferred.prompt(); deferred=null; return; }
+    $("pwaManualText").textContent = ios
+      ? (/CriOS|FxiOS|EdgiOS/.test(ua) ? "Tippe auf das Teilen-Symbol und dann auf „Zum Home-Bildschirm“. Fehlt der Eintrag, öffne die Seite in Safari."
+                                        : "Tippe unten in Safari auf das Teilen-Symbol (Quadrat mit Pfeil nach oben) und dann auf „Zum Home-Bildschirm“.")
+      : "Öffne das Menü deines Browsers (⋮) und wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.";
+    $("pwaManual").hidden=false;
+  };
+  $("pwaToRestore").onclick=pasteRestore;
+  function offMsg(m){ $("pwaOff").textContent=m; $("pwaOff2").textContent=m; }
+  if(!embedded && "serviceWorker" in navigator && location.protocol==="https:"){
+    navigator.serviceWorker.register("sw.js").then(()=>navigator.serviceWorker.ready).then(()=>offMsg("Offline-Modus bereit: funktioniert auch ohne Internet.")).catch(()=>{});
+  }
+  if(standalone && navigator.storage && navigator.storage.persist){ try{ navigator.storage.persist(); }catch(e){} }
+})();
+
+// ---------- Start ----------
+applyDisplay(); renderStreak();
+if(!S.gate) $("gate").hidden=false;
+go("lernen");
+</script>
+
+</body>
+</html>
