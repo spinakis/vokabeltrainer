@@ -16,7 +16,7 @@
 <body>
 <title>Silbenfink</title>
 <meta name="description" content="Hebräische Silben lesen und Coins sammeln">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;600&family=Playpen+Sans+Hebrew:wght@400;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;600&family=Playpen+Sans+Hebrew:wght@400;600&family=Noto+Sans:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 :root{--bg:#EEF1F4;--surface:#FFFFFF;--surface2:#E3E8EE;--ink:#1E2A38;--ink2:#55637A;--line:#CBD3DD;--accent:#3B5B92;--accent-ink:#FFFFFF;--shadow:0 1px 2px rgba(30,42,56,.08),0 8px 24px rgba(30,42,56,.10)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--bg:#141A21;--surface:#1E2731;--surface2:#28333F;--ink:#E9EDF1;--ink2:#A3AFBE;--line:#3A4654;--accent:#8FA8D8;--accent-ink:#10161D;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35)}}
@@ -39,7 +39,7 @@
 #sf .sf-btn{background:var(--surface2);border-radius:12px;padding:.6em 1em;font-weight:700;min-height:46px;border:0;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
 #sf .sf-btn.sf-primary{background:var(--accent);color:var(--accent-ink)}
 #sf .sf-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--surface2);border-radius:12px;padding:4px}
-#sf .sf-seg button{border:0;background:none;font:inherit;color:var(--ink2);font-weight:700;padding:.5em;border-radius:9px;cursor:pointer}
+#sf .sf-seg button{border:0;background:none;font:inherit;font-size:clamp(.7rem,3.6vw,.92rem);color:var(--ink2);font-weight:700;padding:.5em .1em;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:9px;cursor:pointer}
 #sf .sf-seg button[aria-selected="true"]{background:var(--surface);color:var(--accent);box-shadow:var(--shadow)}
 #sf .sf-kopf{display:flex;align-items:center;gap:10px}
 #sf .sf-coins{display:flex;align-items:center;gap:6px;background:var(--sf-gold-bg);color:var(--ink);padding:5px 12px;border-radius:999px;font-weight:700;font-variant-numeric:tabular-nums;margin-left:auto}
@@ -69,6 +69,48 @@
 #sf.sf-hand .sf-syl,#sf.sf-hand .sf-fb b,#sf.sf-hand .sf-regel b,#sf .sf-tile .sf-gh{font-family:"Playpen Sans Hebrew","Noto Serif Hebrew",serif;font-weight:400}
 #sf.sf-hand .sf-syl{font-size:5rem}
 #sf .sf-regel{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.95rem} #sf .sf-regel b{font-family:"Noto Serif Hebrew",serif;font-size:1.3rem;font-weight:400}
+#sf .sf-stufen{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+#sf .sf-chip{min-width:0;min-height:42px;font-size:.95rem;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;font:inherit;font-weight:700;cursor:pointer;padding:0 2px;white-space:nowrap}
+#sf .sf-chip[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+#sf .sf-chip:disabled{opacity:.4;cursor:default}
+#sf .sf-zeit{height:8px;border-radius:4px;background:var(--surface2);overflow:hidden}
+#sf .sf-zeit i{display:block;height:100%;width:100%;background:var(--sf-gold);transform-origin:left}
+#sf .sf-gross{font-size:1.5rem;font-weight:700;text-align:center}
+#sf .sf-punkte{display:flex;gap:6px;justify-content:center} #sf .sf-punkte i{width:9px;height:9px;border-radius:50%;background:var(--line)} #sf .sf-punkte i.sf-an{background:var(--accent)}
+#sf .sf-tile.sf-zu{opacity:.35}
+#sf .sf-he{font-family:"Noto Serif Hebrew",serif;font-size:1.9em;vertical-align:middle;line-height:1}
+#sf.sf-hand .sf-he{font-family:"Playpen Sans Hebrew","Noto Serif Hebrew",serif}
+#sf .sf-klein .sf-btn{min-height:40px;padding:.35em .75em}
+.sf-tor{position:fixed;inset:0;display:grid;place-items:center;background:rgba(20,26,33,.6);z-index:45}
+.sf-tor[hidden]{display:none!important}
+.sf-tor .sf-box{background:var(--surface);color:var(--ink);border-radius:20px;padding:24px;max-width:340px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;text-align:center}
+.sf-tor input{font:inherit;font-size:1.4rem;text-align:center;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.4em}
+.sf-tor .sf-row{display:flex;gap:10px;justify-content:center}
+.sf-tor button{border:0;font:inherit;font-weight:700;border-radius:12px;min-height:46px;padding:0 1.1em;cursor:pointer;background:var(--surface2);color:var(--ink)}
+.sf-tor button.sf-primary{background:var(--accent);color:var(--accent-ink)}
+#sf .sf-opt,#sf .sf-um,#sf .sf-s,#sf .sf-fb{font-family:"Atkinson Hyperlegible","Noto Sans",system-ui,sans-serif}
+#sf .sf-vers{display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--line)}
+#sf .sf-vers .sf-vh{font-family:"Noto Serif Hebrew",serif;font-size:1.7rem;line-height:1.7;direction:rtl;text-align:right}
+#sf .sf-vers .sf-vh .sf-unb{opacity:.28}
+#sf .sf-vers .sf-um{font-style:italic;color:var(--ink2)}
+#sf .sf-vers.sf-zu .sf-vh{filter:blur(5px);user-select:none}
+#sf .sf-stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#sf .sf-stat div{background:var(--surface2);border-radius:12px;padding:10px;text-align:center}
+#sf .sf-stat b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}
+#sf .sf-stat span{font-size:.82rem;color:var(--ink2)}
+#sf .sf-fehler{display:flex;flex-wrap:wrap;gap:8px}
+#sf .sf-fehler span{background:var(--sf-bad-bg);color:var(--ink);border-radius:10px;padding:4px 10px;font-size:.9rem}
+#sf .sf-fehler b{font-family:"Noto Serif Hebrew",serif;font-size:1.3rem;font-weight:400}
+.sf-modus{position:fixed;inset:0;display:grid;place-items:center;background:rgba(20,26,33,.6);z-index:44;padding:16px}
+.sf-modus[hidden]{display:none!important}
+.sf-modus .sf-box{background:var(--surface);color:var(--ink);border-radius:20px;padding:24px;max-width:380px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.sf-modus button{border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;border-radius:14px;padding:14px;text-align:left;cursor:pointer}
+.sf-modus button b{display:block;font-size:1.1rem}
+.sf-modus button span{color:var(--ink2);font-size:.9rem}
+#sf .sf-opt.sf-heb{font-family:"Noto Serif Hebrew",serif;font-weight:400;font-size:2.1rem;direction:rtl}
+#sf.sf-hand .sf-opt.sf-heb{font-family:"Playpen Sans Hebrew","Noto Serif Hebrew",serif}
+#sf .sf-syl.sf-lat{font-family:"Atkinson Hyperlegible","Noto Sans",system-ui,sans-serif;direction:ltr;font-size:4rem;font-weight:700}
+#sf .sf-link{border:0;background:none;color:var(--accent);font:inherit;font-weight:700;cursor:pointer;padding:4px 0}
 .sf-feier{position:fixed;inset:0;display:grid;place-items:center;background:rgba(20,26,33,.6);z-index:40}
 .sf-feier[hidden]{display:none!important}
 .sf-feier .sf-box{background:var(--surface);color:var(--ink);border-radius:20px;padding:28px 24px;text-align:center;max-width:340px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
@@ -77,49 +119,108 @@
 @keyframes sfdreh{from{transform:rotateY(0) scale(.3)}to{transform:rotateY(720deg) scale(1)}}
 .sf-funke{position:fixed;font-size:1.6rem;pointer-events:none;z-index:50;animation:sfflieg 1s ease-out forwards}
 @keyframes sfflieg{to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
-@media (prefers-reduced-motion: reduce){.sf-feier .sf-coin,.sf-funke{animation:none}}
+/* Turbo 6 s und 3 s: hebräische Buchstaben steigen auf und lösen sich in rosa Nebel auf */
+.sf-nebelz{position:fixed;pointer-events:none;z-index:50;font-family:"Noto Serif Hebrew",serif;font-weight:600;color:#E0559A;text-shadow:0 0 6px #FFB3D6;animation:sfnebel 1.5s ease-out forwards}
+@keyframes sfnebel{0%{transform:translate(-50%,-50%) scale(.6);opacity:0;filter:blur(0)}
+ 15%{opacity:1}
+ 55%{transform:translate(calc(-50% + var(--dx)*.6),calc(-50% + var(--dy)*.6)) scale(1.1) rotate(var(--rot));opacity:1;filter:blur(0);color:#E0559A}
+ 100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(2.4) rotate(var(--rot));opacity:0;filter:blur(14px);color:#FFC4E1}}
+.sf-wolke{position:fixed;pointer-events:none;z-index:49;width:220px;height:220px;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,170,215,.75),rgba(255,190,225,.35) 45%,rgba(255,210,235,0) 70%);
+ transform:translate(-50%,-50%) scale(.3);opacity:0;filter:blur(6px);animation:sfwolke 1.7s ease-out forwards}
+@keyframes sfwolke{20%{opacity:.95}100%{transform:translate(-50%,-70%) scale(2.2);opacity:0;filter:blur(18px)}}
+@media (prefers-reduced-motion: reduce){.sf-feier .sf-coin,.sf-funke,.sf-nebelz,.sf-wolke{animation:none;display:none}}
 </style>
 <div id="sf" class="sf-stack">
   <div class="sf-kopf"><div><b>Silbenfink</b><div class="sf-note">Hebräische Silben lesen</div></div>
-    <div class="sf-coins" title="Coins, die noch eingelöst werden können"><span class="sf-coin">₪</span><span id="sf-coinsTop">0</span></div></div>
-  <div class="sf-seg" role="tablist"><button data-sv="spiel" aria-selected="true">Spielen</button><button data-sv="schatz" aria-selected="false">Schatzkarte</button><button data-sv="eltern" aria-selected="false">Für Eltern</button></div>
+    <div class="sf-coins" id="sf-coinsPill" title="Coins, die noch eingelöst werden können"><span class="sf-coin">₪</span><span id="sf-coinsTop">0</span></div><div class="sf-coins" id="sf-versPill" title="Freigeschaltete Bibelverse" hidden>📜 <span id="sf-versTop">0</span></div></div>
+  <div class="sf-seg" role="tablist"><button data-sv="spiel" aria-selected="true">Spielen</button><button data-sv="schatz" aria-selected="false" id="sf-tabSchatz">Schatzkarte</button><button data-sv="eltern" aria-selected="false" id="sf-tabEltern">Für Eltern</button></div>
 
   <div id="sf-v-spiel" class="sf-stack">
-    <div class="sf-card sf-stack">
+    <div class="sf-stufen" id="sf-stufen" aria-label="Stufen"></div>
+    <div id="sf-intro" class="sf-card sf-stack" hidden>
+      <div class="sf-frage" id="sf-introT"></div>
+      <div class="sf-syl" id="sf-introG" lang="he"></div>
+      <div class="sf-gross" id="sf-introS"></div>
+      <div class="sf-note" id="sf-introN" style="text-align:center"></div>
+      <div class="sf-punkte" id="sf-introP"></div>
+      <div class="sf-row" style="justify-content:center"><button class="sf-btn" id="sf-introZ">Zurück</button><button class="sf-btn sf-sag" id="sf-introV" hidden>🔊</button><button class="sf-btn sf-primary" id="sf-introW">Weiter</button></div>
+    </div>
+    <div id="sf-laden" class="sf-card sf-stack" hidden>
+      <h2>🔓 Alle Stufen freischalten</h2>
+      <p style="margin:0">Kostenlos sind die Stufen 1 bis 3: 15 der 22 Buchstaben (ב מ ל ש ת ד נ ר י ס ג ה ו ז ק) und 6 der 9 Vokalzeichen.</p>
+      <p style="margin:0">Die Vollversion (einmaliger Kauf, kein Abo) bringt die Stufen 4 bis 6: die übrigen 7 Buchstaben (כ פ א ע ח ט צ), Bet ohne Punkt, Sin, die 5 Schlussbuchstaben (ך ם ן ף ץ), 3 weitere Vokalzeichen, den Meister-Modus und den Schreib-Modus (Umschrift sehen, hebräische Schreibung wählen).</p>
+      <p class="sf-note" style="margin:0">Einmal kaufen, kein Abo, keine Werbung. Der Kauf ist nur für Eltern.</p>
+      <div class="sf-row"><button class="sf-btn sf-primary sf-kaufen">Vollversion kaufen</button><button class="sf-btn sf-zurueckholen">Käufe wiederherstellen</button></div>
+      <p class="sf-note sf-kaufInfo" style="margin:0"></p>
+      <button class="sf-link" id="sf-ladenZu">Weiter üben</button>
+    </div>
+    <div id="sf-quiz" class="sf-card sf-stack">
+      <div class="sf-zeit" id="sf-zeit" hidden><i id="sf-zeitI"></i></div>
       <div class="sf-frage" id="sf-frage">Wie liest man das?</div>
       <div class="sf-syl" id="sf-syl" lang="he"></div>
       <div class="sf-opts" id="sf-opts"></div>
       <div class="sf-fb" id="sf-fb"></div>
-      <div class="sf-row" style="justify-content:center"><button class="sf-btn sf-primary" id="sf-weiter" hidden>Weiter</button></div>
+      <div class="sf-row" style="justify-content:center"><button class="sf-btn sf-sag" id="sf-sag" hidden>🔊 Anhören</button><button class="sf-btn sf-primary" id="sf-weiter" hidden>Weiter</button></div>
     </div>
-    <div class="sf-serie"><span>Serie: <b id="sf-serie">0</b></span><span>Heute richtig: <b id="sf-heute">0</b></span><span id="sf-naechst"></span></div>
+    <div class="sf-row" style="justify-content:space-between"><span class="sf-note" id="sf-fort"></span><button class="sf-link" id="sf-zeigen">Zeichen dieser Stufe ansehen</button></div>
+    <div class="sf-row sf-klein"><button class="sf-btn" data-sfr="lesen">👁 Lesen</button><button class="sf-btn" data-sfr="schreiben">✍️ Schreiben</button></div>
+    <div class="sf-row sf-klein"><span>⏱ Turbo:</span><button class="sf-btn" data-sft="0">aus</button><button class="sf-btn" data-sft="10">10 s</button><button class="sf-btn" data-sft="6">6 s</button><button class="sf-btn" data-sft="3">3 s</button><span class="sf-note">je Silbe</span></div>
+    <div class="sf-serie"><span>Serie: <b id="sf-serie">0</b></span><span>Heute richtig: <b id="sf-heute">0</b></span><span>⭐ <b id="sf-sterne">0</b></span><span id="sf-naechst"></span></div>
   </div>
 
   <div id="sf-v-schatz" class="sf-stack" hidden>
+    <div class="sf-card sf-stack" id="sf-versKarte" hidden>
+      <h2>📜 Deine Bibelverse</h2>
+      <p class="sf-note" style="margin:0">Jede geschaffte Stufe schaltet einen Vers frei. Blasse Zeichen kennst du noch nicht; mit jeder Stufe wird der Vers lesbarer.</p>
+      <div id="sf-verse"></div>
+    </div>
+    <div class="sf-card sf-stack" id="sf-psalmKarte" hidden>
+      <h2>✍️ Psalm 23</h2>
+      <p class="sf-note" style="margin:0">Die Belohnung fürs Schreiben: Jede Stufe, die du im Schreib-Modus schaffst (18 von 20), schaltet einen Vers frei.</p>
+      <div id="sf-psalm"></div>
+    </div>
     <div class="sf-card sf-stack">
+      <h2>Lernstatistik</h2>
+      <div class="sf-stat" id="sf-stat"></div>
+      <div class="sf-note" id="sf-statFehlerT">Am häufigsten verwechselt:</div>
+      <div class="sf-fehler" id="sf-statFehler"></div>
+    </div>
+    <div class="sf-card sf-stack" id="sf-coinsKopf">
       <h2>Deine Schatzkarte</h2>
-      <p class="sf-note" style="margin:0">Jeder Buchstabe und jedes Vokalzeichen braucht 100 richtige Antworten. Dann gibt es einen Coin für 15 Minuten Videospiel. Falsch geraten kostet 3 Punkte beim verwechselten Zeichen. Kunstwörter aus zwei Silben zählen für alle Zeichen darin. Buchstaben in Schreibschrift (Einstellung bei den Eltern) bringen eigene Coins.</p>
+      <p class="sf-note" style="margin:0">Jeder Buchstabe und jedes Vokalzeichen braucht 100 richtige Antworten. Dann gibt es einen Coin, den du bei deinen Eltern eintauschen kannst (<span class="sf-wert"></span>). Falsch geraten kostet 3 Punkte beim verwechselten Zeichen. Neue Zeichen kommen Stufe für Stufe dazu; eine Stufe ist geschafft bei 18 von 20 richtigen Antworten. Kunstwörter zählen für alle Zeichen darin. Buchstaben in Schreibschrift (Einstellung bei den Eltern) bringen eigene Coins.</p>
       <div class="sf-row"><span class="sf-big" id="sf-verdient">0</span><span class="sf-note">von 71 Coins verdient</span></div>
     </div>
     <h2>Vokalzeichen</h2><div class="sf-grid" id="sf-gridV"></div>
     <h2>Buchstaben</h2><div class="sf-grid" id="sf-gridL"></div>
-    <h2>Buchstaben in Schreibschrift</h2><div class="sf-grid" id="sf-gridH"></div>
+    <h2 id="sf-gridHT">Buchstaben in Schreibschrift</h2><div class="sf-grid" id="sf-gridH"></div>
     <div class="sf-card sf-stack"><h2>So klingen die Zeichen</h2><div class="sf-regel" id="sf-regel"></div></div>
   </div>
 
   <div id="sf-v-eltern" class="sf-stack" hidden>
-    <div class="sf-card sf-stack">
+    <div class="sf-card sf-stack" id="sf-coinKarte">
       <h2>Coins einlösen</h2>
-      <div class="sf-row"><span class="sf-big" id="sf-offen">0</span><span class="sf-note">Coins offen, also <b id="sf-minuten">0</b> Minuten Videospiel</span></div>
+      <div class="sf-row"><span class="sf-big" id="sf-offen">0</span><span class="sf-note">Coins offen · 1 Coin = <b class="sf-wert"></b></span></div>
       <p class="sf-note" style="margin:0">Verdient: <b id="sf-eVerdient">0</b> · schon eingelöst: <b id="sf-eEingeloest">0</b></p>
       <div class="sf-row"><input id="sf-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Eltern-PIN" aria-label="Eltern-PIN"><button class="sf-btn sf-primary" id="sf-einloesen">1 Coin einlösen</button></div>
+      <div class="sf-row"><button class="sf-btn" id="sf-alleFrei">Alle Stufen freischalten (mit PIN)</button></div>
       <p class="sf-note" id="sf-pinInfo" style="margin:0"></p>
+      <button class="sf-link" id="sf-pinVergessen" style="align-self:flex-start">PIN vergessen?</button>
+    </div>
+    <div class="sf-card sf-stack" id="sf-vollKarte" hidden>
+      <h2>Vollversion</h2>
+      <p class="sf-note sf-vollStand" style="margin:0"></p>
+      <div class="sf-row"><button class="sf-btn sf-primary sf-kaufen">Vollversion kaufen</button><button class="sf-btn sf-zurueckholen">Käufe wiederherstellen</button></div>
+      <p class="sf-note sf-kaufInfo" style="margin:0"></p>
     </div>
     <div class="sf-card sf-stack">
       <h2>Einstellungen</h2>
+      <div class="sf-row"><span>Lernmodus:</span><button class="sf-btn" data-sfm="ivrit">Ivrit</button><button class="sf-btn" data-sfm="bibel">Bibelhebräisch</button></div>
+      <p class="sf-note" style="margin:0" id="sf-modusInfo"></p>
+      <div class="sf-row sf-nurKind"><span>1 Coin ist wert:</span><input id="sf-wertE" maxlength="60" style="width:14em" aria-label="Wert eines Coins"><button class="sf-btn" id="sf-wertOk">Speichern (mit PIN)</button></div>
+      <p class="sf-note sf-nurKind" style="margin:0">Zum Beispiel „15 Minuten Bildschirmzeit“, „eine Gutenachtgeschichte mehr“ oder „1 Euro Taschengeld“. Die PIN steht oben bei „Coins einlösen“.</p>
       <div class="sf-row"><span>Antworten zur Auswahl:</span><button class="sf-btn" data-sfn="3">3</button><button class="sf-btn" data-sfn="4">4</button></div>
-      <div class="sf-row"><span>Kunstwörter aus zwei Silben:</span><button class="sf-btn" data-sfw="0">nie</button><button class="sf-btn" data-sfw="35">manchmal</button><button class="sf-btn" data-sfw="70">oft</button></div>
-      <div class="sf-row"><span>Schrift:</span><button class="sf-btn" data-sfs="druck">Druckschrift</button><button class="sf-btn" data-sfs="schreib">Schreibschrift</button><button class="sf-btn" data-sfs="mix">gemischt</button></div>
+      <div class="sf-row sf-nurKind"><span>Schrift:</span><button class="sf-btn" data-sfs="druck">Druckschrift</button><button class="sf-btn" data-sfs="schreib">Schreibschrift</button><button class="sf-btn" data-sfs="mix">gemischt</button></div>
       <div class="sf-row"><span>Töne:</span><button class="sf-btn" id="sf-ton">an</button></div>
     </div>
     <div class="sf-card sf-stack">
@@ -131,158 +232,376 @@
     </div>
   </div>
 </div>
-<div class="sf-feier" id="sf-feier" hidden><div class="sf-box"><span class="sf-coin">₪</span><h2 id="sf-feierT" style="margin:0"></h2><p id="sf-feierB" style="margin:0;color:var(--ink2)"></p><button id="sf-feierOk">Juhu!</button></div></div>
+<div class="sf-modus" id="sf-modus" hidden><div class="sf-box" role="dialog" aria-modal="true"><h2 style="margin:0">Wie möchtest du lernen?</h2>
+<button data-sfm="ivrit"><b>Ich lerne Ivrit</b><span>Modernes Hebräisch, einfache Umschrift (sch, ch, z). Mit Coins zum Eintauschen, ideal für Kinder.</span></button>
+<button data-sfm="bibel"><b>Ich lerne Bibelhebräisch</b><span>Wissenschaftliche Umschrift (š, ḥ, ā, ḇ …). Statt Coins schaltest du Bibelverse frei, dazu eine Lernstatistik.</span></button>
+<p class="sf-note" style="margin:0">Du kannst das später unter „Für Eltern“ bzw. „Optionen“ ändern.</p>
+<p class="sf-note" id="sf-modusKauf" style="margin:0" hidden>Kostenlos sind die Stufen 1 bis 3: 15 der 22 Buchstaben (ב מ ל ש ת ד נ ר י ס ג ה ו ז ק) und 6 der 9 Vokalzeichen. Den Rest schaltet die Vollversion frei (einmalig, kein Abo).</p></div></div>
+<div class="sf-tor" id="sf-tor" hidden><div class="sf-box" role="dialog" aria-modal="true"><h2 style="margin:0">Nur für Eltern</h2><p id="sf-torF" style="margin:0"></p><input id="sf-torA" inputmode="numeric" autocomplete="off" aria-label="Antwort"><p class="sf-note" id="sf-torI" style="margin:0"></p><div class="sf-row"><button id="sf-torX">Abbrechen</button><button class="sf-primary" id="sf-torOk">Weiter</button></div></div></div>
+<div class="sf-feier" id="sf-feier" hidden><div class="sf-box"><span class="sf-coin" id="sf-feierC">₪</span><h2 id="sf-feierT" style="margin:0"></h2><p id="sf-feierB" style="margin:0;color:var(--ink2)"></p><button id="sf-feierOk">Juhu!</button></div></div>
 <script>
 (function(){
 const $=id=>document.getElementById("sf-"+id);
 const DAG="ּ", SHIN="ׁ", SIN="ׂ";
+// je Zeichen: Laut für Ivrit (s) und wissenschaftliche Umschrift für Bibelhebräisch (sb); nb = Name im Bibelmodus
 const L=[
- ["alef","א","","Alef (stumm)"],["bet","ב"+DAG,"b","Bet mit Punkt"],["vet","ב","w","Bet ohne Punkt"],["gimel","ג","g","Gimel"],
- ["dalet","ד","d","Dalet"],["he","ה","h","He"],["waw","ו","w","Waw"],["sajin","ז","s","Sajin (weiches s)"],["chet","ח","ch","Chet"],
- ["tet","ט","t","Tet"],["jud","י","j","Jud"],["kaf","כ"+DAG,"k","Kaf mit Punkt"],["chaf","כ","ch","Chaf ohne Punkt"],
- ["lamed","ל","l","Lamed"],["mem","מ","m","Mem"],["nun","נ","n","Nun"],["samech","ס","s","Samech"],["ajin","ע","","Ajin (stumm)"],
- ["pe","פ"+DAG,"p","Pe mit Punkt"],["fe","פ","f","Fe ohne Punkt"],["zade","צ","z","Zade"],["kuf","ק","k","Kuf"],["resch","ר","r","Resch"],
- ["schin","ש"+SHIN,"sch","Schin (Punkt rechts)"],["sin","ש"+SIN,"s","Sin (Punkt links)"],["taw","ת","t","Taw"],
- ["chaf_s","ך","ch","Chaf am Wortende"],["mem_s","ם","m","Mem am Wortende"],["nun_s","ן","n","Nun am Wortende"],
- ["fe_s","ף","f","Fe am Wortende"],["zade_s","ץ","z","Zade am Wortende"]
-].map(([id,g,s,name])=>({id,g,s,name,fin:id.endsWith("_s"),art:"L"}));
-const V=[["patach","ַ","a","Patach"],["kamatz","ָ","a","Kamatz"],["segol","ֶ","e","Segol"],["zere","ֵ","e","Zere"],
- ["chirek","ִ","i","Chirek"],["cholam","ֹ","o","Cholam"],["kubbuz","ֻ","u","Kubbuz"],["schuruk","וּ","u","Schuruk"],["schwa","ְ","e","Schwa (kurzes e)"]
-].map(([id,m,s,name])=>({id,m,s,name,art:"V"}));
+ ["alef","א","","Alef (stumm)","ʾ","Alef (Stimmeinsatz)"],["bet","ב"+DAG,"b","Bet mit Punkt","b"],["vet","ב","w","Bet ohne Punkt","ḇ"],["gimel","ג","g","Gimel","ḡ","Gimel ohne Punkt"],
+ ["dalet","ד","d","Dalet","ḏ","Dalet ohne Punkt"],["he","ה","h","He","h"],["waw","ו","w","Waw","w"],["sajin","ז","s","Sajin (weiches s)","z","Sajin"],["chet","ח","ch","Chet","ḥ"],
+ ["tet","ט","t","Tet","ṭ"],["jud","י","j","Jud","y"],["kaf","כ"+DAG,"k","Kaf mit Punkt","k"],["chaf","כ","ch","Chaf ohne Punkt","ḵ"],
+ ["lamed","ל","l","Lamed","l"],["mem","מ","m","Mem","m"],["nun","נ","n","Nun","n"],["samech","ס","s","Samech","s"],["ajin","ע","","Ajin (stumm)","ʿ","Ajin (Kehllaut)"],
+ ["pe","פ"+DAG,"p","Pe mit Punkt","p"],["fe","פ","f","Fe ohne Punkt","p̄"],["zade","צ","z","Zade","ṣ"],["kuf","ק","k","Kuf","q"],["resch","ר","r","Resch","r"],
+ ["schin","ש"+SHIN,"sch","Schin (Punkt rechts)","š"],["sin","ש"+SIN,"s","Sin (Punkt links)","ś"],["taw","ת","t","Taw","ṯ","Taw ohne Punkt"],
+ ["chaf_s","ך","ch","Chaf am Wortende","ḵ"],["mem_s","ם","m","Mem am Wortende","m"],["nun_s","ן","n","Nun am Wortende","n"],
+ ["fe_s","ף","f","Fe am Wortende","p̄"],["zade_s","ץ","z","Zade am Wortende","ṣ"]
+].map(([id,g,s,name,sb,nb])=>({id,g,s,name,sb,nb,fin:id.endsWith("_s"),art:"L"}));
+// nur im Bibelmodus: Gimel, Dalet, Taw mit Dagesch (Begadkefat: am Wortanfang mit Punkt, nach Vokal ohne)
+const LD=[["gimel_d","ג"+DAG,"Gimel mit Punkt","g"],["dalet_d","ד"+DAG,"Dalet mit Punkt","d"],["taw_d","ת"+DAG,"Taw mit Punkt","t"]]
+ .map(([id,g,name,sb])=>({id,g,s:sb,name,sb,art:"L",bibel:true}));
+const V=[["patach","ַ","a","Patach","a"],["kamatz","ָ","a","Kamatz","ā"],["segol","ֶ","e","Segol","e"],["zere","ֵ","e","Zere","ē"],
+ ["chirek","ִ","i","Chirek","i"],["cholam","ֹ","o","Cholam","ō"],["kubbuz","ֻ","u","Kubbuz","u"],["schuruk","וּ","u","Schuruk","û"],["schwa","ְ","e","Schwa (kurzes e)","ə","Schwa (gemurmeltes e)"]
+].map(([id,m,s,name,sb,nb])=>({id,m,s,name,sb,nb,art:"V"}));
+const PSALM=[{"ref": "Ps 23,1", "he": "מִזְמוֹר לְדָוִד יְהוָה רֹעִי לֹא אֶחְסָר׃", "tr": "mizmôr ləḏāwiḏ YHWH rōʿî lōʾ ʾeḥsār", "de": "Ein Psalm Davids. Der HERR ist mein Hirte, mir fehlt nichts."}, {"ref": "Ps 23,2", "he": "בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל־מֵי מְנֻחוֹת יְנַהֲלֵנִי׃", "tr": "binʾôṯ dešeʾ yarbîṣēnî ʿal-mê mənuḥôṯ yənahălēnî", "de": "Auf grünen Weiden lässt er mich lagern, zu Wassern der Ruhe führt er mich."}, {"ref": "Ps 23,3", "he": "נַפְשִׁי יְשׁוֹבֵב יַנְחֵנִי בְמַעְגְּלֵי־צֶדֶק לְמַעַן שְׁמוֹ׃", "tr": "napšî yəšôḇēḇ yanḥēnî ḇəmaʿgəlê-ṣeḏeq ləmaʿan šəmô", "de": "Meine Seele bringt er zurück. Er leitet mich auf Pfaden der Gerechtigkeit um seines Namens willen."}, {"ref": "Ps 23,4", "he": "גַּם כִּי־אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא־אִירָא רָע כִּי־אַתָּה עִמָּדִי שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ הֵמָּה יְנַחֲמֻנִי׃", "tr": "gam kî-ʾēlēḵ bəḡêʾ ṣalmāweṯ lōʾ-ʾîrāʾ rāʿ kî-ʾattāh ʿimmāḏî šiḇṭəḵā ûmišʿanteḵā hēmmāh yənaḥămunî", "de": "Auch wenn ich wandere im Tal der Todesschatten, fürchte ich kein Unheil, denn du bist bei mir; dein Stab und dein Stock, sie trösten mich."}, {"ref": "Ps 23,5", "he": "תַּעֲרֹךְ לְפָנַי שֻׁלְחָן נֶגֶד צֹרְרָי דִּשַּׁנְתָּ בַשֶּׁמֶן רֹאשִׁי כּוֹסִי רְוָיָה׃", "tr": "taʿărōḵ ləp̄ānay šulḥān neḡeḏ ṣōrərāy diššantā ḇaššemen rōʾšî kôsî rəwāyāh", "de": "Du deckst mir den Tisch vor den Augen meiner Feinde. Du salbst mein Haupt mit Öl, mein Becher fließt über."}, {"ref": "Ps 23,6", "he": "אַךְ טוֹב וָחֶסֶד יִרְדְּפוּנִי כׇּל־יְמֵי חַיָּי וְשַׁבְתִּי בְּבֵית־יְהוָה לְאֹרֶךְ יָמִים׃", "tr": "ʾaḵ ṭôḇ wāḥeseḏ yirdəp̄ûnî kol-yəmê ḥayyāy wəšaḇtî bəḇêṯ-YHWH ləʾōreḵ yāmîm", "de": "Nur Güte und Gnade folgen mir alle Tage meines Lebens, und ich kehre zurück ins Haus des HERRN für lange Zeit."}];
+const VERSE=[{"ref": "Gen 1,1", "he": "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ׃", "tr": "bərēʾšîṯ bārāʾ ʾĕlōhîm ʾēṯ haššāmayim wəʾēṯ hāʾāreṣ", "de": "Im Anfang schuf Gott den Himmel und die Erde."}, {"ref": "Gen 1,3", "he": "וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי־אוֹר׃", "tr": "wayyōʾmer ʾĕlōhîm yəhî ʾôr wayhî-ʾôr", "de": "Und Gott sprach: Es werde Licht! Und es wurde Licht."}, {"ref": "Ps 23,1", "he": "מִזְמוֹר לְדָוִד יְהוָה רֹעִי לֹא אֶחְסָר׃", "tr": "mizmôr ləḏāwiḏ YHWH rōʿî lōʾ ʾeḥsār", "de": "Ein Psalm Davids. Der HERR ist mein Hirte, mir fehlt nichts."}, {"ref": "Dtn 6,4", "he": "שְׁמַע יִשְׂרָאֵל יְהוָה אֱלֹהֵינוּ יְהוָה אֶחָד׃", "tr": "šəmaʿ yiśrāʾēl YHWH ʾĕlōhênû YHWH ʾeḥāḏ", "de": "Höre, Israel: Der HERR ist unser Gott, der HERR ist einer."}, {"ref": "Num 6,24", "he": "יְבָרֶכְךָ יְהוָה וְיִשְׁמְרֶךָ׃", "tr": "yəḇāreḵḵā YHWH wəyišməreḵā", "de": "Der HERR segne dich und behüte dich."}, {"ref": "Ps 133,1", "he": "שִׁיר הַמַּעֲלוֹת לְדָוִד הִנֵּה מַה־טּוֹב וּמַה־נָּעִים שֶׁבֶת אַחִים גַּם־יָחַד׃", "tr": "šîr hammaʿălôṯ ləḏāwiḏ hinnēh mah-ṭṭôḇ ûmah-nnāʿîm šeḇeṯ ʾaḥîm gam-yāḥaḏ", "de": "Ein Wallfahrtslied Davids. Seht, wie gut und wie schön ist es, wenn Brüder in Eintracht beieinander wohnen!"}];
 // Buchstaben in Schreibschrift sind eigene Zeichen mit eigenem Coin (Vokalzeichen sehen in beiden Schriften gleich aus)
 const LH=L.map(x=>({...x,id:x.id+"_h",name:x.name+" in Schreibschrift",hand:true}));
-const ITEMS=[...V,...L,...LH], BYID={}; ITEMS.forEach(x=>BYID[x.id]=x);
-const START=L.filter(x=>!x.fin), FIN=L.filter(x=>x.fin), GUTT=new Set(["alef","he","chet","ajin"]);
-const OHNE_SCHWA=V.filter(v=>v.id!=="schwa");
-const passt=(c,v)=>!(GUTT.has(c.id)&&v.id==="schwa") && !(c.id==="waw"&&["cholam","kubbuz","schuruk"].includes(v.id));
-function zeig(c,v){
-  if(v.id==="schuruk") return c.g+"וּ";
-  if(v.id==="cholam"&&Math.random()<.5) return c.g+"וֹ";
-  if(v.id==="chirek"&&Math.random()<.4) return c.g+v.m+"י";
-  return c.g+v.m;
-}
+const ITEMS=[...V,...L,...LH,...LD], BYID={}; ITEMS.forEach(x=>BYID[x.id]=x);
+const START=[...L.filter(x=>!x.fin),...LD], FIN=L.filter(x=>x.fin), GUTT=new Set(["alef","he","chet","ajin"]);
 const finZeig=f=>f.id==="chaf_s"? "ךְ" : f.g;
 const glyphV=x=>x.id==="schuruk"?"בּוּ":"ב"+DAG+x.m, glyphL=x=>x.id==="chaf_s"?"ךְ":x.g;
+
+// Lernweg: jede Stufe stellt neue Zeichen vor; die Silbenzahl wächst mit. Freischalten bei 18 von 20 richtig.
+const STUFEN=[
+ {L:["bet","mem","lamed","schin","taw","taw_d"], V:["kamatz","chirek"], s:[1,1]},
+ {L:["dalet","dalet_d","nun","resch","jud","samech"], V:["patach","cholam"], s:[1,2]},
+ {L:["gimel","gimel_d","he","waw","sajin","kuf"], V:["segol","schuruk"], s:[2,2]},
+ {L:["kaf","chaf","pe","fe","vet"], V:["zere","kubbuz"], s:[1,2]},
+ {L:["alef","ajin","chet","tet","zade","sin"], V:["schwa"], s:[1,3]},
+ {L:["chaf_s","mem_s","nun_s","fe_s","zade_s"], V:[], s:[1,3]},
+ {L:[], V:[], s:[2,3], meister:true}
+];
+const STUFE_VON={}; STUFEN.forEach((st,k)=>[...st.L,...st.V].forEach(id=>{ STUFE_VON[id]=k; STUFE_VON[id+"_h"]=k; }));
+const ZIEL=18, FENSTER=20;
+// Kauf: nur in der App (window.SilbenfinkKauf kommt von der App-Hülle); im Browser und in Prushit ist alles frei
+const KAUF=window.SilbenfinkKauf||null, GRATIS_BIS=2;
+const gesperrt=k=>!!KAUF && !S.voll && k>GRATIS_BIS;
 
 const KEY="silbenfink.v1";
 function lade(){ let s={}; try{ s=JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){}
   s.p=s.p||{}; s.fertig=s.fertig||{}; s.eingeloest=s.eingeloest||0; s.n=s.n||4; s.ton=s.ton!==false; s.tag=s.tag||{};
-  if(s.wort===undefined) s.wort=35; if(!s.schrift) s.schrift="druck"; return s; }
+  if(!s.schrift) s.schrift="druck"; s.stufe=s.stufe||0; s.frei=s.frei||0; s.gesehen=s.gesehen||{}; s.verlauf=s.verlauf||{};
+  s.richtung=s.richtung||"lesen"; s.psalm=s.psalm||0;
+  s.turbo=[0,10,6,3].includes(s.turbo)? s.turbo : (s.turbo? 6 : 0); s.sterne=s.sterne||0; s.verw=s.verw||{}; s.zeiten=s.zeiten||[]; s.antw=s.antw||0; s.ok=s.ok||0; delete s.wort; return s; }
 let S=lade();
+const wert=()=>S.wert||"15 Minuten Bildschirmzeit";
+const bibel=()=>S.modus==="bibel";
+const snd=x=>bibel()? x.sb : x.s, nm=x=>bibel()&&x.nb? x.nb : x.name;
+const SPIR=new Set(["vet","chaf","fe","gimel","dalet","taw"]), DAGL=new Set(["bet","kaf","pe","gimel_d","dalet_d","taw_d"]);
+const regelOk=(c,pos)=>!bibel() || (pos===0? !SPIR.has(c.id) : !DAGL.has(c.id));   // Begadkefat
+const aktiv=x=>bibel()? !x.hand : !x.bibel;
 const speichere=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 const pkt=id=>S.p[id]||0, verdient=()=>Object.keys(S.fertig).length, offen=()=>verdient()-S.eingeloest;
 const heute=()=>new Date().toISOString().slice(0,10);
 const idf=(x,hand)=>x.art==="L"&&hand? x.id+"_h" : x.id;
-function zieh(liste,hand){ const w=liste.map(x=>Math.max(4,105-pkt(idf(x,hand)))); let r=Math.random()*w.reduce((a,b)=>a+b,0);
-  for(let i=0;i<liste.length;i++){ r-=w[i]; if(r<=0) return liste[i]; } return liste[liste.length-1]; }
 const zufall=a=>a[Math.floor(Math.random()*a.length)];
+const bekannt=id=>aktiv(BYID[id]) && STUFE_VON[id]<=Math.min(S.stufe,5);
+function zieh(liste,hand){   // Schwaches und Neues kommt öfter
+  const w=liste.map(x=>Math.max(4,105-pkt(idf(x,hand)))*(!STUFEN[S.stufe].meister&&STUFE_VON[x.id]===S.stufe?3:1));
+  let r=Math.random()*w.reduce((a,b)=>a+b,0);
+  for(let i=0;i<liste.length;i++){ r-=w[i]; if(r<=0) return liste[i]; } return liste[liste.length-1]; }
+const passt=(c,v)=>!(GUTT.has(c.id)&&v.id==="schwa") && !(c.id==="waw"&&["cholam","kubbuz","schuruk"].includes(v.id));
+function zeig(c,v){   // gibt [Text, Vokal-Teil] zurück; Vollschreibung (Plene) hat im Bibelmodus eigene Umschrift
+  if(v.id==="schuruk") return [c.g+"וּ",v];
+  if(v.id==="cholam"&&Math.random()<.5) return [c.g+"וֹ",{...v,sb:"ô",plene:true}];
+  if(v.id==="chirek"&&bekannt("jud")&&Math.random()<.4) return [c.g+v.m+"י",{...v,sb:"î",plene:true}];
+  return [c.g+v.m,v];
+}
 
 // Eine Frage besteht aus Teilen: [Buchstabe, Vokal] je Silbe, dazu vielleicht ein Schlussbuchstabe.
-let Q=null, serie=0;
-function silbe(vokale,hand){ let c,v; do{ c=zieh(START,hand); v=zieh(vokale); }while(!passt(c,v)); return [c,v]; }
-function laut(teile){ return teile.map(x=>x.s).join(""); }
+let Q=null, serie=0, uhr=null;
+function pools(){ const KL=START.filter(x=>bekannt(x.id)), KF=FIN.filter(x=>bekannt(x.id)), KV=V.filter(x=>bekannt(x.id));
+  return {KL,KF,KV,KV2:KV.filter(v=>v.id!=="schwa")}; }
+function silbe(KL,vokale,hand,pos){ let c,v,n=0; do{ c=zieh(KL,hand); v=zieh(vokale); }while((!passt(c,v)||!regelOk(c,pos))&&n++<300); return [c,v]; }
+function laut(teile){ return teile.map(snd).join(""); }
 function neueFrage(){
-  const hand = S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib";
-  const zwei = Math.random()*100 < S.wort;
-  let teile = silbe(V,hand);
-  if(zwei) teile = teile.concat(silbe(OHNE_SCHWA,hand));             // in der zweiten Silbe kein Schwa (wäre dort stumm)
-  const finSchwach=FIN.some(x=>pkt(idf(x,hand))<100);
-  if(Math.random()<(finSchwach?.25:.1)) teile.push(zieh(FIN,hand));
-  let text=""; for(let i=0;i<teile.length;i++){ const x=teile[i];
-    if(x.art==="L"&&!x.fin){ text+=zeig(x,teile[i+1]); i++; } else if(x.fin) text+=finZeig(x); }
-  const richtig=laut(teile);
-  // Ablenker: genau ein Teil wird durch einen anders klingenden ersetzt; so weiß das Spiel, was verwechselt wurde
+  stoppUhr();
+  const P=pools(), st=STUFEN[S.stufe];
+  const hand = !bibel() && (S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib");
+  const zahl = st.s[0]+Math.floor(Math.random()*(st.s[1]-st.s[0]+1));
+  let teile = silbe(P.KL,P.KV,hand,0);
+  for(let i=1;i<zahl;i++) teile = teile.concat(silbe(P.KL,P.KV2,hand,i));   // nach der ersten Silbe kein Schwa (wäre dort stumm)
+  if(P.KF.length && Math.random()<(S.stufe===5?.5:.2)) teile.push(zieh(P.KF,hand));
+  for(let i=0;i<teile.length;i++){ const x=teile[i]; if(x.art==="L"&&!x.fin){ teile[i+1]=zeig(x,teile[i+1])[1]; i++; } }
+  const text=schreib(teile), richtig=laut(teile), SCHR=schreiben();
+  // Ablenker: genau ein Teil wird durch ein anders klingendes, schon bekanntes Zeichen ersetzt
   const opts=[{t:richtig,ok:true}], gesehen=new Set([richtig]); let n=0;
+  // Mischung: eine falsche Antwort mit anderem Vokal, eine mit anderem Buchstaben; bevorzugt Verwechselbares
+  const vokK=teile.map((x,i)=>x.art==="V"?i:-1).filter(i=>i>=0), buchK=teile.map((x,i)=>x.art==="L"?i:-1).filter(i=>i>=0);
   while(opts.length<S.n && n++<300){
-    const k=Math.floor(Math.random()*teile.length), alt=teile[k];
-    const pool= alt.art==="V"? V : alt.fin? FIN : START;
-    const neu=zufall(pool); if(neu.s===alt.s) continue;
-    const t=laut(teile.map((x,i)=>i===k?neu:x));
-    if(!t||gesehen.has(t)) continue; gesehen.add(t); opts.push({t,ok:false,schuld:idf(alt,hand)});
+    const j=opts.length, k= j===1&&n<100? zufall(vokK) : j===2&&n<100? zufall(buchK) : Math.floor(Math.random()*teile.length), alt=teile[k];
+    const pool= alt.art==="V"? (k>1?P.KV2:P.KV) : alt.fin? P.KF : P.KL;
+    const neu=n<150? aehnlich(alt,pool) : zufall(pool); if(snd(neu)===snd(alt)||neu.id===alt.id) continue;
+    if(alt.art==="L"&&!alt.fin&&!regelOk(neu,k/2)) continue;
+    const neuT=teile.map((x,i)=>i===k?neu:x), t=laut(neuT);
+    if(!t||gesehen.has(t)) continue; gesehen.add(t); opts.push({t:SCHR?schreib(neuT):t,ok:false,schuld:idf(alt,hand)});
   }
+  if(SCHR) opts[0].t=text;   // Schreib-Modus: Laut wird gezeigt, Schreibungen stehen zur Wahl
   opts.sort(()=>Math.random()-.5);
-  Q={teile,text,richtig,opts,hand,fertig:false}; zeigeFrage();
+  Q={teile,text,richtig,opts,hand,silben:zahl,schr:SCHR,fertig:false}; zeigeFrage();
 }
+// Verwechselbare Zeichen: ähnliche Form oder ähnlicher Klang (gleich klingende fallen ohnehin heraus)
+const AEHNLICH=[["bet","kaf","pe"],["vet","chaf","fe"],["dalet","resch","chaf_s","dalet_d"],["he","chet","taw","taw_d"],["waw","sajin","nun_s","jud"],
+ ["tet","mem","samech","mem_s"],["gimel","nun","gimel_d"],["ajin","zade","zade_s","tet"],["schin","sin","samech"],["kuf","he","resch"],["alef","ajin","he"],
+ ["patach","segol","chirek"],["kamatz","zere","cholam"],["segol","zere","chirek","schwa"],["cholam","kubbuz","schuruk"],["chirek","zere","kubbuz"]];
+function aehnlich(alt,pool){ const nah=new Set(); AEHNLICH.forEach(g=>{ if(g.includes(alt.id)) g.forEach(id=>nah.add(id)); });
+  const w=pool.map(x=>nah.has(x.id)&&x.id!==alt.id? 6 : 1); let z=Math.random()*w.reduce((a,b)=>a+b,0);
+  for(let i=0;i<pool.length;i++){ z-=w[i]; if(z<=0) return pool[i]; } return pool[pool.length-1]; }
+function schreib(teile){ let t=""; for(let i=0;i<teile.length;i++){ const x=teile[i];
+    if(x.art==="L"&&!x.fin){ const v=teile[i+1];
+      t+= v.id==="schuruk"? x.g+"וּ" : v.plene&&v.id==="cholam"? x.g+"וֹ" : v.plene&&v.id==="chirek"? x.g+v.m+"י" : x.g+v.m; i++; }
+    else if(x.fin) t+=finZeig(x); }
+  return t; }
+const schreiben=()=>S.richtung==="schreiben" && !(KAUF&&!S.voll);
+const loesung=()=>Q.schr? `<b lang="he">${Q.text}</b> (${Q.richtig||"stumm"})` : `<b>${Q.richtig||"(stumm)"}</b>`;
 function zeigeFrage(){
-  schrift(Q.hand);
-  $("syl").textContent=Q.text; $("syl").classList.toggle("sf-lang", Q.teile.length>3);
-  $("frage").textContent= Q.teile.length>3? "Wie liest man dieses Kunstwort?" : "Wie liest man das?";
-  $("fb").innerHTML=""; $("weiter").hidden=true;
+  schrift(Q.hand); $("intro").hidden=true; $("laden").hidden=true; $("quiz").hidden=false;
+  $("syl").textContent=Q.schr? Q.richtig : Q.text; $("syl").classList.toggle("sf-lang", Q.teile.length>3); $("syl").classList.toggle("sf-lat", Q.schr);
+  $("syl").lang=Q.schr?"de":"he";
+  $("frage").textContent= Q.schr? (Q.silben>1? "Wie schreibt man dieses Kunstwort?" : "Wie schreibt man das?") : Q.silben>1? "Wie liest man dieses Kunstwort?" : "Wie liest man das?";
+  $("fb").innerHTML=""; $("weiter").hidden=true; $("sag").hidden=true;
   const box=$("opts"); box.innerHTML="";
-  for(const o of Q.opts){ const b=document.createElement("button"); b.className="sf-opt"; b.textContent=o.t||"(stumm)"; b.onclick=()=>antwort(o,b); box.appendChild(b); }
+  for(const o of Q.opts){ const b=document.createElement("button"); b.className="sf-opt"+(Q.schr?" sf-heb":""); if(Q.schr) b.lang="he"; b.textContent=o.t||"(stumm)"; b.onclick=()=>antwort(o,b); box.appendChild(b); }
+  Q.start=Date.now(); if(S.turbo) startUhr(S.turbo*Q.silben);
   oben();
 }
+function startUhr(sek){ const z=$("zeit"), i=$("zeitI"); z.hidden=false;
+  i.style.transition="none"; i.style.transform="scaleX(1)"; void i.offsetWidth;
+  i.style.transition=`transform ${sek}s linear`; i.style.transform="scaleX(0)";
+  Q.start=Date.now(); uhr=setTimeout(zeitUm, sek*1000); }
+function stoppUhr(){ clearTimeout(uhr); uhr=null; const i=$("zeitI"); const w=getComputedStyle(i).transform; i.style.transition="none"; i.style.transform=w; if(!S.turbo) $("zeit").hidden=true; }
+function zeitUm(){ if(!Q||Q.fertig) return; Q.fertig=true; serie=0; ton(false);
+  [...$("opts").children].forEach((x,i)=>{ if(Q.opts[i].ok) x.classList.add("sf-richtig"); });
+  $("fb").innerHTML=`⏱ Zeit um! Richtig ist ${loesung()}. Kein Punktabzug.`;
+  $("weiter").hidden=false; $("sag").hidden=!stimme(); oben(); }
 function plus(id,d){ S.p[id]=Math.max(0,Math.min(100,pkt(id)+d));
-  if(S.p[id]>=100 && !S.fertig[id]){ S.fertig[id]=heute(); feiern(BYID[id]); } }
+  if(S.p[id]>=100 && !S.fertig[id] && !bibel()){ S.fertig[id]=heute(); feiern("coin",BYID[id]); } }
+const vkey=()=>(Q&&Q.schr?"s":"")+S.stufe;
+function merke(ok){ const v=(S.verlauf[vkey()]||[]).concat([ok]).slice(-FENSTER); S.verlauf[vkey()]=v;
+  if(Q.schr){ if(S.stufe>=S.psalm && S.stufe<PSALM.length && v.length>=FENSTER && v.filter(Boolean).length>=ZIEL){ S.psalm=S.stufe+1; feiern("psalm",S.psalm); } return; }
+  if(S.stufe===S.frei && S.frei<STUFEN.length-1 && v.length>=FENSTER && v.filter(Boolean).length>=ZIEL){ S.frei++; feiern("stufe",S.frei); } }
 function antwort(o,b){
-  if(Q.fertig) return; Q.fertig=true;
+  if(Q.fertig) return; Q.fertig=true; stoppUhr();
   if(o.ok){
-    b.classList.add("sf-richtig"); serie++; S.tag[heute()]=(S.tag[heute()]||0)+1;
-    Q.teile.forEach(x=>plus(idf(x,Q.hand),1)); ton(true);
-    $("fb").innerHTML=lob()+` <span class="sf-note">${Q.teile.map(x=>x.name+" = "+(x.s||"stumm")).join(" · ")}</span>`; funken(b);
-    setTimeout(()=>{ if(!$("feier").hidden) return; if(document.getElementById("sf").offsetParent!==null || !document.getElementById("sf").closest(".view")) neueFrage(); }, 900);
+    b.classList.add("sf-richtig"); serie++; S.tag[heute()]=(S.tag[heute()]||0)+1; S.antw++; S.ok++;
+    S.zeiten=S.zeiten.concat([Math.round((Date.now()-Q.start)/Q.silben)]).slice(-50);
+    const schnell=S.turbo && Date.now()-Q.start < S.turbo*Q.silben*1000; if(schnell) S.sterne++;
+    Q.teile.forEach(x=>plus(idf(x,Q.hand),1)); merke(true); ton(true);
+    $("fb").innerHTML=(schnell?(S.turbo<=6?"🌸 ":"⭐ "):"")+lob()+` <span class="sf-note">${Q.teile.map(x=>nm(x)+" = "+(snd(x)||"stumm")).join(" · ")}</span>`;
+    if(schnell && S.turbo<=6) nebel(b); else funken(b);
+    $("sag").hidden=!stimme();
+    setTimeout(()=>{ if(!$("feier").hidden||FEIER.length||!Q.fertig||$("quiz").hidden) return; if(document.getElementById("sf").offsetParent!==null || !document.getElementById("sf").closest(".view")) neueFrage(); }, stimme()?1600:900);
   } else {
     b.classList.add("sf-falsch"); serie=0; ton(false);
     [...$("opts").children].forEach((x,i)=>{ if(Q.opts[i].ok) x.classList.add("sf-richtig"); });
-    plus(o.schuld,-3);
+    plus(o.schuld,-3); merke(false); S.antw++; const sid=o.schuld.replace(/_h$/,""); S.verw[sid]=(S.verw[sid]||0)+1;
     const z=BYID[o.schuld];
-    $("fb").innerHTML=`Richtig ist <b>${Q.richtig||"(stumm)"}</b>. Achte auf <b>${z.art==="V"?glyphV(z):glyphL(z)}</b>: ${z.name}, klingt „${z.s||"stumm"}“.`;
-    $("weiter").hidden=false;
+    $("fb").innerHTML=`Richtig ist ${loesung()}. Achte auf <b>${z.art==="V"?glyphV(z):glyphL(z)}</b>: ${nm(z)}, klingt „${snd(z)||"stumm"}“.`;
+    $("weiter").hidden=false; $("sag").hidden=!stimme();
   }
   speichere(); oben();
 }
 const LOB=["Super!","Richtig!","Toll gelesen!","Genau!","Prima!","Klasse!"];
 const lob=()=> serie>=10? `<b>${serie} in Folge!</b>` : zufall(LOB);
-function feiern(x){ $("feierT").textContent="Neuer Coin!";
-  $("feierB").textContent=`${x.art==="V"?"Vokalzeichen":"Buchstabe"} „${x.name}“: 100 Punkte geschafft. Der Coin ist 15 Minuten Videospiel wert. Du hast jetzt ${verdient()} von ${ITEMS.length}.`;
-  $("feier").hidden=false; ton(true,true); }
-$("feierOk").onclick=()=>{ $("feier").hidden=true; neueFrage(); };
+const FEIER=[];
+function feiern(art,x){ FEIER.push([art,x]); if($("feier").hidden) naechsteFeier(); }
+function naechsteFeier(){ const f=FEIER.shift(); if(!f) return false; const [art,x]=f;
+  if(art==="coin"){ $("feierC").textContent="₪"; $("feierT").textContent="Neuer Coin!";
+    $("feierB").textContent=`${x.art==="V"?"Vokalzeichen":"Buchstabe"} „${x.name}“: 100 Punkte geschafft. Eintauschen bei den Eltern: ${wert()}. Du hast jetzt ${verdient()} von ${ITEMS.filter(aktiv).length}.`; }
+  else if(art==="psalm"){ $("feierC").textContent=bibel()?"✍️":"★"; $("feierT").textContent="Schreib-Stufe geschafft!";
+    $("feierB").textContent= bibel()? `Neuer Vers: ${PSALM[x-1].ref} („${PSALM[x-1].de}“). Du findest ihn unter „Fortschritt“.` : `${ZIEL} von ${FENSTER} richtig geschrieben. Super!`; }
+  else { $("feierC").textContent=bibel()?"📜":"★"; $("feierT").textContent=`Stufe ${x} geschafft!`;
+    const vers=bibel()&&VERSE[x-1]? ` Neuer Vers freigeschaltet: ${VERSE[x-1].ref} („${VERSE[x-1].de}“). Du findest ihn unter „Fortschritt“.` : "";
+    $("feierB").textContent=(STUFEN[x].meister? "Du kennst jetzt alle Zeichen. Ab sofort bist du Meister-Leser!" : `${ZIEL} von ${FENSTER} richtig. Jetzt lernst du neue Zeichen kennen.`)+vers; $("feier").dataset.stufe=x; }
+  $("feier").hidden=false; ton(true,true); return true; }
+$("feierOk").onclick=()=>{ $("feier").hidden=true; if(naechsteFeier()) return;
+  const k=$("feier").dataset.stufe; delete $("feier").dataset.stufe;
+  if(k!==undefined) startStufe(+k); else if(!$("quiz").hidden) neueFrage(); };
 $("weiter").onclick=neueFrage;
+
+// Vorstellung der neuen Zeichen einer Stufe
+let IN=null;
+function introListe(k){ const st=STUFEN[k], B=bibel(), a=B?"ā":"a";
+  return [...st.L.map(id=>BYID[id]), ...st.V.map(id=>BYID[id])].filter(aktiv).map(x=>{
+    if(x.art==="V"){ const bsp= x.id==="schuruk"? "מוּ" : "מ"+x.m;
+      const extra= x.id==="cholam"? ` · auch so: מוֹ${B?" = „mô“":""}` : x.id==="chirek"&&k>0? ` · oft mit Jud: מִי${B?" = „mî“":""}` : x.id==="schwa"&&B? " · am Silbenende stumm" : "";
+      return {g:glyphV(x).replace("ב"+DAG,"◌").replace("בּ","◌"), name:nm(x), s:snd(x), note:`Beispiel: ${bsp} = „m${snd(x)}“${extra}`, sag:bsp}; }
+    if(x.fin){ const bsp="לָ"+finZeig(x); return {g:glyphL(x), name:nm(x), s:snd(x), note:`Steht nur am Wortende. Beispiel: ${bsp} = „l${a}${snd(x)}“`, sag:bsp}; }
+    const regel= B&&SPIR.has(x.id)? " · ohne Punkt nach einem Vokal (weich)" : B&&DAGL.has(x.id)? " · mit Punkt am Wortanfang (hart)" : "";
+    const bsp=x.g+"ָ"; return {g:x.g, name:nm(x), s:snd(x)||"stumm", note:`Beispiel: ${bsp} = „${snd(x)}${a}“${regel}`, sag:bsp}; }); }
+function startStufe(k){ stoppUhr(); if(gesperrt(k)){ zeigeLaden(); return; } S.stufe=k; speichere(); stufenLeiste();
+  if(!S.gesehen[k] && !STUFEN[k].meister) zeigeIntro(k); else neueFrage(); oben(); }
+function zeigeLaden(){ stoppUhr(); $("quiz").hidden=true; $("intro").hidden=true; $("laden").hidden=false; $("zeit").hidden=true; kaufText(); }
+$("ladenZu").onclick=()=>{ $("laden").hidden=true; startStufe(Math.min(S.stufe,GRATIS_BIS)); };
+let PREIS=null;
+function kaufText(){ document.querySelectorAll("#sf .sf-kaufen").forEach(b=>{ b.textContent= S.voll? "Gekauft ✓" : "Vollversion kaufen"+(PREIS?" ("+PREIS+")":""); b.disabled=!!S.voll; });
+  document.querySelectorAll("#sf .sf-vollStand").forEach(x=>x.textContent= S.voll? "Gekauft: Alle Stufen sind freigeschaltet. Danke!" : "Kostenlos sind die Stufen 1 bis 3: 15 der 22 Buchstaben (ב מ ל ש ת ד נ ר י ס ג ה ו ז ק) und 6 der 9 Vokalzeichen. Die Vollversion (einmaliger Kauf, kein Abo) bringt die Stufen 4 bis 6: die übrigen 7 Buchstaben (כ פ א ע ח ט צ), Bet ohne Punkt, Sin, die 5 Schlussbuchstaben (ך ם ן ף ץ), 3 weitere Vokalzeichen, den Meister-Modus und den Schreib-Modus (Umschrift sehen, hebräische Schreibung wählen)."); }
+function kaufInfo(t){ document.querySelectorAll("#sf .sf-kaufInfo").forEach(x=>x.textContent=t); }
+function nachKauf(ok,meldung){ if(ok){ S.voll=true; speichere(); kaufText(); stufenLeiste(); kaufInfo("Danke! Alle Stufen sind freigeschaltet.");
+    if(!$("laden").hidden){ $("laden").hidden=true; startStufe(Math.min(S.frei,STUFEN.length-1)); } }
+  else kaufInfo(meldung); }
+// Elternschranke: eine Rechenaufgabe, die kleine Kinder noch nicht lösen
+function elternTor(){ return new Promise(fertig=>{ const a=6+Math.floor(Math.random()*4), b=12+Math.floor(Math.random()*8);
+  $("torF").textContent=`Bitte rechnen: ${a} × ${b} = ?`; $("torA").value=""; $("torI").textContent=""; $("tor").hidden=false; $("torA").focus();
+  $("torOk").onclick=()=>{ $("tor").hidden=true; fertig(+$("torA").value===a*b? true : "falsch"); };
+  $("torX").onclick=()=>{ $("tor").hidden=true; fertig(false); }; }); }
+document.querySelectorAll("#sf .sf-kaufen").forEach(b=>b.onclick=async()=>{ if(!KAUF||S.voll) return;
+  const tor=await elternTor(); if(tor!==true){ kaufInfo(tor==="falsch"? "Die Rechenaufgabe stimmte nicht. Bitte noch einmal." : "Abgebrochen."); return; }
+  kaufInfo("Einen Moment …"); try{ nachKauf(await KAUF.kaufen(), "Der Kauf wurde nicht abgeschlossen."); }catch(e){ nachKauf(false, "Der Kauf wurde abgebrochen oder ist gerade nicht möglich."); } });
+document.querySelectorAll("#sf .sf-zurueckholen").forEach(b=>b.onclick=async()=>{ if(!KAUF) return;
+  kaufInfo("Einen Moment …"); try{ nachKauf(await KAUF.wiederherstellen(), "Kein früherer Kauf gefunden."); }catch(e){ nachKauf(false, "Wiederherstellen ist gerade nicht möglich."); } });
+function kaufPruefen(){ if(!KAUF) return; KAUF.preis().then(p=>{ PREIS=p; kaufText(); }).catch(()=>{});
+  KAUF.besitzt().then(v=>{ if(v!==!!S.voll){ S.voll=v; speichere(); stufenLeiste(); kaufText(); if(gesperrt(S.stufe)) startStufe(GRATIS_BIS); } }).catch(()=>{}); }
+function zeigeIntro(k){ IN={k,liste:introListe(k),i:0}; $("quiz").hidden=true; $("laden").hidden=true; $("intro").hidden=false; $("zeit").hidden=true; introSchritt(); }
+function introSchritt(){ const it=IN.liste[IN.i];
+  $("introT").textContent=`Stufe ${IN.k+1}: neues Zeichen ${IN.i+1} von ${IN.liste.length}`;
+  $("introG").textContent=it.g; $("introS").textContent=`${it.name}: „${it.s}“`; $("introN").innerHTML=it.note.replace(/([\u0590-\u05FF]+)/g,'<span class="sf-he" lang="he">$1</span>');
+  $("introP").innerHTML=IN.liste.map((_,j)=>`<i class="${j<=IN.i?"sf-an":""}"></i>`).join("");
+  $("introZ").hidden=IN.i===0; $("introV").hidden=!stimme();
+  $("introW").textContent= IN.i===IN.liste.length-1? "Los geht's!" : "Weiter"; }
+$("introW").onclick=()=>{ if(IN.i<IN.liste.length-1){ IN.i++; introSchritt(); return; } S.gesehen[IN.k]=true; speichere(); IN=null; neueFrage(); };
+$("introZ").onclick=()=>{ if(IN.i>0){ IN.i--; introSchritt(); } };
+$("introV").onclick=()=>sag(IN.liste[IN.i].sag);
+$("zeigen").onclick=()=>{ if(!STUFEN[S.stufe].meister) zeigeIntro(S.stufe); };
+$("sag").onclick=()=>sag(Q.text);
+
+// Vorlesen mit der hebräischen Stimme des Geräts, falls vorhanden
+let HE=null;
+function stimmeSuchen(){ try{ HE=speechSynthesis.getVoices().find(v=>/^he|^iw/i.test(v.lang))||null; }catch(e){ HE=null; } }
+const stimme=()=>!!HE;
+if(window.speechSynthesis){ stimmeSuchen(); speechSynthesis.onvoiceschanged=()=>{ stimmeSuchen(); if(IN) introSchritt(); }; }
+function sag(t){ if(!HE) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.voice=HE; u.lang=HE.lang; u.rate=.8; speechSynthesis.speak(u); }catch(e){} }
+
+function stufenLeiste(){ const box=$("stufen"); box.innerHTML="";
+  STUFEN.forEach((st,k)=>{ const b=document.createElement("button"); b.className="sf-chip";
+    b.textContent= st.meister? "★" : String(k+1); if(k>S.frei||gesperrt(k)) b.textContent="🔒"; b.disabled=k>S.frei;
+    b.setAttribute("aria-current", k===S.stufe); b.title= st.meister? "Meister: alle Zeichen" : "Stufe "+(k+1);
+    b.onclick=()=>startStufe(k); box.appendChild(b); });
+  $("zeigen").hidden=!!STUFEN[S.stufe].meister; }
 function oben(){
-  $("coinsTop").textContent=offen(); $("serie").textContent=serie; $("heute").textContent=S.tag[heute()]||0;
-  const nah=ITEMS.filter(x=>!S.fertig[x.id]).sort((a,b)=>pkt(b.id)-pkt(a.id))[0];
-  $("naechst").textContent= nah? `Nächster Coin: ${nah.art==="V"||nah.hand?nah.name:nah.g} ${pkt(nah.id)}/100` : "Alles geschafft!";
+  $("coinsTop").textContent=offen(); $("versTop").textContent=verseFrei()+S.psalm; $("serie").textContent=serie; $("heute").textContent=S.tag[heute()]||0; $("sterne").textContent=S.sterne;
+  const nah=ITEMS.filter(x=>aktiv(x)&&!S.fertig[x.id]&&STUFE_VON[x.id]<=S.frei).sort((a,b)=>pkt(b.id)-pkt(a.id))[0];
+  $("naechst").textContent= bibel()? "" : nah? `Nächster Coin: ${nah.art==="V"||nah.hand?nah.name:nah.g} ${pkt(nah.id)}/100` : "";
+  const st=STUFEN[S.stufe], sch=schreiben(), v=S.verlauf[(sch?"s":"")+S.stufe]||[];
+  document.querySelectorAll("#sf [data-sfr]").forEach(b=>{ b.classList.toggle("sf-primary", b.dataset.sfr===(sch?"schreiben":"lesen"));
+    if(b.dataset.sfr==="schreiben") b.textContent=(KAUF&&!S.voll?"🔒 ":"✍️ ")+"Schreiben"; });
+  $("fort").textContent= sch? (S.stufe<PSALM.length && S.stufe>=S.psalm && bibel()? `Schreiben, Stufe ${S.stufe+1}: ${v.filter(Boolean).length} von ${v.length} richtig (Psalmvers ab ${ZIEL} von ${FENSTER})` : `Schreiben, Stufe ${S.stufe+1}: ${v.filter(Boolean).length} der letzten ${v.length} richtig`)
+    : st.meister? "Meister: alle Zeichen, 2 bis 3 Silben"
+    : S.stufe<S.frei? `Stufe ${S.stufe+1} ist geschafft. Üben lohnt sich trotzdem.`
+    : v.length? `Stufe ${S.stufe+1}: ${v.filter(Boolean).length} der letzten ${v.length} richtig (nächste Stufe ab ${ZIEL} von ${FENSTER})` : `Stufe ${S.stufe+1}: Nächste Stufe ab ${ZIEL} von ${FENSTER} richtig`;
+  document.querySelectorAll("#sf [data-sft]").forEach(b=>b.classList.toggle("sf-primary", +b.dataset.sft===S.turbo));
 }
 function schatz(){
   $("verdient").textContent=verdient();
-  for(const [box,liste] of [["gridV",V],["gridL",L],["gridH",LH]]){
+  for(const [box,liste] of [["gridV",V],["gridL",[...L,...LD].filter(aktiv)],["gridH",LH.filter(aktiv)]]){
     const g=$(box); g.innerHTML="";
-    for(const x of liste){ const t=document.createElement("div"); const p=pkt(x.id); t.className="sf-tile"+(S.fertig[x.id]?" sf-fertig":"");
-      t.innerHTML=`${S.fertig[x.id]?'<span class="sf-coin">₪</span>':""}<div class="sf-g${x.hand?" sf-gh":""}" lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</div><div class="sf-s">${x.s||"stumm"} · ${p}</div><div class="sf-bar"><i style="width:${p}%"></i></div>`;
-      t.title=x.name; g.appendChild(t); }
+    for(const x of liste){ const t=document.createElement("div"); const p=pkt(x.id);
+      t.className="sf-tile"+(S.fertig[x.id]?" sf-fertig":"")+(STUFE_VON[x.id]>S.frei?" sf-zu":"");
+      t.innerHTML=`${S.fertig[x.id]?'<span class="sf-coin">₪</span>':""}<div class="sf-g${x.hand?" sf-gh":""}" lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</div><div class="sf-s">${snd(x)||"stumm"} · ${p}</div><div class="sf-bar"><i style="width:${p}%"></i></div>`;
+      t.title=nm(x)+" (Stufe "+(STUFE_VON[x.id]+1)+")"; g.appendChild(t); }
   }
-  $("regel").innerHTML=[...V,...L].map(x=>`<b lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</b><span>${x.name}: ${x.s||"stumm"}</span>`).join("");
+  $("regel").innerHTML=[...V,...L,...LD].filter(aktiv).map(x=>`<b lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</b><span>${nm(x)}: ${snd(x)||"stumm"} (Stufe ${STUFE_VON[x.id]+1})</span>`).join("");
+  statistik(); verse();
 }
+// Lernstatistik: Lesetempo, Trefferquote, Lerntage in Folge, häufigste Verwechslungen
+function tageInFolge(){ let n=0; const d=new Date(); if(!S.tag[heute()]) d.setDate(d.getDate()-1);
+  for(;;){ const k=d.toISOString().slice(0,10); if(!S.tag[k]) break; n++; d.setDate(d.getDate()-1); } return n; }
+function statistik(){
+  const z=S.zeiten, tempo=z.length>=5? Math.round(60000/(z.reduce((a,b)=>a+b,0)/z.length)) : null;
+  const quote=S.antw? Math.round(100*S.ok/S.antw) : null;
+  $("stat").innerHTML=[[tempo??"–","Silben pro Minute (zuletzt)"],[quote==null?"–":quote+" %","richtig von "+S.antw+" Antworten"],
+    [tageInFolge(),"Lerntage in Folge"],[Object.keys(S.tag).length,"Lerntage insgesamt"]].map(([w,t])=>`<div><b>${w}</b><span>${t}</span></div>`).join("");
+  const top=Object.entries(S.verw).filter(([id])=>BYID[id]&&aktiv(BYID[id])).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  $("statFehlerT").hidden=!top.length;
+  $("statFehler").innerHTML=top.map(([id,n])=>{ const x=BYID[id]; return `<span><b lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</b> ${nm(x)}: ${n}×</span>`; }).join(""); }
+// Bibelverse: Vers k ist frei, wenn Stufe k geschafft ist; Zeichen, die man noch nicht kennt, erscheinen blass
+const verseFrei=()=>Math.min(VERSE.length, S.frei);
+const ZEICHEN={"א":"alef","ה":"he","ו":"waw","ז":"sajin","ח":"chet","ט":"tet","י":"jud","ל":"lamed","מ":"mem","ם":"mem_s","נ":"nun","ן":"nun_s","ס":"samech","ע":"ajin","ף":"fe_s","צ":"zade","ץ":"zade_s","ק":"kuf","ר":"resch","ך":"chaf_s"};
+const VOK={"ׇ":"kamatz","ַ":"patach","ָ":"kamatz","ֶ":"segol","ֵ":"zere","ִ":"chirek","ֹ":"cholam","ֻ":"kubbuz","ְ":"schwa"};
+const CHATEF={"ֲ":["patach","schwa"],"ֱ":["segol","schwa"],"ֳ":["kamatz","schwa"]};
+function verseHTML(he){ const kenn=id=>STUFE_VON[id]<=Math.min(S.frei,5);
+  return he.replace(/([\u05D0-\u05EA])([\u0591-\u05C7]*)/g,(all,b,m)=>{
+    let id; const dag=m.includes(DAG);
+    if(b==="ב") id=dag?"bet":"vet"; else if(b==="כ") id=dag?"kaf":"chaf"; else if(b==="פ") id=dag?"pe":"fe";
+    else if(b==="ג") id=dag?"gimel_d":"gimel"; else if(b==="ד") id=dag?"dalet_d":"dalet"; else if(b==="ת") id=dag?"taw_d":"taw";
+    else if(b==="ש") id=m.includes(SIN)?"sin":"schin"; else id=ZEICHEN[b];
+    let ok=id&&kenn(id);
+    if(b==="ו"&&(m===DAG||m==="ֹ")) ok=kenn(m===DAG?"schuruk":"cholam");   // Schuruk und Cholam auf Waw sind Vokale
+    for(const ch of m){ if(VOK[ch]&&!kenn(VOK[ch])) ok=false; if(CHATEF[ch]&&!CHATEF[ch].every(kenn)) ok=false; }
+    return ok? all : `<span class="sf-unb">${all}</span>`; }); }
+function psalm(){ const box=$("psalm"); box.innerHTML="";
+  PSALM.forEach((v,i)=>{ const frei=i<S.psalm, d=document.createElement("div"); d.className="sf-vers"+(frei?"":" sf-zu");
+    const h=frei? verseHTML(v.he) : v.he, ganz=frei&&!h.includes("sf-unb");
+    d.innerHTML= frei? `<div class="sf-note"><b>${v.ref}</b>${ganz?" · ✓ ganz lesbar":""}</div><div class="sf-vh" lang="he">${h}</div><div class="sf-um">${v.tr}</div><div>${v.de}</div>`
+      : `<div class="sf-note"><b>Vers ${i+1}</b> · frei nach Schreib-Stufe ${i+1}</div><div class="sf-vh" lang="he" aria-hidden="true">${h}</div>`;
+    box.appendChild(d); }); }
+function verse(){ psalm(); const box=$("verse"); box.innerHTML="";
+  VERSE.forEach((v,i)=>{ const frei=i<verseFrei(), d=document.createElement("div"); d.className="sf-vers"+(frei?"":" sf-zu");
+    const h=frei? verseHTML(v.he) : v.he, ganz=frei&&!h.includes("sf-unb");
+    d.innerHTML= frei? `<div class="sf-note"><b>${v.ref}</b>${ganz?" · ✓ Diesen Vers kannst du ganz lesen":""}</div><div class="sf-vh" lang="he">${h}</div><div class="sf-um">${v.tr}</div><div>${v.de}</div>`
+      : `<div class="sf-note"><b>Vers ${i+1}</b> · frei nach Stufe ${i+1}</div><div class="sf-vh" lang="he" aria-hidden="true">${h}</div>`;
+    box.appendChild(d); }); }
+// Lernmodus: Ivrit (Coins) oder Bibelhebräisch (Verse, wissenschaftliche Umschrift)
+function modusUI(){ const B=bibel();
+  $("coinsPill").hidden=B; $("versPill").hidden=!B; $("tabSchatz").textContent=B?"Fortschritt":"Schatzkarte"; $("tabEltern").textContent=B?"Optionen":"Für Eltern";
+  $("versKarte").hidden=!B; $("psalmKarte").hidden=!B; $("coinsKopf").hidden=B; $("coinKarte").hidden=B; $("gridHT").hidden=B; $("gridH").hidden=B;
+  document.querySelectorAll("#sf .sf-nurKind").forEach(x=>x.hidden=B);
+  document.querySelectorAll("[data-sfm]").forEach(b=>b.classList.toggle("sf-primary", b.dataset.sfm===S.modus));
+  $("modusInfo").textContent= B? "Wissenschaftliche Umschrift: ā ē ō (lang), ə (Schwa), ʾ ʿ ḥ ṭ ṣ q š ś, Begadkefat mit ḇ ḡ ḏ ḵ p̄ ṯ. Belohnung: Bibelverse." : "Einfache Umschrift nach heutiger israelischer Aussprache. Belohnung: Coins zum Eintauschen.";
+  if(B) schrift(false); }
+document.querySelectorAll("[data-sfm]").forEach(b=>b.onclick=()=>{ S.modus=b.dataset.sfm; speichere(); $("modus").hidden=true; modusUI(); oben(); stufenLeiste();
+  if(!$("v-schatz").hidden) schatz(); if(!$("quiz").hidden) neueFrage(); else if(IN) zeigeIntro(IN.k); });
 function schrift(hand){ document.getElementById("sf").classList.toggle("sf-hand", hand); }
 function eltern(){
-  $("offen").textContent=offen(); $("minuten").textContent=offen()*15; $("eVerdient").textContent=verdient(); $("eEingeloest").textContent=S.eingeloest;
+  $("offen").textContent=offen(); $("eVerdient").textContent=verdient(); $("eEingeloest").textContent=S.eingeloest;
   $("pinInfo").textContent= S.pin? "" : "Noch keine PIN: Die erste eingegebene PIN (4 bis 8 Ziffern) wird gespeichert.";
   document.querySelectorAll("#sf [data-sfn]").forEach(b=>b.classList.toggle("sf-primary", +b.dataset.sfn===S.n));
-  document.querySelectorAll("#sf [data-sfw]").forEach(b=>b.classList.toggle("sf-primary", +b.dataset.sfw===S.wort));
   document.querySelectorAll("#sf [data-sfs]").forEach(b=>b.classList.toggle("sf-primary", b.dataset.sfs===S.schrift));
-  $("ton").textContent=S.ton?"an":"aus";
+  modusUI(); $("ton").textContent=S.ton?"an":"aus"; if(document.activeElement!==$("wertE")) $("wertE").value=wert(); wertZeigen(); $("vollKarte").hidden=!KAUF; kaufText();
 }
+function pinOk(){ const p=$("pin").value.trim();
+  if(!S.pin){ if(!/^\d{4,8}$/.test(p)){ $("pinInfo").textContent="Bitte eine PIN aus 4 bis 8 Ziffern eingeben."; return false; } S.pin=p; }
+  else if(p!==S.pin){ $("pinInfo").textContent="Falsche PIN."; return false; }
+  return true; }
 $("einloesen").onclick=()=>{
-  const p=$("pin").value.trim();
-  if(!S.pin){ if(!/^\d{4,8}$/.test(p)){ $("pinInfo").textContent="Bitte eine PIN aus 4 bis 8 Ziffern eingeben."; return; } S.pin=p; }
-  else if(p!==S.pin){ $("pinInfo").textContent="Falsche PIN."; return; }
-  if(offen()<=0){ $("pinInfo").textContent="Es ist kein Coin offen."; return; }
+  if(!pinOk()) return;
+  if(offen()<=0){ $("pinInfo").textContent="Es ist kein Coin offen."; speichere(); return; }
   S.eingeloest++; S.log=(S.log||[]).concat([new Date().toISOString()]); speichere(); $("pin").value="";
-  eltern(); oben(); $("pinInfo").textContent="Eingelöst: 15 Minuten Videospiel. Viel Spaß!";
+  eltern(); oben(); $("pinInfo").textContent=`Eingelöst: ${wert()}. Viel Spaß!`;
 };
+function wertZeigen(){ document.querySelectorAll("#sf .sf-wert").forEach(x=>x.textContent=wert()); }
+$("wertOk").onclick=()=>{ const t=$("wertE").value.trim(); if(!t){ $("pinInfo").textContent="Bitte eintragen, was ein Coin wert ist."; return; }
+  if(!pinOk()) { $("wertE").scrollIntoView({block:"center"}); return; } S.wert=t; speichere(); $("pin").value=""; eltern(); $("pinInfo").textContent=`Gespeichert: 1 Coin = ${t}.`; };
+$("pinVergessen").onclick=async()=>{ if(!S.pin){ $("pinInfo").textContent="Es ist noch keine PIN gespeichert."; return; }
+  const tor=await elternTor(); if(tor!==true){ $("pinInfo").textContent= tor==="falsch"? "Die Rechenaufgabe stimmte nicht." : "Abgebrochen."; return; }
+  delete S.pin; speichere(); eltern(); $("pinInfo").textContent="PIN gelöscht. Die nächste eingegebene PIN (4 bis 8 Ziffern) wird neu gespeichert. Coins und Spielstand bleiben erhalten."; };
+$("alleFrei").onclick=()=>{ if(!pinOk()) return; S.frei=STUFEN.length-1; speichere(); $("pin").value=""; stufenLeiste(); oben(); $("pinInfo").textContent="Alle Stufen sind frei."; };
 document.querySelectorAll("#sf [data-sfn]").forEach(b=>b.onclick=()=>{ S.n=+b.dataset.sfn; speichere(); eltern(); neueFrage(); });
 document.querySelectorAll("#sf [data-sfs]").forEach(b=>b.onclick=()=>{ S.schrift=b.dataset.sfs; speichere(); eltern(); neueFrage(); });
-document.querySelectorAll("#sf [data-sfw]").forEach(b=>b.onclick=()=>{ S.wort=+b.dataset.sfw; speichere(); eltern(); neueFrage(); });
+document.querySelectorAll("#sf [data-sfr]").forEach(b=>b.onclick=()=>{
+  if(b.dataset.sfr==="schreiben" && KAUF && !S.voll){ zeigeLaden(); return; }
+  S.richtung=b.dataset.sfr; speichere(); if(!$("quiz").hidden||!$("laden").hidden) neueFrage(); else oben(); });
+document.querySelectorAll("#sf [data-sft]").forEach(b=>b.onclick=()=>{ S.turbo=+b.dataset.sft; speichere(); if(!S.turbo) $("zeit").hidden=true; if(!$("quiz").hidden) neueFrage(); else oben(); });
 $("ton").onclick=()=>{ S.ton=!S.ton; speichere(); eltern(); };
 $("kopier").onclick=()=>{ const c="SILBEN1:"+btoa(unescape(encodeURIComponent(JSON.stringify(S)))); $("code").value=c;
   (navigator.clipboard? navigator.clipboard.writeText(c):Promise.reject()).then(()=>$("codeInfo").textContent="Code kopiert.").catch(()=>{ $("code").select(); $("codeInfo").textContent="Code markiert, bitte selbst kopieren."; }); };
 $("herstell").onclick=()=>{ try{ const t=$("code").value.trim().replace(/\s+/g,""); if(!t.startsWith("SILBEN1:")) throw 0;
-  const s=JSON.parse(decodeURIComponent(escape(atob(t.slice(8))))); if(!s.p) throw 0; S=s; speichere(); S=lade(); $("codeInfo").textContent="Spielstand wiederhergestellt."; eltern(); oben(); }
+  const s=JSON.parse(decodeURIComponent(escape(atob(t.slice(8))))); if(!s.p) throw 0; S=s; if(KAUF) S.voll=false; speichere(); S=lade(); $("codeInfo").textContent="Spielstand wiederhergestellt."; eltern(); oben(); startStufe(gesperrt(S.stufe)?GRATIS_BIS:S.stufe); kaufPruefen(); }
   catch(e){ $("codeInfo").textContent="Das ist kein gültiger Silbenfink-Code."; } };
 document.querySelectorAll("#sf [data-sv]").forEach(t=>t.onclick=()=>{
   document.querySelectorAll("#sf [data-sv]").forEach(x=>x.setAttribute("aria-selected", x===t));
   ["spiel","schatz","eltern"].forEach(v=>$("v-"+v).hidden = v!==t.dataset.sv);
-  if(t.dataset.sv==="schatz") schatz(); if(t.dataset.sv==="eltern") eltern();
+  if(t.dataset.sv!=="spiel" && Q && !Q.fertig && uhr){ stoppUhr(); Q.pause=true; }
+  if(t.dataset.sv==="spiel" && Q && Q.pause && !$("quiz").hidden){ Q.pause=false; neueFrage(); }
+  if(t.dataset.sv==="schatz"){ schatz(); wertZeigen(); } if(t.dataset.sv==="eltern") eltern();
 });
 let AC=null;
 function ton(gut,coin){ if(!S.ton) return; try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)();
@@ -291,13 +610,24 @@ function ton(gut,coin){ if(!S.ton) return; try{ AC=AC||new (window.AudioContext|
     const t0=AC.currentTime+i*.09; g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.15,t0+.02);
     g.gain.exponentialRampToValueAtTime(.0001,t0+.25); o.connect(g).connect(AC.destination); o.start(t0); o.stop(t0+.3); });
   }catch(e){} }
+function nebel(el){   // die Buchstaben der Frage fliegen auf und werden rosa Nebel
+  const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2;
+  const zeichen=[...Q.text].filter(c=>/[\u05D0-\u05EA]/.test(c)), pool=zeichen.length? zeichen : ["א","ב","ש"];
+  const w=document.createElement("span"); w.className="sf-wolke"; w.style.left=x+"px"; w.style.top=y+"px"; document.body.appendChild(w); setTimeout(()=>w.remove(),1800);
+  for(let i=0;i<12;i++){ const s=document.createElement("span"); s.className="sf-nebelz"; s.textContent=pool[i%pool.length];
+    s.style.left=(x+Math.random()*40-20)+"px"; s.style.top=(y+Math.random()*20-10)+"px"; s.style.fontSize=(1.1+Math.random()*1.1)+"rem";
+    s.style.setProperty("--dx",(Math.random()*220-110)+"px"); s.style.setProperty("--dy",(-70-Math.random()*130)+"px"); s.style.setProperty("--rot",(Math.random()*60-30)+"deg");
+    s.style.animationDelay=(i*35)+"ms"; document.body.appendChild(s); setTimeout(()=>s.remove(),1700+i*35); } }
 function funken(el){ const r=el.getBoundingClientRect();
   for(let i=0;i<8;i++){ const s=document.createElement("span"); s.className="sf-funke"; s.textContent=["⭐","✨","🪙"][i%3];
     s.style.left=(r.left+r.width/2)+"px"; s.style.top=(r.top+r.height/2)+"px";
     s.style.setProperty("--dx",(Math.random()*160-80)+"px"); s.style.setProperty("--dy",(-60-Math.random()*90)+"px");
     document.body.appendChild(s); setTimeout(()=>s.remove(),1000); } }
-window.Silbenfink={neueFrage, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS};
-neueFrage();
+window.Silbenfink={neueFrage, startStufe, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS, STUFEN};
+if(gesperrt(S.stufe)) S.stufe=GRATIS_BIS;
+if(!S.modus){ S.modus="ivrit"; $("modus").hidden=false; }
+$("modusKauf").hidden=!KAUF;
+modusUI(); stufenLeiste(); startStufe(S.stufe); kaufPruefen();
 })();
 </script>
 
