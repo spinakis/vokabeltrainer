@@ -203,7 +203,6 @@
       <div class="sf-row"><span class="sf-big" id="sf-offen">0</span><span class="sf-note">Coins offen · 1 Coin = <b class="sf-wert"></b></span></div>
       <p class="sf-note" style="margin:0">Verdient: <b id="sf-eVerdient">0</b> · schon eingelöst: <b id="sf-eEingeloest">0</b></p>
       <div class="sf-row"><input id="sf-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Eltern-PIN" aria-label="Eltern-PIN"><button class="sf-btn sf-primary" id="sf-einloesen">1 Coin einlösen</button></div>
-      <div class="sf-row"><button class="sf-btn" id="sf-alleFrei">Alle Stufen freischalten (mit PIN)</button></div>
       <p class="sf-note" id="sf-pinInfo" style="margin:0"></p>
       <button class="sf-link" id="sf-pinVergessen" style="align-self:flex-start">PIN vergessen?</button>
     </div>
@@ -217,6 +216,8 @@
       <h2>Einstellungen</h2>
       <div class="sf-row"><span>Lernmodus:</span><button class="sf-btn" data-sfm="ivrit">Ivrit</button><button class="sf-btn" data-sfm="bibel">Bibelhebräisch</button></div>
       <p class="sf-note" style="margin:0" id="sf-modusInfo"></p>
+      <div class="sf-row"><button class="sf-btn" id="sf-alleFrei">Alle Stufen freischalten (mit PIN)</button></div>
+      <p class="sf-note" id="sf-alleFreiInfo" style="margin:0"></p>
       <div class="sf-row sf-nurKind"><span>1 Coin ist wert:</span><input id="sf-wertE" maxlength="60" style="width:14em" aria-label="Wert eines Coins"><button class="sf-btn" id="sf-wertOk">Speichern (mit PIN)</button></div>
       <p class="sf-note sf-nurKind" style="margin:0">Zum Beispiel „15 Minuten Bildschirmzeit“, „eine Gutenachtgeschichte mehr“ oder „1 Euro Taschengeld“. Die PIN steht oben bei „Coins einlösen“.</p>
       <div class="sf-row"><span>Antworten zur Auswahl:</span><button class="sf-btn" data-sfn="3">3</button><button class="sf-btn" data-sfn="4">4</button></div>
@@ -300,7 +301,8 @@ const regelOk=(c,pos)=>!bibel() || (pos===0? !SPIR.has(c.id) : !DAGL.has(c.id));
 const aktiv=x=>bibel()? !x.hand : !x.bibel;
 const speichere=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 const pkt=id=>S.p[id]||0, verdient=()=>Object.keys(S.fertig).length, offen=()=>verdient()-S.eingeloest;
-const heute=()=>new Date().toISOString().slice(0,10);
+const tagKey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const heute=()=>tagKey(new Date());
 const idf=(x,hand)=>x.art==="L"&&hand? x.id+"_h" : x.id;
 const zufall=a=>a[Math.floor(Math.random()*a.length)];
 const bekannt=id=>aktiv(BYID[id]) && STUFE_VON[id]<=Math.min(S.stufe,5);
@@ -386,7 +388,7 @@ function plus(id,d){ S.p[id]=Math.max(0,Math.min(100,pkt(id)+d));
   if(S.p[id]>=100 && !S.fertig[id] && !bibel()){ S.fertig[id]=heute(); feiern("coin",BYID[id]); } }
 const vkey=()=>(Q&&Q.schr?"s":"")+S.stufe;
 function merke(ok){ const v=(S.verlauf[vkey()]||[]).concat([ok]).slice(-FENSTER); S.verlauf[vkey()]=v;
-  if(Q.schr){ if(S.stufe>=S.psalm && S.stufe<PSALM.length && v.length>=FENSTER && v.filter(Boolean).length>=ZIEL){ S.psalm=S.stufe+1; feiern("psalm",S.psalm); } return; }
+  if(Q.schr && S.stufe>=S.psalm && S.stufe<PSALM.length && v.length>=FENSTER && v.filter(Boolean).length>=ZIEL){ S.psalm=S.stufe+1; feiern("psalm",S.psalm); }
   if(S.stufe===S.frei && S.frei<STUFEN.length-1 && v.length>=FENSTER && v.filter(Boolean).length>=ZIEL){ S.frei++; feiern("stufe",S.frei); } }
 function antwort(o,b){
   if(Q.fertig) return; Q.fertig=true; stoppUhr();
@@ -436,22 +438,24 @@ function introListe(k){ const st=STUFEN[k], B=bibel(), a=B?"ā":"a";
       return {g:glyphV(x).replace("ב"+DAG,"◌").replace("בּ","◌"), name:nm(x), s:snd(x), note:`Beispiel: ${bsp} = „m${snd(x)}“${extra}`, sag:bsp}; }
     if(x.fin){ const bsp="לָ"+finZeig(x); return {g:glyphL(x), name:nm(x), s:snd(x), note:`Steht nur am Wortende. Beispiel: ${bsp} = „l${a}${snd(x)}“`, sag:bsp}; }
     const regel= B&&SPIR.has(x.id)? " · ohne Punkt nach einem Vokal (weich)" : B&&DAGL.has(x.id)? " · mit Punkt am Wortanfang (hart)" : "";
-    const bsp=x.g+"ָ"; return {g:x.g, name:nm(x), s:snd(x)||"stumm", note:`Beispiel: ${bsp} = „${snd(x)}${a}“${regel}`, sag:bsp}; }); }
+    const weich=B&&SPIR.has(x.id), bsp=(weich?"מָ":"")+x.g+"ָ";
+    return {g:x.g, name:nm(x), s:snd(x)||"stumm", note:`Beispiel: ${bsp} = „${weich?"mā":""}${snd(x)}${a}“${regel}`, sag:bsp}; }); }
 function startStufe(k){ stoppUhr(); if(gesperrt(k)){ zeigeLaden(); return; } S.stufe=k; speichere(); stufenLeiste();
   if(!S.gesehen[k] && !STUFEN[k].meister) zeigeIntro(k); else neueFrage(); oben(); }
 function zeigeLaden(){ stoppUhr(); $("quiz").hidden=true; $("intro").hidden=true; $("laden").hidden=false; $("zeit").hidden=true; kaufText(); }
-$("ladenZu").onclick=()=>{ $("laden").hidden=true; startStufe(Math.min(S.stufe,GRATIS_BIS)); };
-let PREIS=null;
+$("ladenZu").onclick=()=>{ LADEN_WUNSCH=null; $("laden").hidden=true; startStufe(Math.min(S.stufe,GRATIS_BIS)); };
+let PREIS=null, LADEN_WUNSCH=null;
 function kaufText(){ document.querySelectorAll("#sf .sf-kaufen").forEach(b=>{ b.textContent= S.voll? "Gekauft ✓" : "Vollversion kaufen"+(PREIS?" ("+PREIS+")":""); b.disabled=!!S.voll; });
   document.querySelectorAll("#sf .sf-vollStand").forEach(x=>x.textContent= S.voll? "Gekauft: Alle Stufen sind freigeschaltet. Danke!" : "Kostenlos sind die Stufen 1 bis 3: 15 der 22 Buchstaben (ב מ ל ש ת ד נ ר י ס ג ה ו ז ק) und 6 der 9 Vokalzeichen. Die Vollversion (einmaliger Kauf, kein Abo) bringt die Stufen 4 bis 6: die übrigen 7 Buchstaben (כ פ א ע ח ט צ), Bet ohne Punkt, Sin, die 5 Schlussbuchstaben (ך ם ן ף ץ), 3 weitere Vokalzeichen, den Meister-Modus und den Schreib-Modus (Umschrift sehen, hebräische Schreibung wählen)."); }
 function kaufInfo(t){ document.querySelectorAll("#sf .sf-kaufInfo").forEach(x=>x.textContent=t); }
-function nachKauf(ok,meldung){ if(ok){ S.voll=true; speichere(); kaufText(); stufenLeiste(); kaufInfo("Danke! Alle Stufen sind freigeschaltet.");
+function nachKauf(ok,meldung){ if(ok){ S.voll=true; if(LADEN_WUNSCH){ S.richtung=LADEN_WUNSCH; LADEN_WUNSCH=null; } speichere(); kaufText(); stufenLeiste(); kaufInfo("Danke! Alle Stufen sind freigeschaltet.");
     if(!$("laden").hidden){ $("laden").hidden=true; startStufe(Math.min(S.frei,STUFEN.length-1)); } }
   else kaufInfo(meldung); }
 // Elternschranke: eine Rechenaufgabe, die kleine Kinder noch nicht lösen
 function elternTor(){ return new Promise(fertig=>{ const a=6+Math.floor(Math.random()*4), b=12+Math.floor(Math.random()*8);
   $("torF").textContent=`Bitte rechnen: ${a} × ${b} = ?`; $("torA").value=""; $("torI").textContent=""; $("tor").hidden=false; $("torA").focus();
   $("torOk").onclick=()=>{ $("tor").hidden=true; fertig(+$("torA").value===a*b? true : "falsch"); };
+  $("torA").onkeydown=e=>{ if(e.key==="Enter") $("torOk").click(); };
   $("torX").onclick=()=>{ $("tor").hidden=true; fertig(false); }; }); }
 document.querySelectorAll("#sf .sf-kaufen").forEach(b=>b.onclick=async()=>{ if(!KAUF||S.voll) return;
   const tor=await elternTor(); if(tor!==true){ kaufInfo(tor==="falsch"? "Die Rechenaufgabe stimmte nicht. Bitte noch einmal." : "Abgebrochen."); return; }
@@ -459,7 +463,7 @@ document.querySelectorAll("#sf .sf-kaufen").forEach(b=>b.onclick=async()=>{ if(!
 document.querySelectorAll("#sf .sf-zurueckholen").forEach(b=>b.onclick=async()=>{ if(!KAUF) return;
   kaufInfo("Einen Moment …"); try{ nachKauf(await KAUF.wiederherstellen(), "Kein früherer Kauf gefunden."); }catch(e){ nachKauf(false, "Wiederherstellen ist gerade nicht möglich."); } });
 function kaufPruefen(){ if(!KAUF) return; KAUF.preis().then(p=>{ PREIS=p; kaufText(); }).catch(()=>{});
-  KAUF.besitzt().then(v=>{ if(v!==!!S.voll){ S.voll=v; speichere(); stufenLeiste(); kaufText(); if(gesperrt(S.stufe)) startStufe(GRATIS_BIS); } }).catch(()=>{}); }
+  KAUF.besitzt().then(v=>{ if(v && !S.voll){ S.voll=true; speichere(); stufenLeiste(); kaufText(); if(!$("laden").hidden) nachKauf(true); } }).catch(()=>{}); }
 function zeigeIntro(k){ IN={k,liste:introListe(k),i:0}; $("quiz").hidden=true; $("laden").hidden=true; $("intro").hidden=false; $("zeit").hidden=true; introSchritt(); }
 function introSchritt(){ const it=IN.liste[IN.i];
   $("introT").textContent=`Stufe ${IN.k+1}: neues Zeichen ${IN.i+1} von ${IN.liste.length}`;
@@ -513,7 +517,7 @@ function schatz(){
 }
 // Lernstatistik: Lesetempo, Trefferquote, Lerntage in Folge, häufigste Verwechslungen
 function tageInFolge(){ let n=0; const d=new Date(); if(!S.tag[heute()]) d.setDate(d.getDate()-1);
-  for(;;){ const k=d.toISOString().slice(0,10); if(!S.tag[k]) break; n++; d.setDate(d.getDate()-1); } return n; }
+  for(;;){ const k=tagKey(d); if(!S.tag[k]) break; n++; d.setDate(d.getDate()-1); } return n; }
 function statistik(){
   const z=S.zeiten, tempo=z.length>=5? Math.round(60000/(z.reduce((a,b)=>a+b,0)/z.length)) : null;
   const quote=S.antw? Math.round(100*S.ok/S.antw) : null;
@@ -565,7 +569,7 @@ function eltern(){
   $("pinInfo").textContent= S.pin? "" : "Noch keine PIN: Die erste eingegebene PIN (4 bis 8 Ziffern) wird gespeichert.";
   document.querySelectorAll("#sf [data-sfn]").forEach(b=>b.classList.toggle("sf-primary", +b.dataset.sfn===S.n));
   document.querySelectorAll("#sf [data-sfs]").forEach(b=>b.classList.toggle("sf-primary", b.dataset.sfs===S.schrift));
-  modusUI(); $("ton").textContent=S.ton?"an":"aus"; if(document.activeElement!==$("wertE")) $("wertE").value=wert(); wertZeigen(); $("vollKarte").hidden=!KAUF; kaufText();
+  modusUI(); $("alleFrei").textContent= bibel()? "Alle Stufen freischalten" : "Alle Stufen freischalten (mit PIN)"; $("alleFreiInfo").textContent=""; $("ton").textContent=S.ton?"an":"aus"; if(document.activeElement!==$("wertE")) $("wertE").value=wert(); wertZeigen(); $("vollKarte").hidden=!KAUF; kaufText();
 }
 function pinOk(){ const p=$("pin").value.trim();
   if(!S.pin){ if(!/^\d{4,8}$/.test(p)){ $("pinInfo").textContent="Bitte eine PIN aus 4 bis 8 Ziffern eingeben."; return false; } S.pin=p; }
@@ -583,18 +587,22 @@ $("wertOk").onclick=()=>{ const t=$("wertE").value.trim(); if(!t){ $("pinInfo").
 $("pinVergessen").onclick=async()=>{ if(!S.pin){ $("pinInfo").textContent="Es ist noch keine PIN gespeichert."; return; }
   const tor=await elternTor(); if(tor!==true){ $("pinInfo").textContent= tor==="falsch"? "Die Rechenaufgabe stimmte nicht." : "Abgebrochen."; return; }
   delete S.pin; speichere(); eltern(); $("pinInfo").textContent="PIN gelöscht. Die nächste eingegebene PIN (4 bis 8 Ziffern) wird neu gespeichert. Coins und Spielstand bleiben erhalten."; };
-$("alleFrei").onclick=()=>{ if(!pinOk()) return; S.frei=STUFEN.length-1; speichere(); $("pin").value=""; stufenLeiste(); oben(); $("pinInfo").textContent="Alle Stufen sind frei."; };
+$("alleFrei").onclick=async()=>{
+  if(bibel()){ const tor=await elternTor(); if(tor!==true){ $("alleFreiInfo").textContent= tor==="falsch"? "Die Rechenaufgabe stimmte nicht." : "Abgebrochen."; return; } }
+  else if(!pinOk()){ $("alleFreiInfo").textContent=$("pinInfo").textContent; return; }
+  S.frei=STUFEN.length-1; speichere(); $("pin").value=""; stufenLeiste(); oben();
+  $("alleFreiInfo").textContent= KAUF&&!S.voll? "Freigeschaltet, soweit die kostenlose Fassung reicht (Stufen 1 bis 3). Die übrigen Stufen öffnet die Vollversion." : "Alle Stufen sind frei."; };
 document.querySelectorAll("#sf [data-sfn]").forEach(b=>b.onclick=()=>{ S.n=+b.dataset.sfn; speichere(); eltern(); neueFrage(); });
 document.querySelectorAll("#sf [data-sfs]").forEach(b=>b.onclick=()=>{ S.schrift=b.dataset.sfs; speichere(); eltern(); neueFrage(); });
 document.querySelectorAll("#sf [data-sfr]").forEach(b=>b.onclick=()=>{
-  if(b.dataset.sfr==="schreiben" && KAUF && !S.voll){ zeigeLaden(); return; }
+  if(b.dataset.sfr==="schreiben" && KAUF && !S.voll){ LADEN_WUNSCH="schreiben"; zeigeLaden(); return; }
   S.richtung=b.dataset.sfr; speichere(); if(!$("quiz").hidden||!$("laden").hidden) neueFrage(); else oben(); });
 document.querySelectorAll("#sf [data-sft]").forEach(b=>b.onclick=()=>{ S.turbo=+b.dataset.sft; speichere(); if(!S.turbo) $("zeit").hidden=true; if(!$("quiz").hidden) neueFrage(); else oben(); });
 $("ton").onclick=()=>{ S.ton=!S.ton; speichere(); eltern(); };
 $("kopier").onclick=()=>{ const c="SILBEN1:"+btoa(unescape(encodeURIComponent(JSON.stringify(S)))); $("code").value=c;
   (navigator.clipboard? navigator.clipboard.writeText(c):Promise.reject()).then(()=>$("codeInfo").textContent="Code kopiert.").catch(()=>{ $("code").select(); $("codeInfo").textContent="Code markiert, bitte selbst kopieren."; }); };
 $("herstell").onclick=()=>{ try{ const t=$("code").value.trim().replace(/\s+/g,""); if(!t.startsWith("SILBEN1:")) throw 0;
-  const s=JSON.parse(decodeURIComponent(escape(atob(t.slice(8))))); if(!s.p) throw 0; S=s; if(KAUF) S.voll=false; speichere(); S=lade(); $("codeInfo").textContent="Spielstand wiederhergestellt."; eltern(); oben(); startStufe(gesperrt(S.stufe)?GRATIS_BIS:S.stufe); kaufPruefen(); }
+  const s=JSON.parse(decodeURIComponent(escape(atob(t.slice(8))))); if(!s.p) throw 0; S=s; if(!S.modus) S.modus="ivrit"; if(KAUF) S.voll=false; speichere(); S=lade(); $("codeInfo").textContent="Spielstand wiederhergestellt."; eltern(); oben(); startStufe(gesperrt(S.stufe)?GRATIS_BIS:S.stufe); kaufPruefen(); }
   catch(e){ $("codeInfo").textContent="Das ist kein gültiger Silbenfink-Code."; } };
 document.querySelectorAll("#sf [data-sv]").forEach(t=>t.onclick=()=>{
   document.querySelectorAll("#sf [data-sv]").forEach(x=>x.setAttribute("aria-selected", x===t));
