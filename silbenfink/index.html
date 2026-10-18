@@ -66,7 +66,7 @@
 #sf .sf-big{font-size:2.2rem;font-weight:700;font-variant-numeric:tabular-nums}
 #sf input{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55em .8em;width:9em}
 #sf textarea{width:100%;min-height:70px;font:inherit;font-size:.8rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px;word-break:break-all}
-#sf.sf-hand .sf-syl,#sf.sf-hand .sf-fb b,#sf.sf-hand .sf-tile .sf-g,#sf.sf-hand .sf-regel b{font-family:"Playpen Sans Hebrew","Noto Serif Hebrew",serif;font-weight:400}
+#sf.sf-hand .sf-syl,#sf.sf-hand .sf-fb b,#sf.sf-hand .sf-regel b,#sf .sf-tile .sf-gh{font-family:"Playpen Sans Hebrew","Noto Serif Hebrew",serif;font-weight:400}
 #sf.sf-hand .sf-syl{font-size:5rem}
 #sf .sf-regel{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.95rem} #sf .sf-regel b{font-family:"Noto Serif Hebrew",serif;font-size:1.3rem;font-weight:400}
 .sf-feier{position:fixed;inset:0;display:grid;place-items:center;background:rgba(20,26,33,.6);z-index:40}
@@ -98,11 +98,12 @@
   <div id="sf-v-schatz" class="sf-stack" hidden>
     <div class="sf-card sf-stack">
       <h2>Deine Schatzkarte</h2>
-      <p class="sf-note" style="margin:0">Jeder Buchstabe und jedes Vokalzeichen braucht 100 richtige Antworten. Dann gibt es einen Coin für 15 Minuten Videospiel. Falsch geraten kostet 3 Punkte beim verwechselten Zeichen. Kunstwörter aus zwei Silben zählen für alle Zeichen darin.</p>
-      <div class="sf-row"><span class="sf-big" id="sf-verdient">0</span><span class="sf-note">von 40 Coins verdient</span></div>
+      <p class="sf-note" style="margin:0">Jeder Buchstabe und jedes Vokalzeichen braucht 100 richtige Antworten. Dann gibt es einen Coin für 15 Minuten Videospiel. Falsch geraten kostet 3 Punkte beim verwechselten Zeichen. Kunstwörter aus zwei Silben zählen für alle Zeichen darin. Buchstaben in Schreibschrift (Einstellung bei den Eltern) bringen eigene Coins.</p>
+      <div class="sf-row"><span class="sf-big" id="sf-verdient">0</span><span class="sf-note">von 71 Coins verdient</span></div>
     </div>
     <h2>Vokalzeichen</h2><div class="sf-grid" id="sf-gridV"></div>
     <h2>Buchstaben</h2><div class="sf-grid" id="sf-gridL"></div>
+    <h2>Buchstaben in Schreibschrift</h2><div class="sf-grid" id="sf-gridH"></div>
     <div class="sf-card sf-stack"><h2>So klingen die Zeichen</h2><div class="sf-regel" id="sf-regel"></div></div>
   </div>
 
@@ -148,7 +149,9 @@ const L=[
 const V=[["patach","ַ","a","Patach"],["kamatz","ָ","a","Kamatz"],["segol","ֶ","e","Segol"],["zere","ֵ","e","Zere"],
  ["chirek","ִ","i","Chirek"],["cholam","ֹ","o","Cholam"],["kubbuz","ֻ","u","Kubbuz"],["schuruk","וּ","u","Schuruk"],["schwa","ְ","e","Schwa (kurzes e)"]
 ].map(([id,m,s,name])=>({id,m,s,name,art:"V"}));
-const ITEMS=[...V,...L], BYID={}; ITEMS.forEach(x=>BYID[x.id]=x);
+// Buchstaben in Schreibschrift sind eigene Zeichen mit eigenem Coin (Vokalzeichen sehen in beiden Schriften gleich aus)
+const LH=L.map(x=>({...x,id:x.id+"_h",name:x.name+" in Schreibschrift",hand:true}));
+const ITEMS=[...V,...L,...LH], BYID={}; ITEMS.forEach(x=>BYID[x.id]=x);
 const START=L.filter(x=>!x.fin), FIN=L.filter(x=>x.fin), GUTT=new Set(["alef","he","chet","ajin"]);
 const OHNE_SCHWA=V.filter(v=>v.id!=="schwa");
 const passt=(c,v)=>!(GUTT.has(c.id)&&v.id==="schwa") && !(c.id==="waw"&&["cholam","kubbuz","schuruk"].includes(v.id));
@@ -169,20 +172,22 @@ let S=lade();
 const speichere=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 const pkt=id=>S.p[id]||0, verdient=()=>Object.keys(S.fertig).length, offen=()=>verdient()-S.eingeloest;
 const heute=()=>new Date().toISOString().slice(0,10);
-function zieh(liste){ const w=liste.map(x=>Math.max(4,105-pkt(x.id))); let r=Math.random()*w.reduce((a,b)=>a+b,0);
+const idf=(x,hand)=>x.art==="L"&&hand? x.id+"_h" : x.id;
+function zieh(liste,hand){ const w=liste.map(x=>Math.max(4,105-pkt(idf(x,hand)))); let r=Math.random()*w.reduce((a,b)=>a+b,0);
   for(let i=0;i<liste.length;i++){ r-=w[i]; if(r<=0) return liste[i]; } return liste[liste.length-1]; }
 const zufall=a=>a[Math.floor(Math.random()*a.length)];
 
 // Eine Frage besteht aus Teilen: [Buchstabe, Vokal] je Silbe, dazu vielleicht ein Schlussbuchstabe.
 let Q=null, serie=0;
-function silbe(vokale){ let c,v; do{ c=zieh(START); v=zieh(vokale); }while(!passt(c,v)); return [c,v]; }
+function silbe(vokale,hand){ let c,v; do{ c=zieh(START,hand); v=zieh(vokale); }while(!passt(c,v)); return [c,v]; }
 function laut(teile){ return teile.map(x=>x.s).join(""); }
 function neueFrage(){
+  const hand = S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib";
   const zwei = Math.random()*100 < S.wort;
-  let teile = silbe(V);
-  if(zwei) teile = teile.concat(silbe(OHNE_SCHWA));             // in der zweiten Silbe kein Schwa (wäre dort stumm)
-  const finSchwach=FIN.some(x=>pkt(x.id)<100);
-  if(Math.random()<(finSchwach?.25:.1)) teile.push(zieh(FIN));
+  let teile = silbe(V,hand);
+  if(zwei) teile = teile.concat(silbe(OHNE_SCHWA,hand));             // in der zweiten Silbe kein Schwa (wäre dort stumm)
+  const finSchwach=FIN.some(x=>pkt(idf(x,hand))<100);
+  if(Math.random()<(finSchwach?.25:.1)) teile.push(zieh(FIN,hand));
   let text=""; for(let i=0;i<teile.length;i++){ const x=teile[i];
     if(x.art==="L"&&!x.fin){ text+=zeig(x,teile[i+1]); i++; } else if(x.fin) text+=finZeig(x); }
   const richtig=laut(teile);
@@ -193,13 +198,13 @@ function neueFrage(){
     const pool= alt.art==="V"? V : alt.fin? FIN : START;
     const neu=zufall(pool); if(neu.s===alt.s) continue;
     const t=laut(teile.map((x,i)=>i===k?neu:x));
-    if(!t||gesehen.has(t)) continue; gesehen.add(t); opts.push({t,ok:false,schuld:alt.id});
+    if(!t||gesehen.has(t)) continue; gesehen.add(t); opts.push({t,ok:false,schuld:idf(alt,hand)});
   }
   opts.sort(()=>Math.random()-.5);
-  Q={teile,text,richtig,opts,fertig:false}; zeigeFrage();
+  Q={teile,text,richtig,opts,hand,fertig:false}; zeigeFrage();
 }
 function zeigeFrage(){
-  schrift(S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib");
+  schrift(Q.hand);
   $("syl").textContent=Q.text; $("syl").classList.toggle("sf-lang", Q.teile.length>3);
   $("frage").textContent= Q.teile.length>3? "Wie liest man dieses Kunstwort?" : "Wie liest man das?";
   $("fb").innerHTML=""; $("weiter").hidden=true;
@@ -213,7 +218,7 @@ function antwort(o,b){
   if(Q.fertig) return; Q.fertig=true;
   if(o.ok){
     b.classList.add("sf-richtig"); serie++; S.tag[heute()]=(S.tag[heute()]||0)+1;
-    Q.teile.forEach(x=>plus(x.id,1)); ton(true);
+    Q.teile.forEach(x=>plus(idf(x,Q.hand),1)); ton(true);
     $("fb").innerHTML=lob()+` <span class="sf-note">${Q.teile.map(x=>x.name+" = "+(x.s||"stumm")).join(" · ")}</span>`; funken(b);
     setTimeout(()=>{ if(!$("feier").hidden) return; if(document.getElementById("sf").offsetParent!==null || !document.getElementById("sf").closest(".view")) neueFrage(); }, 900);
   } else {
@@ -229,24 +234,24 @@ function antwort(o,b){
 const LOB=["Super!","Richtig!","Toll gelesen!","Genau!","Prima!","Klasse!"];
 const lob=()=> serie>=10? `<b>${serie} in Folge!</b>` : zufall(LOB);
 function feiern(x){ $("feierT").textContent="Neuer Coin!";
-  $("feierB").textContent=`${x.art==="V"?"Vokalzeichen":"Buchstabe"} „${x.name}“: 100 Punkte geschafft. Der Coin ist 15 Minuten Videospiel wert. Du hast jetzt ${verdient()} von 40.`;
+  $("feierB").textContent=`${x.art==="V"?"Vokalzeichen":"Buchstabe"} „${x.name}“: 100 Punkte geschafft. Der Coin ist 15 Minuten Videospiel wert. Du hast jetzt ${verdient()} von ${ITEMS.length}.`;
   $("feier").hidden=false; ton(true,true); }
 $("feierOk").onclick=()=>{ $("feier").hidden=true; neueFrage(); };
 $("weiter").onclick=neueFrage;
 function oben(){
   $("coinsTop").textContent=offen(); $("serie").textContent=serie; $("heute").textContent=S.tag[heute()]||0;
   const nah=ITEMS.filter(x=>!S.fertig[x.id]).sort((a,b)=>pkt(b.id)-pkt(a.id))[0];
-  $("naechst").textContent= nah? `Nächster Coin: ${nah.art==="V"?nah.name:nah.g} ${pkt(nah.id)}/100` : "Alles geschafft!";
+  $("naechst").textContent= nah? `Nächster Coin: ${nah.art==="V"||nah.hand?nah.name:nah.g} ${pkt(nah.id)}/100` : "Alles geschafft!";
 }
 function schatz(){
   $("verdient").textContent=verdient();
-  for(const [box,liste] of [["gridV",V],["gridL",L]]){
+  for(const [box,liste] of [["gridV",V],["gridL",L],["gridH",LH]]){
     const g=$(box); g.innerHTML="";
     for(const x of liste){ const t=document.createElement("div"); const p=pkt(x.id); t.className="sf-tile"+(S.fertig[x.id]?" sf-fertig":"");
-      t.innerHTML=`${S.fertig[x.id]?'<span class="sf-coin">₪</span>':""}<div class="sf-g" lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</div><div class="sf-s">${x.s||"stumm"} · ${p}</div><div class="sf-bar"><i style="width:${p}%"></i></div>`;
+      t.innerHTML=`${S.fertig[x.id]?'<span class="sf-coin">₪</span>':""}<div class="sf-g${x.hand?" sf-gh":""}" lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</div><div class="sf-s">${x.s||"stumm"} · ${p}</div><div class="sf-bar"><i style="width:${p}%"></i></div>`;
       t.title=x.name; g.appendChild(t); }
   }
-  $("regel").innerHTML=ITEMS.map(x=>`<b lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</b><span>${x.name}: ${x.s||"stumm"}</span>`).join("");
+  $("regel").innerHTML=[...V,...L].map(x=>`<b lang="he">${x.art==="V"?glyphV(x):glyphL(x)}</b><span>${x.name}: ${x.s||"stumm"}</span>`).join("");
 }
 function schrift(hand){ document.getElementById("sf").classList.toggle("sf-hand", hand); }
 function eltern(){
