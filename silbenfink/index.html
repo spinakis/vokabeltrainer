@@ -234,7 +234,7 @@
   </div>
 </div>
 <div class="sf-modus" id="sf-modus" hidden><div class="sf-box" role="dialog" aria-modal="true"><h2 style="margin:0">Wie möchtest du lernen?</h2>
-<button data-sfm="ivrit"><b>Ich lerne Ivrit</b><span>Modernes Hebräisch, einfache Umschrift (sch, ch, z). Mit Coins zum Eintauschen, ideal für Kinder.</span></button>
+<button data-sfm="ivrit"><b>Ich lerne Ivrit</b><span>Modernes Hebräisch, einfache Umschrift (sch, ch, z, ss). Mit Coins zum Eintauschen, ideal für Kinder.</span></button>
 <button data-sfm="bibel"><b>Ich lerne Bibelhebräisch</b><span>Wissenschaftliche Umschrift (š, ḥ, ā, ḇ …). Statt Coins schaltest du Bibelverse frei, dazu eine Lernstatistik.</span></button>
 <p class="sf-note" style="margin:0">Du kannst das später unter „Für Eltern“ bzw. „Optionen“ ändern.</p>
 <p class="sf-note" id="sf-modusKauf" style="margin:0" hidden>Kostenlos sind die Stufen 1 bis 3: 15 der 22 Buchstaben (ב מ ל ש ת ד נ ר י ס ג ה ו ז ק) und 6 der 9 Vokalzeichen. Den Rest schaltet die Vollversion frei (einmalig, kein Abo).</p></div></div>
@@ -249,9 +249,9 @@ const L=[
  ["alef","א","","Alef (stumm)","ʾ","Alef (Stimmeinsatz)"],["bet","ב"+DAG,"b","Bet mit Punkt","b"],["vet","ב","w","Bet ohne Punkt","ḇ"],["gimel","ג","g","Gimel","ḡ","Gimel ohne Punkt"],
  ["dalet","ד","d","Dalet","ḏ","Dalet ohne Punkt"],["he","ה","h","He","h"],["waw","ו","w","Waw","w"],["sajin","ז","s","Sajin (weiches s)","z","Sajin"],["chet","ח","ch","Chet","ḥ"],
  ["tet","ט","t","Tet","ṭ"],["jud","י","j","Jud","y"],["kaf","כ"+DAG,"k","Kaf mit Punkt","k"],["chaf","כ","ch","Chaf ohne Punkt","ḵ"],
- ["lamed","ל","l","Lamed","l"],["mem","מ","m","Mem","m"],["nun","נ","n","Nun","n"],["samech","ס","s","Samech","s"],["ajin","ע","","Ajin (stumm)","ʿ","Ajin (Kehllaut)"],
+ ["lamed","ל","l","Lamed","l"],["mem","מ","m","Mem","m"],["nun","נ","n","Nun","n"],["samech","ס","ss","Samech (scharfes s)","s","Samech"],["ajin","ע","","Ajin (stumm)","ʿ","Ajin (Kehllaut)"],
  ["pe","פ"+DAG,"p","Pe mit Punkt","p"],["fe","פ","f","Fe ohne Punkt","p̄"],["zade","צ","z","Zade","ṣ"],["kuf","ק","k","Kuf","q"],["resch","ר","r","Resch","r"],
- ["schin","ש"+SHIN,"sch","Schin (Punkt rechts)","š"],["sin","ש"+SIN,"s","Sin (Punkt links)","ś"],["taw","ת","t","Taw","ṯ","Taw ohne Punkt"],
+ ["schin","ש"+SHIN,"sch","Schin (Punkt rechts)","š"],["sin","ש"+SIN,"ss","Sin (Punkt links, scharfes s)","ś","Sin (Punkt links)"],["taw","ת","t","Taw","ṯ","Taw ohne Punkt"],
  ["chaf_s","ך","ch","Chaf am Wortende","ḵ"],["mem_s","ם","m","Mem am Wortende","m"],["nun_s","ן","n","Nun am Wortende","n"],
  ["fe_s","ף","f","Fe am Wortende","p̄"],["zade_s","ץ","z","Zade am Wortende","ṣ"]
 ].map(([id,g,s,name,sb,nb])=>({id,g,s,name,sb,nb,fin:id.endsWith("_s"),art:"L"}));
@@ -352,7 +352,7 @@ function neueFrage(){
 }
 // Verwechselbare Zeichen: ähnliche Form oder ähnlicher Klang (gleich klingende fallen ohnehin heraus)
 const AEHNLICH=[["bet","kaf","pe"],["vet","chaf","fe"],["dalet","resch","chaf_s","dalet_d"],["he","chet","taw","taw_d"],["waw","sajin","nun_s","jud"],
- ["tet","mem","samech","mem_s"],["gimel","nun","gimel_d"],["ajin","zade","zade_s","tet"],["schin","sin","samech"],["kuf","he","resch"],["alef","ajin","he"],
+ ["tet","mem","samech","mem_s"],["gimel","nun","gimel_d"],["ajin","zade","zade_s","tet"],["schin","sin","samech"],["sajin","samech","sin"],["kuf","he","resch"],["alef","ajin","he"],
  ["patach","segol","chirek"],["kamatz","zere","cholam"],["segol","zere","chirek","schwa"],["cholam","kubbuz","schuruk"],["chirek","zere","kubbuz"]];
 function aehnlich(alt,pool){ const nah=new Set(); AEHNLICH.forEach(g=>{ if(g.includes(alt.id)) g.forEach(id=>nah.add(id)); });
   const w=pool.map(x=>nah.has(x.id)&&x.id!==alt.id? 6 : 1); let z=Math.random()*w.reduce((a,b)=>a+b,0);
@@ -437,7 +437,8 @@ function introListe(k){ const st=STUFEN[k], B=bibel(), a=B?"ā":"a";
       const extra= x.id==="cholam"? ` · auch so: מוֹ${B?" = „mô“":""}` : x.id==="chirek"&&k>0? ` · oft mit Jud: מִי${B?" = „mî“":""}` : x.id==="schwa"&&B? " · am Silbenende stumm" : "";
       return {g:glyphV(x).replace("ב"+DAG,"◌").replace("בּ","◌"), name:nm(x), s:snd(x), note:`Beispiel: ${bsp} = „m${snd(x)}“${extra}`, sag:bsp}; }
     if(x.fin){ const bsp="לָ"+finZeig(x); return {g:glyphL(x), name:nm(x), s:snd(x), note:`Steht nur am Wortende. Beispiel: ${bsp} = „l${a}${snd(x)}“`, sag:bsp}; }
-    const regel= B&&SPIR.has(x.id)? " · ohne Punkt nach einem Vokal (weich)" : B&&DAGL.has(x.id)? " · mit Punkt am Wortanfang (hart)" : "";
+    const merk= !B&&x.id==="sajin"? " · weich wie in „Sonne“" : !B&&(x.id==="samech"||x.id==="sin")? " · scharf wie in „Wasser“, deshalb ss" : "";
+    const regel= merk || (B&&SPIR.has(x.id)? " · ohne Punkt nach einem Vokal (weich)" : B&&DAGL.has(x.id)? " · mit Punkt am Wortanfang (hart)" : "");
     const weich=B&&SPIR.has(x.id), bsp=(weich?"מָ":"")+x.g+"ָ";
     return {g:x.g, name:nm(x), s:snd(x)||"stumm", note:`Beispiel: ${bsp} = „${weich?"mā":""}${snd(x)}${a}“${regel}`, sag:bsp}; }); }
 function startStufe(k){ stoppUhr(); if(gesperrt(k)){ zeigeLaden(); return; } S.stufe=k; speichere(); stufenLeiste();
