@@ -351,7 +351,20 @@ function zeig(c,v){   // gibt [Text, Vokal-Teil] zurück; Vollschreibung (Plene)
 let Q=null, serie=0, uhr=null;
 // Runden: nach 20 Antworten ein Zwischenstand mit der Frage, ob es weitergeht
 const RUNDE_LEN=20; let RUNDE=null;
-const neueRunde=()=>{ RUNDE={n:0,ok:0,sterne:S.sterne,t0:Date.now(),zeit:0,fehler:{}}; };
+const neueRunde=()=>{ RUNDE={n:0,ok:0,sterne:S.sterne,t0:Date.now(),zeit:0,fehler:{},pos:[],doppel:0,sack:[]}; };
+// Position der richtigen Antwort: gleichmäßig verteilt (Sack mit jeder Position gleich oft), höchstens zweimal hintereinander
+// an derselben Stelle und solche Doppel höchstens zweimal pro Runde. Die falschen Antworten werden fair gemischt (Fisher-Yates).
+function mische(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function platziere(opts){ if(!RUNDE) neueRunde(); const n=opts.length, R=RUNDE, p=R.pos, letzte=p[p.length-1];
+  const erlaubt=k=> k<n && !(k===letzte && (p[p.length-2]===letzte || R.doppel>=2));
+  if(!R.sack.some(k=>k<n)){ const rest=mische([...Array(n).keys()]), v=[...Array(RUNDE_LEN)].map((_,i)=> i<RUNDE_LEN-RUNDE_LEN%n? i%n : rest[i%n]); R.sack=mische(v); }   // pro Runde jede Position gleich oft
+  // Vorausschau: nicht so ziehen, dass am Ende nur noch verbotene Positionen im Sack liegen
+  const kand=R.sack.map((k,i)=>[k,i]).filter(([k])=>erlaubt(k));
+  kand.sort((x,y)=>R.sack.filter(k=>k===y[0]).length-R.sack.filter(k=>k===x[0]).length || Math.random()-.5);
+  let i= kand.length? (Math.random()<.6? kand[0][1] : kand[Math.floor(Math.random()*kand.length)][1]) : -1, k;
+  if(i>=0){ k=R.sack[i]; R.sack.splice(i,1); } else { const frei=[...Array(n).keys()].filter(erlaubt); k=frei[Math.floor(Math.random()*frei.length)]; }
+  if(k===letzte) R.doppel++; p.push(k);
+  const ok=opts.find(o=>o.ok), falsch=mische(opts.filter(o=>!o.ok)); falsch.splice(k,0,ok); opts.splice(0,n,...falsch); }
 function zaehle(ok,schuld){ if(!RUNDE) neueRunde(); RUNDE.n++; if(ok) RUNDE.ok++; if(Q&&Q.start) RUNDE.zeit+=(Date.now()-Q.start)/Q.silben;
   if(!ok&&schuld) RUNDE.fehler[schuld]=(RUNDE.fehler[schuld]||0)+1; }
 function naechste(){ if(RUNDE&&RUNDE.n>=RUNDE_LEN) zeigeRunde(); else neueFrage(); }
@@ -394,7 +407,7 @@ function neueFrage(){
     if(!t||gesehen.has(t)) continue; gesehen.add(t); opts.push({t:SCHR?schreib(neuT):t,ok:false,schuld:idf(alt,hand),statt:idf(neu,hand)});
   }
   if(SCHR) opts[0].t=text;   // Schreib-Modus: Laut wird gezeigt, Schreibungen stehen zur Wahl
-  opts.sort(()=>Math.random()-.5);
+  platziere(opts);
   const lat=[]; for(let i=0;i<teile.length;i++){ const x=teile[i]; if(x.fin) lat[lat.length-1]+=snd(x); else { lat.push(snd(x)+snd(teile[i+1])); i++; } }
   Q={teile,text,richtig,opts,hand,sil:silHe,lat,silben:zahl,schr:SCHR,tipp:TIPP,fertig:false}; zeigeFrage();
 }
@@ -502,7 +515,7 @@ function neueWortFrage(){
   let opts;
   if(SCHR){ const ab=wortSchreibAblenker(w); opts=[{t:w.s.join(""),ok:true},...ab]; }
   else opts=[{t:wortText(sil,w.b),ok:true},...wortAblenker(w)];
-  opts.sort(()=>Math.random()-.5);
+  platziere(opts);
   Q={wort:w,teile:[],sil:w.s.slice(),lat:sil.slice(),text:w.s.join(""),richtig:wortText(sil,w.b),opts,hand:false,silben:w.s.length,schr:SCHR,tipp:TIPP,bet:w.b,fertig:false};
   zeigeFrage();
 }
@@ -815,7 +828,7 @@ function funken(el){ const r=el.getBoundingClientRect();
     s.style.left=(r.left+r.width/2)+"px"; s.style.top=(r.top+r.height/2)+"px";
     s.style.setProperty("--dx",(Math.random()*160-80)+"px"); s.style.setProperty("--dy",(-60-Math.random()*90)+"px");
     document.body.appendChild(s); setTimeout(()=>s.remove(),1000); } }
-window.Silbenfink={neueFrage, naechste, get RUNDE(){return RUNDE;}, startStufe, canon, wortPool, wortAblenker, wortSchreibAblenker, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS, STUFEN, WOERTER, REGELN};
+window.Silbenfink={neueFrage, naechste, platziere, neueRunde, get RUNDE(){return RUNDE;}, startStufe, canon, wortPool, wortAblenker, wortSchreibAblenker, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS, STUFEN, WOERTER, REGELN};
 if(gesperrt(S.stufe)) S.stufe=GRATIS_BIS;
 if(!S.modus){ S.modus="ivrit"; $("modus").hidden=false; }
 $("modusKauf").hidden=!KAUF;
