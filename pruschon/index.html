@@ -416,18 +416,6 @@
       <div class="sf-row"><button class="sf-btn" data-sfm="ivrit">Ivrit</button><button class="sf-btn" data-sfm="bibel">Bibelhebräisch</button></div>
       <p class="sf-note" style="margin:0" id="sf-modusInfo"></p>
     </div>
-    <div class="sf-card sf-stack" id="sf-profilKarte">
-      <h2 id="sf-profilH">Kinder</h2>
-      <p class="sf-note" style="margin:0" id="sf-profilNote"></p>
-      <div class="sf-stack" id="sf-profilListe" style="gap:8px"></div>
-      <div class="sf-row"><button class="sf-btn" id="sf-profilNeu">Hinzufügen</button></div>
-      <div class="sf-profForm" id="sf-profilForm" hidden>
-        <p id="sf-profilFrage" style="margin:0"></p>
-        <input id="sf-profilName" maxlength="20" autocomplete="off" aria-label="Name">
-        <div class="sf-row"><button class="sf-btn sf-primary" id="sf-profilOk">Speichern</button><button class="sf-btn" id="sf-profilX">Abbrechen</button></div>
-      </div>
-      <p class="sf-note" id="sf-profilInfo" style="margin:0" aria-live="polite"></p>
-    </div>
     <div class="sf-card sf-stack" id="sf-lernenKarte">
       <h2>Was gelernt wird</h2>
       <div class="sf-stack" style="gap:8px"><span>Richtung:</span><div class="sf-row sf-richt"><button class="sf-btn" data-sfq="lesen">👁 Lesen</button><button class="sf-btn" data-sfq="schreiben">✍️ Schreiben</button><button class="sf-btn" data-sfq="tippen" hidden>⌨️ Tippen</button></div></div>
@@ -460,14 +448,6 @@
       <div class="sf-row sf-erkZ"><span class="sf-note">So funktionieren die Coins</span><button class="sf-btn" id="sf-erkCoins">Erklären</button></div>
       <div class="sf-row sf-erkZ"><span class="sf-note">Höchstens eine Stufe alle 12 Stunden</span><button class="sf-btn" id="sf-erkZwoelf">Erklären</button></div>
     </div>
-    <div class="sf-card sf-stack" id="sf-berichtKarte">
-      <h2>Wochenbericht</h2>
-      <div id="sf-berichtTab"></div>
-      <div class="sf-berichtZ" id="sf-berichtZ"></div>
-      <div class="sf-row"><button class="sf-btn" id="sf-berichtKopie">Als Text kopieren</button><button class="sf-btn" id="sf-erkBericht">Erklären</button></div>
-      <textarea id="sf-berichtT" rows="10" readonly hidden aria-label="Wochenbericht als Text"></textarea>
-      <p class="sf-note" id="sf-berichtInfo" style="margin:0" aria-live="polite"></p>
-    </div>
     <div class="sf-card sf-stack" id="sf-bedienungKarte">
       <h2>Bedienung</h2>
       <div class="sf-row"><span>Antworten zur Auswahl:</span><button class="sf-btn" data-sfn="3">3</button><button class="sf-btn" data-sfn="4">4</button></div>
@@ -486,6 +466,26 @@
       <div class="sf-row"><button class="sf-btn" id="sf-alleFrei">Alle Stufen freischalten (mit PIN)</button></div>
       <p class="sf-note" id="sf-alleFreiInfo" style="margin:0"></p>
       <div class="sf-row" id="sf-bewertenZ" hidden><button class="sf-btn" id="sf-bewerten">App bewerten</button></div>
+    </div>
+    <div class="sf-card sf-stack" id="sf-profilKarte">
+      <h2 id="sf-profilH">Kinder</h2>
+      <p class="sf-note" style="margin:0" id="sf-profilNote"></p>
+      <div class="sf-stack" id="sf-profilListe" style="gap:8px"></div>
+      <div class="sf-row"><button class="sf-btn" id="sf-profilNeu">Hinzufügen</button></div>
+      <div class="sf-profForm" id="sf-profilForm" hidden>
+        <p id="sf-profilFrage" style="margin:0"></p>
+        <input id="sf-profilName" maxlength="20" autocomplete="off" aria-label="Name">
+        <div class="sf-row"><button class="sf-btn sf-primary" id="sf-profilOk">Speichern</button><button class="sf-btn" id="sf-profilX">Abbrechen</button></div>
+      </div>
+      <p class="sf-note" id="sf-profilInfo" style="margin:0" aria-live="polite"></p>
+    </div>
+    <div class="sf-card sf-stack" id="sf-berichtKarte">
+      <h2>Wochenbericht</h2>
+      <div id="sf-berichtTab"></div>
+      <div class="sf-berichtZ" id="sf-berichtZ"></div>
+      <div class="sf-row"><button class="sf-btn" id="sf-berichtKopie">Als Text kopieren</button><button class="sf-btn" id="sf-erkBericht">Erklären</button></div>
+      <textarea id="sf-berichtT" rows="10" readonly hidden aria-label="Wochenbericht als Text"></textarea>
+      <p class="sf-note" id="sf-berichtInfo" style="margin:0" aria-live="polite"></p>
     </div>
     <div class="sf-card sf-stack">
       <h2>Sicherung</h2>
