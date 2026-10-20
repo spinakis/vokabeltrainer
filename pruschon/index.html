@@ -156,8 +156,8 @@
 #sf .sf-mehr{display:none;position:absolute;top:12px;right:8px;width:38px;height:30px;border:0;background:none;color:var(--ink2);opacity:.55;font:inherit;font-size:1.3rem;line-height:1;border-radius:8px;cursor:pointer;z-index:2}
 #sf #sf-zeit:not([hidden]) ~ .sf-mehr{top:30px}
 #sf.sf-ruhig .sf-mehr{display:block}
-#sf.sf-ruhig:has(#sf-v-spiel:not([hidden]) #sf-quiz:not([hidden])) .sf-steuer{display:none}
-#sf #sf-quiz{position:relative}
+#sf.sf-ruhig:has(#sf-v-spiel:not([hidden]) #sf-quiz:not([hidden])) .sf-steuer,#sf.sf-ruhig:has(#sf-v-spiel:not([hidden]) #sf-intro:not([hidden])) .sf-steuer{display:none}
+#sf #sf-quiz,#sf #sf-intro{position:relative}
 #sf.sf-ruhig #sf-quiz > .sf-row{display:contents}
 #sf.sf-ruhig #sf-zeit{order:1} #sf.sf-ruhig #sf-frage{order:2} #sf.sf-ruhig #sf-syl{order:3} #sf.sf-ruhig #sf-gl{order:4} #sf.sf-ruhig #sf-sag{order:5}
 #sf.sf-ruhig #sf-opts{order:6} #sf.sf-ruhig #sf-tipp{order:7} #sf.sf-ruhig #sf-fb{order:8} #sf.sf-ruhig #sf-weiter{order:9;align-self:center}
@@ -169,10 +169,10 @@
 #sf.sf-hand .sf-syl.sf-introgross{font-size:10rem}
 @media (max-height:760px){#sf .sf-syl.sf-introgross{font-size:8.6rem}#sf.sf-hand .sf-syl.sf-introgross{font-size:7.6rem}}
 #sf .sf-kr{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-#sf .sf-kr circle{fill:none;stroke:#D23B3B;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;animation:sfkr .7s ease-out forwards}
+#sf .sf-kr circle,#sf .sf-kr ellipse{fill:none;stroke:#D23B3B;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;animation:sfkr .7s ease-out forwards}
 @keyframes sfkr{to{stroke-dashoffset:0;opacity:1}}
-#sf .sf-kr.sf-still circle{animation:none;stroke-dashoffset:0;opacity:1}
-@media (prefers-reduced-motion: reduce){#sf .sf-kr circle{animation:none;stroke-dashoffset:0;opacity:1}}
+#sf .sf-kr.sf-still circle,#sf .sf-kr.sf-still ellipse{animation:none;stroke-dashoffset:0;opacity:1}
+@media (prefers-reduced-motion: reduce){#sf .sf-kr circle,#sf .sf-kr ellipse{animation:none;stroke-dashoffset:0;opacity:1}}
 #sf .sf-merkb{align-self:center;min-height:40px;padding:.3em .9em;font-size:.95rem}
 #sf .sf-merk{display:flex;flex-direction:column;gap:8px;text-align:center}
 #sf .sf-merkt{font-size:1rem}
@@ -197,6 +197,7 @@
   <div id="sf-v-spiel" class="sf-stack">
     <div class="sf-stufen sf-steuer" id="sf-stufen" aria-label="Stufen"></div>
     <div id="sf-intro" class="sf-card sf-stack" hidden>
+      <button class="sf-mehr" id="sf-mehr2" aria-label="Steuerung zeigen">⋯</button>
       <div class="sf-frage" id="sf-introT"></div>
       <div class="sf-introbox" id="sf-introBox"><div class="sf-syl sf-introgross" id="sf-introG" lang="he"></div><svg class="sf-kr" id="sf-introKr" aria-hidden="true"></svg></div>
       <div class="sf-gross" id="sf-introS"></div>
@@ -476,12 +477,16 @@ function neueFrage(){
   stoppUhr();
   const P=pools(), st=STUFEN[S.stufe];
   const hand = S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib";
-  let zahl = st.s[0]+Math.floor(Math.random()*(st.s[1]-st.s[0]+1)); if(!P.KV2.length) zahl=1;   // nur Schwa bekannt: eine Silbe
-  let teile = silbe(P.KL,P.KV,hand,0);
-  for(let i=1;i<zahl;i++) teile = teile.concat(silbe(P.KL,P.KV2,hand,i));   // nach der ersten Silbe kein Schwa (wäre dort stumm)
-  if(P.KF.length && (P.def.fin || Math.random()<(S.stufe===5?.5:.2))) teile.push(zieh(P.KF,hand));
-  for(let i=0;i<teile.length;i++){ const x=teile[i]; if(x.art==="L"&&!x.fin){ teile[i+1]=zeig(x,teile[i+1])[1]; i++; } }
-  const silHe=schreibSil(teile), text=silHe.join(""), richtig=laut(teile), SCHR=schreiben(), TIPP=tippen();
+  let zahl, teile, silHe, text;
+  for(let v=0; v<30; v++){   // nie dieselbe Frage (gleicher hebräischer Text) zweimal hintereinander; erst danach Antworten bauen und platzieren
+    zahl = st.s[0]+Math.floor(Math.random()*(st.s[1]-st.s[0]+1)); if(!P.KV2.length) zahl=1;   // nur Schwa bekannt: eine Silbe
+    teile = silbe(P.KL,P.KV,hand,0);
+    for(let i=1;i<zahl;i++) teile = teile.concat(silbe(P.KL,P.KV2,hand,i));   // nach der ersten Silbe kein Schwa (wäre dort stumm)
+    if(P.KF.length && (P.def.fin || Math.random()<(S.stufe===5?.5:.2))) teile.push(zieh(P.KF,hand));
+    for(let i=0;i<teile.length;i++){ const x=teile[i]; if(x.art==="L"&&!x.fin){ teile[i+1]=zeig(x,teile[i+1])[1]; i++; } }
+    silHe=schreibSil(teile); text=silHe.join(""); if(text!==LETZT_TEXT) break; }
+  LETZT_TEXT=text;
+  const richtig=laut(teile), SCHR=schreiben(), TIPP=tippen();
   // Ablenker: genau ein Teil wird durch ein anders klingendes, schon bekanntes Zeichen ersetzt
   const opts=[{t:richtig,ok:true}], gesehen=new Set([richtig]); let n=0;
   // Mischung: eine falsche Antwort mit anderem Vokal, eine mit anderem Buchstaben; bevorzugt Verwechselbares
@@ -534,7 +539,7 @@ const wortPool=()=>WOERTER.filter(w=>w.m===S.modus && wortBekannt(w));
 const wu=w=> !bibel()&&S.sprache==="en"&&w.ue? w.ue : w.u;
 const wortText=(sil,b)=>sil.map((s,i)=>S.betonung&&sil.length>1&&i===b-1? s.toUpperCase() : s).join("-");   // Betonung nur auf Wunsch gezeigt, nie abgefragt
 const gloss=w=>S.sprache==="en"? w.en : w.de;
-let WQ=[], LETZTES=null;
+let WQ=[], LETZTES=null, LETZT_TEXT=null;
 function waehleWort(){ const pool=wortPool(); if(!pool.length) return null;
   WQ.forEach(q=>q[1]--); const f=WQ.find(q=>q[1]<=0 && q[0]!==LETZTES);
   if(f){ WQ.splice(WQ.indexOf(f),1); const w=pool.find(x=>x.id===f[0]); if(w) return w; }
@@ -598,7 +603,7 @@ function neueWortFrage(){
   stoppUhr(); const w=waehleWort();
   if(!w){ Q=null; $("intro").hidden=true; $("laden").hidden=true; $("quiz").hidden=false; $("zeit").hidden=true; $("opts").innerHTML=""; $("weiter").hidden=true; $("sag").hidden=true;
     $("syl").textContent="…"; $("syl").className="sf-syl"; $("frage").textContent=T("Noch keine Wörter: Erst Stufe 4 schaffen, dann kommen Wörter aus den Zeichen, die du kennst."); $("fb").innerHTML=""; oben(); return; }
-  LETZTES=w.id; const sil=wu(w), SCHR=schreiben(), TIPP=tippen(), HAND=S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib";
+  LETZTES=w.id; LETZT_TEXT=w.s.join(""); const sil=wu(w), SCHR=schreiben(), TIPP=tippen(), HAND=S.schrift==="mix"? Math.random()<.5 : S.schrift==="schreib";
   let opts;
   if(SCHR){ const ab=wortSchreibAblenker(w); opts=[{t:w.s.join(""),ok:true},...ab]; }
   else opts=[{t:wortText(sil,w.b),ok:true},...wortAblenker(w)];
@@ -710,7 +715,7 @@ $("feierOk").onclick=()=>{ $("feier").hidden=true; if(naechsteFeier()) return;
 $("weiter").onclick=naechste;
 
 // ---------- „Woran erkenne ich es?“: rote Kreise an den Unterscheidungsmerkmalen (nur Vorstellung, nur Druckschrift-Buchstaben) ----------
-// Koordinaten: [x, y, r] normiert auf die TINTENBOX des gerenderten Glyphs (Bounding-Box der gezeichneten Fläche, per Canvas
+// Koordinaten: [x, y, r] (Kreis) oder [x, y, rx, ry] (Ellipse, beide Radien relativ zur Höhe) normiert auf die TINTENBOX des gerenderten Glyphs (Bounding-Box der gezeichneten Fläche, per Canvas
 // measureText/actualBoundingBox*, auf die Position im DOM per Range gelegt). x läuft auf dem BILDSCHIRM von LINKS (0) nach RECHTS (1),
 // y von OBEN (0) nach UNTEN (1); r ist der Radius relativ zur Höhe der Tintenbox. Gleiche Merkmale für Varianten (MERK_ALIAS).
 const MERKMALE={
@@ -725,7 +730,7 @@ const MERKMALE={
  tet:{txt:"Oben ist die Öffnung, links innen rollt sich die Spitze ein.", kreise:[[.48,.1,.1],[.2,.27,.09]], vs:[{id:"mem", txt:"Öffnung unten links", kreise:[[.22,.92,.1]]}]},
  jud:{txt:"Ganz klein und kurz, hängt oben in der Zeile.", kreise:[[.5,.5,.56]], vs:[{id:"waw", txt:"länger, bis zur Linie", kreise:[[.8,.88,.1]]}]},
  kaf:{txt:"Rund, ohne Fuß unten rechts.", kreise:[[.88,.9,.1]], vs:[{id:"bet", txt:"Fuß unten rechts", kreise:[[.92,.9,.085]]},{id:"pe", txt:"Haken innen", kreise:[[.2,.52,.1]]}]},
- lamed:{txt:"Der Hals ragt hoch über die Zeile hinaus.", kreise:[[.35,.1,.12]], vs:[]},
+ lamed:{txt:"Der Hals ragt hoch über die Zeile hinaus.", kreise:[[.17,.21,.15,.27]], vs:[]},
  mem:{txt:"Unten links ist eine Lücke.", kreise:[[.22,.92,.1]], vs:[{id:"tet", txt:"Öffnung oben", kreise:[[.48,.1,.1]]},{id:"samech", txt:"unten ganz geschlossen", kreise:[[.2,.9,.1]]}]},
  nun:{txt:"Schmal, mit einem Fuß nach links.", kreise:[[.3,.92,.1]], vs:[{id:"gimel", txt:"mit schrägem Bein rechts", kreise:[[.85,.88,.1]]},{id:"kaf", txt:"breit, runde Ecke", kreise:[[.88,.9,.1]]}]},
  samech:{txt:"Rundum geschlossen, mit runden Ecken.", kreise:[[.12,.9,.1],[.88,.9,.1]], vs:[{id:"mem_s", txt:"eckig", kreise:[[.06,.9,.1]]}]},
@@ -755,7 +760,8 @@ async function merkKreise(box,gel,svg,kreise,verzug,still){
   const m=cx.measureText(txt), l=rr.left-b.left-m.actualBoundingBoxLeft, rt=rr.left-b.left+m.actualBoundingBoxRight,
     base=rr.top-b.top+m.fontBoundingBoxAscent, o=base-m.actualBoundingBoxAscent, u=base+m.actualBoundingBoxDescent;
   svg.classList.toggle("sf-still",!!still); svg.setAttribute("viewBox",`0 0 ${b.width} ${b.height}`);
-  svg.innerHTML=kreise.map(([x,y,r],i)=>`<circle cx="${(l+x*(rt-l)).toFixed(1)}" cy="${(o+y*(u-o)).toFixed(1)}" r="${(r*(u-o)).toFixed(1)}" pathLength="1" style="animation-delay:${((verzug||0)+i*.15).toFixed(2)}s"/>`).join(""); }
+  svg.innerHTML=kreise.map(([x,y,r,ry],i)=>{ const H=u-o, c=`cx="${(l+x*(rt-l)).toFixed(1)}" cy="${(o+y*H).toFixed(1)}"`, d=`pathLength="1" style="animation-delay:${((verzug||0)+i*.15).toFixed(2)}s"/>`;
+    return ry? `<ellipse ${c} rx="${(r*H).toFixed(1)}" ry="${(ry*H).toFixed(1)}" ${d}` : `<circle ${c} r="${(r*H).toFixed(1)}" ${d}`; }).join(""); }
 function merkAus(){ MERK_AN=false; MERK_TOK++; $("introM").hidden=true; $("introB").setAttribute("aria-expanded","false"); $("intro").classList.remove("sf-merkoffen");
   $("introKr").innerHTML=""; $("introVs").innerHTML=""; $("introVsW").hidden=true; }
 async function merkZeige(neu){
@@ -811,7 +817,7 @@ document.querySelectorAll("#sf .sf-zurueckholen").forEach(b=>b.onclick=async()=>
 function kaufPruefen(){ if(!KAUF) return; KAUF.preis().then(p=>{ PREIS=p; kaufText(); }).catch(()=>{});
   KAUF.besitzt().then(v=>{ if(v && !S.voll){ S.voll=true; speichere(); stufenLeiste(); kaufText(); if(!$("laden").hidden) nachKauf(true); } }).catch(()=>{}); }
 function zeigeIntro(k){ IN={k,liste:introListe(k),i:0}; $("quiz").hidden=true; $("runde").hidden=true; $("laden").hidden=true; $("intro").hidden=false; $("zeit").hidden=true; introSchritt(); }
-function introSchritt(){ const it=IN.liste[IN.i]; schrift(S.schrift==="schreib"); merkAus();
+function introSchritt(){ ruhigSetz(); const it=IN.liste[IN.i]; schrift(S.schrift==="schreib"); merkAus();
   $("introG").classList.toggle("sf-introgross", !STUFEN[IN.k].woerter);
   $("introB").hidden=!(it.id && merkFuer(it.id) && S.schrift!=="schreib" && !STUFEN[IN.k].woerter);
   $("introT").textContent= STUFEN[IN.k].woerter? T("Neue Stufe: Wörter") : T("Stufe {k}: neues Zeichen {i} von {n}").replace("{k}",IN.k+1).replace("{i}",IN.i+1).replace("{n}",IN.liste.length);
@@ -1000,7 +1006,7 @@ function uebersetzeDOM(){ for(const id of ["sf","sf-modus","sf-tor","sf-laut","s
   document.documentElement.lang=S.sprache; }
 document.querySelectorAll("#sf [data-sfl]").forEach(b=>b.onclick=()=>{ S.sprache=b.dataset.sfl; if(!bibel()) delete S.wertStd; speichere(); uebersetzeDOM(); eltern(); stufenLeiste(); oben(); if(!$("v-schatz").hidden) schatz(); if(!$("quiz").hidden) neueFrage(); else if(IN) zeigeIntro(IN.k); });
 const ruhigSetz=()=>document.getElementById("sf").classList.toggle("sf-ruhig", !!S.ruhig);
-$("mehr").onclick=()=>document.getElementById("sf").classList.remove("sf-ruhig");   // Steuerung bis zur nächsten Frage zeigen
+$("mehr").onclick=$("mehr2").onclick=()=>document.getElementById("sf").classList.remove("sf-ruhig");   // Steuerung bis zur nächsten Frage zeigen
 $("ruhigAn").onclick=()=>{ S.ruhig=!S.ruhig; speichere(); eltern(); ruhigSetz(); };
 function schrift(hand){ document.getElementById("sf").classList.toggle("sf-hand", hand); }
 function eltern(){
