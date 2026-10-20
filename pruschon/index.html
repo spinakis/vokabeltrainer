@@ -180,6 +180,7 @@
 #sf .sf-vs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 #sf .sf-kand{display:flex;flex-direction:column;align-items:center;min-width:92px;max-width:130px}
 #sf .sf-kbox{position:relative}
+#sf .sf-gc{position:absolute;pointer-events:none}
 #sf .sf-kg{font-family:"Noto Serif Hebrew","SBL Hebrew","Times New Roman",serif;font-size:5.6rem;line-height:1.1;direction:rtl;text-align:center;white-space:nowrap}
 @media (max-height:760px){#sf .sf-kg,#sf .sf-merkoffen .sf-kg{font-size:3.6rem}#sf .sf-merkoffen .sf-syl.sf-introgross{font-size:7rem}}
 #sf .sf-kn{font-size:.85rem;font-weight:700} #sf .sf-kt{font-size:.8rem;color:var(--ink2)}
@@ -715,14 +716,14 @@ $("feierOk").onclick=()=>{ $("feier").hidden=true; if(naechsteFeier()) return;
 $("weiter").onclick=naechste;
 
 // ---------- „Woran erkenne ich es?“: rote Kreise an den Unterscheidungsmerkmalen (nur Vorstellung, nur Druckschrift-Buchstaben) ----------
-// Koordinaten: [x, y, r] (Kreis) oder [x, y, rx, ry] (Ellipse, beide Radien relativ zur Höhe) normiert auf die TINTENBOX des gerenderten Glyphs (Bounding-Box der gezeichneten Fläche, per Canvas
-// measureText/actualBoundingBox*, auf die Position im DOM per Range gelegt). x läuft auf dem BILDSCHIRM von LINKS (0) nach RECHTS (1),
+// Koordinaten: [x, y, r] (Kreis) oder [x, y, rx, ry] (Ellipse, beide Radien relativ zur Höhe) normiert auf die TINTENBOX des gerenderten Glyphs (Bounding-Box der gezeichneten Fläche, per getImageData-Pixelscan
+// des Canvas, in dem der Glyph während der Anzeige gezeichnet wird). x läuft auf dem BILDSCHIRM von LINKS (0) nach RECHTS (1),
 // y von OBEN (0) nach UNTEN (1); r ist der Radius relativ zur Höhe der Tintenbox. Gleiche Merkmale für Varianten (MERK_ALIAS).
 const MERKMALE={
  alef:{txt:"Ein schräger Strich durch die Mitte, oben rechts ein Arm, unten links ein Bein.", kreise:[[.5,.5,.14]], vs:[{id:"ajin", txt:"zwei Arme, kein schräger Strich", kreise:[[.5,.45,.13]]}]},
- bet:{txt:"Unten rechts ragt ein kleiner Fuß über die Linie hinaus.", kreise:[[.92,.9,.085]], vs:[{id:"kaf", txt:"rund, kein Fuß", kreise:[[.88,.9,.1]]}]},
+ bet:{txt:"Unten rechts ragt ein kleiner Fuß über die Linie hinaus.", kreise:[[.9,.9,.14]], vs:[{id:"kaf", txt:"rund, kein Fuß", kreise:[[.88,.88,.15]]}]},
  gimel:{txt:"Unten geht ein Füßchen nach links ab.", kreise:[[.1,.9,.09]], vs:[{id:"nun", txt:"kein zweites Bein rechts", kreise:[[.8,.86,.1]]}]},
- dalet:{txt:"Oben rechts ist eine scharfe Ecke, der Balken steht rechts über.", kreise:[[.95,.12,.08]], vs:[{id:"resch", txt:"runde Schulter", kreise:[[.88,.14,.1]]},{id:"chaf_s", txt:"geht unter die Zeile", kreise:[[.9,.9,.1]]}]},
+ dalet:{txt:"Oben rechts ist eine scharfe Ecke, der Balken steht rechts über.", kreise:[[.9,.12,.16]], vs:[{id:"resch", txt:"runde Schulter", kreise:[[.85,.15,.16]]},{id:"chaf_s", txt:"geht unter die Zeile", kreise:[[.85,.9,.12]]}]},
  he:{txt:"Oben links ist eine Lücke zwischen Balken und linkem Bein.", kreise:[[.09,.34,.1]], vs:[{id:"chet", txt:"oben geschlossen", kreise:[[.1,.3,.1]]},{id:"taw", txt:"Fuß unten links", kreise:[[.12,.9,.1]]}]},
  waw:{txt:"Ein schlanker Strich mit einem kleinen Kopf.", kreise:[[.3,.08,.1]], vs:[{id:"sajin", txt:"Kopf ragt nach beiden Seiten", kreise:[[.5,.07,.12]]},{id:"jud", txt:"kurz, hängt oben", kreise:[[.5,.5,.56]]},{id:"nun_s", txt:"länger, geht unter die Zeile", kreise:[[.8,.92,.07]]}]},
  sajin:{txt:"Der Kopf ragt links und rechts über den Stiel.", kreise:[[.5,.07,.12]], vs:[{id:"waw", txt:"nur ein kleiner Kopf", kreise:[[.3,.08,.1]]}]},
@@ -751,18 +752,33 @@ const MERKMALE={
 const MERK_ALIAS={vet:"bet",chaf:"kaf",fe:"pe",gimel_d:"gimel",dalet_d:"dalet",taw_d:"taw"};
 const merkFuer=id=>MERKMALE[MERK_ALIAS[id]||id]||null;
 let MERK_AN=false, MERK_ALLE=false, MERK_TOK=0;
-async function merkKreise(box,gel,svg,kreise,verzug,still){
-  const txt=gel.textContent, cs=getComputedStyle(gel), font=`${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+// Pixelgenau, browserunabhängig: Der Glyph wird bei geöffneten Merkmalen als Canvas gezeichnet (der DOM-Text bleibt unsichtbar im Layout);
+// die Tintenbox wird per getImageData aus genau diesem Canvas gelesen, die Kreise liegen darauf.
+function merkCanvasWeg(gel){ if(gel._sfCv){ gel._sfCv.remove(); gel._sfCv=null; } gel._sfBox=null; gel.style.color=""; }
+async function merkKreise(box,gel,svg,kreise,verzug,still,tok){
+  merkCanvasWeg(gel);
+  const txt=gel.textContent, cs=getComputedStyle(gel), font=`${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`, farbe=cs.color, fs=parseFloat(cs.fontSize)||16;
   try{ await document.fonts.load(font,txt); }catch(e){}
-  const b=box.getBoundingClientRect(); if(!b.width||!gel.firstChild) return;
-  const rg=document.createRange(); rg.selectNodeContents(gel); const rr=rg.getBoundingClientRect();
-  const cx=document.createElement("canvas").getContext("2d"); cx.font=font; cx.direction="ltr"; cx.textAlign="left"; cx.textBaseline="alphabetic";
-  const m=cx.measureText(txt), l=rr.left-b.left-m.actualBoundingBoxLeft, rt=rr.left-b.left+m.actualBoundingBoxRight,
-    base=rr.top-b.top+m.fontBoundingBoxAscent, o=base-m.actualBoundingBoxAscent, u=base+m.actualBoundingBoxDescent;
+  if(tok!==undefined && tok!==MERK_TOK) return;
+  const W=gel.offsetWidth, H0=gel.offsetHeight, b=box.getBoundingClientRect(); if(!W||!H0||!b.width||!txt) return;
+  const dpr=window.devicePixelRatio||1, pad=Math.ceil(fs*.5), cw=W+2*pad, ch=H0+2*pad;
+  const cv=document.createElement("canvas"); cv.className="sf-gc"; cv.setAttribute("aria-hidden","true");
+  cv.width=Math.ceil(cw*dpr); cv.height=Math.ceil(ch*dpr); cv.style.width=cw+"px"; cv.style.height=ch+"px";
+  cv.style.left=(gel.offsetLeft-pad)+"px"; cv.style.top=(gel.offsetTop-pad)+"px";
+  const cx=cv.getContext("2d",{willReadFrequently:true}); cx.setTransform(dpr,0,0,dpr,0,0);
+  cx.font=font; cx.direction="rtl"; cx.textAlign="center"; cx.textBaseline="alphabetic"; cx.fillStyle=farbe;
+  const m=cx.measureText(txt), fa=m.fontBoundingBoxAscent!==undefined?m.fontBoundingBoxAscent:fs*.9, fd=m.fontBoundingBoxDescent!==undefined?m.fontBoundingBoxDescent:fs*.3;
+  cx.fillText(txt,pad+W/2,pad+(H0-(fa+fd))/2+fa);
+  const d=cx.getImageData(0,0,cv.width,cv.height).data, w=cv.width, h=cv.height; let x0=w,x1=-1,y0=h,y1=-1;
+  for(let y=0;y<h;y++){ const r=y*w*4; for(let x=0;x<w;x++){ if(d[r+x*4+3]>0){ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; } } }
+  if(x1<0) return;
+  const ink={l:x0/dpr-pad, r:(x1+1)/dpr-pad, t:y0/dpr-pad, b:(y1+1)/dpr-pad};   // relativ zur Glyph-Box
+  box.appendChild(cv); gel._sfCv=cv; gel._sfBox=ink; gel.style.color="transparent";
+  const l=gel.offsetLeft+ink.l, rt=gel.offsetLeft+ink.r, o=gel.offsetTop+ink.t, u=gel.offsetTop+ink.b, H=u-o;
   svg.classList.toggle("sf-still",!!still); svg.setAttribute("viewBox",`0 0 ${b.width} ${b.height}`);
-  svg.innerHTML=kreise.map(([x,y,r,ry],i)=>{ const H=u-o, c=`cx="${(l+x*(rt-l)).toFixed(1)}" cy="${(o+y*H).toFixed(1)}"`, d=`pathLength="1" style="animation-delay:${((verzug||0)+i*.15).toFixed(2)}s"/>`;
-    return ry? `<ellipse ${c} rx="${(r*H).toFixed(1)}" ry="${(ry*H).toFixed(1)}" ${d}` : `<circle ${c} r="${(r*H).toFixed(1)}" ${d}`; }).join(""); }
-function merkAus(){ MERK_AN=false; MERK_TOK++; $("introM").hidden=true; $("introB").setAttribute("aria-expanded","false"); $("intro").classList.remove("sf-merkoffen");
+  svg.innerHTML=kreise.map(([x,y,r,ry],i)=>{ const c=`cx="${(l+x*(rt-l)).toFixed(1)}" cy="${(o+y*H).toFixed(1)}"`, dd=`pathLength="1" style="animation-delay:${((verzug||0)+i*.15).toFixed(2)}s"/>`;
+    return ry? `<ellipse ${c} rx="${(r*H).toFixed(1)}" ry="${(ry*H).toFixed(1)}" ${dd}` : `<circle ${c} r="${(r*H).toFixed(1)}" ${dd}`; }).join(""); }
+function merkAus(){ MERK_AN=false; MERK_TOK++; merkCanvasWeg($("introG")); $("introM").hidden=true; $("introB").setAttribute("aria-expanded","false"); $("intro").classList.remove("sf-merkoffen");
   $("introKr").innerHTML=""; $("introVs").innerHTML=""; $("introVsW").hidden=true; }
 async function merkZeige(neu){
   if(!IN) return; const it=IN.liste[IN.i], M=it&&it.id&&merkFuer(it.id); if(!M) return;
@@ -776,8 +792,8 @@ async function merkZeige(neu){
     d.querySelector(".sf-kg").textContent=x.g; d.querySelector(".sf-kn").textContent=nm(x)+(spaeter?" "+T("(kommt später)"):""); d.querySelector(".sf-kt").textContent=T(v.txt);
     box.appendChild(d); return [d,v]; });
   const verzug=neu===true?0:.2+M.kreise.length*.15;
-  await merkKreise($("introBox"),$("introG"),$("introKr"),M.kreise,0,neu===true);
-  for(const [d,v] of teile){ if(tok!==MERK_TOK) return; await merkKreise(d.querySelector(".sf-kbox"),d.querySelector(".sf-kg"),d.querySelector(".sf-kr"),v.kreise,verzug,neu===true); } }
+  await merkKreise($("introBox"),$("introG"),$("introKr"),M.kreise,0,neu===true,tok);
+  for(const [d,v] of teile){ if(tok!==MERK_TOK) return; await merkKreise(d.querySelector(".sf-kbox"),d.querySelector(".sf-kg"),d.querySelector(".sf-kr"),v.kreise,verzug,neu===true,tok); } }
 // Vorstellung der neuen Zeichen einer Stufe
 let IN=null;
 function introListe(k){ const st=STUFEN[k], B=bibel(), a=B?"ā":"a";
@@ -848,10 +864,10 @@ const LAUT={
  vet:{de:"W wie in »Wasser«",en:"V as in »very«",de_b:"ḇ: wie W in »Wasser«",en_b:"ḇ: like V in »very«"},
  gimel:{de:"G wie in »Garten«",en:"G as in »garden«",de_b:"ḡ: ein weiches, gehauchtes g (wie in norddeutschem »Wagen«)",en_b:"ḡ: a soft, breathy g (as in Dutch »goed«)",hinweis:"Im Bibelmodus hat Gimel ohne Punkt den weichen Laut, mit Punkt das normale g."},
  gimel_d:{de:"G wie in »Garten«",en:"G as in »garden«"},
- dalet:{de:"D wie in »Dach«",en:"D as in »door«",de_b:"ḏ: wie englisches th in »this«",en_b:"ḏ: like th in »this«"},
+ dalet:{de:"D wie in »Dach«",en:"D as in »door«",de_b:"ḏ: ein gelispeltes d, die Zungenspitze liegt an den oberen Schneidezähnen",en_b:"ḏ: like th in »this«"},
  dalet_d:{de:"D wie in »Dach«",en:"D as in »door«"},
  he:{de:"H wie in »Haus«",en:"H as in »house«",hinweis:"Am Wortende ist He meist stumm."},
- waw:{de:"W wie in »Wasser«",en:"V as in »very«",de_b:"w: wie englisches w in »water«",en_b:"w as in »water«"},
+ waw:{de:"W wie in »Wasser«",en:"V as in »very«",de_b:"w: ein weiches w, die Lippen sind dabei gerundet und berühren die Zähne nicht",en_b:"w as in »water«"},
  sajin:{de:"weiches S wie in »Rose«",en:"Z as in »zoo«"},
  chet:{de:"CH wie in »Bach«",en:"CH as in Scottish »loch«",de_b:"ḥ: ein kehliges h, rauer als in »Haus«, ohne das Reiben von »Bach«",en_b:"ḥ: a throaty h, rougher than in »house«, without the friction of »loch«"},
  tet:{de:"T wie in »Tasse«",en:"T as in »table«",de_b:"ṭ: ein dumpfes t, mit der Zunge weiter hinten",en_b:"ṭ: a dull t, tongue further back"},
@@ -870,7 +886,7 @@ const LAUT={
  resch:{de:"R wie in »Rose« (Zäpfchen-r)",en:"R as in French »rouge« (uvular r)"},
  schin:{de:"SCH wie in »Schule«",en:"SH as in »ship«"},
  sin:{de:"scharfes S wie in »Wasser«",en:"S as in »sun«"},
- taw:{de:"T wie in »Tasse«",en:"T as in »table«",de_b:"ṯ: wie englisches th in »thing«",en_b:"ṯ: like th in »thing«"},
+ taw:{de:"T wie in »Tasse«",en:"T as in »table«",de_b:"ṯ: ein gelispeltes t, wie ein s mit der Zungenspitze zwischen den Zähnen",en_b:"ṯ: like th in »thing«"},
  taw_d:{de:"T wie in »Tasse«",en:"T as in »table«"},
  patach:{de:"A wie in »Hand« (kurz)",en:"A as in »father« (short)"},
  kamatz:{de:"A wie in »Hand«",en:"A as in »father«",de_b:"ā: langes a wie in »Vater«",en_b:"ā: long a as in »father«",hinweis:"Kamatz katan: in geschlossener, unbetonter Silbe ein kurzes o."},
@@ -1076,7 +1092,7 @@ function funken(el){ const r=el.getBoundingClientRect();
     s.style.left=(r.left+r.width/2)+"px"; s.style.top=(r.top+r.height/2)+"px";
     s.style.setProperty("--dx",(Math.random()*160-80)+"px"); s.style.setProperty("--dy",(-60-Math.random()*90)+"px");
     document.body.appendChild(s); setTimeout(()=>s.remove(),1000); } }
-window.Silbenfink={lautKarte, lautZu, LAUT, zeigeIntro, introSchritt, get IN(){return IN;}, merkZeige, merkAus, MERKMALE, MERK_ALIAS, set merkAlle(v){MERK_ALLE=!!v;}, neueFrage, naechste, stadienDef, aktStad, platziere, neueRunde, get RUNDE(){return RUNDE;}, startStufe, canon, wortPool, wortAblenker, wortSchreibAblenker, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS, STUFEN, WOERTER, REGELN};
+window.Silbenfink={lautKarte, lautZu, LAUT, zeigeIntro, introSchritt, get IN(){return IN;}, merkZeige, merkAus, merkBox:g=>g&&g._sfBox, MERKMALE, MERK_ALIAS, set merkAlle(v){MERK_ALLE=!!v;}, neueFrage, naechste, stadienDef, aktStad, platziere, neueRunde, get RUNDE(){return RUNDE;}, startStufe, canon, wortPool, wortAblenker, wortSchreibAblenker, get Q(){return Q;}, get S(){return S;}, set S(v){S=v;}, ITEMS, STUFEN, WOERTER, REGELN};
 if(gesperrt(S.stufe)) S.stufe=GRATIS_BIS;
 if(!S.modus){ S.modus="ivrit"; $("modus").hidden=false; }
 $("modusKauf").hidden=!KAUF;
