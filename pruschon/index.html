@@ -2048,6 +2048,20 @@ uebersetzeDOM(); modusUI(); stufenLeiste(); startStufe(S.stufe); kaufPruefen();
 </script>
 
 </div>
+<script>
+// Service Worker (Offline-Modus) nur in der echten Web-App: https, nicht eingebettet (Artefakt/iframe), nicht in der Capacitor-App.
+// Kein Neuladen bei neuer Fassung (nicht mitten im Spiel): der neue Worker ist beim nächsten Start aktiv.
+(function(){
+  var embedded=false; try{ embedded = window.self!==window.top; }catch(e){ embedded=true; }
+  var app = !!(window.Capacitor || window.SilbenfinkKauf || window.SilbenfinkBewerten);
+  if(embedded || app || !("serviceWorker" in navigator) || location.protocol!=="https:"){
+    try{ console.info("Pruschon: Service Worker nicht registriert (" + (embedded?"eingebettet":app?"App":!("serviceWorker" in navigator)?"nicht unterstützt":"kein https") + ")."); }catch(e){}
+    return;
+  }
+  navigator.serviceWorker.register("sw.js").then(function(){ return navigator.serviceWorker.ready; })
+    .then(function(){ try{ console.info("Pruschon: Offline-Modus bereit."); }catch(e){} }).catch(function(){});
+})();
+</script>
 
 </body>
 </html>

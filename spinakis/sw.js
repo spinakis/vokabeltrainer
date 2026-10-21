@@ -1,5 +1,5 @@
-const CACHE="spinakis-2026-10-21.57a453-sw2", PREFIX="spinakis-", NAV_TIMEOUT=4000;
-const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png"];
+const CACHE="spinakis-2026-10-21.e931af-sw3", PREFIX="spinakis-", NAV_TIMEOUT=4000;
+const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","schriften/NotoSans-Regular-Umschrift.ttf","schriften/NotoSans-Bold-Umschrift.ttf","schriften/CrimsonPro-VF.ttf","schriften/CrimsonPro-Italic-VF.ttf","schriften/NotoSansMath-Symbole.ttf"];
 // Nur echte Erfolgsantworten dürfen in den Cache (keine 404/500, keine Weiterleitung auf eine WLAN-Anmeldeseite).
 const good=res=>!!res && res.ok && (res.type==="basic" || res.type==="cors");
 const withTimeout=(p,ms)=>new Promise((ok,no)=>{ const t=setTimeout(()=>no(new Error("timeout")),ms); p.then(v=>{clearTimeout(t);ok(v);},e=>{clearTimeout(t);no(e);}); });
@@ -9,11 +9,14 @@ self.addEventListener("activate",e=>{ e.waitUntil(caches.keys().then(ks=>Promise
 self.addEventListener("fetch",e=>{
   const r=e.request; if(r.method!=="GET") return;
   if(r.mode==="navigate"){ // online: neueste Fassung; Fehler, Anmeldeseite oder Timeout: die gespeicherte
-    const net=fetch(r).then(res=>{ if(good(res) && /html/.test(res.headers.get("content-type")||"")){ const cp=res.clone(); caches.open(CACHE).then(c=>c.put("./",cp)); } return res; });
+    // Antwort unter der tatsächlichen Adresse ablegen (hilfe.html bleibt hilfe.html); nur die Startseite zusätzlich unter "./"
+    const start=/(\/|\/index\.html)$/.test(new URL(r.url).pathname);
+    const net=fetch(r).then(res=>{ if(good(res) && /html/.test(res.headers.get("content-type")||"")){ const cp=res.clone(), cp2=start? res.clone() : null; caches.open(CACHE).then(c=>{ c.put(r,cp); if(cp2) c.put("./",cp2); }); } return res; });
     net.catch(()=>{});
+    const alt=()=>caches.match(r).then(hit=>hit||caches.match("./"));
     e.respondWith(withTimeout(net,NAV_TIMEOUT)
-      .then(res=>(good(res) && /html/.test(res.headers.get("content-type")||""))? res : caches.match("./").then(hit=>hit||res))
-      .catch(()=>caches.match("./").then(hit=>hit||net)));
+      .then(res=>(good(res) && /html/.test(res.headers.get("content-type")||""))? res : alt().then(hit=>hit||res))
+      .catch(()=>alt().then(hit=>hit||net)));
     return;
   }
   // Fremde Adressen (Google Fonts): mit CORS holen, damit res.ok prüfbar ist (sonst undurchsichtige Antworten)
