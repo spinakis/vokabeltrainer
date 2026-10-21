@@ -2,8 +2,8 @@
 // ersetzt beim Build die beiden Platzhalter unten durch die Version und die Dateiliste und schreibt dist/sw.js.
 // Im Dev-Server wird er nie registriert.
 
-const VERSION = "7a2d471bd1";
-const DATEIEN = ["./","./index.html","./assets/index-DPqYhaJE.css","./assets/index-pjpOMlh5.js","./icons/apple-touch-icon.png","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png","./icons/icon.svg","./manifest.webmanifest"];
+const VERSION = "1473daf67f";
+const DATEIEN = ["./","./index.html","./assets/index-0N78XjHJ.css","./assets/index-CoMvM1C8.js","./icons/apple-touch-icon.png","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png","./icons/icon.svg","./manifest.webmanifest"];
 const CACHE = "provenienz-" + VERSION;
 
 // Installieren: alle Dateien des Builds in den Cache dieser Version laden (relative Adressen, auch unter einem Unterordner).
