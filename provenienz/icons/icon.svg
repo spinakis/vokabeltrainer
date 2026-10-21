@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- App-Symbol: Anhänger-Etikett in Nussbaum mit weißem P auf Papier (Vorschlag) -->
+  <rect width="512" height="512" fill="#f7f2e8"/>
+  <g transform="rotate(-12 256 256)">
+    <path d="M256 64 L376 150 L376 436 Q376 452 360 452 L152 452 Q136 452 136 436 L136 150 Z"
+          fill="#6b4a2f" stroke="#6b4a2f" stroke-width="16" stroke-linejoin="round"/>
+    <circle cx="256" cy="140" r="20" fill="#f7f2e8"/>
+    <path fill="#ffffff" fill-rule="evenodd"
+          d="M206 210 H290 A62 62 0 0 1 290 334 H248 V400 H206 Z M248 248 V296 H286 A24 24 0 0 0 286 248 Z"/>
+  </g>
+</svg>
