@@ -1,5 +1,5 @@
-const CACHE="pruschon-2026-10-20.8f0eb3";
-const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png"];
+const CACHE="pruschon-2026-10-20.8ed3a3";
+const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","schriften/NotoSerifHebrew-Regular.ttf","schriften/NotoSansHebrew-Regular.ttf","schriften/PlaypenSansHebrew-Regular.ttf","schriften/NotoRashiHebrew-Regular.ttf","schriften/FrankRuhlLibre-Regular.ttf","schriften/DavidLibre-Regular.ttf","schriften/AtkinsonHyperlegible-Regular.ttf","schriften/AtkinsonHyperlegible-Bold.ttf","schriften/NotoSans-Regular-Umschrift.ttf","schriften/NotoSans-Bold-Umschrift.ttf","schriften/ShlomoStam.ttf"];
 self.addEventListener("install",e=>{ e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())); });
 self.addEventListener("activate",e=>{ e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())); });
 self.addEventListener("fetch",e=>{
