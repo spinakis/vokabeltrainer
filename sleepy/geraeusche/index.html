@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Sleepy – Geräusche zum Aufnehmen</title>
+<style>
+:root {
+  --bg: #fbf3e4;
+  --card: #fffdf8;
+  --text: #2b2a22;
+  --muted: #6a6454;
+  --line: #e6d9bd;
+  --accent: #2f7d4f;
+  --accent-text: #ffffff;
+  --accent-soft: #dff0e0;
+  --warm: #e08a2c;
+  --warm-soft: #fde9cc;
+  --focus: #1d5fd1;
+  --shadow: 0 2px 6px rgba(80, 60, 20, .10);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14201a;
+    --card: #1d2c24;
+    --text: #f2ecdc;
+    --muted: #b3ad9b;
+    --line: #34493c;
+    --accent: #6fcf8c;
+    --accent-text: #0f2417;
+    --accent-soft: #24462f;
+    --warm: #f2a649;
+    --warm-soft: #44331a;
+    --focus: #8ab8ff;
+    --shadow: 0 2px 6px rgba(0, 0, 0, .35);
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 18px/1.5 ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-wrap: anywhere;
+}
+.wrap { max-width: 980px; margin: 0 auto; padding: 16px 16px 48px; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+h1 { font-size: 1.8rem; line-height: 1.2; margin: 8px 0 4px; }
+h2 { font-size: 1.35rem; line-height: 1.25; margin: 0 0 8px; }
+p { margin: 0 0 10px; }
+.lead { color: var(--muted); margin-bottom: 16px; }
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 14px 16px; box-shadow: var(--shadow); }
+.howto { margin-bottom: 14px; }
+.howto ol { margin: 0 0 8px; padding-left: 1.4em; }
+.howto li { margin-bottom: 6px; }
+details { margin-top: 6px; }
+summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; color: var(--accent); }
+details ul { margin: 4px 0 0; padding-left: 1.2em; }
+details li { margin-bottom: 8px; }
+code { font: .9em ui-monospace, Menlo, monospace; background: var(--warm-soft); padding: 0 .3em; border-radius: 5px; }
+
+.sticky { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 8px 0 10px; margin: 0 0 6px; border-bottom: 2px solid var(--line); }
+.progress-line { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-weight: 800; font-size: 1.1rem; }
+.bar { height: 18px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 6px 0 10px; }
+.bar > div { height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .25s; }
+.filters { display: flex; gap: 8px; }
+.filters button { flex: 1 1 0; min-width: 0; white-space: nowrap; padding: 8px 4px; font-size: 1rem; }
+button { font: inherit; font-weight: 700; min-height: 48px; padding: 8px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; touch-action: manipulation; }
+button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+button.big { background: var(--warm); border-color: var(--warm); color: #2b1a00; width: 100%; font-size: 1.05rem; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.actions { margin: 14px 0; }
+.status { min-height: 1.5em; margin-top: 6px; font-weight: 700; color: var(--accent); }
+.fallback { width: 100%; height: 12em; font: 16px/1.4 ui-monospace, Menlo, monospace; background: var(--card); color: var(--text); border: 2px solid var(--line); border-radius: 12px; padding: 8px; margin-top: 8px; }
+.warn { background: var(--warm-soft); border: 2px solid var(--warm); border-radius: 14px; padding: 10px 14px; margin-bottom: 12px; }
+
+.group { margin-top: 22px; }
+.group > h2 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-bottom: 3px solid var(--warm); padding-bottom: 4px; }
+.group > h2 .cnt { font-size: .95rem; font-weight: 700; color: var(--muted); }
+.items { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 12px; padding: 0; list-style: none; }
+@media (min-width: 700px) { .items { grid-template-columns: repeat(2, minmax(0, 1fr)); } body { font-size: 19px; } }
+.item { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.item.done { background: var(--accent-soft); border-color: var(--accent); }
+.head { display: flex; align-items: flex-start; gap: 10px; }
+.nr { flex: none; min-width: 2.4em; text-align: center; font-weight: 800; background: var(--warm); color: #2b1a00; border-radius: 12px; padding: 2px 8px; font-size: 1.1rem; }
+.name { font-size: 1.5rem; font-weight: 800; line-height: 1.15; min-width: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .85rem; font-weight: 700; background: var(--warm-soft); border-radius: 999px; padding: 2px 10px; color: var(--text); }
+.wann b, .tipp b { color: var(--muted); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .03em; display: block; }
+.check { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 6px 12px; border: 2px solid var(--line); border-radius: 14px; background: var(--bg); cursor: pointer; font-weight: 800; touch-action: manipulation; }
+.check input { appearance: none; -webkit-appearance: none; flex: none; width: 44px; height: 44px; margin: 0; border: 3px solid var(--accent); border-radius: 12px; background: var(--card); display: grid; place-content: center; cursor: pointer; }
+.check input::after { content: ""; width: 22px; height: 12px; border-left: 5px solid var(--accent-text); border-bottom: 5px solid var(--accent-text); transform: rotate(-45deg) translate(1px, -2px); opacity: 0; }
+.check input:checked { background: var(--accent); }
+.check input:checked::after { opacity: 1; }
+.item.done .check { border-color: var(--accent); }
+.note { width: 100%; min-height: 44px; font: inherit; font-size: 16px; padding: 8px 12px; border: 2px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); }
+.note::placeholder { color: var(--muted); }
+.empty { text-align: center; color: var(--muted); padding: 24px 0; }
+.foot { margin-top: 28px; color: var(--muted); }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .bar > div { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Sleepy – Geräusche zum Aufnehmen</h1>
+  <p class="lead">Hallo Alon! Hier sind die 60 Geräusche für dein Spiel. Bei jedem steht, wofür es ist und wie du es aufnehmen kannst.</p>
+
+  <section class="card howto" aria-labelledby="anl">
+    <h2 id="anl">So geht’s</h2>
+    <ol>
+      <li>Mit der App <b>Sprachmemos</b> aufnehmen.</li>
+      <li>Vor jeder Aufnahme die <b>Nummer und den Namen</b> sagen („Nummer 22, Spucken, Versuch 2“).</li>
+      <li>Jedes Geräusch <b>dreimal</b> aufnehmen.</li>
+      <li>Draußen: Handy-Mikro mit einer <b>Socke</b> abdecken.</li>
+      <li>Setz danach das Häkchen „aufgenommen“ – die Seite merkt es sich.</li>
+    </ol>
+    <details>
+      <summary>Alle Tipps ansehen</summary>
+      <ul>
+        <li>Mit der App Sprachmemos aufnehmen. Vor jeder Aufnahme die Nummer und den Namen sagen („Nummer 22, Spucken, Versuch 2“). So lassen sich die Aufnahmen später sicher zuordnen.</li>
+        <li>Handy 20–30 cm entfernt, bei lauten Sachen 50 cm. 1 s Stille vor und nach dem Geräusch.</li>
+        <li>Jedes Geräusch dreimal aufnehmen. Bei „×3“ in der Liste: drei leicht verschiedene Fassungen, damit es nicht immer gleich klingt.</li>
+        <li>Draußen: Rücken in den Wind, Handy-Mikro mit einer Socke abdecken.</li>
+        <li>Später (Auftrag): Sprachmemos (m4a) werden umgewandelt: Anfang und Ende abschneiden, gleich laut machen, mono, als <code>.ogg</code> und <code>.mp3</code> (für Safari). Dateien in <code>sleepy/public/sounds/</code> mit dem Namen aus der Liste.</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="sticky">
+    <div class="progress-line"><span id="progText">0 von 60 aufgenommen</span></div>
+    <div class="bar" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" id="bar"><div id="barFill"></div></div>
+    <div class="filters" role="group" aria-label="Filter">
+      <button type="button" data-filter="alle" aria-pressed="true">alle</button>
+      <button type="button" data-filter="offen" aria-pressed="false">noch offen</button>
+      <button type="button" data-filter="fertig" aria-pressed="false">fertig</button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div id="storeWarn" class="warn" hidden>Dein Browser kann sich hier nichts merken. Die Häkchen gelten nur, solange die Seite offen ist. Schick den Stand lieber zwischendurch mit „Liste als Text kopieren“.</div>
+    <button type="button" class="big" id="copyBtn">Liste als Text kopieren</button>
+    <div class="status" id="copyStatus" role="status" aria-live="polite"></div>
+    <textarea class="fallback" id="copyFallback" readonly hidden aria-label="Liste als Text"></textarea>
+  </div>
+
+  <main id="list"></main>
+  <p class="empty" id="empty" hidden>Hier ist gerade nichts.</p>
+
+  <p class="foot">Neue Gegner aus 0.3 und später (Kobolde, Irrlichter usw.) kommen in die Liste, sobald Alon sie festlegt.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var DATA = {"groups": ["Laufen und Springen", "Wasser", "Kampf", "Früchte und Spucken", "Sleepy und Einsammeln", "Menü und Händler", "Gegner", "Adler-König und Arena", "Murmeltier und Schmied", "Tarnung und Ruhen", "Hintergrund (Schleifen)"], "items": [{"n": 1, "name": "schritt-gras", "wann": "Laufen auf Wiese und Waldboden", "len": "0,2 s ×4", "tipp": "mit den Fingern auf Rasen klopfen oder im Gras gehen", "ab": "0.4", "g": 0}, {"n": 2, "name": "schritt-stein", "wann": "Laufen auf Fels, im Bau", "len": "0,2 s ×4", "tipp": "Fingerknöchel auf einen Stein", "ab": "0.4", "g": 0}, {"n": 3, "name": "sprung", "wann": "Absprung", "len": "0,3 s", "tipp": "Jackenärmel schnell durch die Luft ziehen", "ab": "0.4", "g": 0}, {"n": 4, "name": "doppelsprung", "wann": "zweiter Sprung in der Luft", "len": "0,3 s", "tipp": "ein Tuch zweimal schnell ausschlagen", "ab": "0.4", "g": 0}, {"n": 5, "name": "landen", "wann": "Landung nach einem Sprung", "len": "0,2 s", "tipp": "Rucksack auf den Boden plumpsen lassen", "ab": "0.4", "g": 0}, {"n": 6, "name": "rollen", "wann": "Sleepy rollt als Kugel (Schleife)", "len": "2 s", "tipp": "Ball über Kies oder Teppich rollen", "ab": "0.4", "g": 0}, {"n": 7, "name": "wand-rutschen", "wann": "Rutschen an der Wand (Schleife)", "len": "1 s", "tipp": "Hand langsam über Baumrinde reiben", "ab": "0.4", "g": 0}, {"n": 8, "name": "wandsprung", "wann": "Absprung von der Wand", "len": "0,3 s", "tipp": "Hand auf Holz klatschen, dann Ärmel-Wusch", "ab": "0.4", "g": 0}, {"n": 9, "name": "dash", "wann": "Dash", "len": "0,3 s", "tipp": "dünnen Stock schnell durch die Luft schwingen", "ab": "0.4", "g": 0}, {"n": 10, "name": "platsch-rein", "wann": "Sleepy fällt ins Wasser", "len": "0,8 s", "tipp": "Stein in einen Bach oder Eimer werfen", "ab": "0.4", "g": 1}, {"n": 11, "name": "schwimmzug", "wann": "Schwimmzug nach oben", "len": "0,4 s ×2", "tipp": "Hand durchs Wasser ziehen (Badewanne)", "ab": "0.4", "g": 1}, {"n": 12, "name": "platsch-raus", "wann": "Sprung aus dem Wasser", "len": "0,5 s", "tipp": "Hand schnell aus dem Wasser reißen", "ab": "0.4", "g": 1}, {"n": 13, "name": "blubbern", "wann": "unter Wasser", "len": "1 s", "tipp": "mit Strohhalm ins Wasserglas pusten", "ab": "0.4", "g": 1}, {"n": 14, "name": "luft-knapp", "wann": "Luftbalken blinkt rot", "len": "0,5 s", "tipp": "kurzes Japsen", "ab": "0.4", "g": 1}, {"n": 15, "name": "schwert-schwung", "wann": "Schwerthieb", "len": "0,2 s ×3", "tipp": "Stock oder Gerte durch die Luft", "ab": "0.4", "g": 2}, {"n": 16, "name": "schwert-treffer", "wann": "Hieb trifft einen Gegner", "len": "0,2 s ×3", "tipp": "Stock auf ein Kissen schlagen", "ab": "0.4", "g": 2}, {"n": 17, "name": "hammer-schlag", "wann": "Hieb mit dem Hammer", "len": "0,3 s", "tipp": "Holzhammer auf einen Baumstamm", "ab": "0.4", "g": 2}, {"n": 18, "name": "schild-block", "wann": "Angriff abgeblockt", "len": "0,2 s", "tipp": "Löffel gegen einen Topfdeckel", "ab": "0.4", "g": 2}, {"n": 19, "name": "schild-bricht", "wann": "Schild bricht", "len": "0,5 s", "tipp": "Topfdeckel fallen lassen", "ab": "0.4", "g": 2}, {"n": 20, "name": "pogo", "wann": "Abprall vom Gegner", "len": "0,2 s", "tipp": "Lineal an der Tischkante schnippen („boing“)", "ab": "0.4", "g": 2}, {"n": 21, "name": "kauen", "wann": "Frucht essen", "len": "1 s", "tipp": "in einen Apfel beißen und kauen, Handy nah", "ab": "0.4", "g": 3}, {"n": 22, "name": "spucken", "wann": "Kern spucken", "len": "0,15 s ×3", "tipp": "„ptü“ mit dem Mund", "ab": "0.4", "g": 3}, {"n": 23, "name": "kern-trifft", "wann": "Kern trifft etwas", "len": "0,1 s", "tipp": "Kirschkern gegen ein Brett werfen", "ab": "0.4", "g": 3}, {"n": 24, "name": "autsch", "wann": "Sleepy wird getroffen", "len": "0,3 s", "tipp": "kurzes Quieken oder hoher Pfiff", "ab": "0.4", "g": 4}, {"n": 25, "name": "sleepy-faellt", "wann": "Sleepy verliert alle Herzen", "len": "1 s", "tipp": "langer, absinkender Pfiff", "ab": "0.4", "g": 4}, {"n": 26, "name": "spinacoin", "wann": "Spinacoin einsammeln", "len": "0,2 s", "tipp": "zwei Münzen aneinander klicken", "ab": "0.4", "g": 4}, {"n": 27, "name": "frucht-nehmen", "wann": "Frucht einsammeln", "len": "0,2 s", "tipp": "Blätter rascheln, dann „plopp“ mit dem Finger im Mund", "ab": "0.4", "g": 4}, {"n": 28, "name": "skillpunkt", "wann": "Skillpunkt-Stern", "len": "1 s", "tipp": "Glöckchen oder hoher Geigenton", "ab": "0.4", "g": 4}, {"n": 29, "name": "rastpunkt", "wann": "Rastpunkt wird grün", "len": "0,5 s", "tipp": "kleines Glöckchen", "ab": "0.4", "g": 4}, {"n": 30, "name": "beutel", "wann": "Beutel mit Spinacoins", "len": "0,3 s", "tipp": "Säckchen mit Münzen schütteln", "ab": "0.4", "g": 4}, {"n": 31, "name": "menue-tick", "wann": "im Menü weiterblättern", "len": "0,1 s", "tipp": "Kugelschreiber klicken", "ab": "0.4", "g": 5}, {"n": 32, "name": "menue-ok", "wann": "im Menü bestätigen", "len": "0,2 s", "tipp": "Zunge schnalzen", "ab": "0.4", "g": 5}, {"n": 33, "name": "kaufen", "wann": "beim Händler oder Schmied kaufen", "len": "0,4 s", "tipp": "Münzen in die Hand fallen lassen", "ab": "0.4", "g": 5}, {"n": 34, "name": "fuchs-knurren", "wann": "Fuchs holt aus", "len": "0,5 s", "tipp": "selbst knurren", "ab": "0.4", "g": 6}, {"n": 35, "name": "biss", "wann": "Fuchs, Schlange oder Dachs beißt", "len": "0,2 s", "tipp": "Wäscheklammer zuschnappen lassen", "ab": "0.4", "g": 6}, {"n": 36, "name": "adler-schrei", "wann": "Adler stößt herab", "len": "0,6 s", "tipp": "hoher Schrei", "ab": "0.4", "g": 6}, {"n": 37, "name": "sturzflug", "wann": "Sturzflug (Adler, König)", "len": "0,6 s", "tipp": "Handtuch schnell durch die Luft schwingen", "ab": "0.4", "g": 6}, {"n": 38, "name": "schlange-zischen", "wann": "Schlange holt aus", "len": "0,5 s", "tipp": "„ssss“ durch die Zähne", "ab": "0.4", "g": 6}, {"n": 39, "name": "skorpion-klicken", "wann": "Skorpion holt aus", "len": "0,3 s", "tipp": "Fingernägel aneinander klicken", "ab": "0.4", "g": 6}, {"n": 40, "name": "dachs-grunzen", "wann": "Dachs holt aus", "len": "0,6 s", "tipp": "tief grunzen", "ab": "0.4", "g": 6}, {"n": 41, "name": "graben", "wann": "Dachs gräbt, Rumpeln im Bau", "len": "2 s", "tipp": "Sack über den Boden schleifen", "ab": "0.4", "g": 6}, {"n": 42, "name": "decke-bricht", "wann": "Dachs bricht durch", "len": "1 s", "tipp": "trockene Äste knacken und Kies ausschütten", "ab": "0.4", "g": 6}, {"n": 43, "name": "gegner-puff", "wann": "Gegner verschwindet", "len": "0,3 s", "tipp": "„pff“ in die hohle Hand", "ab": "0.4", "g": 6}, {"n": 44, "name": "koenig-schrei", "wann": "Adler-König am Anfang und bei jeder Phase", "len": "1 s", "tipp": "laut und tief schreien", "ab": "0.4", "g": 7}, {"n": 45, "name": "federn", "wann": "Federfächer", "len": "0,3 s", "tipp": "Papierblatt schnell durch die Luft ziehen", "ab": "0.4", "g": 7}, {"n": 46, "name": "windstoss", "wann": "Windstoß des Königs", "len": "2 s", "tipp": "Wind im Wald aufnehmen oder ins Mikro pusten (nicht zu nah)", "ab": "0.4", "g": 7}, {"n": 47, "name": "tor", "wann": "Arena-Tor geht zu oder auf", "len": "0,6 s", "tipp": "Gartentor oder Metallgitter", "ab": "0.4", "g": 7}, {"n": 48, "name": "murmeltier-pfiff", "wann": "Murmeltier redet", "len": "0,4 s", "tipp": "hoher Pfiff (echte Murmeltiere pfeifen so)", "ab": "0.4", "g": 8}, {"n": 49, "name": "plappern", "wann": "Sprechblase erscheint", "len": "0,5 s ×3", "tipp": "mit verstellter Stimme brabbeln", "ab": "0.4", "g": 8}, {"n": 50, "name": "amboss", "wann": "Schmied arbeitet", "len": "0,4 s ×2", "tipp": "Hammer auf einen Schraubenschlüssel", "ab": "0.4", "g": 8}, {"n": 51, "name": "knutschen", "wann": "Schmied und Frau", "len": "0,5 s", "tipp": "Kussgeräusch auf den Handrücken", "ab": "0.4", "g": 8}, {"n": 52, "name": "schmied-weint", "wann": "Schmied ist traurig", "len": "1 s", "tipp": "übertrieben schluchzen", "ab": "0.4", "g": 8}, {"n": 53, "name": "tarnung", "wann": "Anzug wechseln, Tarnung an", "len": "0,4 s", "tipp": "Stoff rascheln", "ab": "0.5", "g": 9}, {"n": 54, "name": "schnarchen", "wann": "Sleepy ruht (Schleife)", "len": "2 s", "tipp": "leise schnarchen", "ab": "0.5", "g": 9}, {"n": 55, "name": "herz-zurueck", "wann": "½ Herz beim Ruhen", "len": "0,5 s", "tipp": "heller Geigenton (Flageolett)", "ab": "0.5", "g": 9}, {"n": 56, "name": "wald", "wann": "Hintergrund Bergwald (Schleife)", "len": "30 s", "tipp": "im Wald Vögel und Wind, Handy ganz still halten", "ab": "0.4", "g": 10}, {"n": 57, "name": "alm", "wann": "Hintergrund Alm (Schleife)", "len": "30 s", "tipp": "Kuhglocken, Wind, Grillen", "ab": "0.4", "g": 10}, {"n": 58, "name": "bau", "wann": "Hintergrund Bau (Schleife)", "len": "30 s", "tipp": "tropfender Wasserhahn im Bad", "ab": "0.4", "g": 10}, {"n": 59, "name": "labyrinth", "wann": "Hintergrund Labyrinth (Schleife)", "len": "30 s", "tipp": "Tropfen im Keller oder Treppenhaus (mit Hall)", "ab": "0.4", "g": 10}, {"n": 60, "name": "bach", "wann": "Hintergrund am Wasser (Schleife)", "len": "30 s", "tipp": "Bach plätschern", "ab": "0.4", "g": 10}]};
+  var KEY = "sleepy-geraeusche-v1";
+  var state = { done: {}, notes: {} };
+  var filter = "alle";
+  var storageOk = true;
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var o = JSON.parse(raw);
+        if (o && typeof o === "object") {
+          state.done = (o.done && typeof o.done === "object") ? o.done : {};
+          state.notes = (o.notes && typeof o.notes === "object") ? o.notes : {};
+        }
+      }
+    } catch (e) { storageOk = false; }
+    if (storageOk) {
+      try { localStorage.setItem(KEY + "-test", "1"); localStorage.removeItem(KEY + "-test"); }
+      catch (e) { storageOk = false; }
+    }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); }
+    catch (e) { storageOk = false; document.getElementById("storeWarn").hidden = false; }
+  }
+
+  var listEl = document.getElementById("list");
+  var cards = [];       // {item, el, cb, note}
+  var groupEls = [];    // {el, cnt, gi}
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function labeled(cls, label, text) {
+    var d = el("div", cls);
+    d.appendChild(el("b", null, label));
+    d.appendChild(document.createTextNode(text));
+    return d;
+  }
+
+  function build() {
+    DATA.groups.forEach(function (gname, gi) {
+      var sec = el("section", "group");
+      var h = el("h2", null, gname);
+      var cnt = el("span", "cnt", "");
+      h.appendChild(cnt);
+      sec.appendChild(h);
+      var ul = el("ul", "items");
+      DATA.items.filter(function (it) { return it.g === gi; }).forEach(function (it) {
+        var li = el("li", "card item");
+        var head = el("div", "head");
+        head.appendChild(el("span", "nr", String(it.n)));
+        head.appendChild(el("span", "name", it.name));
+        li.appendChild(head);
+        var meta = el("div", "meta");
+        meta.appendChild(el("span", "tag", "Länge: " + it.len));
+        meta.appendChild(el("span", "tag", "ab Version " + it.ab));
+        li.appendChild(meta);
+        li.appendChild(labeled("wann", "Wann im Spiel", it.wann));
+        li.appendChild(labeled("tipp", "So nimmst du es auf", it.tipp));
+
+        var lab = el("label", "check");
+        var cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = !!state.done[it.n];
+        cb.setAttribute("data-nr", it.n);
+        cb.setAttribute("aria-label", "Nummer " + it.n + " " + it.name + " aufgenommen");
+        lab.appendChild(cb);
+        lab.appendChild(el("span", null, "aufgenommen"));
+        li.appendChild(lab);
+
+        var note = document.createElement("input");
+        note.type = "text";
+        note.className = "note";
+        note.placeholder = "Notiz, z. B. Datei: Sprachmemo 12";
+        note.setAttribute("aria-label", "Notiz zu Nummer " + it.n + " " + it.name);
+        note.setAttribute("autocomplete", "off");
+        note.value = state.notes[it.n] || "";
+        li.appendChild(note);
+
+        cb.addEventListener("change", function () {
+          if (cb.checked) state.done[it.n] = true; else delete state.done[it.n];
+          li.classList.toggle("done", cb.checked);
+          save(); updateProgress();
+        });
+        note.addEventListener("input", function () {
+          var v = note.value;
+          if (v.trim()) state.notes[it.n] = v; else delete state.notes[it.n];
+          save();
+        });
+
+        li.classList.toggle("done", cb.checked);
+        ul.appendChild(li);
+        cards.push({ item: it, el: li, cb: cb, note: note, gi: gi });
+      });
+      sec.appendChild(ul);
+      listEl.appendChild(sec);
+      groupEls.push({ el: sec, cnt: cnt, gi: gi });
+    });
+  }
+
+  function countDone() {
+    return DATA.items.filter(function (it) { return state.done[it.n]; }).length;
+  }
+
+  function updateProgress() {
+    var total = DATA.items.length, d = countDone();
+    document.getElementById("progText").textContent = d + " von " + total + " aufgenommen";
+    document.getElementById("barFill").style.width = (d / total * 100) + "%";
+    document.getElementById("bar").setAttribute("aria-valuenow", d);
+    groupEls.forEach(function (g) {
+      var inG = cards.filter(function (c) { return c.gi === g.gi; });
+      var n = inG.filter(function (c) { return c.cb.checked; }).length;
+      g.cnt.textContent = n + " von " + inG.length;
+    });
+  }
+
+  // Filter wird nur beim Umschalten angewendet, damit ein Eintrag nicht
+  // unter dem Finger verschwindet, wenn man das Häkchen setzt.
+  function applyFilter() {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var d = c.cb.checked;
+      var show = filter === "alle" || (filter === "offen" && !d) || (filter === "fertig" && d);
+      c.el.hidden = !show;
+      if (show) shown++;
+    });
+    groupEls.forEach(function (g) {
+      g.el.hidden = !cards.some(function (c) { return c.gi === g.gi && !c.el.hidden; });
+    });
+    document.getElementById("empty").hidden = shown > 0;
+    document.getElementById("empty").textContent = filter === "fertig"
+      ? "Noch nichts aufgenommen. Los geht’s!"
+      : "Alles aufgenommen – super gemacht!";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-filter]"), function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-filter") === filter ? "true" : "false");
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-filter]"), function (b) {
+    b.addEventListener("click", function () { filter = b.getAttribute("data-filter"); applyFilter(); });
+  });
+
+  function line(it) {
+    var s = it.n + " " + it.name;
+    var n = (state.notes[it.n] || "").trim();
+    return n ? s + " – " + n : s;
+  }
+  function buildText() {
+    var done = DATA.items.filter(function (it) { return state.done[it.n]; });
+    var open = DATA.items.filter(function (it) { return !state.done[it.n]; });
+    var out = ["Sleepy – Geräusche: " + done.length + " von " + DATA.items.length + " aufgenommen", ""];
+    out.push("FERTIG (" + done.length + "):");
+    if (done.length) done.forEach(function (it) { out.push(line(it)); }); else out.push("(noch nichts)");
+    out.push("");
+    out.push("NOCH OFFEN (" + open.length + "):");
+    if (open.length) open.forEach(function (it) { out.push(line(it)); }); else out.push("(nichts mehr offen)");
+    return out.join("\n");
+  }
+
+  var statusEl = document.getElementById("copyStatus");
+  var fb = document.getElementById("copyFallback");
+  function say(msg) { statusEl.textContent = msg; }
+  function showFallback(text) {
+    fb.value = text; fb.hidden = false; fb.focus(); fb.select();
+    say("Kopieren geht hier nicht automatisch. Text markieren und kopieren:");
+  }
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var text = buildText();
+    fb.hidden = true;
+    function legacy() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        if (ok) say("Kopiert! Jetzt kannst du es Papa schicken."); else showFallback(text);
+      } catch (e) { showFallback(text); }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          say("Kopiert! Jetzt kannst du es Papa schicken.");
+        }, legacy);
+      } else { legacy(); }
+    } catch (e) { legacy(); }
+  });
+
+  load();
+  build();
+  document.getElementById("storeWarn").hidden = storageOk;
+  updateProgress();
+  applyFilter();
+})();
+</script>
+</body>
+</html>

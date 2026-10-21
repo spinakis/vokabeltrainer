@@ -6,7 +6,7 @@ Installierbare Vokabeltrainer für den Latein- und Griechischunterricht von Herr
 - Spinakis (Griechisch): [spinakis/](spinakis/)
 - Apologie (Lernwortschatz zu Platons Apologie): [apologie/](apologie/)
 - Memory für die Tafel (zwei Spieler, Vokabeln, Götter, Stammformen): [memory/](memory/)
-- Sleepy (Testversion des Murmeltier-Jump-'n'-Runs, kein Vokabeltrainer): [sleepy/](sleepy/)
+- Sleepy (Testversion des Murmeltier-Jump-'n'-Runs, kein Vokabeltrainer): [sleepy/](sleepy/); dazu die Geräusche-Liste zum Selbst-Aufnehmen: [sleepy/geraeusche/](sleepy/geraeusche/)
 - Provenienz-Notizbuch – Prototyp 0.1 (Objektakten für Sammlerstücke; Daten bleiben lokal im Browser): [provenienz/](provenienz/)
 
 Die Trainer sind ausschließlich für diesen Unterricht bestimmt. Die Vokabeln folgen dem jeweiligen
@@ -22,7 +22,7 @@ seine eigenen Ordner:
 |---|---|---|
 | `fringillus/`, `spinakis/`, `apologie/` | Repository Vokabeln | `docs/veroeffentlichen.sh` |
 | `memory/` | Repository Tafelbilder | dort |
-| `sleepy/` | Repository Programme | von Hand, eine einzelne HTML-Datei |
+| `sleepy/` (mit `sleepy/geraeusche/`) | Repository Programme | von Hand, je eine einzelne HTML-Datei |
 | `provenienz/` | Repository Programme | von Hand, Vite-Build (`dist/`) |
 
 Regeln für jedes Veröffentlichungsskript:
