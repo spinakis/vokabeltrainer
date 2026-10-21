@@ -1,4 +1,4 @@
-const CACHE="spinakis-2026-10-21.e931af-sw3", PREFIX="spinakis-", NAV_TIMEOUT=4000;
+const CACHE="spinakis-2026-10-21.858494-sw3", PREFIX="spinakis-", NAV_TIMEOUT=4000;
 const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","schriften/NotoSans-Regular-Umschrift.ttf","schriften/NotoSans-Bold-Umschrift.ttf","schriften/CrimsonPro-VF.ttf","schriften/CrimsonPro-Italic-VF.ttf","schriften/NotoSansMath-Symbole.ttf"];
 // Nur echte Erfolgsantworten dürfen in den Cache (keine 404/500, keine Weiterleitung auf eine WLAN-Anmeldeseite).
 const good=res=>!!res && res.ok && (res.type==="basic" || res.type==="cors");
