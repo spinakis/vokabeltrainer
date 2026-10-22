@@ -33,3 +33,7 @@ Regeln für jedes Veröffentlichungsskript:
 3. Wird der Push abgelehnt, weil ein anderes Skript schneller war: neu holen und noch einmal pushen, nie erzwingen.
 
 Diese README gehört allen; wer einen Ordner hinzufügt, trägt ihn oben in die Liste und in die Tabelle ein.
+
+## Zugangscode
+
+Alle App-Startseiten hier (Fringillus, Spinakis, Apologie, Pruschon, Prushit, Sleepy, Provenienz) verlangen den Zugangscode der Klasse; Memory hat seinen eigenen. Eingesetzt wird er beim Veröffentlichen mit `docs/zugang.py` aus dem Repository Vokabeln (dort automatisch in `docs/veroeffentlichen.sh`). Wer `sleepy/` oder `provenienz/` von Hand neu veröffentlicht, ruft danach `python3 <Vokabeln>/docs/zugang.py sleepy/index.html …` auf. Offen bleiben `pruschon/datenschutz.html` und `pruschon/hilfe.html` (Datenschutz- und Support-URL im App Store).
