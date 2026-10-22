@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Lesen</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1d1d1f;--mut:#6b6b70;--card:#fff;--line:#d9d6cd;--acc:#2f5d8a;--accfg:#fff;--err:#a3281f}
+@media(prefers-color-scheme:dark){:root{--bg:#161618;--fg:#ececee;--mut:#9a9aa1;--card:#222226;--line:#38383e;--acc:#6aa3d8;--accfg:#10202f;--err:#ff8b80}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:max(20px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
+main{max-width:34rem;margin:0 auto;overflow-wrap:anywhere}
+h1{font-size:1.5rem;margin:1.5rem 0 1rem}
+h2{font-size:1.05rem;margin:1.6rem 0 .5rem;color:var(--mut);text-transform:none}
+input,button{font:inherit;border-radius:12px}
+input{width:100%;padding:16px;font-size:1.25rem;border:2px solid var(--line);background:var(--card);color:var(--fg)}
+input:focus{outline:none;border-color:var(--acc)}
+button{border:0;background:var(--acc);color:var(--accfg);padding:14px 22px;font-weight:600;cursor:pointer;min-height:48px}
+button:disabled{opacity:.5}
+#go{width:100%;margin-top:12px;font-size:1.15rem}
+#msg{min-height:1.5em;margin-top:12px;color:var(--err)}
+#msg.ok{color:var(--mut)}
+.item{display:flex;gap:12px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px 10px 16px;margin:8px 0}
+.item span{flex:1;min-width:0}
+.item button{flex:none}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden;display:none}
+.bar i{display:block;height:100%;width:0;background:var(--acc)}
+#hint{color:var(--mut);font-size:.95rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Lesen</h1>
+<form id="f" autocomplete="off">
+  <label for="c" class="sr" style="position:absolute;left:-9999px">Code</label>
+  <input id="c" type="password" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Code" enterkeyhint="go">
+  <button id="go" type="submit">Öffnen</button>
+</form>
+<div id="msg" role="status" aria-live="polite"></div>
+<div id="liste"></div>
+</main>
+<script>
+(function(){
+'use strict';
+const subtle = crypto.subtle;
+// BEGIN CRYPTO (identisch mit lesen/bauen/verschluesseln.mjs)
+const ITER_MIN = 600000;
+async function schluessel(code, salt, iter) {
+  const roh = await subtle.importKey('raw', new TextEncoder().encode(code), 'PBKDF2', false, ['deriveKey']);
+  return subtle.deriveKey({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: iter }, roh,
+    { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function entschluesseln(code, buf) {
+  const b = new Uint8Array(buf);
+  if (b.length < 49 || b[0] !== 1) throw new Error('format');
+  const iter = new DataView(b.buffer, b.byteOffset + 1, 4).getUint32(0);
+  if (iter < ITER_MIN || iter > 5000000) throw new Error('format');
+  const kopf = b.slice(0, 33);
+  const key = await schluessel(code, b.slice(5, 21), iter);
+  return new Uint8Array(await subtle.decrypt({ name: 'AES-GCM', iv: b.slice(21, 33), additionalData: kopf }, key, b.slice(33)));
+}
+// END CRYPTO
+
+const $ = id => document.getElementById(id);
+const msg = (t, ok) => { $('msg').textContent = t; $('msg').className = ok ? 'ok' : ''; };
+let code = null, fehl = 0, sperre = 0;
+
+async function holen(pfad, fortschritt) {
+  const r = await fetch(pfad, { cache: 'no-store' });
+  if (!r.ok) throw new Error('http');
+  const gesamt = +r.headers.get('content-length') || 0;
+  if (!r.body || !fortschritt) return r.arrayBuffer();
+  const rd = r.body.getReader(), teile = []; let n = 0;
+  for (;;) { const { done, value } = await rd.read(); if (done) break; teile.push(value); n += value.length; fortschritt(gesamt ? n / gesamt : null, n); }
+  const out = new Uint8Array(n); let o = 0;
+  for (const t of teile) { out.set(t, o); o += t.length; }
+  return out.buffer;
+}
+
+$('f').addEventListener('submit', async e => {
+  e.preventDefault();
+  const jetzt = Date.now();
+  if (jetzt < sperre) { msg('Bitte kurz warten (' + Math.ceil((sperre - jetzt) / 1000) + ' s).'); return; }
+  const eingabe = $('c').value.trim();
+  if (!eingabe) return;
+  $('go').disabled = true; msg('Einen Moment …', true);
+  try {
+    let buf;
+    try { buf = await holen('d/index.bin'); } catch (_) { msg('Gerade nicht erreichbar. Bitte später noch einmal versuchen.'); return; }
+    let idx;
+    try { idx = JSON.parse(new TextDecoder().decode(await entschluesseln(eingabe, buf))); }
+    catch (_) {
+      fehl++;
+      if (fehl >= 3) { sperre = Date.now() + 15000; fehl = 0; msg('Code stimmt nicht. Bitte 15 Sekunden warten.'); }
+      else msg('Code stimmt nicht.');
+      return;
+    }
+    code = eingabe; $('c').value = ''; fehl = 0;
+    zeigen(idx);
+  } finally { $('go').disabled = false; }
+});
+
+function zeigen(idx) {
+  $('f').style.display = 'none';
+  const L = $('liste'); L.textContent = '';
+  const hint = document.createElement('p'); hint.id = 'hint';
+  hint.textContent = 'Zum Speichern auf „Herunterladen“ tippen.';
+  L.appendChild(hint);
+  msg('');
+  for (const g of idx.gruppen) {
+    const h = document.createElement('h2'); h.textContent = g.name; L.appendChild(h);
+    for (const eintrag of g.eintraege) {
+      const d = document.createElement('div'); d.className = 'item';
+      const s = document.createElement('span'); s.textContent = eintrag.titel;
+      const bar = document.createElement('div'); bar.className = 'bar'; const fill = document.createElement('i'); bar.appendChild(fill); s.appendChild(bar);
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = 'Herunterladen';
+      b.addEventListener('click', () => laden(eintrag, b, bar, fill));
+      d.append(s, b); L.appendChild(d);
+    }
+  }
+}
+
+async function laden(eintrag, b, bar, fill) {
+  b.disabled = true; bar.style.display = 'block'; fill.style.width = '5%'; const alt = b.textContent; b.textContent = 'Lädt …';
+  try {
+    const buf = await holen('d/' + eintrag.datei, (p) => { if (p !== null) fill.style.width = Math.max(5, p * 85) + '%'; });
+    fill.style.width = '92%'; b.textContent = 'Entschlüsselt …';
+    const pdf = await entschluesseln(code, buf);
+    fill.style.width = '100%';
+    const blob = new Blob([pdf], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (ios) {
+      window.open(url, '_blank') || (location.href = url);
+      msg('Geöffnet. Zum Speichern: Teilen → In Dateien sichern.', true);
+    } else {
+      const a = document.createElement('a'); a.href = url; a.download = eintrag.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      msg('Heruntergeladen.', true);
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 120000);
+  } catch (_) {
+    msg('Das hat nicht geklappt. Bitte noch einmal versuchen.');
+  } finally { b.disabled = false; b.textContent = alt; setTimeout(() => { bar.style.display = 'none'; fill.style.width = '0'; }, 1500); }
+}
+})();
+</script>
+</body>
+</html>
