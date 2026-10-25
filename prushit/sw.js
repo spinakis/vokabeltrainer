@@ -1,4 +1,4 @@
-const CACHE="prushit-2026-10-24.b5da6e.9fb0-sw3", PREFIX="prushit-", NAV_TIMEOUT=4000;
+const CACHE="prushit-2026-10-25.82372a.9fb0-sw3", PREFIX="prushit-", NAV_TIMEOUT=4000;
 const CORE=["./","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","schriften/NotoSerifHebrew-Regular.ttf","schriften/NotoSansHebrew-Regular.ttf","schriften/PlaypenSansHebrew-Regular.ttf","schriften/NotoRashiHebrew-Regular.ttf","schriften/FrankRuhlLibre-Regular.ttf","schriften/DavidLibre-Regular.ttf","schriften/AtkinsonHyperlegible-Regular.ttf","schriften/AtkinsonHyperlegible-Bold.ttf","schriften/NotoSans-Regular-Umschrift.ttf","schriften/NotoSans-Bold-Umschrift.ttf","schriften/CrimsonPro-Italic-VF.ttf"];
 // Nur echte Erfolgsantworten dürfen in den Cache (keine 404/500, keine Weiterleitung auf eine WLAN-Anmeldeseite).
 const good=res=>!!res && res.ok && (res.type==="basic" || res.type==="cors");
