@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="app-version" content="2026-10-27.134c55">
+<meta name="app-version" content="2026-10-27.3e525b">
 <meta name="apple-mobile-web-app-title" content="Pruschon">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
@@ -3338,7 +3338,7 @@ $("einstHilfe").onclick=()=>{ ERK.einst={t:"So funktioniert die Einstufung",p:["
 // Öffnen und Schließen
 async function einstOeffnen(quelle){
   if(EI||!einstSchriften().length) return;
-  if(EINST_TOR_KIND&&kind()){ const tor=await elternTor(); if(tor!==true) return; }
+  if(EINST_TOR_KIND&&kind()&&quelle!=="start"){ const tor=await elternTor(); if(tor!==true) return; }   // beim Erststart (nach dem Rundgang) ohne Schranke: es gibt noch keine Eltern-PIN (Matthias, 27.10.)
   const li=einstSchriften(), sid=li.some(x=>x.id===basisSchrift())? basisSchrift() : li[0].id;
   EI={quelle,sid,fokus:document.activeElement,phase:"Ein",antw:[],bestanden:0,fragen:0,lv:null,q:null};
   einstEin(); $("einst").hidden=false; $("einstBox").scrollTop=0; ($("einstSchrift").hidden? $("einstGo") : $("einstSchrift").querySelector('[aria-pressed="true"]')).focus(); }
@@ -3458,7 +3458,7 @@ function wegZeige(){
   $("startSprache").hidden=true; $("startRund").hidden=true; $("startWeg").hidden=false; $("start").hidden=false; startHintergrund(true);
   $("start").querySelector(".sf-box").setAttribute("aria-labelledby","sf-wegH"); $("wegNeu").focus(); }
 $("wegNeu").onclick=()=>rgZeige(0);
-$("wegKann").onclick=()=>{ EINST_WARTET=true; startZu(); if(EINST_WARTET&&$("modus").hidden){ EINST_WARTET=false; einstOeffnen("start"); } };
+$("wegKann").onclick=()=>{ EINST_WARTET=true; rgZeige(0); };   // erst der Rundgang, dann die Moduswahl, dann der Test (siehe startZu und die Modusknöpfe)
 function rgZeige(i){
   const R=RG(); RGI=Math.max(0,Math.min(R.length-1,i)); const k=R[RGI], letzte=RGI===R.length-1;
   $("start").hidden=false; $("startSprache").hidden=true; $("startWeg").hidden=true; $("startRund").hidden=false; startHintergrund(true);
@@ -3475,7 +3475,8 @@ function startZu(){
   $("start").hidden=true; startHintergrund(false);
   if(RG_ERST){ RG_ERST=false; S.start=1; speichere();
     if(RG_MODUS){ RG_MODUS=false; $("modus").hidden=false; const b=document.querySelector("#sf-modus button"); if(b) b.focus(); } }
-  else if(RG_FOKUS&&document.contains(RG_FOKUS)) RG_FOKUS.focus(); }
+  else if(RG_FOKUS&&document.contains(RG_FOKUS)) RG_FOKUS.focus();
+  if(EINST_WARTET&&$("modus").hidden){ EINST_WARTET=false; setTimeout(()=>einstOeffnen("start"),0); } }   // Einstufung gewünscht, aber keine Moduswahl mehr nötig
 { const m0=modusUI; modusUI=function(){ const r=m0.apply(this,arguments); $("rgZeigen").parentElement.hidden=bibel(); return r; }; }   // „Rundgang zeigen“ nur im Ivrit-Modus
 modusUI();
 $("rgZeigen").onclick=()=>{ RG_FOKUS=$("rgZeigen"); RG_ERST=false; rgZeige(0); };
