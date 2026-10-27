@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="app-version" content="2026-10-27.3e525b">
+<meta name="app-version" content="2026-10-27.1bd5f9">
 <meta name="apple-mobile-web-app-title" content="Pruschon">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
@@ -2944,6 +2944,7 @@ function eltern(){
   $("zwoelfAn").textContent=S.sperre12?T("an"):T("aus"); $("zwoelfAn").setAttribute("aria-pressed",!!S.sperre12); $("zwoelfBibel").hidden=!(bibel()&&S.sperre12&&!PRUSHIT);
   $("zwoelfInfo").textContent= S.pin? T("Zum Umlegen ist die Eltern-PIN nötig.") : ""; $("zwoelfInfo").hidden=!S.pin;   // ohne PIN bleibt der Schalter frei
   document.querySelectorAll("#sf-vollKarte .sf-nurKauf").forEach(x=>x.hidden=!KAUF); $("vollH").textContent= KAUF? T("Vollversion") : T("Stufen"); $("bewertenZ").hidden=!(KAUF&&APP_STORE_ID); modiMenue(); kaufText(); einstKarteUI(); ewUI();
+  $("alleFrei").parentElement.hidden=!PRUSHIT; $("alleFreiInfo").hidden=!PRUSHIT; $("vollKarte").hidden=!KAUF&&!PRUSHIT;   // „Alle Stufen freischalten“ nur noch in Prushit; in Pruschon ersetzt die Einstufung es (Matthias, 27.10.). Ohne Kauf bleibt in Pruschon nichts auf der Karte
 }
 function pinUI(){ const hat=!!S.pin;
   $("pinStatus").textContent= hat? T("gesetzt ✓") : T("noch keine PIN");
