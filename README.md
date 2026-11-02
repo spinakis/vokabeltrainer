@@ -8,7 +8,6 @@ Installierbare Vokabeltrainer für den Latein- und Griechischunterricht von Herr
 - Apologie, Lesefassung der Schulausgabe für den Tolino Vision 6 (PDF, 424 S., Stand 22.10.2026, vorübergehend): [apologie/Apologie_Tolino.pdf](apologie/Apologie_Tolino.pdf)
 - Memory für die Tafel (zwei Spieler, Vokabeln, Götter, Stammformen): [memory/](memory/)
 - Sleepy (Testversion des Murmeltier-Jump-'n'-Runs, kein Vokabeltrainer): [sleepy/](sleepy/); dazu die Geräusche-Liste zum Selbst-Aufnehmen: [sleepy/geraeusche/](sleepy/geraeusche/)
-- Provenienz-Notizbuch – Prototyp 0.1 (Objektakten für Sammlerstücke; Daten bleiben lokal im Browser): [provenienz/](provenienz/)
 - Lesen (Seite mit Code für verschlüsselte Textausgaben): [lesen/](lesen/)
 
 Die Trainer sind ausschließlich für diesen Unterricht bestimmt. Die Vokabeln folgen dem jeweiligen
@@ -25,7 +24,6 @@ seine eigenen Ordner:
 | `fringillus/`, `spinakis/`, `apologie/` | Repository Vokabeln | `docs/veroeffentlichen.sh` |
 | `memory/` | Repository Tafelbilder | dort |
 | `sleepy/` (mit `sleepy/geraeusche/`) | Repository Programme | von Hand, je eine einzelne HTML-Datei |
-| `provenienz/` | Repository Programme | von Hand, Vite-Build (`dist/`) |
 | `lesen/` | lokal bei Matthias | `lesen/bauen/verschluesseln.mjs` (nur `lesen/d/` mit verschlüsselten Dateien) |
 
 Regeln für jedes Veröffentlichungsskript:
@@ -38,4 +36,3 @@ Diese README gehört allen; wer einen Ordner hinzufügt, trägt ihn oben in die 
 
 ## Zugangscode
 
-Alle App-Startseiten hier (Fringillus, Spinakis, Apologie, Pruschon, Prushit, Sleepy, Provenienz) verlangen den Zugangscode der Klasse; Memory hat seinen eigenen. Eingesetzt wird er beim Veröffentlichen mit `docs/zugang.py` aus dem Repository Vokabeln (dort automatisch in `docs/veroeffentlichen.sh`). Wer `sleepy/` oder `provenienz/` von Hand neu veröffentlicht, ruft danach `python3 <Vokabeln>/docs/zugang.py sleepy/index.html …` auf. Offen bleiben `pruschon/datenschutz.html` und `pruschon/hilfe.html` (Datenschutz- und Support-URL im App Store).
